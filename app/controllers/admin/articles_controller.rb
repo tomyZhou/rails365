@@ -12,8 +12,11 @@ class Admin::ArticlesController < Admin::BaseController
 
   def create
     @article = Article.new(article_params)
-    Rails.cache.delete "articles"
-    Rails.cache.delete "hot_articles"
+    expired_home
+    # 分类页
+    Rails.cache.delete "group_all"
+    Rails.cache.delete "group:#{@article.group_id}/articles"
+    Rails.cache.delete "group:#{@article.group_id}/tag_list"
 
     respond_to do |format|
       if @article.save
@@ -32,11 +35,14 @@ class Admin::ArticlesController < Admin::BaseController
   def update
     respond_to do |format|
       if @article.update(article_params)
-        Rails.cache.delete "articles"
-        Rails.cache.delete "hot_articles"
+        expired_home
+        # 文章页
         Rails.cache.delete "article:#{@article.id}/group_name"
         Rails.cache.delete "article:#{@article.id}/recommend_articles"
         Rails.cache.delete "article:#{@article.id}/tags"
+        # 分类页
+        Rails.cache.delete "group:#{@article.group_id}/articles"
+        Rails.cache.delete "group:#{@article.group_id}/tag_list"
 
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
         format.json { render :show, status: :ok, location: @article }
@@ -49,8 +55,10 @@ class Admin::ArticlesController < Admin::BaseController
 
   def destroy
     @article.destroy
-    Rails.cache.delete "articles"
-    Rails.cache.delete "hot_articles"
+    expired_home
+    # 分类页
+    Rails.cache.delete "group:#{@article.group_id}/articles"
+    Rails.cache.delete "group:#{@article.group_id}/tag_list"
 
     respond_to do |format|
       format.html { redirect_to admin_root_path, notice: 'Article was successfully destroyed.' }
@@ -65,6 +73,13 @@ private
 
   def article_params
     params.require(:article).permit(:title, :body, :published, :group_id, :tag_list)
+  end
+
+  def expired_home
+    # 首页
+    Rails.cache.delete "articles"
+    Rails.cache.delete "hot_articles"
+    Rails.cache.delete "groups"
   end
 
 end

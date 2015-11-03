@@ -6,7 +6,7 @@ class HomeController < ApplicationController
     @hot_articles = Rails.cache.fetch "hot_articles" do
       Article.except_body_with_default.select("visit_count").order("visit_count DESC").limit(10).to_a
     end
-    @groups = Rails.cache.fetch "groups" do
+    @groups = Rails.cache.fetch("groups", expires_in: 2.hours) do
       Group.all.to_a
     end
   end

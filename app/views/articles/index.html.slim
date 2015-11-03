@@ -7,20 +7,21 @@
 - if session[:admin]
   .text-right
     = link_to "添加新文章", new_admin_article_path
-- @articles.each do |article|
-  - if params[:search].present?
-    h3 = link_to article.title.html_safe, article, class: "search-hight-light"
-  - else
-    h3 = link_to article.title, article
-  p.text-right
-    = raw article.tags.map { |t| link_to t.name, tag_path(t.id) }.join(', ')
-  p.text-right
-    - if article.group
-      span.label.label-default = link_to article.group.try(:name), group_path(article.group)
-    span.text-muted
-      | *创建于
-      = datetime article.created_at
-    - if session[:admin]
-      span.label.label-default = article.published
-      = link_to 'Destroy', [:admin, article], method: :delete, data: { confirm: 'Are you sure?' }
-= paginate @articles
+- cache @articles do
+  - @articles.each do |article|
+    - if params[:search].present?
+      h3 = link_to article.title.html_safe, article, class: "search-hight-light"
+    - else
+      h3 = link_to article.title, article
+    p.text-right
+      = raw article.tags.map { |t| link_to t.name, tag_path(t.id) }.join(', ')
+    p.text-right
+      - if article.group
+        span.label.label-default = link_to article.group.try(:name), group_path(article.group)
+      span.text-muted
+        | *创建于
+        = datetime article.created_at
+      - if session[:admin]
+        span.label.label-default = article.published
+        = link_to 'Destroy', [:admin, article], method: :delete, data: { confirm: 'Are you sure?' }
+  = paginate @articles

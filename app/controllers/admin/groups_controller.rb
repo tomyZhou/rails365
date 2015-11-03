@@ -16,6 +16,7 @@ class Admin::GroupsController < Admin::BaseController
   def create
     @group = Group.new(group_params)
     Rails.cache.delete "groups"
+    Rails.cache.delete "group_all"
 
     respond_to do |format|
       if @group.save
@@ -32,6 +33,7 @@ class Admin::GroupsController < Admin::BaseController
     respond_to do |format|
       if @group.update(group_params)
         Rails.cache.delete "groups"
+        Rails.cache.delete "group_all"
         format.html { redirect_to @group, notice: 'Group was successfully updated.' }
         format.json { render :show, status: :ok, location: @group }
       else
@@ -44,6 +46,7 @@ class Admin::GroupsController < Admin::BaseController
   def destroy
     @group.destroy
     Rails.cache.delete "groups"
+    Rails.cache.delete "group_all"
     respond_to do |format|
       format.html { redirect_to groups_url, notice: 'Group was successfully destroyed.' }
       format.json { head :no_content }
