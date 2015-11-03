@@ -34,6 +34,9 @@ class Admin::ArticlesController < Admin::BaseController
       if @article.update(article_params)
         Rails.cache.delete "articles"
         Rails.cache.delete "hot_articles"
+        Rails.cache.delete "article:#{@article.id}/group_name"
+        Rails.cache.delete "article:#{@article.id}/recommend_articles"
+        Rails.cache.delete "article:#{@article.id}/tags"
 
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
         format.json { render :show, status: :ok, location: @article }

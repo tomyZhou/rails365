@@ -14,14 +14,22 @@ class ArticlesController < ApplicationController
 
   def show
     set_meta_tags title: @article.title, description: @article.title, keywords: @article.tag_list
-    @group_name = @article.group.try(:name) || ""
-    @recommend_articles = Article.except_body_with_default.search_by_title_or_body(@group_name).order("visit_count DESC").limit(11)
-    @tags = @article.tag_counts_on(:tags)
+    @group_name = Rails.cache.fetch "article:#{@article.id}/group_name" do
+      @article.group.try(:name) || ""
+    end
+    @recommend_articles = Rails.cache.fetch "article:#{@article.id}/recommend_articles" do
+      Article.except_body_with_default.search_by_title_or_body(@group_name).order("visit_count DESC").limit(11).to_a
+    end
+    @tags = Rails.cache.fetch "article:#{@article.id}/tags" do
+      @article.tag_counts_on(:tags)
+    end
   end
 
   private
     def set_article
-      @article = Article.find(params[:id])
+      @article = Rails.cache.fetch "article:#{params[:id]}" do
+        Article.find(params[:id])
+      end
       if request.path != article_path(@article)
         return redirect_to @article, :status => :moved_permanently
       end
