@@ -12,6 +12,8 @@ class Admin::ArticlesController < Admin::BaseController
 
   def create
     @article = Article.new(article_params)
+    Rails.cache.delete "articles"
+    Rails.cache.delete "hot_articles"
 
     respond_to do |format|
       if @article.save
@@ -30,6 +32,9 @@ class Admin::ArticlesController < Admin::BaseController
   def update
     respond_to do |format|
       if @article.update(article_params)
+        Rails.cache.delete "articles"
+        Rails.cache.delete "hot_articles"
+
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
         format.json { render :show, status: :ok, location: @article }
       else
@@ -41,6 +46,9 @@ class Admin::ArticlesController < Admin::BaseController
 
   def destroy
     @article.destroy
+    Rails.cache.delete "articles"
+    Rails.cache.delete "hot_articles"
+
     respond_to do |format|
       format.html { redirect_to admin_root_path, notice: 'Article was successfully destroyed.' }
       format.json { head :no_content }
