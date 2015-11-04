@@ -40,6 +40,7 @@ class Admin::ArticlesController < Admin::BaseController
         Rails.cache.delete "article:#{@article.id}/group_name"
         Rails.cache.delete "article:#{@article.id}/recommend_articles"
         Rails.cache.delete "article:#{@article.id}/tags"
+        Rails.cache.delete "article:#{@article.slug}"
         # 分类页
         Rails.cache.delete "group:#{@article.group_id}/articles"
         Rails.cache.delete "group:#{@article.group_id}/tag_list"
