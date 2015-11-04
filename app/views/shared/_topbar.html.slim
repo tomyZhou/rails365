@@ -1,62 +1,61 @@
-- cache "topbar_#{session[:admin]}" do
-  nav.navbar.navbar-inverse
-    .container
-      /! Brand and toggle get grouped for better mobile display
-      .navbar-header
-        button.navbar-toggle.collapsed aria-expanded="false" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"
-          span.sr-only
-          span.icon-bar
-          span.icon-bar
-          span.icon-bar
-        a.navbar-brand href="/"  Rails365
-      /! Collect the nav links, forms, and other content for toggling
-      #bs-example-navbar-collapse-1.collapse.navbar-collapse
-        ul.nav.navbar-nav
-          li class="#{controller_name == 'articles' ? 'active' : nil}"
-            a href="/articles"
-              | 文章
-              span.sr-only (current)
-          li class="#{controller_name == 'groups' ? 'active' : nil}"
-            a href="/groups" 分类
-          li class="#{controller_name == 'tags' ? 'active' : nil}"
-            a href="/tags" 标签
-          /li.dropdown
-          /  a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
-          /    | Dropdown
-          /    span.caret
-          /  ul.dropdown-menu
-          /    li
-          /      a href="#"  Action
-          /    li
-          /      a href="#"  Another action
-          /    li
-          /      a href="#"  Something else here
-          /    li.divider role="separator"
-          /    li
-          /      a href="#"  Separated link
-          /    li.divider role="separator"
-          /    li
-          /      a href="#"  One more separated link
-        = form_tag "/articles", method: "get", class: "navbar-form navbar-left", role: "search"
-          .form-group
-            input.form-control placeholder="Search" type="text" name="search" value="#{params[:search].presence}"/
-        - if session[:admin]
-          ul.nav.navbar-nav.navbar-right
-            /li
-            /  a href="/admin/articles/new"  添加新文章
-            li.dropdown
-              a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
-                | 管理
-                span.caret
-              ul.dropdown-menu
-                li
-                  a href="/admin/articles" 文章
-                li
-                  a href="/admin/groups" 分类
-                li
-                  a href="/admin/exception_logs" 异常
-                /li.divider role="separator"
-                /li
-                /  a href="#"  Separated link
-      /! /.navbar-collapse
-    /! /.container-fluid
+nav.navbar.navbar-inverse
+  .container
+    /! Brand and toggle get grouped for better mobile display
+    .navbar-header
+      button.navbar-toggle.collapsed aria-expanded="false" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"
+        span.sr-only
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand href="/"  Rails365
+    /! Collect the nav links, forms, and other content for toggling
+    #bs-example-navbar-collapse-1.collapse.navbar-collapse
+      ul.nav.navbar-nav
+        li class="#{controller_name == 'articles' ? 'active' : nil}"
+          a href="/articles"
+            | 文章
+            span.sr-only (current)
+        li class="#{controller_name == 'groups' ? 'active' : nil}"
+          a href="/groups" 分类
+        li class="#{controller_name == 'tags' ? 'active' : nil}"
+          a href="/tags" 标签
+        /li.dropdown
+        /  a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
+        /    | Dropdown
+        /    span.caret
+        /  ul.dropdown-menu
+        /    li
+        /      a href="#"  Action
+        /    li
+        /      a href="#"  Another action
+        /    li
+        /      a href="#"  Something else here
+        /    li.divider role="separator"
+        /    li
+        /      a href="#"  Separated link
+        /    li.divider role="separator"
+        /    li
+        /      a href="#"  One more separated link
+      = form_tag "/articles", method: "get", class: "navbar-form navbar-left", role: "search"
+        .form-group
+          input.form-control placeholder="Search" type="text" name="search" value="#{params[:search].presence}"/
+      - if session[:admin]
+        ul.nav.navbar-nav.navbar-right
+          /li
+          /  a href="/admin/articles/new"  添加新文章
+          li.dropdown
+            a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
+              | 管理
+              span.caret
+            ul.dropdown-menu
+              li
+                a href="/admin/articles" 文章
+              li
+                a href="/admin/groups" 分类
+              li
+                a href="/admin/exception_logs" 异常
+              /li.divider role="separator"
+              /li
+              /  a href="#"  Separated link
+    /! /.navbar-collapse
+  /! /.container-fluid
