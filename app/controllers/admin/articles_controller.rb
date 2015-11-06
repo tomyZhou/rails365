@@ -12,14 +12,12 @@ class Admin::ArticlesController < Admin::BaseController
 
   def create
     @article = Article.new(article_params)
-    expired_home
-    # 分类页
-    Rails.cache.delete "group_all"
-    Rails.cache.delete "group:#{@article.group_id}/articles"
-    Rails.cache.delete "group:#{@article.group_id}/tag_list"
 
     respond_to do |format|
       if @article.save
+        expired_common
+        # 所有分类页面
+        Rails.cache.delete "group_all"
         format.html { redirect_to @article, notice: 'Article was successfully created.' }
         format.json { render :show, status: :created, location: @article }
       else
@@ -35,15 +33,15 @@ class Admin::ArticlesController < Admin::BaseController
   def update
     respond_to do |format|
       if @article.update(article_params)
-        expired_home
-        # 文章页
+        expired_common
+        # 文章搜索用的group name
         Rails.cache.delete "article:#{@article.id}/group_name"
+        # 文章show页面右侧推荐文章列表
         Rails.cache.delete "article:#{@article.id}/recommend_articles"
+        # 文章show页面右侧标签
         Rails.cache.delete "article:#{@article.id}/tags"
+        # 文章
         Rails.cache.delete "article:#{@article.slug}"
-        # 分类页
-        Rails.cache.delete "group:#{@article.group_id}/articles"
-        Rails.cache.delete "group:#{@article.group_id}/tag_list"
 
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
         format.json { render :show, status: :ok, location: @article }
@@ -56,10 +54,7 @@ class Admin::ArticlesController < Admin::BaseController
 
   def destroy
     @article.destroy
-    expired_home
-    # 分类页
-    Rails.cache.delete "group:#{@article.group_id}/articles"
-    Rails.cache.delete "group:#{@article.group_id}/tag_list"
+    expired_common
 
     respond_to do |format|
       format.html { redirect_to admin_root_path, notice: 'Article was successfully destroyed.' }
@@ -76,11 +71,15 @@ private
     params.require(:article).permit(:title, :body, :published, :group_id, :tag_list)
   end
 
-  def expired_home
+  def expired_common
     # 首页
     Rails.cache.delete "articles"
     Rails.cache.delete "hot_articles"
     Rails.cache.delete "groups"
+    # 分类show页面下的文章列表
+    Rails.cache.delete "group:#{@article.group_id}/articles"
+    # 分类show页面的keyworkds meta
+    Rails.cache.delete "group:#{@article.group_id}/tag_list"
   end
 
 end

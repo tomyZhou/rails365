@@ -15,11 +15,9 @@ class Admin::GroupsController < Admin::BaseController
 
   def create
     @group = Group.new(group_params)
-    Rails.cache.delete "groups"
-    Rails.cache.delete "group_all"
-
     respond_to do |format|
       if @group.save
+        expired_common
         format.html { redirect_to @group, notice: 'Group was successfully created.' }
         format.json { render :show, status: :created, location: @group }
       else
@@ -32,8 +30,7 @@ class Admin::GroupsController < Admin::BaseController
   def update
     respond_to do |format|
       if @group.update(group_params)
-        Rails.cache.delete "groups"
-        Rails.cache.delete "group_all"
+        expired_common
         format.html { redirect_to @group, notice: 'Group was successfully updated.' }
         format.json { render :show, status: :ok, location: @group }
       else
@@ -45,8 +42,7 @@ class Admin::GroupsController < Admin::BaseController
 
   def destroy
     @group.destroy
-    Rails.cache.delete "groups"
-    Rails.cache.delete "group_all"
+    expired_common
     respond_to do |format|
       format.html { redirect_to groups_url, notice: 'Group was successfully destroyed.' }
       format.json { head :no_content }
@@ -60,5 +56,10 @@ class Admin::GroupsController < Admin::BaseController
 
     def group_params
       params.require(:group).permit(:name)
+    end
+
+    def expired_common
+      Rails.cache.delete "groups"
+      Rails.cache.delete "group_all"
     end
 end

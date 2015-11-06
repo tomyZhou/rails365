@@ -1,12 +1,11 @@
-- cache [@group, session[:admin]] do
-  .page-header
-    h2
-      = @group.name
-      | (#{@group.articles_count})
+.page-header
+  h2
+    = @group.name
+    | (#{@group.articles_count})
 
-  - if session[:admin]
-    .text-right
-      = link_to '编辑', edit_admin_group_path(@group)
+- if session[:admin]
+  .text-right
+    = link_to '编辑', edit_admin_group_path(@group)
 
 - cache [@articles, session[:admin]] do
   - @articles.each do |article|
