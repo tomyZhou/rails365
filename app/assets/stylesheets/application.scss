@@ -110,7 +110,12 @@ $c9:#999;
 }
 
 .markdown_header {
-  background-color: #3e648d;
-  padding: 10px;
-  color: #fff;
+  text-align: left;
+  line-height: 100%;
+  margin: 0;
+  color: #020202;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
 }
