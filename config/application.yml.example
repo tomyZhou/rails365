@@ -1,5 +1,7 @@
 USERNAME: "hfpp2012"
 PASSWORD: '12345678'
+# http basic auth secret token
+REALM: '12345678'
 aliyun_access_id: 'your access id'
 aliyun_access_key: 'your access key'
 aliyun_bucket: 'your bucket name'

@@ -1,5 +1,7 @@
 class Admin::BaseController < ActionController::Base
-  USERS = { ENV["USERNAME"] => ENV['PASSWORD'] }
+  REALM = ENV["REALM"]
+  USERS = {ENV["USERNAME"] => ENV['PASSWORD'],
+           "dap" => Digest::MD5.hexdigest(["dap", REALM, "secret"].join(":"))}
   layout "admin"
 
   before_action :authenticate
@@ -7,7 +9,7 @@ class Admin::BaseController < ActionController::Base
 
   private
     def authenticate
-      authenticate_or_request_with_http_digest do |username|
+      authenticate_or_request_with_http_digest(REALM) do |username|
         session[:admin] = true
         USERS[username]
       end
