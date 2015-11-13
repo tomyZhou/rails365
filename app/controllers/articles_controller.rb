@@ -9,7 +9,7 @@ class ArticlesController < ApplicationController
     else
       @articles = Article.except_body_with_default.order("id DESC").page(params[:page])
     end
-    set_meta_tags title: '文章列表', description: "提供rails文章和视频教程，知识和信息交流", keywords: ActsAsTaggableOn::Tag.most_used.map(&:name).join(", ")
+    set_meta_tags title: '文章列表', description: ENV["meta_description"], keywords: ActsAsTaggableOn::Tag.most_used.map(&:name).join(", ")
   end
 
   def show

@@ -5,7 +5,7 @@ class GroupsController < ApplicationController
     @groups = Rails.cache.fetch "group_all" do
       Group.all.to_a
     end
-    set_meta_tags title: "分类列表", description: "提供rails文章和视频教程，知识和信息交流", keywords: @groups.map(&:name).join(", ")
+    set_meta_tags title: "分类列表", description: ENV["meta_description"], keywords: @groups.map(&:name).join(", ")
   end
 
   def show
