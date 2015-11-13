@@ -1,3 +1,4 @@
+secret_key_base: "c9906c7a2375a8f9d503f9195359b787db599b9f3ec38f0dfb2228b9e9f52f83168bcc2f5f93a8acb60add8937d7f11bb24c788c014d3494bd83ab934801e8b4"
 USERNAME: "hfpp2012"
 PASSWORD: '12345678'
 # http basic auth secret token
