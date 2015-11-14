@@ -39,5 +39,5 @@
                 - if group.present?
                   .col-sm-2.group-image
                     = link_to group do
-                      = image_tag group.image_url(:group).to_s, width: "120px", height: "120px"
+                      img data-original=group.image_url(:group).to_s width="120px" height="120px" class="lazy"
                       p.text-center #{group.name}(#{group.articles_count})

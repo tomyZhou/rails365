@@ -9,6 +9,10 @@
 #= require jquery.checkall
 #= require qrcode
 #= require jquery.fluidbox.min
+#= require jquery.lazyload
+
+jQuery ->
+  $("img.lazy").lazyload()
 
 # jQuery ->
 #   flash = [
