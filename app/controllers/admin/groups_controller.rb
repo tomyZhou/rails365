@@ -55,7 +55,7 @@ class Admin::GroupsController < Admin::BaseController
     end
 
     def group_params
-      params.require(:group).permit(:name)
+      params.require(:group).permit(:name, :image)
     end
 
     def expired_common

@@ -1,6 +1,6 @@
 - cache @tags do
   .page-header
-    h2 所有标签(#{@tags.count})
+    h2.text-primary 所有标签(#{@tags.count})
 
   - @tags.in_groups_of(4) do |tags_group|
     .row

@@ -1,6 +1,6 @@
 - cache [@groups, session[:admin]] do
   .page-header
-    h2 所有分类(#{@groups.count})
+    h2.text-primary 所有分类(#{@groups.count})
 
   - if session[:admin]
     .text-right
@@ -9,7 +9,10 @@
     .row
       - per_group.each do |group|
         - if group.present?
-          .col-sm-3
-            h3 = link_to "#{group.name}(#{group.articles_count})", group
+          .col-sm-3.group-image
+            = link_to group do
+              = image_tag group.image_url(:group).to_s, width: "120px", height: "120px"
+              h3.text-center = link_to "#{group.name}(#{group.articles_count})", group
             - if session[:admin]
-              = link_to 'Destroy', [:admin, group], method: :delete, data: { confirm: 'Are you sure?' }
+              p.text-center
+                = link_to 'Destroy', [:admin, group], method: :delete, data: { confirm: 'Are you sure?' }

@@ -33,9 +33,11 @@
         .panel-heading
           div 所有的分类
         .panel-body
-          - @groups.in_groups_of(4) do |per_group|
+          - @groups.in_groups_of(6) do |per_group|
             .row
               - per_group.each do |group|
                 - if group.present?
-                  .col-sm-3
-                    p = link_to "#{group.name}(#{group.articles_count})", group
+                  .col-sm-2.group-image
+                    = link_to group do
+                      = image_tag group.image_url(:group).to_s, width: "120px", height: "120px"
+                      p.text-center #{group.name}(#{group.articles_count})

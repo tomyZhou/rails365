@@ -1,8 +1,8 @@
 .page-header
   - if @tag.present?
-    h2 标签<strong>#{@tag.name}</strong>下的所有文章
+    h2.text-primary 标签<strong>#{@tag.name}</strong>下的所有文章
   - else
-    h2 所有文章(#{@articles.total_count})
+    h2.text-primary 所有文章(#{@articles.total_count})
 
 - if session[:admin]
   .text-right
