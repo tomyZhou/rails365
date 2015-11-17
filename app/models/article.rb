@@ -34,7 +34,7 @@ class Article < ActiveRecord::Base
     if tags.length >= 4
       tag_list
     else
-      tags.map { |tag| tag.name.downcase } | ENV["meta_primary_keyword"].split(/,\ */)
+      (tags.map { |tag| tag.name.downcase } | ENV["meta_primary_keyword"].split(/,\ */)).join(", ")
     end
   end
 

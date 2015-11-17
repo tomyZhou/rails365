@@ -10,9 +10,9 @@ class GroupsController < ApplicationController
 
   def show
     @keywords = Rails.cache.fetch "group:#{@group.id}/tag_list" do
-      @group.articles.map(&:tag_list).join(", ").split(", ").uniq.to_a
+      @group.articles.map(&:meta_keyword).join(", ").split(", ").uniq.first(6).to_a
     end
-    set_meta_tags title: @group.name, description: @group.name, keywords: @keywords
+    set_meta_tags title: @group.name, description: ENV["meta_description"], keywords: @keywords.presence || ENV['meta_keyword']
   end
 
   private
