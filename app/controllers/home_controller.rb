@@ -9,6 +9,6 @@ class HomeController < ApplicationController
     @groups = Rails.cache.fetch("groups", expires_in: 2.hours) do
       Group.all.to_a
     end
-    set_meta_tags title: "", description: ENV["meta_description"], keywords: @groups.map(&:name).join(", ")
+    set_meta_tags title: "", description: ENV["meta_description"], keywords: ENV["meta_keyword"]
   end
 end
