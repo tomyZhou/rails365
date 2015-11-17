@@ -9,7 +9,7 @@ class ArticlesController < ApplicationController
     else
       @articles = Article.except_body_with_default.order("id DESC").page(params[:page])
     end
-    set_meta_tags title: '文章列表', description: ENV["meta_description"], keywords: ENV["meta_keyword"]
+    set_meta_tags title: '文章列表'
   end
 
   def show
