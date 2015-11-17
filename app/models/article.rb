@@ -39,6 +39,14 @@ class Article < ActiveRecord::Base
     title_changed? || super
   end
 
+  def meta_keyword
+    if tags.length >= 4
+      tag_list
+    else
+      tags.map { |tag| tag.name.downcase } | ENV["meta_primary_keyword"].split(/,\ */)
+    end
+  end
+
   alias_method :old_tag_list, :tag_list
   def tag_list
     super.join(", ")
