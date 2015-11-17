@@ -68,7 +68,7 @@ private
   end
 
   def article_params
-    params.require(:article).permit(:title, :body, :published, :group_id, :tag_list)
+    params.require(:article).permit(:title, :body, :published, :group_id, :tag_list, :meta_description)
   end
 
   def expired_common

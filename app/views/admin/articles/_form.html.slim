@@ -28,6 +28,10 @@
     .col-sm-10
       = f.text_field :tag_list, class: "form-control"
   .form-group
+    = f.label :meta_description, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :meta_description, class: "form-control"
+  .form-group
     = f.label :published, class: "col-sm-2 control-label"
     .col-sm-10
       = f.check_box :published
