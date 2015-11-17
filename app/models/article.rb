@@ -23,16 +23,7 @@ class Article < ActiveRecord::Base
   validates :title, uniqueness: true
 
   def normalize_friendly_id(input)
-    date = if self.created_at.present?
-             created_at.strftime('%Y-%m-%d')
-           else
-             Time.zone.now.strftime('%Y-%m-%d')
-           end
-    "#{date}-#{PinYin.of_string(input).to_s.to_slug.normalize.to_s}"
-  end
-
-  def set_friendly_id
-    self.slug = "#{created_at.strftime('%Y-%m-%d')}-#{self.slug}"
+    "#{PinYin.of_string(input).to_s.to_slug.normalize.to_s}"
   end
 
   def should_generate_new_friendly_id?
