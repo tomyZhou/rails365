@@ -66,8 +66,9 @@ gem 'pg_search', '~> 1.0.5'
 gem 'rails-i18n', '~> 4.0.4'
 
 # redis cache
-gem 'redis-namespace'
-gem 'redis-rails'
+gem 'redis-namespace', '~> 1.5.2'
+gem 'redis-rails', '~> 4.0.0'
+gem "hiredis", '~> 0.6.0'
 
 group :development, :test do
   gem 'byebug'

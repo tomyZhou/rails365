@@ -124,6 +124,7 @@ GEM
       activerecord (>= 4.0.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    hiredis (0.6.0)
     hitimes (1.2.3)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
@@ -342,6 +343,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.5.0)
   figaro (~> 1.1.1)
   friendly_id (~> 5.1.0)
+  hiredis (~> 0.6.0)
   jbuilder (~> 2.0)
   jquery-fileupload-rails (~> 0.4.5)
   jquery-rails
@@ -362,8 +364,8 @@ DEPENDENCIES
   rails-i18n (~> 4.0.4)
   rails_db
   redcarpet (~> 3.3.3)
-  redis-namespace
-  redis-rails
+  redis-namespace (~> 1.5.2)
+  redis-rails (~> 4.0.0)
   rouge!
   rspec-rails (~> 3.3.3)
   ruby-pinyin (~> 0.4.6)

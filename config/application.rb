@@ -38,6 +38,6 @@ module Rails365
       g.fixture_replacement :factory_girl, dir: "spec/factories"
     end
     config.exceptions_app = self.routes
-    config.cache_store = :redis_store, {host: '127.0.0.1', port: 6379, namespace: "rails365"}
+    config.cache_store = :redis_store, {host: '127.0.0.1', port: 6379, namespace: "rails365", driver: :hiredis}
   end
 end
