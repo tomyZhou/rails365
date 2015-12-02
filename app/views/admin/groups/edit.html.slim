@@ -5,4 +5,5 @@ h1 Editing group
 = link_to 'Show', @group
 '|
 = link_to 'Back', groups_path
-
+'|
+= link_to 'Destroy', admin_group_path(@group), method: :delete, data: { confirm: 'Are you sure?' }
