@@ -6,25 +6,14 @@
           ul.nav.nav-pills.nav-stacked
             li style="padding: 10px;"
               = image_tag "weixin.jpg", width: "120px", height: "120px"
-        .col-md-3
-          ul.nav.nav-pills.nav-stacked
-            li
-              a href="https://ruby-china.org/" rel="nofollow" target="_blank" ruby-china 社区
-            li
-              a href="http://yinsigan.github.io/" rel="nofollow" target="_blank" 旧的博客
-        .col-md-3
-          ul.nav.nav-pills.nav-stacked
-            li
-              a href="http://railscasts.com" rel="nofollow" target="_blank" railscasts视频
-            li
-              a href="https://github.com/yinsigan/rails365" rel="nofollow" target="_blank" 本站源码
-        .col-md-3
-          ul.nav.nav-pills.nav-stacked
-            li
-              a href="http://36kr.com/" rel="nofollow" target="_blank" 36Kr
-            li
-              a href="http://www.wneihan.com" rel="nofollow" target="_blank" wneihan
-
+        - cache @sites do
+          - @sites.in_groups_of(3).transpose.each do |site_group|
+            .col-md-3
+              ul.nav.nav-pills.nav-stacked
+                - site_group.each do |site|
+                  - if site.present?
+                    li
+                      = link_to site.name, site.url, rel: "nofollow", target: "_blank"
     .row
       .col-lg-12
         ul.nav.nav-pills.nav-justified

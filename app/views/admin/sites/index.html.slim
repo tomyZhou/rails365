@@ -1,0 +1,17 @@
+h4 所有的网站友链
+.text-right
+  = link_to "添加新友链", new_admin_site_path
+table.table.table
+  tr
+    th id
+    th 网站标识
+    th 网址
+    th 操作
+  - @sites.each do |site|
+    tr
+      td ##{site.id}
+      td = site.name
+      td = site.url
+      td
+        = link_to "编辑", edit_admin_site_path(site), class: "btn btn-link btn-sm"
+        = link_to '删除', [:admin, site], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link btn-sm"

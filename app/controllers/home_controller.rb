@@ -9,5 +9,8 @@ class HomeController < ApplicationController
     @groups = Rails.cache.fetch("groups", expires_in: 2.hours) do
       Group.all.to_a
     end
+    @sites = Rails.cache.fetch("sites") do
+      Site.all.to_a
+    end
   end
 end
