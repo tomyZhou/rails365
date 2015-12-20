@@ -17,7 +17,11 @@ class Admin::ExceptionLogsController < Admin::BaseController
   end
 
   def destroy_multiple
-    Admin::ExceptionLog.delete(params[:admin_exception_log_ids])
+    if params[:clear_all].present?
+      Admin::ExceptionLog.delete_all
+    else
+      Admin::ExceptionLog.delete(params[:admin_exception_log_ids])
+    end
     flash[:danger] = '删除成功'
     redirect_to :back
   end
