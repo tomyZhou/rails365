@@ -6,6 +6,11 @@ class Admin::ArticlesController < Admin::BaseController
     render 'articles/index'
   end
 
+  def unpublished
+    @articles = Article.unpublished.includes(:group).order("id DESC").page(params[:page])
+    render 'articles/index'
+  end
+
   def new
     @article = Article.new
   end

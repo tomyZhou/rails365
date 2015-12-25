@@ -12,13 +12,19 @@ class Article < ActiveRecord::Base
                   :using => {
                     :tsearch => {:dictionary => "testzhcfg", :prefix => true, :negation => true}
                   }
+
   acts_as_taggable
   ActsAsTaggableOn.remove_unused_tags = true
+
   extend FriendlyId
   friendly_id :title, use: [:slugged, :finders, :history]
+
   belongs_to :group, counter_cache: true
+
   scope :published, -> { where(published: true) }
+  scope :unpublished, -> { where(published: false) }
   scope :except_body_with_default, -> { published.select(:title, :created_at, :updated_at, :published, :group_id, :slug, :id).includes(:group) }
+
   validates :title, :body, presence: true
   validates :title, uniqueness: true
 

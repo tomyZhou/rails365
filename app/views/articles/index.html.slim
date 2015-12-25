@@ -6,6 +6,7 @@
 
 - if session[:admin]
   .text-right
+    = link_to "查看隐藏的文章", unpublished_admin_articles_path, class: "mr10"
     = link_to "添加新文章", new_admin_article_path
 - cache @articles do
   - @articles.each do |article|
