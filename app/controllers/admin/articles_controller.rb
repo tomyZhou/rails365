@@ -21,6 +21,8 @@ class Admin::ArticlesController < Admin::BaseController
     respond_to do |format|
       if @article.save
         expired_common
+        # 分类show页面下的文章列表
+        Rails.cache.delete "group:#{@article.group_id}/articles"
         # 所有分类页面
         Rails.cache.delete "group_all"
         format.html { redirect_to @article, notice: 'Article was successfully created.' }
@@ -37,6 +39,8 @@ class Admin::ArticlesController < Admin::BaseController
 
   def update
     respond_to do |format|
+      # 分类show页面下的文章列表
+      Rails.cache.delete "group:#{@article.group_id}/articles"
       if @article.update(article_params)
         expired_common
         # 文章搜索用的group name
@@ -60,6 +64,8 @@ class Admin::ArticlesController < Admin::BaseController
   def destroy
     @article.destroy
     expired_common
+    # 分类show页面下的文章列表
+    Rails.cache.delete "group:#{@article.group_id}/articles"
 
     respond_to do |format|
       format.html { redirect_to admin_root_path, notice: 'Article was successfully destroyed.' }
@@ -81,8 +87,6 @@ private
     Rails.cache.delete "articles"
     Rails.cache.delete "hot_articles"
     Rails.cache.delete "groups"
-    # 分类show页面下的文章列表
-    Rails.cache.delete "group:#{@article.group_id}/articles"
     # 分类show页面的keyworkds meta
     Rails.cache.delete "group:#{@article.group_id}/tag_list"
     Rails.cache.delete "group:#{@article.group_id}"
