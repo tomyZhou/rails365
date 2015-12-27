@@ -68,6 +68,7 @@ class Admin::ArticlesController < Admin::BaseController
     expired_common
     # 分类show页面下的文章列表
     Rails.cache.delete "group:#{@article.group_id}/articles"
+    Rails.cache.delete "group:#{@article.group.try(:friendly_id)}"
 
     respond_to do |format|
       format.html { redirect_to admin_root_path, notice: 'Article was successfully destroyed.' }
@@ -92,7 +93,6 @@ private
     # 分类show页面的keyworkds meta
     Rails.cache.delete "group:#{@article.group_id}/tag_list"
     Rails.cache.delete "group:#{@article.group_id}"
-    Rails.cache.delete "group:#{@article.group.try(:friendly_id)}"
   end
 
 end
