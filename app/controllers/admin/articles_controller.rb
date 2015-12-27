@@ -21,6 +21,7 @@ class Admin::ArticlesController < Admin::BaseController
     respond_to do |format|
       if @article.save
         expired_common
+        Rails.cache.delete "group:#{@article.group.try(:friendly_id)}"
         # 分类show页面下的文章列表
         Rails.cache.delete "group:#{@article.group_id}/articles"
         # 所有分类页面
@@ -41,6 +42,7 @@ class Admin::ArticlesController < Admin::BaseController
     respond_to do |format|
       # 分类show页面下的文章列表
       Rails.cache.delete "group:#{@article.group_id}/articles"
+      Rails.cache.delete "group:#{@article.group.try(:friendly_id)}"
       if @article.update(article_params)
         expired_common
         # 文章搜索用的group name
