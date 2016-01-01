@@ -8,6 +8,8 @@
 # server 'db.example.com', user: 'deploy', roles: %w{db}
 
 server 'www.rails365.net', user: 'yinsigan', roles: %w{app db web}
+set :rails_env, "production"
+set :stage, :production
 
 
 # role-based syntax
