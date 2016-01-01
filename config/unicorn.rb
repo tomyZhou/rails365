@@ -6,6 +6,9 @@ pid                "#{app_path}/shared/tmp/pids/unicorn.pid"
 stderr_path        "log/unicorn.log"
 stdout_path        "log/unicorn.log"
 
+# preload
+preload_app true
+
 before_fork do |server, worker|
   if defined?(ActiveRecord::Base)
     ActiveRecord::Base.connection.disconnect!

@@ -20,6 +20,9 @@ set :rbenv_roles, :all # default value
 
 set :bundle_flags, ''
 
+set :unicorn_config_path, -> { File.join(current_path, "config", "unicorn.rb") }
+set :unicorn_rack_env, "production"
+
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
@@ -50,6 +53,7 @@ set :bundle_flags, ''
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
+after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
 
   after :restart, :clear_cache do
@@ -59,6 +63,10 @@ namespace :deploy do
       #   execute :rake, 'cache:clear'
       # end
     end
+  end
+
+  task :restart do
+    invoke 'unicorn:restart'
   end
 
 end
