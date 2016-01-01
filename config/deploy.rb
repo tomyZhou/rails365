@@ -1,73 +1,64 @@
-require 'mina/bundler'
-require 'mina/rails'
-require 'mina/git'
-require 'mina/rbenv'
-require 'mina/unicorn'
-require 'mina_sidekiq/tasks'
+# config valid only for current version of Capistrano
+lock '3.4.0'
 
-set :user, 'yinsigan'
-set :domain, 'rails365.net'
-set :deploy_to, '/home/yinsigan/rails365'
-set :repository, 'git@github.com:yinsigan/rails365.git'
-set :branch, 'master'
-set :term_mode, nil
+set :application, 'rails365_cap'
+set :repo_url, 'git@github.com:yinsigan/rails365.git'
+set :branch, "cap"
+set :deploy_to, "/home/yinsigan/#{fetch(:application)}"
+set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/application.yml')
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'pids', 'tmp/sockets')
 
-task :environment do
-  invoke :'rbenv:load'
-end
+set :rbenv_type, :user # or :system, depends on your rbenv setup
+set :rbenv_ruby, '2.2.2'
 
-set :shared_paths, ['config/database.yml', 'config/application.yml', 'log', 'tmp/sockets', 'tmp/pids', 'pids']
+# in case you want to set ruby version from the file:
+# set :rbenv_ruby, File.read('.ruby-version').strip
+#
+set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
+set :rbenv_map_bins, %w{rake gem bundle ruby rails}
+set :rbenv_roles, :all # default value
 
-task :setup => :environment do
-  queue! %[mkdir -p "#{deploy_to}/#{shared_path}/log"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/log"]
+set :bundle_flags, ''
 
-  queue! %[mkdir -p "#{deploy_to}/#{shared_path}/config"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/config"]
+# Default branch is :master
+# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
-  queue! %[touch "#{deploy_to}/#{shared_path}/config/database.yml"]
-  queue  %[echo "-----> Be sure to edit '#{deploy_to}/#{shared_path}/config/database.yml'."]
+# Default deploy_to directory is /var/www/my_app_name
+# set :deploy_to, '/var/www/my_app_name'
 
-  queue! %[touch "#{deploy_to}/#{shared_path}/config/application.yml"]
-  queue  %[echo "-----> Be sure to edit '#{deploy_to}/#{shared_path}/config/application.yml'."]
+# Default value for :scm is :git
+# set :scm, :git
 
-  queue! %[mkdir -p "#{deploy_to}/#{shared_path}/tmp/sockets"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/tmp/sockets"]
+# Default value for :format is :pretty
+# set :format, :pretty
 
-  queue! %[mkdir -p "#{deploy_to}/#{shared_path}/tmp/pids"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/tmp/pids"]
+# Default value for :log_level is :debug
+# set :log_level, :debug
 
-  queue! %[mkdir -p "#{deploy_to}/shared/pids/"]
-end
+# Default value for :pty is false
+# set :pty, true
 
-desc "Deploys the current version to the server."
-task :deploy => :environment do
-  to :before_hook do
+# Default value for :linked_files is []
+# set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
 
-  end
-  deploy do
-    invoke :'sidekiq:quiet'
-    invoke :'git:clone'
-    invoke :'deploy:link_shared_paths'
-    invoke :'bundle:install'
-    invoke :'rails:db_migrate'
-    invoke :'rails:assets_precompile'
-    invoke :'deploy:cleanup'
+# Default value for linked_dirs is []
+# set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 
-    to :launch do
-      invoke :'unicorn:restart'
-      invoke :'sidekiq:restart'
+# Default value for default_env is {}
+# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+
+# Default value for keep_releases is 5
+# set :keep_releases, 5
+
+namespace :deploy do
+
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+      # Here we can do anything such as:
+      # within release_path do
+      #   execute :rake, 'cache:clear'
+      # end
     end
   end
-end
 
-desc "Shows logs."
-task :logs do
-  queue %[cd #{deploy_to!}/current && tail -f log/production.log]
-end
-
-desc "Display the unicorn logs."
-task :unicorn_logs do
-  queue 'echo "Contents of the unicorn log file are as follows:"'
-  queue "tail -f #{deploy_to}/current/log/unicorn.log"
 end
