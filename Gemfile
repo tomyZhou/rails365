@@ -92,4 +92,5 @@ group :development do
   gem 'capistrano-rails', '~> 1.1.3'
   gem 'capistrano3-unicorn', '~> 0.2.1'
   gem 'capistrano-sidekiq', '~> 0.5.4'
+  gem 'capistrano-faster-assets', '~> 1.0.2'
 end
