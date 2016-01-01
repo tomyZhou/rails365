@@ -3,7 +3,7 @@ lock '3.4.0'
 
 set :application, 'rails365_cap'
 set :repo_url, 'git@github.com:yinsigan/rails365.git'
-set :branch, "cap"
+# set :branch, "cap"
 set :deploy_to, "/home/yinsigan/#{fetch(:application)}"
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/application.yml')
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'pids', 'tmp/sockets')
@@ -24,7 +24,7 @@ set :unicorn_config_path, -> { File.join(current_path, "config", "unicorn.rb") }
 set :unicorn_rack_env, "production"
 
 # Default branch is :master
-# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
 # set :deploy_to, '/var/www/my_app_name'
