@@ -16,22 +16,10 @@ class Admin::ArticlesController < Admin::BaseController
   end
 
   def create
-    @article = Article.new(article_params)
+    CreateArticleWorker.perform_async(article_params)
 
     respond_to do |format|
-      if @article.save
-        expired_common
-        Rails.cache.delete "group:#{@article.group.try(:friendly_id)}"
-        # 分类show页面下的文章列表
-        Rails.cache.delete "group:#{@article.group_id}/articles"
-        # 所有分类页面
-        Rails.cache.delete "group_all"
-        format.html { redirect_to @article, notice: 'Article was successfully created.' }
-        format.json { render :show, status: :created, location: @article }
-      else
-        format.html { render :new }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to articles_path, notice: 'Article was created.' }
     end
   end
 
@@ -39,27 +27,9 @@ class Admin::ArticlesController < Admin::BaseController
   end
 
   def update
+    UpdateArticleWorker.perform_async(params[:id], article_params)
     respond_to do |format|
-      # 分类show页面下的文章列表
-      Rails.cache.delete "group:#{@article.group_id}/articles"
-      Rails.cache.delete "group:#{@article.group.try(:friendly_id)}"
-      if @article.update(article_params)
-        expired_common
-        # 文章搜索用的group name
-        Rails.cache.delete "article:#{@article.id}/group_name"
-        # 文章show页面右侧推荐文章列表
-        Rails.cache.delete "article:#{@article.id}/recommend_articles"
-        # 文章show页面右侧标签
-        Rails.cache.delete "article:#{@article.id}/tags"
-        # 文章
-        Rails.cache.delete "article:#{@article.slug}"
-
-        format.html { redirect_to @article, notice: 'Article was successfully updated.' }
-        format.json { render :show, status: :ok, location: @article }
-      else
-        format.html { render :edit }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to @article, notice: 'Article was updated.' }
     end
   end
 
