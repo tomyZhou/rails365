@@ -44,7 +44,7 @@ gem 'oneapm_rpm', '~> 1.2.2'
 gem 'rack-mini-profiler', require: false
 
 # background
-gem 'sidekiq', '~> 3.5.1'
+gem 'sidekiq', '~> 4.0.2'
 
 # notification
 gem 'exception_notification', github: 'smartinez87/exception_notification'
