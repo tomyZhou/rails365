@@ -1,0 +1,8 @@
+p
+  strong Title:
+  = @admin_sidekiq_exception.ex
+p
+  strong Body:
+  = simple_format @admin_sidekiq_exception.ctx_hash
+
+= link_to 'Back', admin_sidekiq_exceptions_path

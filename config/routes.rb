@@ -15,6 +15,9 @@ Rails.application.routes.draw do
     resources :exception_logs, only: [:show, :destroy, :index] do
       delete :destroy_multiple, on: :collection
     end
+    resources :sidekiq_exceptions, only: [:show, :destroy, :index] do
+      delete :destroy_multiple, on: :collection
+    end
   end
 
   %w(404 422 500).each do |code|
