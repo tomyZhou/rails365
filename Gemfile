@@ -84,3 +84,5 @@ group :development do
   gem 'quiet_assets'
   gem 'pry'
 end
+
+gem 'sinatra', :require => nil

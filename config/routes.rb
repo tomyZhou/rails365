@@ -1,3 +1,4 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
   root to: 'home#index'
 
@@ -26,4 +27,9 @@ Rails.application.routes.draw do
 
   patch '/photos', to: "photos#create"
   get 'tags/:tag_id', to: 'articles#index', as: :tag
+
+  Sidekiq::Web.use Rack::Auth::Basic do |username, password|
+    username == ENV["USERNAME"] && password == ENV['PASSWORD']
+  end if Rails.env.production?
+  mount Sidekiq::Web => '/sidekiq'
 end
