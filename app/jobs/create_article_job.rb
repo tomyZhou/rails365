@@ -1,9 +1,8 @@
-class CreateArticleWorker
-
-  include Sidekiq::Worker
+class CreateArticleJob < ActiveJob::Base
+  queue_as :default
 
   def perform(article_params)
-    logger.info 'create article begin'
+    Sidekiq.logger.info 'create article begin'
     @article = Article.new(article_params)
     @article.save!
 
@@ -20,7 +19,6 @@ class CreateArticleWorker
     Rails.cache.delete "group:#{@article.group_id}/articles"
     # 所有分类页面
     Rails.cache.delete "group_all"
-    logger.info 'create article end'
+    Sidekiq.logger.info 'create article end'
   end
-
 end

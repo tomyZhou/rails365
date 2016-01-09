@@ -16,7 +16,7 @@ class Admin::ArticlesController < Admin::BaseController
   end
 
   def create
-    CreateArticleWorker.perform_async(article_params)
+    CreateArticleJob.perform_later(article_params)
 
     respond_to do |format|
       format.html { redirect_to articles_path, notice: 'Article was created.' }
@@ -27,7 +27,7 @@ class Admin::ArticlesController < Admin::BaseController
   end
 
   def update
-    UpdateArticleWorker.perform_async(params[:id], article_params)
+    UpdateArticleJob.perform_later(params[:id], article_params)
     respond_to do |format|
       format.html { redirect_to @article, notice: 'Article was updated.' }
     end

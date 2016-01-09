@@ -1,9 +1,8 @@
-class UpdateArticleWorker
-
-  include Sidekiq::Worker
+class UpdateArticleJob < ActiveJob::Base
+  queue_as :default
 
   def perform(article_id, article_params)
-    logger.info 'update article begin'
+    Sidekiq.logger.info 'update article begin'
     @article = Article.find(article_id)
     Rails.cache.delete "group:#{@article.group_id}/articles"
     Rails.cache.delete "group:#{@article.group.try(:friendly_id)}"
@@ -25,7 +24,6 @@ class UpdateArticleWorker
     Rails.cache.delete "article:#{@article.id}/tags"
     # 文章
     Rails.cache.delete "article:#{@article.slug}"
-    logger.info 'update article end'
+    Sidekiq.logger.info 'update article end'
   end
-
 end

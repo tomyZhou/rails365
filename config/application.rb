@@ -39,5 +39,6 @@ module Rails365
     end
     config.exceptions_app = self.routes
     config.cache_store = :redis_store, {host: '127.0.0.1', port: 6379, namespace: "rails365", driver: :hiredis}
+    config.active_job.queue_adapter = :sidekiq
   end
 end
