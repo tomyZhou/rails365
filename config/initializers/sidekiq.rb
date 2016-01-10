@@ -10,7 +10,4 @@ Sidekiq.configure_server do |config|
   config.error_handlers << Proc.new do |ex,ctx_hash|
     Admin::SidekiqException.create!(ex: ex, ctx_hash: ctx_hash)
   end
-  config.server_middleware do |chain|
-    chain.remove Sidekiq::Middleware::Server::RetryJobs
-  end
 end
