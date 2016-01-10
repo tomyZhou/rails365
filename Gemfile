@@ -85,4 +85,5 @@ group :development do
   gem 'pry'
 end
 
-gem 'sinatra', :require => nil
+gem 'sinatra', '~> 1.4.6', :require => nil
+gem 'pghero', '~> 1.2.1'

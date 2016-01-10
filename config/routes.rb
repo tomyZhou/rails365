@@ -32,4 +32,5 @@ Rails.application.routes.draw do
     username == ENV["USERNAME"] && password == ENV['PASSWORD']
   end if Rails.env.production?
   mount Sidekiq::Web => '/sidekiq'
+  mount PgHero::Engine, at: "pghero"
 end
