@@ -80,10 +80,10 @@ group :development, :test do
 end
 
 group :development do
+  gem 'pghero', '~> 1.2.1'
   gem 'rails_db'
   gem 'quiet_assets'
   gem 'pry'
 end
 
 gem 'sinatra', '~> 1.4.6', :require => nil
-gem 'pghero', '~> 1.2.1'
