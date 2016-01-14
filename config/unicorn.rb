@@ -1,5 +1,5 @@
 app_path = File.expand_path( File.join(File.dirname(__FILE__), '..', '..'))
-worker_processes   1
+worker_processes   2
 timeout            180
 listen             "#{app_path}/shared/tmp/sockets/unicorn.sock"
 pid                "#{app_path}/shared/tmp/pids/unicorn.pid"
