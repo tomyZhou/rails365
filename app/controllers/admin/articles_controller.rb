@@ -16,10 +16,14 @@ class Admin::ArticlesController < Admin::BaseController
   end
 
   def create
-    CreateArticleWorker.perform_async(article_params)
-
+    @article = Article.new(article_params)
     respond_to do |format|
-      format.html { redirect_to articles_path, notice: 'Article was created.' }
+      if @article.valid?
+        CreateArticleWorker.perform_async(article_params)
+        format.html { redirect_to articles_path, notice: 'Article was created.' }
+      else
+        format.html { render :new }
+      end
     end
   end
 
