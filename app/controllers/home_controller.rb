@@ -9,5 +9,8 @@ class HomeController < ApplicationController
     @groups = Rails.cache.fetch("groups", expires_in: 2.hours) do
       Group.all.to_a
     end
+    respond_to do |format|
+      format.all { render :index, formats: [:html]}
+    end
   end
 end
