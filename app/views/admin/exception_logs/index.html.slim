@@ -12,7 +12,9 @@ h2 所有异常
         label for="checkAll"
       th id
       th 时间
+      th request_url
       th title
+      th message
       th body
       th 操作
     - @admin_exception_logs.each do |admin_exception_log|
@@ -20,7 +22,9 @@ h2 所有异常
         td = check_box_tag 'admin_exception_log_ids[]', admin_exception_log.id, nil, :id => "admin_exception_log_#{admin_exception_log.id}", class: "check"
         td = admin_exception_log.id
         td = datetime admin_exception_log.created_at
+        td = admin_exception_log.request_url
         td = admin_exception_log.title
+        td = link_to(truncate(admin_exception_log.message), admin_exception_log)
         td = link_to(truncate(admin_exception_log.body), admin_exception_log)
         td = link_to 'Destroy', admin_exception_log, method: :delete, data: { confirm: 'Are you sure?' }
 = paginate @admin_exception_logs

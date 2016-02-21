@@ -10,6 +10,9 @@ class ArticlesController < ApplicationController
       @articles = Article.except_body_with_default.order("id DESC").page(params[:page])
     end
     set_meta_tags title: '文章列表'
+    respond_to do |format|
+      format.all { render :index, formats: [:html]}
+    end
   end
 
   def show

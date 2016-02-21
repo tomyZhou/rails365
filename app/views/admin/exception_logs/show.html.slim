@@ -2,6 +2,12 @@ p
   strong Title:
   = @admin_exception_log.title
 p
+  strong Request Url:
+  = @admin_exception_log.request_url
+p
+  strong Message:
+  = simple_format @admin_exception_log.message
+p
   strong Body:
   = simple_format @admin_exception_log.body
 
