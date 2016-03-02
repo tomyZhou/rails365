@@ -1,20 +1,6 @@
-= form_for [:admin, @group], html: {class: "form-horizontal"} do |f|
-  - if @group.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@group.errors.count, "error")} prohibited this group from being saved:"
-      ul
-        - @group.errors.full_messages.each do |message|
-          li = message
-
-  .form-group
-    = f.label :name, class: "col-sm-2 control-label"
-    .col-sm-10
-      = f.text_field :name, class: "form-control"
-  .form-group
-    = f.label :image, class: "col-sm-2 control-label"
-    .col-sm-10
-      = f.file_field :image, class: "form-control"
-      = f.hidden_field :image_cache
-  .form-group
-    .col-sm-10.col-sm-offset-2
-      = f.submit "save", class: "btn btn-primary"
+= bootstrap_form_for [:admin, @group], html: {class: "form-horizontal"} do |f|
+  = f.error_messages
+  = f.text_field :name, class: "form-control"
+  = f.file_field :image, class: "form-control"
+  = f.hidden_field :image_cache
+  = f.submit "save", class: "btn btn-primary"
