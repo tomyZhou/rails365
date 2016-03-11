@@ -49,9 +49,6 @@ gem 'sidekiq', '~> 4.0.2'
 # notification
 gem 'exception_notification', github: 'smartinez87/exception_notification'
 
-# seo
-gem 'meta-tags', '~> 2.0.0'
-
 # friendly url
 gem 'friendly_id', '~> 5.1.0'
 gem 'ruby-pinyin', '~> 0.4.6'

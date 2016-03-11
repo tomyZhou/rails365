@@ -5,11 +5,11 @@ class GroupsController < ApplicationController
     @groups = Rails.cache.fetch "group_all" do
       Group.all.to_a
     end
-    set_meta_tags title: "分类列表"
+    @title = "分类列表"
   end
 
   def show
-    set_meta_tags title: @group.name, description: ENV["meta_description"], keywords: ENV['meta_keyword']
+    @title = @group.name
   end
 
   private

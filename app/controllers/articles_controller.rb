@@ -7,14 +7,14 @@ class ArticlesController < ApplicationController
     else
       @articles = Article.except_body_with_default.order("id DESC").page(params[:page])
     end
-    set_meta_tags title: '文章列表'
+    @title = '文章列表'
     respond_to do |format|
       format.all { render :index, formats: [:html]}
     end
   end
 
   def show
-    set_meta_tags title: @article.title, description: @article.title, keywords: ENV['meta_keyword']
+    @title = @article.title
     @group_name = Rails.cache.fetch "article:#{@article.id}/group_name" do
       @article.group.try(:name) || ""
     end
