@@ -1,14 +1,14 @@
 p
   strong Title:
-  = @admin_exception_log.title
+  = @exception_log.title
 p
   strong Request Url:
-  = @admin_exception_log.request_url
+  = @exception_log.request_url
 p
   strong Message:
-  = simple_format @admin_exception_log.message
+  = simple_format @exception_log.message
 p
   strong Body:
-  = simple_format @admin_exception_log.body
+  = simple_format @exception_log.body
 
 = link_to 'Back', admin_exception_logs_path

@@ -15,15 +15,15 @@ h2 所有sidekiq异常
       th ex
       th ctx_hash
       th 操作
-    - @admin_sidekiq_exceptions.each do |admin_sidekiq_exception|
+    - @sidekiq_exceptions.each do |sidekiq_exception|
       tr
-        td = check_box_tag 'admin_sidekiq_exception_ids[]', admin_sidekiq_exception.id, nil, :id => "admin_sidekiq_exception_#{admin_sidekiq_exception.id}", class: "check"
-        td = admin_sidekiq_exception.id
-        td = datetime admin_sidekiq_exception.created_at
-        td = admin_sidekiq_exception.ex
-        td = link_to(truncate(admin_sidekiq_exception.ctx_hash), admin_sidekiq_exception)
-        td = link_to 'Destroy', admin_sidekiq_exception, method: :delete, data: { confirm: 'Are you sure?' }
-= paginate @admin_sidekiq_exceptions
+        td = check_box_tag 'sidekiq_exception_ids[]', sidekiq_exception.id, nil, :id => "sidekiq_exception_#{sidekiq_exception.id}", class: "check"
+        td = sidekiq_exception.id
+        td = datetime sidekiq_exception.created_at
+        td = sidekiq_exception.ex
+        td = link_to(truncate(sidekiq_exception.ctx_hash), sidekiq_exception)
+        td = link_to 'Destroy', sidekiq_exception, method: :delete, data: { confirm: 'Are you sure?' }
+= paginate @sidekiq_exceptions
 
 coffee:
   jQuery ->

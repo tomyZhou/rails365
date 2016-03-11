@@ -1,15 +1,15 @@
 class Admin::ExceptionLogsController < Admin::BaseController
-  before_action :set_admin_exception_log, only: [:show, :destroy]
+  before_action :set_exception_log, only: [:show, :destroy]
 
   def index
-    @admin_exception_logs = Admin::ExceptionLog.order("id DESC").page(params[:page]).per(20)
+    @exception_logs = Admin::ExceptionLog.order("id DESC").page(params[:page]).per(20)
   end
 
   def show
   end
 
   def destroy
-    @admin_exception_log.destroy
+    @exception_log.destroy
     respond_to do |format|
       format.html { redirect_to admin_exception_logs_url, notice: 'Exception log was successfully destroyed.' }
       format.json { head :no_content }
@@ -20,7 +20,7 @@ class Admin::ExceptionLogsController < Admin::BaseController
     if params[:clear_all].present?
       Admin::ExceptionLog.delete_all
     else
-      Admin::ExceptionLog.delete(params[:admin_exception_log_ids])
+      Admin::ExceptionLog.delete(params[:exception_log_ids])
     end
     flash[:danger] = '删除成功'
     redirect_to :back
@@ -28,7 +28,7 @@ class Admin::ExceptionLogsController < Admin::BaseController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_admin_exception_log
-      @admin_exception_log = Admin::ExceptionLog.find(params[:id])
+    def set_exception_log
+      @exception_log = Admin::ExceptionLog.find(params[:id])
     end
 end

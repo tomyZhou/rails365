@@ -1,15 +1,15 @@
 class Admin::SidekiqExceptionsController < Admin::BaseController
-  before_action :set_admin_sidekiq_exception, only: [:show, :destroy]
+  before_action :set_sidekiq_exception, only: [:show, :destroy]
 
   def index
-    @admin_sidekiq_exceptions = Admin::SidekiqException.order("id DESC").page(params[:page]).per(20)
+    @sidekiq_exceptions = Admin::SidekiqException.order("id DESC").page(params[:page]).per(20)
   end
 
   def show
   end
 
   def destroy
-    @admin_sidekiq_exception.destroy
+    @sidekiq_exception.destroy
     respond_to do |format|
       format.html { redirect_to admin_sidekiq_exceptions_url, notice: 'Sidekiq Exception was successfully destroyed.' }
       format.json { head :no_content }
@@ -20,7 +20,7 @@ class Admin::SidekiqExceptionsController < Admin::BaseController
     if params[:clear_all].present?
       Admin::SidekiqException.delete_all
     else
-      Admin::SidekiqException.delete(params[:admin_sidekiq_exception_ids])
+      Admin::SidekiqException.delete(params[:sidekiq_exception_ids])
     end
     flash[:danger] = '删除成功'
     redirect_to :back
@@ -28,7 +28,7 @@ class Admin::SidekiqExceptionsController < Admin::BaseController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_admin_sidekiq_exception
-      @admin_sidekiq_exception = Admin::SidekiqException.find(params[:id])
+    def set_sidekiq_exception
+      @sidekiq_exception = Admin::SidekiqException.find(params[:id])
     end
 end
