@@ -9,7 +9,6 @@
       span.glyphicon.glyphicon-picture#image-upload
   = f.text_area :body, class: "form-control", rows: 20, required: true
   = f.select :group_id, Group.all.collect { |p| [ p.name, p.id ] }, include_blank: true
-  = f.text_field :tag_list, class: "form-control"
   = f.submit "save", class: "btn btn-primary"
 
 coffee:
