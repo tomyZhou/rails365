@@ -27,14 +27,6 @@
           - @recommend_articles.each do |recommend_article|
             - unless recommend_article.id == @article.id
               p = link_to recommend_article.title, recommend_article
-    .panel.panel-default
-      .panel-heading
-        div 标签
-      .panel-body
-        - cache @tags do
-          - tag_cloud(@tags, %w(css1 css2 css3 css4)) do |tag, css_class|
-            div
-              = link_to tag.name, tag_path(tag.id), class: css_class
 
 javascript:
   $(document).ready(function() {

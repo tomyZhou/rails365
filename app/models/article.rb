@@ -6,15 +6,9 @@ class Article < ActiveRecord::Base
                     :title => 'A',
                     :body => 'B'
                   },
-                  :associated_against => {
-                    :tags => [:name],
-                  },
                   :using => {
                     :tsearch => {:dictionary => "testzhcfg", :prefix => true, :negation => true}
                   }
-
-  acts_as_taggable
-  ActsAsTaggableOn.remove_unused_tags = true
 
   extend FriendlyId
   friendly_id :title, use: [:slugged, :finders, :history]
@@ -32,19 +26,6 @@ class Article < ActiveRecord::Base
 
   def should_generate_new_friendly_id?
     title_changed? || super
-  end
-
-  def meta_keyword
-    if tags.length >= 4
-      tag_list
-    else
-      (tags.map { |tag| tag.name.downcase } | ENV["meta_primary_keyword"].split(/,\ */)).join(", ")
-    end
-  end
-
-  alias_method :old_tag_list, :tag_list
-  def tag_list
-    super.join(", ")
   end
 
 end

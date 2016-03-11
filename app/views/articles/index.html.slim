@@ -1,8 +1,5 @@
 .page-header
-  - if @tag.present?
-    h2.text-primary 标签<strong>#{@tag.name}</strong>下的所有文章
-  - else
-    h2.text-primary 所有文章(#{@articles.total_count})
+  h2.text-primary 所有文章(#{@articles.total_count})
 
 - if session[:admin]
   .text-right
@@ -13,8 +10,6 @@
       h3 = link_to article.title.html_safe, article, class: "search-hight-light"
     - else
       h3 = link_to article.title, article
-    p.text-right
-      = raw article.tags.map { |t| link_to t.name, tag_path(t.id) }.join(', ')
     p.text-right
       - if article.group
         span.label.label-default = link_to article.group.try(:name), group_path(article.group)

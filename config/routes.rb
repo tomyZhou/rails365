@@ -4,7 +4,6 @@ Rails.application.routes.draw do
 
   resources :articles, only: [:show, :index]
   resources :groups, only: [:show, :index]
-  resources :tags, only: [:index]
 
   namespace :admin do
     root to: "articles#index"
@@ -24,7 +23,6 @@ Rails.application.routes.draw do
   end
 
   patch '/photos', to: "photos#create"
-  get 'tags/:tag_id', to: 'articles#index', as: :tag
 
   Sidekiq::Web.use Rack::Auth::Basic do |username, password|
     username == ENV["USERNAME"] && password == ENV['PASSWORD']

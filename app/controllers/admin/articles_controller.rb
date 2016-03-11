@@ -51,7 +51,7 @@ private
   end
 
   def article_params
-    params.require(:article).permit(:title, :body, :group_id, :tag_list)
+    params.require(:article).permit(:title, :body, :group_id)
   end
 
   def expired_common
@@ -60,7 +60,6 @@ private
     Rails.cache.delete "hot_articles"
     Rails.cache.delete "groups"
     # 分类show页面的keyworkds meta
-    Rails.cache.delete "group:#{@article.group_id}/tag_list"
     Rails.cache.delete "group:#{@article.group_id}"
   end
 

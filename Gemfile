@@ -49,9 +49,6 @@ gem 'sidekiq', '~> 4.0.2'
 # notification
 gem 'exception_notification', github: 'smartinez87/exception_notification'
 
-# tag
-gem 'acts-as-taggable-on', '~> 3.4'
-
 # seo
 gem 'meta-tags', '~> 2.0.0'
 

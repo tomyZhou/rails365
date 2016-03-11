@@ -4,8 +4,6 @@ class ArticlesController < ApplicationController
   def index
     if params[:search].present?
       @articles = Article.except_body_with_default.search_by_title_or_body(params[:search]).order("id DESC").page(params[:page])
-    elsif params[:tag_id] && @tag = ActsAsTaggableOn::Tag.find_by(id: params[:tag_id])
-      @articles = Article.except_body_with_default.tagged_with(@tag.name).order("id DESC").page(params[:page])
     else
       @articles = Article.except_body_with_default.order("id DESC").page(params[:page])
     end
@@ -16,15 +14,12 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    set_meta_tags title: @article.title, description: @article.title, keywords: @article.meta_keyword
+    set_meta_tags title: @article.title, description: @article.title, keywords: ENV['meta_keyword']
     @group_name = Rails.cache.fetch "article:#{@article.id}/group_name" do
       @article.group.try(:name) || ""
     end
     @recommend_articles = Rails.cache.fetch "article:#{@article.id}/recommend_articles" do
       Article.except_body_with_default.search_by_title_or_body(@group_name).order("visit_count DESC").limit(11).to_a
-    end
-    @tags = Rails.cache.fetch "article:#{@article.id}/tags" do
-      @article.tag_counts_on(:tags)
     end
   end
 

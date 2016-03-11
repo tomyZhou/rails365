@@ -12,7 +12,6 @@ class CreateArticleWorker
     Rails.cache.delete "hot_articles"
     Rails.cache.delete "groups"
     # 分类show页面的keyworkds meta
-    Rails.cache.delete "group:#{@article.group_id}/tag_list"
     Rails.cache.delete "group:#{@article.group_id}"
 
     Rails.cache.delete "group:#{@article.group.try(:friendly_id)}"
