@@ -16,7 +16,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    set_meta_tags title: @article.title, description: @article.meta_description || @article.title, keywords: @article.meta_keyword
+    set_meta_tags title: @article.title, description: @article.title, keywords: @article.meta_keyword
     @group_name = Rails.cache.fetch "article:#{@article.id}/group_name" do
       @article.group.try(:name) || ""
     end
