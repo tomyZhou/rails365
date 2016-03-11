@@ -21,9 +21,7 @@ class Article < ActiveRecord::Base
 
   belongs_to :group, counter_cache: true
 
-  scope :published, -> { where(published: true) }
-  scope :unpublished, -> { where(published: false) }
-  scope :except_body_with_default, -> { published.select(:title, :created_at, :updated_at, :published, :group_id, :slug, :id).includes(:group) }
+  scope :except_body_with_default, -> { select(:title, :created_at, :updated_at, :group_id, :slug, :id).includes(:group) }
 
   validates :title, :body, presence: true
   validates :title, uniqueness: true

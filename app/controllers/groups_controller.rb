@@ -21,7 +21,7 @@ class GroupsController < ApplicationController
         Group.find(params[:id])
       end
       @articles = Rails.cache.fetch "group:#{@group.id}/articles" do
-        @group.articles.published.to_a
+        @group.articles.to_a
       end
     end
 end

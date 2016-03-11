@@ -13,5 +13,4 @@
     p.text-muted.pull-right
       = datetime article.created_at
       - if session[:admin]
-        span.label.label-default = article.published
         = link_to 'Destroy', [:admin, article], method: :delete, data: { confirm: 'Are you sure?' }

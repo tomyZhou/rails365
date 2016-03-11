@@ -8,9 +8,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: "articles#index"
-    resources :articles, only: [:edit, :destroy, :index, :new, :update, :create] do
-      get :unpublished, on: :collection
-    end
+    resources :articles, only: [:edit, :destroy, :index, :new, :update, :create]
     resources :groups, only: [:edit, :destroy, :index, :new, :update, :create]
     resources :sites, except: [:show]
     resources :exception_logs, only: [:show, :destroy, :index] do

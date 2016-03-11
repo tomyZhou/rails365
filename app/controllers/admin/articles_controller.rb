@@ -6,11 +6,6 @@ class Admin::ArticlesController < Admin::BaseController
     render 'articles/index'
   end
 
-  def unpublished
-    @articles = Article.unpublished.includes(:group).order("id DESC").page(params[:page])
-    render 'articles/index'
-  end
-
   def new
     @article = Article.new
   end
@@ -56,7 +51,7 @@ private
   end
 
   def article_params
-    params.require(:article).permit(:title, :body, :published, :group_id, :tag_list, :meta_description)
+    params.require(:article).permit(:title, :body, :group_id, :tag_list, :meta_description)
   end
 
   def expired_common
