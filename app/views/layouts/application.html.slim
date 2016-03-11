@@ -2,9 +2,9 @@
 doctype html
 html
 head
-  title = @title ? "#{@title} | Rails365-分享linux, nginx，redis，postgresql，ruby优秀文章" : "Rails365-分享linux, nginx，redis，postgresql，ruby优秀文章"
-  meta name="description" content='<%= ENV["meta_description"] %>'
-  meta name="keywords" content='<%= ENV["meta_keyword"] %>'
+  title = @title ? "#{@title} | #{@site_info_title}" : @site_info_title
+  meta name="description" content="#{@site_info_meta_description}"
+  meta name="keywords" content="#{@site_info_meta_keyword}"
   = stylesheet_link_tag    'application', media: 'all'
   = javascript_include_tag 'application'
   meta http-equiv="X-UA-Compatible" content="IE=edge"

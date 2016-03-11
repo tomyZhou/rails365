@@ -22,7 +22,7 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def error_messages
-    if object.errors.any?
+    if object && object.errors.any?
       content_tag(:div, id: "error_explanation") do
         content_tag(:h2, "#{pluralize(object.errors.count, "error")} prohibited this article from being saved:") +
         content_tag(:ul) do

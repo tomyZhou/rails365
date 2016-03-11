@@ -6,7 +6,7 @@ nav.navbar.navbar-inverse
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      a.navbar-brand href="/"  Rails365
+      a.navbar-brand href="/" = @site_info_name
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       ul.nav.navbar-nav
         li class="#{controller_name == 'articles' ? 'active' : nil}"
@@ -33,6 +33,8 @@ nav.navbar.navbar-inverse
                 a href="/admin/exception_logs" 异常
               li
                 a href="/admin/sites" 友链
+              li
+                a href="/admin/site_infos" 网站设置
               li
                 a href="/admin/sidekiq_exceptions" sidekiq异常
               li

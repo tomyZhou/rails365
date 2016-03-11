@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :articles, only: [:edit, :destroy, :index, :new, :update, :create]
     resources :groups, only: [:edit, :destroy, :index, :new, :update, :create]
     resources :sites, except: [:show]
+    resources :site_infos, only: [:index, :update, :edit]
     resources :exception_logs, only: [:show, :destroy, :index] do
       delete :destroy_multiple, on: :collection
     end

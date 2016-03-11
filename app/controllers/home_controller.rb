@@ -9,6 +9,9 @@ class HomeController < ApplicationController
     @groups = Rails.cache.fetch("groups", expires_in: 2.hours) do
       Group.all.to_a
     end
+    @site_info_home_desc = Rails.cache.fetch "site_info_home_desc" do
+      Admin::SiteInfo.find_by(key: "home_desc").try(:value)
+    end
     respond_to do |format|
       format.all { render :index, formats: [:html]}
     end
