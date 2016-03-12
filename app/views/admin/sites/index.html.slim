@@ -14,4 +14,4 @@ table.table.table
       td = site.url
       td
         = link_to "编辑", edit_admin_site_path(site), class: "btn btn-link btn-sm"
-        = link_to '删除', [:admin, site], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link btn-sm"
+        = link_to '删除', site, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link btn-sm"

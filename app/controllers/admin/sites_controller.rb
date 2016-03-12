@@ -2,18 +2,18 @@ class Admin::SitesController < Admin::BaseController
   before_action :set_site, only: [:edit, :update, :destroy]
 
   def index
-    @sites = Site.all
+    @sites = Admin::Site.all
   end
 
   def new
-    @site = Site.new
+    @site = Admin::Site.new
   end
 
   def edit
   end
 
   def create
-    @site = Site.new(site_params)
+    @site = Admin::Site.new(site_params)
     respond_to do |format|
       if @site.save
         expired_common
@@ -46,11 +46,11 @@ class Admin::SitesController < Admin::BaseController
 
   private
     def set_site
-      @site = Site.find(params[:id])
+      @site = Admin::Site.find(params[:id])
     end
 
     def site_params
-      params.require(:site).permit(:name, :url)
+      params.require(:admin_site).permit(:name, :url)
     end
 
     def expired_common

@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   private
     def set_sites
       @sites = Rails.cache.fetch("sites") do
-        Site.all.to_a
+        Admin::Site.all.to_a
       end
       @site_info_name = Rails.cache.fetch "site_info_name" do
         Admin::SiteInfo.find_by(key: "name").try(:value)
