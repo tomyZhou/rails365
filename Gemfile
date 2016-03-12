@@ -80,3 +80,7 @@ end
 
 gem 'sinatra', '~> 1.4.6', :require => nil
 gem 'pghero', '~> 1.2.1'
+
+# user authentication
+gem 'devise', '~> 3.5.6'
+gem 'devise-i18n', '~> 0.12.1'

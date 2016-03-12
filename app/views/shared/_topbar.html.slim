@@ -1,4 +1,5 @@
 nav.navbar.navbar-inverse
+
   .container
     .navbar-header
       button.navbar-toggle.collapsed aria-expanded="false" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"
@@ -18,11 +19,11 @@ nav.navbar.navbar-inverse
       = form_tag "/articles", method: "get", class: "navbar-form navbar-left", role: "search"
         .form-group
           input.form-control placeholder="Search" type="text" name="search" value="#{params[:search].presence}"/
-      - if session[:admin]
+      - if user_signed_in?
         ul.nav.navbar-nav.navbar-right
           li.dropdown
             a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
-              | 管理
+              = current_user.email
               span.caret
             ul.dropdown-menu
               li
@@ -41,3 +42,11 @@ nav.navbar.navbar-inverse
                 a href="/sidekiq" sidekiq web
               li
                 a href="/pghero" pghero
+              li
+                = link_to('注销', destroy_user_session_path, :method => :delete)
+      - else
+        ul.nav.navbar-nav.navbar-right
+          li
+            = link_to('注册', new_registration_path(:user))
+          li
+            = link_to('登录', new_session_path(:user))

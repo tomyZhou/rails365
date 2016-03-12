@@ -1,0 +1,19 @@
+.modal-dialog
+  .modal-content
+    .modal-header
+      h1.text-center = t('welcome_login')
+    .modal-body
+      .row
+        = form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form col-md-12 center-block"}) do |f|
+          = devise_error_messages!
+          .form-group
+            = f.email_field :email, autofocus: true, class: "form-control input-lg"
+          .form-group
+            = f.password_field :password, autocomplete: "off", class: "form-control input-lg"
+          - if devise_mapping.rememberable?
+            .checkbox
+              label
+                = f.check_box :remember_me
+                | remember_me
+          .form-group
+            = f.submit "Log in", class: "btn btn-lg btn-primary btn-block"

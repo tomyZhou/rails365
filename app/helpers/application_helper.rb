@@ -11,4 +11,9 @@ module ApplicationHelper
     options[:builder] = BootstrapFormBuilder
     form_for(object, options, &block)
   end
+
+  def deivse_form_for(object, options = {}, &block)
+    options[:builder] = DeviseFormBuilder
+    form_for(object, options, &block)
+  end
 end
