@@ -7,9 +7,9 @@
         = form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form col-md-12 center-block"}) do |f|
           = devise_error_messages!
           .form-group
-            = f.email_field :email, autofocus: true, class: "form-control input-lg"
+            = f.text_field :login, autofocus: true, class: "form-control input-lg", placeholder: "请输入邮箱或用户名"
           .form-group
-            = f.password_field :password, autocomplete: "off", class: "form-control input-lg"
+            = f.password_field :password, autocomplete: "off", class: "form-control input-lg", placeholder: "请输入登录密码"
           - if devise_mapping.rememberable?
             .checkbox
               label
