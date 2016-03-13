@@ -3,12 +3,11 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'home#index'
 
-  resources :articles, only: [:show, :index]
+  resources :articles
   resources :groups, only: [:show, :index]
 
   namespace :admin do
     root to: "articles#index"
-    resources :articles, only: [:edit, :destroy, :index, :new, :update, :create]
     resources :groups, only: [:edit, :destroy, :index, :new, :update, :create]
     resources :sites, except: [:show]
     resources :site_infos, only: [:index, :update, :edit]

@@ -1,9 +1,9 @@
 .page-header
   h2.text-primary 所有文章(#{@articles.total_count})
 
-- if session[:admin]
+- if can? :create, Article
   .text-right
-    = link_to "添加新文章", new_admin_article_path
+    = link_to "添加新文章", new_article_path
 - cache @articles do
   - @articles.each do |article|
     - if params[:search].present?
@@ -14,8 +14,6 @@
       - if article.group
         span.label.label-default = link_to article.group.try(:name), group_path(article.group)
       span.text-muted
-        | *创建于
+        | 由#{article.user.try(:email)}*创建于
         = datetime article.created_at
-      - if session[:admin]
-        = link_to 'Destroy', [:admin, article], method: :delete, data: { confirm: 'Are you sure?' }
   = paginate @articles

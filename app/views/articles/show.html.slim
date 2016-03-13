@@ -1,12 +1,12 @@
-- cache [@article, session[:admin]] do
+- cache [@article, current_user] do
   .page-header
     h2 = @article.title
   .row
     .col-md-12.block-margin
       .text-right
         = datetime @article.created_at
-        - if session[:admin]
-          = link_to "编辑", edit_admin_article_path(@article)
+        - if can? :update, @article
+          = link_to "编辑", edit_article_path(@article)
 .row
   .col-md-8
     - cache @article do

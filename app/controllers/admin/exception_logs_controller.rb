@@ -1,5 +1,6 @@
 class Admin::ExceptionLogsController < Admin::BaseController
   before_action :set_exception_log, only: [:show, :destroy]
+  load_and_authorize_resource
 
   def index
     @exception_logs = Admin::ExceptionLog.order("id DESC").page(params[:page]).per(20)

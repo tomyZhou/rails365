@@ -14,10 +14,11 @@ class Article < ActiveRecord::Base
   friendly_id :title, use: [:slugged, :finders, :history]
 
   belongs_to :group, counter_cache: true
+  belongs_to :user
 
-  scope :except_body_with_default, -> { select(:title, :created_at, :updated_at, :group_id, :slug, :id).includes(:group) }
+  scope :except_body_with_default, -> { select(:title, :created_at, :updated_at, :group_id, :slug, :id, :user_id).includes(:group) }
 
-  validates :title, :body, presence: true
+  validates :title, :body, :group_id, :user_id, presence: true
   validates :title, uniqueness: true
 
   def normalize_friendly_id(input)

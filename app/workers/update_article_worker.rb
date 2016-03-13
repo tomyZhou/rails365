@@ -2,11 +2,13 @@ class UpdateArticleWorker
 
   include Sidekiq::Worker
 
-  def perform(article_id, article_params)
+  def perform(article_id, user_id, article_params)
     logger.info 'update article begin'
+    @user = User.find(user_id)
     @article = Article.find(article_id)
     Rails.cache.delete "group:#{@article.group_id}/articles"
     Rails.cache.delete "group:#{@article.group.try(:friendly_id)}"
+    @article.user_id = @user.id
     @article.update!(article_params)
 
     # 首页

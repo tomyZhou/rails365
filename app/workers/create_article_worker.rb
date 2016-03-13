@@ -2,9 +2,11 @@ class CreateArticleWorker
 
   include Sidekiq::Worker
 
-  def perform(article_params)
+  def perform(article_params, user_id)
     logger.info 'create article begin'
+    @user = User.find(user_id)
     @article = Article.new(article_params)
+    @article.user_id = @user.id
     @article.save!
 
     # 首页

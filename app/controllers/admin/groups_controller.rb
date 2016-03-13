@@ -1,5 +1,6 @@
 class Admin::GroupsController < Admin::BaseController
   before_action :set_group, only: [:edit, :update, :destroy]
+  load_and_authorize_resource
 
   def index
     @groups = Group.all

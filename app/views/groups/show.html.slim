@@ -3,14 +3,11 @@
     = @group.name
     | (#{@group.articles_count})
 
-- if session[:admin]
-  .text-right
-    = link_to '编辑', edit_admin_group_path(@group)
+.text-right
+  = link_to '编辑', edit_admin_group_path(@group)
 
-- cache [@articles, session[:admin]] do
+- cache @articles do
   - @articles.each do |article|
     h3 = link_to article.title, article
     p.text-muted.pull-right
       = datetime article.created_at
-      - if session[:admin]
-        = link_to 'Destroy', [:admin, article], method: :delete, data: { confirm: 'Are you sure?' }

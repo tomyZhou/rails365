@@ -1,5 +1,6 @@
 class Admin::SiteInfosController < Admin::BaseController
   before_action :set_site_info, only: [:edit, :update]
+  load_and_authorize_resource
 
   def index
     @site_infos = Admin::SiteInfo.all
