@@ -24,9 +24,11 @@ Rails.application.routes.draw do
 
   patch '/photos', to: "photos#create"
 
-  Sidekiq::Web.use Rack::Auth::Basic do |username, password|
-    username == ENV["USERNAME"] && password == ENV['PASSWORD']
-  end if Rails.env.production?
-  mount Sidekiq::Web => '/sidekiq'
-  mount PgHero::Engine, at: "pghero"
+  authenticate :user, lambda { |u| u.super_admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
+  authenticate :user, lambda { |u| u.super_admin? } do
+    mount PgHero::Engine, at: "pghero"
+  end
 end
