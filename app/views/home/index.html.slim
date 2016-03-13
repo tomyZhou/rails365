@@ -13,7 +13,7 @@
         .panel-body
           - @articles.each do |article|
             p.clearfix
-              span.pull-right = datetime article.created_at
+              span.pull-right = custom_timeago_tag article.created_at
               = link_to article.title, article_path(article)
   - cache @hot_articles do
     .col-md-6

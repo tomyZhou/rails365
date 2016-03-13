@@ -10,6 +10,8 @@
 #= require qrcode
 #= require jquery.fluidbox.min
 #= require jquery.lazyload
+#= require rails-timeago
+#= require locales/jquery.timeago.zh-CN.js
 
 jQuery ->
   $("img.lazy").lazyload()
