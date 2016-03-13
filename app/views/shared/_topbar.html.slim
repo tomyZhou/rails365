@@ -23,7 +23,7 @@ nav.navbar.navbar-inverse
         ul.nav.navbar-nav.navbar-right
           li.dropdown
             a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
-              = current_user.email
+              = current_user.login
               span.caret
             ul.dropdown-menu
               - if can? :manage, Admin::ExceptionLog

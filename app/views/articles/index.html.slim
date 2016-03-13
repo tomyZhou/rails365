@@ -14,6 +14,6 @@
       - if article.group
         span.label.label-default = link_to article.group.try(:name), group_path(article.group)
       span.text-muted
-        | 由#{article.user.try(:email)}*创建于
+        | 由#{article.user.try(:login)}*创建于
         = datetime article.created_at
   = paginate @articles
