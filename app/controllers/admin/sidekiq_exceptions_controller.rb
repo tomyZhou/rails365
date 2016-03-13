@@ -1,6 +1,6 @@
 class Admin::SidekiqExceptionsController < Admin::BaseController
   before_action :set_sidekiq_exception, only: [:show, :destroy]
-  load_and_authorize_resource
+  authorize_resource
 
   def index
     @sidekiq_exceptions = Admin::SidekiqException.order("id DESC").page(params[:page]).per(20)

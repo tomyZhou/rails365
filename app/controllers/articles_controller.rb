@@ -2,7 +2,7 @@ class ArticlesController < ApplicationController
   before_action :set_article, only: [:show]
   before_action :find_changed_article, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
-  load_and_authorize_resource
+  authorize_resource
 
   def index
     if params[:search].present?

@@ -1,7 +1,7 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show]
   before_action :find_changed_group, only: [:edit, :update, :destroy]
-  load_and_authorize_resource
+  authorize_resource
 
   def index
     @groups = Rails.cache.fetch "group_all" do
