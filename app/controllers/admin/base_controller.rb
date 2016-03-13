@@ -2,8 +2,6 @@ class Admin::BaseController < ActionController::Base
   layout "admin"
 
   before_action do
-    authenticate_user!
-
     @site_info_name = Rails.cache.fetch "site_info_name" do
       Admin::SiteInfo.find_by(key: "name").try(:value)
     end
