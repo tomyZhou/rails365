@@ -26,20 +26,23 @@ nav.navbar.navbar-inverse
               = current_user.email
               span.caret
             ul.dropdown-menu
-              li
-                a href="/admin/groups" 分类
-              li
-                a href="/admin/exception_logs" 异常
-              li
-                a href="/admin/sites" 友链
-              li
-                a href="/admin/site_infos" 网站设置
-              li
-                a href="/admin/sidekiq_exceptions" sidekiq异常
-              li
-                a href="/sidekiq" sidekiq web
-              li
-                a href="/pghero" pghero
+              - if can? :manage, Admin::ExceptionLog
+                li
+                  a href="/admin/exception_logs" 异常
+              - if can? :manage, Admin::Site
+                li
+                  a href="/admin/sites" 友链
+              - if can? :manage, Admin::SiteInfo
+                li
+                  a href="/admin/site_infos" 网站设置
+              - if can? :manage, Admin::SidekiqException
+                li
+                  a href="/admin/sidekiq_exceptions" sidekiq异常
+              - if current_user.super_admin?
+                li
+                  a href="/sidekiq" sidekiq web
+                li
+                  a href="/pghero" pghero
               li
                 = link_to('注销', destroy_user_session_path, :method => :delete)
       - else

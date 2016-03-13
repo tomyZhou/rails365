@@ -4,6 +4,7 @@
   .row
     .col-md-12.block-margin
       .text-right
+        | 由*#{@article.user.try(:email)}*发表于
         = datetime @article.created_at
         - if can? :update, @article
           = link_to "编辑", edit_article_path(@article)

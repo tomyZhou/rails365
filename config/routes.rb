@@ -4,11 +4,10 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :articles
-  resources :groups, only: [:show, :index]
+  resources :groups
 
   namespace :admin do
     root to: "articles#index"
-    resources :groups, only: [:edit, :destroy, :index, :new, :update, :create]
     resources :sites, except: [:show]
     resources :site_infos, only: [:index, :update, :edit]
     resources :exception_logs, only: [:show, :destroy, :index] do

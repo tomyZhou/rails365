@@ -1,0 +1,9 @@
+h1 Editing group
+
+== render 'form'
+
+= link_to 'Show', @group
+'|
+= link_to 'Back', groups_path
+'|
+= link_to 'Destroy', group_path(@group), method: :delete, data: { confirm: 'Are you sure?' }
