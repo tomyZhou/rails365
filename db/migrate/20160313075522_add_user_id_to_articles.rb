@@ -4,7 +4,7 @@ class AddUserIdToArticles < ActiveRecord::Migration
   end
 
   def data
-    user = User.create! email: "hfpp2012@aliyun.com", password: "12345678"
+    user = User.create! email: "hfpp2012@aliyun.com", password: "12345678", login: "hfpp2012"
     Article.update_all user_id: user.id
   end
 
