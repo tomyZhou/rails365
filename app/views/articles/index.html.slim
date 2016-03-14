@@ -15,5 +15,5 @@
         span.label.label-default = link_to article.group.try(:name), group_path(article.group)
       span.text-muted
         | 由#{article.user.try(:login)}*创建于
-        = datetime article.created_at
+        = custom_timeago_tag article.created_at
   = paginate @articles
