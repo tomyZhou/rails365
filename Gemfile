@@ -83,7 +83,6 @@ gem 'pghero', '~> 1.2.1'
 
 # user authentication
 gem 'devise', '~> 3.5.6'
-gem 'devise-i18n', '~> 0.12.1'
 gem 'cancancan', '~> 1.10'
 gem 'rails-timeago', '~> 2.0'
 

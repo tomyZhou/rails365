@@ -1,7 +1,7 @@
 .modal-dialog
   .modal-content
     .modal-header
-      h1.text-center = t('welcome_login')
+      h1.text-center = t('.sign_in', :default => "Sign in")
     .modal-body
       .row
         = form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form col-md-12 center-block"}) do |f|
@@ -9,13 +9,12 @@
             .alert.alert-warning
               = flash[:alert]
           .form-group
-            = f.text_field :login, autofocus: true, class: "form-control input-lg", placeholder: "请输入邮箱或用户名"
+            = f.text_field :login, autofocus: true, class: "form-control input-lg", placeholder: t('.login_placeholder')
           .form-group
             = f.password_field :password, autocomplete: "off", class: "form-control input-lg", placeholder: "请输入登录密码"
           - if devise_mapping.rememberable?
-            .checkbox
-              label
-                = f.check_box :remember_me
-                | remember_me
+            .form-group
+              = f.check_box :remember_me
+              = f.label :remember_me
           .form-group
-            = f.submit "Log in", class: "btn btn-lg btn-primary btn-block"
+            = f.submit t('.sign_in', :default => "Sign in"), class: "btn btn-lg btn-primary btn-block"
