@@ -5,7 +5,9 @@
     .modal-body
       .row
         = form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form col-md-12 center-block"}) do |f|
-          = devise_error_messages!
+          - if flash[:alert].present?
+            .alert.alert-warning
+              = flash[:alert]
           .form-group
             = f.text_field :login, autofocus: true, class: "form-control input-lg", placeholder: "请输入邮箱或用户名"
           .form-group
