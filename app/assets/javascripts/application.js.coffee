@@ -6,6 +6,7 @@
 #= require bootstrap/dropdown
 #= require bootstrap/collapse
 #= require bootstrap/alert
+#= require bootstrap/tab
 #= require jquery.checkall
 #= require qrcode
 #= require jquery.fluidbox.min

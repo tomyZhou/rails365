@@ -44,6 +44,8 @@ nav.navbar.navbar-inverse
                 li
                   a href="/pghero" pghero
               li
+                = link_to '个人中心', user_path(current_user)
+              li
                 = link_to('注销', destroy_user_session_path, :method => :delete)
       - else
         ul.nav.navbar-nav.navbar-right

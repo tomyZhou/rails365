@@ -1,0 +1,22 @@
+.row
+  .col-md-4
+    .panel.panel-default
+      .panel-heading
+        = current_user.username
+      .panel-body
+        p 第#{current_user.id}位会员
+        p #{datetime current_user.created_at}
+  .col-md-8
+    div
+      ul.nav.nav-tabs role="tablist"
+        li.active role="presentation"
+          a aria-controls="profile" data-toggle="tab" href="#profile" role="tab"  个人信息
+      .tab-content
+        #profile.tab-pane.active role="tabpanel"
+          table.table.table-bordered
+            tr
+              td
+                | email: #{current_user.email}
+            tr
+              td
+                | 最后登录时间: #{datetime current_user.last_sign_in_at}

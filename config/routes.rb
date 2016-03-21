@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :articles
   resources :groups
+  resources :users, only: [:show]
 
   namespace :admin do
     root to: "articles#index"
