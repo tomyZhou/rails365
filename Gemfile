@@ -1,7 +1,7 @@
-if ENV['RUBYTAOBAO']
-  source 'https://ruby.taobao.org'
+if ENV['RUBYCHINAGEM']
+  source 'https://gems.ruby-china.org'
 else
-  source 'https://rubygems.org'
+  source 'https://ruby.taobao.org'
 end
 
 gem 'rails', '4.2.3'

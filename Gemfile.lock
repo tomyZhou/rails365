@@ -13,7 +13,7 @@ GIT
     rouge (1.8.0)
 
 GEM
-  remote: https://rubygems.org/
+  remote: https://ruby.taobao.org/
   specs:
     actionmailer (4.2.3)
       actionpack (= 4.2.3)
