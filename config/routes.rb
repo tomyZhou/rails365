@@ -1,6 +1,6 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => {:registrations => "registrations"}
   root to: 'home#index'
 
   resources :articles
@@ -32,4 +32,6 @@ Rails.application.routes.draw do
   authenticate :user, lambda { |u| u.super_admin? } do
     mount PgHero::Engine, at: "pghero"
   end
+
+  mount RuCaptcha::Engine => "/rucaptcha"
 end

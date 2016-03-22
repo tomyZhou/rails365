@@ -88,3 +88,5 @@ gem 'rails-timeago', '~> 2.0'
 
 # data migrate
 gem 'migration_data', '~> 0.2.1'
+
+gem 'rucaptcha', '~> 0.3.2.1'
