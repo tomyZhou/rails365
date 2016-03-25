@@ -18,3 +18,5 @@
               = f.label :remember_me
           .form-group
             = f.submit t('.sign_in', :default => "Sign in"), class: "btn btn-lg btn-primary btn-block"
+    .modal-footer
+      = render "devise/shared/links"

@@ -16,9 +16,7 @@
             = rucaptcha_input_tag(class: 'form-control')
         = f.submit t('.sign_up', :default => "Sign up"), class: "btn btn-primary btn-lg btn-block"
     .modal-footer
-      .col-md-12.text-left
-        p.clearfix
-          = link_to t('devise.shared.links.sign_in', :default => "Sign in"), new_session_path(:user), class: "pull-right"
+      = render "devise/shared/links"
 
 coffee:
   jQuery ->
