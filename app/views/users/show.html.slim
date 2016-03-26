@@ -6,6 +6,8 @@
       .panel-body
         p 第#{current_user.id}位会员
         p #{datetime current_user.created_at}
+        p
+          = link_to "修改个人信息", edit_user_registration_path
   .col-md-8
     div
       ul.nav.nav-tabs role="tablist"
@@ -17,6 +19,7 @@
             tr
               td
                 | email: #{current_user.email}
-            tr
-              td
-                | 最后登录时间: #{datetime current_user.last_sign_in_at}
+            - if current_user.last_sign_in_at.present?
+              tr
+                td
+                  | 最后登录时间: #{datetime current_user.last_sign_in_at}

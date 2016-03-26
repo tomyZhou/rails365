@@ -2,7 +2,7 @@ zh-CN:
   activerecord:
     attributes:
       user:
-        username: "用户名"
+        username: "登录名"
         current_password: "当前密码"
         email: "电子邮箱"
         password: "密码"

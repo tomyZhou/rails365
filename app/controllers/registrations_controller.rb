@@ -27,6 +27,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   def update
     super
+    Rails.cache.delete "current_user_[#{current_user.id}]" if current_user
   end
 
 protected
