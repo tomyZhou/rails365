@@ -1,10 +1,14 @@
 class User < ActiveRecord::Base
+  ALLOW_LOGIN_CHARS_REGEXP = /\A[A-Za-z0-9\-\_\.]+\z/
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :async, :authentication_keys => [:login]
 
   validate :validate_username
+  validates :username, format: { with: ALLOW_LOGIN_CHARS_REGEXP, message: '只允许数字、大小写字母和下划线' },
+                    length: { in: 3..20 }, presence: true,
+                    uniqueness: { case_sensitive: true}
 
   def validate_username
     if User.where(email: username).exists?
