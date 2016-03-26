@@ -5,7 +5,7 @@
         = current_user.username
       .panel-body
         p 第#{current_user.id}位会员
-        p #{datetime current_user.created_at}
+        p #{I18n.l current_user.created_at, :format => :long}
         p
           = link_to "修改个人信息", edit_user_registration_path
   .col-md-8
@@ -22,4 +22,4 @@
             - if current_user.last_sign_in_at.present?
               tr
                 td
-                  | 最后登录时间: #{datetime current_user.last_sign_in_at}
+                  | 最后登录时间: #{I18n.l current_user.last_sign_in_at, :format => :long}

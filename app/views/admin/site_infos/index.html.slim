@@ -9,7 +9,7 @@ table.table
   - @site_infos.each do |site_info|
     tr
       td = site_info.id
-      td = datetime site_info.updated_at
+      td = I18n.l site_info.updated_at, :format => :long
       td = site_info.key
       td = site_info.value
       td = site_info.desc

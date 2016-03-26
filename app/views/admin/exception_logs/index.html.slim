@@ -21,7 +21,7 @@ h2 所有异常
       tr
         td = check_box_tag 'exception_log_ids[]', exception_log.id, nil, :id => "exception_log_#{exception_log.id}", class: "check"
         td = exception_log.id
-        td = datetime exception_log.created_at
+        td = I18n.l exception_log.created_at, :format => :long
         td = exception_log.request_url
         td = exception_log.title
         td = link_to(truncate(exception_log.message), exception_log)

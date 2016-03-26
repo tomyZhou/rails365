@@ -19,7 +19,7 @@ h2 所有sidekiq异常
       tr
         td = check_box_tag 'sidekiq_exception_ids[]', sidekiq_exception.id, nil, :id => "sidekiq_exception_#{sidekiq_exception.id}", class: "check"
         td = sidekiq_exception.id
-        td = datetime sidekiq_exception.created_at
+        td = I18n.l sidekiq_exception.created_at, :format => :long
         td = sidekiq_exception.ex
         td = link_to(truncate(sidekiq_exception.ctx_hash), sidekiq_exception)
         td = link_to 'Destroy', sidekiq_exception, method: :delete, data: { confirm: 'Are you sure?' }
