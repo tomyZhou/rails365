@@ -3,7 +3,6 @@ class UpdateArticleWorker
   include Sidekiq::Worker
 
   def perform(article_id, user_id, article_params)
-    logger.info 'update article begin'
     @user = User.find(user_id)
     @article = Article.find(article_id)
     Rails.cache.delete "group:#{@article.group_id}/articles"
@@ -24,7 +23,6 @@ class UpdateArticleWorker
     Rails.cache.delete "article:#{@article.id}/recommend_articles"
     # 文章
     Rails.cache.delete "article:#{@article.slug}"
-    logger.info 'update article end'
   end
 
 end

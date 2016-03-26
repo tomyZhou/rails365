@@ -3,7 +3,6 @@ class CreateArticleWorker
   include Sidekiq::Worker
 
   def perform(article_params, user_id)
-    logger.info 'create article begin'
     @user = User.find(user_id)
     @article = Article.new(article_params)
     @article.user_id = @user.id
@@ -21,7 +20,6 @@ class CreateArticleWorker
     Rails.cache.delete "group:#{@article.group_id}/articles"
     # 所有分类页面
     Rails.cache.delete "group_all"
-    logger.info 'create article end'
   end
 
 end
