@@ -8,4 +8,3 @@ class DeviseRememberableWorker
     end 
   end
 end
-
