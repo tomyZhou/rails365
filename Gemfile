@@ -85,8 +85,9 @@ gem 'pghero', '~> 1.2.1'
 gem 'devise', '~> 3.5.6'
 gem 'cancancan', '~> 1.10'
 gem 'rails-timeago', '~> 2.0'
+gem 'rucaptcha', '~> 0.3.2.1'
+gem "devise-async", '~> 0.10.1'
 
 # data migrate
 gem 'migration_data', '~> 0.2.1'
 
-gem 'rucaptcha', '~> 0.3.2.1'
