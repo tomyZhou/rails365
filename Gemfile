@@ -91,3 +91,5 @@ gem "devise-async", '~> 0.10.1'
 # data migrate
 gem 'migration_data', '~> 0.2.1'
 
+gem "homeland", '~> 1.0.0'
+gem 'font-awesome-sass-rails'

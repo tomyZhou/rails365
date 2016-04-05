@@ -1,4 +1,4 @@
-@import "spacelab_variables";
+@import "united_variables";
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "rouge";
@@ -93,11 +93,8 @@ $c9:#999;
 .css4 { font-size: 1.6em; }
 
 .nav-justified > li.footer-list > a, .nav-tabs.nav-justified > li.footer-list > a {
-  &:hover {
-    color: #ddd;
-    background-color: #446E9B;
-  }
   color: #ddd;
+  background-color: #DD4814;
 }
 
 /* 底部 */
