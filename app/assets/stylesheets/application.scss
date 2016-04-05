@@ -1,5 +1,6 @@
-@import "united_variables";
+$navbar-border-radius: none;
 @import "bootstrap-sprockets";
+@import "bootswatch/cerulean/variables";
 @import "bootstrap";
 @import "rouge";
 @import "fluidbox.min";
@@ -94,7 +95,7 @@ $c9:#999;
 
 .nav-justified > li.footer-list > a, .nav-tabs.nav-justified > li.footer-list > a {
   color: #ddd;
-  background-color: #DD4814;
+  background-color: #2FA4E7;
 }
 
 /* 底部 */
