@@ -3,7 +3,7 @@ class Admin::SidekiqExceptionsController < Admin::BaseController
   authorize_resource
 
   def index
-    @sidekiq_exceptions = Admin::SidekiqException.order("id DESC").page(params[:page]).per(20)
+    @sidekiq_exceptions = Admin::SidekiqException.order("id DESC").page(params[:page])
   end
 
   def show

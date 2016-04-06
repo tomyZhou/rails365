@@ -3,7 +3,7 @@ class Admin::ExceptionLogsController < Admin::BaseController
   authorize_resource
 
   def index
-    @exception_logs = Admin::ExceptionLog.order("id DESC").page(params[:page]).per(20)
+    @exception_logs = Admin::ExceptionLog.order("id DESC").page(params[:page])
   end
 
   def show
