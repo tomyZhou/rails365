@@ -94,3 +94,6 @@ gem 'migration_data', '~> 0.2.1'
 gem "homeland", '~> 1.0.0'
 gem 'font-awesome-sass-rails'
 gem 'bootswatch-rails'
+
+gem 'status-page', github: "rails-engine/status-page"
+gem 'faraday'

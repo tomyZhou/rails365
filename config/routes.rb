@@ -36,4 +36,6 @@ Rails.application.routes.draw do
   mount RuCaptcha::Engine => "/rucaptcha"
 
   mount Homeland::Engine, at: "/homeland"
+
+  mount StatusPage::Engine, at: '/web'
 end
