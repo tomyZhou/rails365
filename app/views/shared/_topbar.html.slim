@@ -17,7 +17,7 @@ nav.navbar.navbar-default
         li class="#{controller_name == 'groups' ? 'active' : nil}"
           a href="/groups" 分类
         li
-          a href="/homeland" 社区
+          a href="/topics" 社区
       = form_tag "/articles", method: "get", class: "navbar-form navbar-left", role: "search"
         .form-group
           input.form-control placeholder="搜索标题或内容" type="text" name="search" value="#{params[:search].presence}"/
