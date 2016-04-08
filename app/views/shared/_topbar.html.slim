@@ -29,9 +29,6 @@ nav.navbar.navbar-default
               - if can? :manage, Admin::Site
                 li
                   a href="/admin/sites" 友链
-              - if can? :manage, Admin::SiteInfo
-                li
-                  a href="/admin/site_infos" 网站设置
               - if current_user.super_admin?
                 li
                   a href="/admin" rails_admin
