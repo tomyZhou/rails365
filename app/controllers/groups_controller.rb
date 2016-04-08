@@ -23,45 +23,30 @@ class GroupsController < ApplicationController
 
   def create
     @group = Group.new(group_params)
-    respond_to do |format|
-      if @group.save
-        expired_common
-        format.html { redirect_to @group, notice: 'Group was successfully created.' }
-        format.json { render :show, status: :created, location: @group }
-      else
-        format.html { render :new }
-        format.json { render json: @group.errors, status: :unprocessable_entity }
-      end
+
+    if @group.save
+      redirect_to @group, notice: 'Group was successfully created.'
+    else
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @group.update(group_params)
-        expired_common
-        format.html { redirect_to @group, notice: 'Group was successfully updated.' }
-        format.json { render :show, status: :ok, location: @group }
-      else
-        format.html { render :edit }
-        format.json { render json: @group.errors, status: :unprocessable_entity }
-      end
+    if @group.update(group_params)
+      redirect_to @group, notice: 'Group was successfully updated.'
+    else
+      render :edit
     end
   end
 
   def destroy
     @group.destroy
-    expired_common
-    respond_to do |format|
-      format.html { redirect_to groups_url, notice: 'Group was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to groups_url, notice: 'Group was successfully destroyed.'
   end
 
   private
     def set_group
-      @group = Rails.cache.fetch "group:#{params[:id]}" do
-        Group.find(params[:id])
-      end
+      @group = Group.fetch_by_uniq_keys!(slug: params[:id])
       @articles = Rails.cache.fetch "group:#{@group.id}/articles" do
         @group.articles.to_a
       end
@@ -75,8 +60,4 @@ class GroupsController < ApplicationController
       params.require(:group).permit(:name, :image)
     end
 
-    def expired_common
-      Rails.cache.delete "groups"
-      Rails.cache.delete "group_all"
-    end
 end

@@ -6,6 +6,6 @@ class Admin::SiteInfo < ActiveRecord::Base
 
 private
   def clear_cache
-    Rails.cache.delete "slc/admin_site_infos/#{self.id}/1"
+    self.expire_second_level_cache
   end
 end
