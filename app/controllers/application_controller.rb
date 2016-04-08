@@ -19,21 +19,10 @@ class ApplicationController < ActionController::Base
       Admin::Site.all.to_a
     end
 
-    @site_info_name = Rails.cache.fetch "site_info_name" do
-      Admin::SiteInfo.find_by(key: "name").try(:value)
-    end
-
-    @site_info_title = Rails.cache.fetch "site_info_title" do
-      Admin::SiteInfo.find_by(key: "title").try(:value)
-    end
-
-    @site_info_meta_description = Rails.cache.fetch "site_info_meta_description" do
-      Admin::SiteInfo.find_by(key: "meta_description").try(:value)
-    end
-
-    @site_info_meta_keyword = Rails.cache.fetch "site_info_meta_keyword" do
-      Admin::SiteInfo.find_by(key: "meta_keyword").try(:value)
-    end
+    @site_info_name = Admin::SiteInfo.fetch_by_uniq_keys(key: "name").try(:value)
+    @site_info_title = Admin::SiteInfo.fetch_by_uniq_keys(key: "title").try(:value)
+    @site_info_meta_description = Admin::SiteInfo.fetch_by_uniq_keys(key: "meta_description").try(:value)
+    @site_info_meta_keyword = Admin::SiteInfo.fetch_by_uniq_keys(key: "meta_keyword").try(:value)
 
     if current_user && current_user.super_admin?
       Rack::MiniProfiler.authorize_request

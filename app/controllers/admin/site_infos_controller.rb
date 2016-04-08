@@ -12,7 +12,7 @@ class Admin::SiteInfosController < Admin::BaseController
   def update
     respond_to do |format|
       if @site_info.update(site_info_params)
-        Rails.cache.delete "site_info_#{@site_info.key}"
+        Rails.cache.delete "slc/admin_site_infos/#{@site_info.id}/1"
         format.html { redirect_to admin_site_infos_path, notice: 'Site_info was successfully updated.' }
       else
         format.html { render :edit }

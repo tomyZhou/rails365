@@ -1,6 +1,5 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, :controllers => {:registrations => "registrations"}
   root to: 'home#index'
 
@@ -31,4 +30,6 @@ Rails.application.routes.draw do
   mount RuCaptcha::Engine => "/rucaptcha"
 
   mount StatusPage::Engine, at: '/web'
+
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 end

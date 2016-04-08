@@ -97,3 +97,4 @@ gem 'status-page', github: "rails-engine/status-page"
 gem 'faraday'
 
 gem 'rails_admin'
+gem "second_level_cache", "~> 2.1.9"

@@ -4,9 +4,7 @@ class Admin::BaseController < ActionController::Base
   layout "admin"
 
   before_action do
-    @site_info_name = Rails.cache.fetch "site_info_name" do
-      Admin::SiteInfo.find_by(key: "name").try(:value)
-    end
+    @site_info_name = Admin::SiteInfo.fetch_by_uniq_keys(key: "name").try(:value)
 
     if current_user && current_user.super_admin?
       Rack::MiniProfiler.authorize_request
