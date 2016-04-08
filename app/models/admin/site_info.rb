@@ -6,6 +6,6 @@ class Admin::SiteInfo < ActiveRecord::Base
 
 private
   def clear_cache
-    self.expire_second_level_cache
+    expire_second_level_cache
   end
 end

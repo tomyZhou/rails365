@@ -47,9 +47,7 @@ class GroupsController < ApplicationController
   private
     def set_group
       @group = Group.fetch_by_uniq_keys!(slug: params[:id])
-      @articles = Rails.cache.fetch "group:#{@group.id}/articles" do
-        @group.articles.to_a
-      end
+      @articles = @group.cached_articles
     end
 
     def find_changed_group

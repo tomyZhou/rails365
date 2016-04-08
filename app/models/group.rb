@@ -8,9 +8,8 @@ class Group < ActiveRecord::Base
 
   acts_as_cached(version: 1, expires_in: 1.month)
 
-  # for exists redis data
-  def second_level_cache_key
-    "group:#{self.slug}"
+  def cached_articles
+    Rails.cache.fetch("group:#{id}/articles") { articles.to_a }
   end
 
   def normalize_friendly_id(input)
@@ -21,13 +20,11 @@ class Group < ActiveRecord::Base
     name_changed? || super
   end
 
-  after_update :clear_cache
-  after_save :clear_cache
-  after_destroy :clear_cache
+  after_commit :clear_cache
 
 private
   def clear_cache
-    self.expire_second_level_cache
+    expire_second_level_cache
     Rails.cache.delete "groups"
     Rails.cache.delete "group_all"
   end
