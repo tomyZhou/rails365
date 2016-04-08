@@ -15,9 +15,7 @@ class ApplicationController < ActionController::Base
 
   before_action do
 
-    @sites = Rails.cache.fetch("sites") do
-      Admin::Site.all.to_a
-    end
+    @sites = Admin::Site.cache_objects
 
     @site_info_name = Admin::SiteInfo.fetch_by_uniq_keys(key: "name").try(:value)
     @site_info_title = Admin::SiteInfo.fetch_by_uniq_keys(key: "title").try(:value)

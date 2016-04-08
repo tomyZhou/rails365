@@ -26,9 +26,6 @@ nav.navbar.navbar-default
               = current_user.login
               span.caret
             ul.dropdown-menu
-              - if can? :manage, Admin::Site
-                li
-                  a href="/admin/sites" 友链
               - if current_user.super_admin?
                 li
                   a href="/admin" rails_admin

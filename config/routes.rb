@@ -7,10 +7,6 @@ Rails.application.routes.draw do
   resources :groups
   resources :users, only: [:show]
 
-  namespace :admin do
-    resources :sites, except: [:show]
-  end
-
   %w(404 422 500).each do |code|
     get code, to: "errors#show", code: code
   end
