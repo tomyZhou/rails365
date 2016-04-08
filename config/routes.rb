@@ -1,5 +1,6 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, :controllers => {:registrations => "registrations"}
   root to: 'home#index'
 
@@ -11,12 +12,6 @@ Rails.application.routes.draw do
     root to: "articles#index"
     resources :sites, except: [:show]
     resources :site_infos, only: [:index, :update, :edit]
-    resources :exception_logs, only: [:show, :destroy, :index] do
-      delete :destroy_multiple, on: :collection
-    end
-    resources :sidekiq_exceptions, only: [:show, :destroy, :index] do
-      delete :destroy_multiple, on: :collection
-    end
   end
 
   %w(404 422 500).each do |code|

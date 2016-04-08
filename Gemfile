@@ -95,3 +95,5 @@ gem 'bootswatch-rails'
 
 gem 'status-page', github: "rails-engine/status-page"
 gem 'faraday'
+
+gem 'rails_admin'
