@@ -8,9 +8,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
 
   namespace :admin do
-    root to: "articles#index"
     resources :sites, except: [:show]
-    resources :site_infos, only: [:index, :update, :edit]
   end
 
   %w(404 422 500).each do |code|
