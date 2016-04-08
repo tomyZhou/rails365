@@ -43,7 +43,4 @@ class User < ActiveRecord::Base
     ENV["admin_emails"].include?(email)
   end
 
-  def profile_url
-    "/users/#{self.id}"
-  end
 end
