@@ -28,11 +28,7 @@ nav.navbar.navbar-default
             ul.dropdown-menu
               - if current_user.super_admin?
                 li
-                  a href="/admin" rails_admin
-                li
-                  a href="/sidekiq" sidekiq web
-                li
-                  a href="/pghero" pghero
+                  a href="/admin" 后台管理
               li
                 = link_to 'status', "/web/status"
               li

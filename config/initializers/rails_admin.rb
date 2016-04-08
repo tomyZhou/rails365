@@ -16,6 +16,11 @@ RailsAdmin.config do |config|
   ## == Cancan ==
   config.authorize_with :cancan
 
+  config.navigation_static_links = {
+    'sidekiq web' => '/sidekiq',
+    'pghero' => "/pghero"
+  }
+
   ## == Pundit ==
   # config.authorize_with :pundit
 
