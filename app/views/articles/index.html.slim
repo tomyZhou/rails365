@@ -12,7 +12,7 @@
       h3 = link_to article.title, article
     p.text-right
       - if article.group
-        span.label.label-primary = article.group.try(:name)
+        span.label.label-primary = article.group.name
       span.text-muted
         | 由#{article.user.try(:login)}*创建于
         = custom_timeago_tag article.created_at

@@ -21,7 +21,7 @@ class Article < ActiveRecord::Base
   scope :except_body_with_default, -> { select(:title, :created_at, :updated_at, :group_id, :slug, :id, :user_id).includes(:group) }
 
   def self.cached_recommend_articles(article)
-    group_name = article.group.try(:name) || "ruby"
+    group_name = article.group.name || "ruby"
     Rails.cache.fetch [:slug, "recommend_articles", group_name] do
       Article.except_body_with_default.search_by_title_or_body(group_name).order("visit_count DESC").limit(11).to_a
     end
@@ -52,19 +52,19 @@ class Article < ActiveRecord::Base
     # 所有分类页面
     Rails.cache.delete "group_all"
     # 所属的分类
-    IdentityCache.cache.delete(group.try(:primary_cache_index_key))
+    IdentityCache.cache.delete(group.primary_cache_index_key)
     # 分类show页面下的文章列表
-    Rails.cache.delete [group.try(:name), 'articles']
+    Rails.cache.delete [group.name, 'articles']
   end
 
   def clear_before_updated_cache
-    Rails.cache.delete [group.try(:name), "articles"]
-    IdentityCache.cache.delete(group.try(:primary_cache_index_key))
+    Rails.cache.delete [group.name, "articles"]
+    IdentityCache.cache.delete(group.primary_cache_index_key)
   end
 
   def clear_after_updated_cache
     # 文章show页面右侧推荐文章列表
-    Rails.cache.delete [slug, "recommend_articles", group.try(:name)]
+    Rails.cache.delete [slug, "recommend_articles", group.name]
   end
 
 end
