@@ -25,7 +25,8 @@ class Group < ActiveRecord::Base
 
   after_commit :clear_cache
 
-private
+  private
+
   def clear_cache
     Rails.cache.delete "groups"
     Rails.cache.delete "group_all"

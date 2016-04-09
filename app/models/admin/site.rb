@@ -8,7 +8,7 @@ class Admin::Site < ActiveRecord::Base
 
   after_commit :clear_cache
 
-private
+  private
   def clear_cache
     Rails.cache.delete "sites"
   end
