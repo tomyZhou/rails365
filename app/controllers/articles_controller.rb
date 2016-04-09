@@ -55,10 +55,8 @@ class ArticlesController < ApplicationController
 
     def set_article
       @article = Article.fetch_by_slug!(params[:id])
-
-      if request.path != article_path(@article)
-        return redirect_to @article, :status => :moved_permanently
-      end
+    rescue ActiveRecord::RecordNotFound
+      @article = Article.find(params[:id])
     end
 
     def find_changed_article
