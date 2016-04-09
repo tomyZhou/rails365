@@ -46,8 +46,8 @@ class GroupsController < ApplicationController
 
   private
     def set_group
-      @group = Group.fetch_by_uniq_keys!(slug: params[:id])
-      @articles = @group.cached_articles
+      @group = Group.fetch_by_slug!(params[:id])
+      @articles = @group.fetch_articles
     end
 
     def find_changed_group

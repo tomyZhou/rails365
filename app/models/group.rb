@@ -3,14 +3,17 @@ class Group < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: [:slugged, :finders, :history]
   mount_uploader :image, PhotoUploader
+
+  include IdentityCache
   has_many :articles, dependent: :nullify
-  validates :name, presence: true
 
-  acts_as_cached(version: 1, expires_in: 1.month)
+  cache_index :slug, :unique => true
 
-  def cached_articles
-    Rails.cache.fetch("group:#{id}/articles") { articles.to_a }
+  def fetch_articles
+    Rails.cache.fetch([name, 'articles']) { articles.to_a }
   end
+
+  validates :name, presence: true, uniqueness: true
 
   def normalize_friendly_id(input)
     "#{PinYin.of_string(input).to_s.to_slug.normalize.to_s}"
@@ -24,7 +27,6 @@ class Group < ActiveRecord::Base
 
 private
   def clear_cache
-    expire_second_level_cache
     Rails.cache.delete "groups"
     Rails.cache.delete "group_all"
   end

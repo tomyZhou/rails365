@@ -17,7 +17,7 @@ class CreateArticleWorker
 
     Rails.cache.delete "group:#{@article.group.try(:friendly_id)}"
     # 分类show页面下的文章列表
-    Rails.cache.delete "group:#{@article.group_id}/articles"
+    Rails.cache.delete [@article.group.try(:name), "articles"]
     # 所有分类页面
     Rails.cache.delete "group_all"
   end

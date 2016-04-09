@@ -10,7 +10,7 @@ class HomeController < ApplicationController
       Group.all.to_a
     end
 
-    @site_info_home_desc = Admin::SiteInfo.fetch_by_uniq_keys(key: "home_desc").try(:value)
+    @site_info_home_desc = Admin::SiteInfo.fetch_by_key("home_desc").try(:value)
 
     respond_to do |format|
       format.all { render :index, formats: [:html]}

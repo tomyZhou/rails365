@@ -59,11 +59,6 @@ gem 'pg_search', '~> 1.0.5'
 
 gem 'rails-i18n', '~> 4.0.4'
 
-# redis cache
-gem 'redis-namespace', '~> 1.5.2'
-gem 'redis-rails', '~> 4.0.0'
-gem "hiredis", '~> 0.6.0'
-
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
@@ -91,10 +86,18 @@ gem "devise-async", '~> 0.10.1'
 # data migrate
 gem 'migration_data', '~> 0.2.1'
 
-gem 'bootswatch-rails'
+# theme
+gem 'bootswatch-rails', '~> 3.3.5'
 
 gem 'status-page', github: "rails-engine/status-page"
-gem 'faraday'
+gem 'faraday', '~> 0.9.2'
 
-gem 'rails_admin'
-gem "second_level_cache", "~> 2.1.9"
+# admin
+gem 'rails_admin', '~> 0.8.1'
+
+# redis cache
+gem 'redis-namespace', '~> 1.5.2'
+gem 'redis-rails', '~> 4.0.0'
+gem "hiredis", '~> 0.6.0'
+gem 'identity_cache', '~> 0.3.1'
+gem 'cityhash', '~> 0.8.1'
