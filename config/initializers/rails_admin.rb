@@ -21,6 +21,13 @@ RailsAdmin.config do |config|
     'pghero' => "/pghero"
   }
 
+  config.model Group do
+    edit do
+      field :name
+      field :image, :carrierwave
+    end
+  end
+
   ## == Pundit ==
   # config.authorize_with :pundit
 

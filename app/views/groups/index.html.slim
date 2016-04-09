@@ -1,10 +1,7 @@
-- cache [@groups, current_user] do
+- cache @groups do
   .page-header
     h2.text-primary 所有分类(#{@groups.count})
 
-  - if can? :create, Group
-    .text-right
-      = link_to "添加新分类", new_group_path
   - @groups.in_groups_of(4) do |per_group|
     .row
       - per_group.each do |group|

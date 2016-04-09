@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :articles
-  resources :groups
+  resources :groups, only: [:index, :show]
   resources :users, only: [:show]
 
   %w(404 422 500).each do |code|

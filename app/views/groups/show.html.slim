@@ -3,10 +3,6 @@
     = @group.name
     | (#{@group.articles_count})
 
-- if can? :update, Group
-  .text-right
-    = link_to '编辑', edit_group_path(@group)
-
 - cache @articles do
   - @articles.each do |article|
     h3 = link_to article.title, article
