@@ -5,7 +5,7 @@ class Group < ActiveRecord::Base
   mount_uploader :image, PhotoUploader
 
   include IdentityCache
-  has_many :articles, dependent: :nullify
+  has_many :articles, -> { order "created_at DESC" }, dependent: :nullify
 
   cache_index :slug, :unique => true
 
