@@ -8,8 +8,7 @@ aliyun_area: "cn-shenzhen"
 aliyun_host: "http://aliyun.rails365.net"
 oneapm_license_key: "your oneapm license key"
 sidekiq_namespace: "sidekiq"
-admin_emails:
-  - "hfpp2012@aliyun.com"
 email_domain: "www.rails365.net"
 aliyun_email_username: "hfpp2012@rails365.net"
 aliyun_email_password: ""
+admin_emails: ["hfpp2012@aliyun.com"]
