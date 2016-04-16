@@ -23,7 +23,6 @@
         .panel-body
           - @hot_articles.each do |article|
             p.clearfix
-              span.pull-right = article.visit_count
               = link_to article.title, article_path(article)
 
 - cache @groups do

@@ -23,7 +23,7 @@ class Article < ActiveRecord::Base
   def self.cached_recommend_articles(article)
     group_name = article.group.name || "ruby"
     Rails.cache.fetch [:slug, "recommend_articles", group_name] do
-      Article.except_body_with_default.search_by_title_or_body(group_name).order("visit_count DESC").limit(11).to_a
+      Article.except_body_with_default.search_by_title_or_body(group_name).limit(11).to_a
     end
   end
 
