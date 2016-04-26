@@ -54,12 +54,15 @@ class Article < ActiveRecord::Base
     # 所属的分类
     IdentityCache.cache.delete(group.primary_cache_index_key)
     # 分类show页面下的文章列表
-    Rails.cache.delete [group.name, 'articles']
+    Rails.cache.delete [group.name, "articles"]
   end
 
   def clear_before_updated_cache
-    Rails.cache.delete [group.name, "articles"]
-    IdentityCache.cache.delete(group.primary_cache_index_key)
+    if group_id_changed?
+      group = Group.find(group_id_was)
+      Rails.cache.delete [group.name, 'articles']
+      IdentityCache.cache.delete(group.primary_cache_index_key)
+    end
   end
 
   def clear_after_updated_cache
