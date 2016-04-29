@@ -10,8 +10,9 @@
           = link_to "编辑", edit_article_path(@article)
 .row
   .col-md-8
-    - cache @article do
-      = markdown @article.body
+    .article_content
+      - cache @article do
+        = markdown @article.body
   .col-md-4
     .panel.panel-default
       .panel-heading
