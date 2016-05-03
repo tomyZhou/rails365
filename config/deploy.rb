@@ -11,7 +11,7 @@ set :deploy_to, '/home/yinsigan/rails365'
 set :repository, 'git@github.com:yinsigan/rails365.git'
 set :branch, 'master'
 set :term_mode, nil
-set :puma_config, -> { "#{deploy_to}/#{current_path}/config/puma.rb" }
+set :puma_config, -> { "#{deploy_to}/#{current_path}/config/puma_app.rb" }
 
 task :environment do
   invoke :'rbenv:load'

@@ -101,3 +101,5 @@ gem 'redis-rails', '~> 4.0.0'
 gem "hiredis", '~> 0.6.0'
 gem 'identity_cache', '~> 0.3.1'
 gem 'cityhash', '~> 0.8.1'
+
+gem 'tubesock'

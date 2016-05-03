@@ -342,6 +342,9 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.1)
+    tubesock (0.2.7)
+      rack (>= 1.5.0)
+      websocket (>= 1.1.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.2)
@@ -357,6 +360,7 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    websocket (1.2.3)
 
 PLATFORMS
   ruby
@@ -418,6 +422,7 @@ DEPENDENCIES
   slim-rails (~> 3.0.1)
   spring
   status-page!
+  tubesock
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
 

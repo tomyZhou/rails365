@@ -35,7 +35,7 @@ class ArticlesController < ApplicationController
 
     if @article.valid?
       CreateArticleWorker.perform_async(article_params, current_user.id)
-      redirect_to articles_path, notice: 'Article was created.'
+      redirect_to articles_path, notice: '文章正在后台创建中，如果创建成功将会有消息提醒!'
     else
       render :new
     end
@@ -43,12 +43,12 @@ class ArticlesController < ApplicationController
 
   def update
     UpdateArticleWorker.perform_async(params[:id], current_user.id, article_params)
-    redirect_to @article, notice: 'Article was updated.'
+    redirect_to @article, notice: '文章正在后台更新中，如果更新成功将会有消息提醒!'
   end
 
   def destroy
     @article.destroy
-    redirect_to articles_path, notice: 'Article was successfully destroyed.'
+    redirect_to articles_path, notice: '文章成功删除!'
   end
 
   private

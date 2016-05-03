@@ -17,6 +17,17 @@
 jQuery ->
   $("img.lazy").lazyload()
 
+$ ->
+  socket = new WebSocket "ws://#{window.location.host}/ws"
+
+  socket.onmessage = (event) ->
+    if event.data.length
+      new Notification "有消息拉！",
+        body: "#{event.data}"
+        icon: "http://www.rails365.net/favicon.ico"
+
+Notification.requestPermission()
+
 # jQuery ->
 #   flash = [
 #     "info"

@@ -26,4 +26,6 @@ Rails.application.routes.draw do
   mount StatusPage::Engine, at: '/web'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+
+  get "/ws", to: "websocket#ws"
 end
