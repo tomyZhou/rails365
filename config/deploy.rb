@@ -2,7 +2,7 @@ require 'mina/bundler'
 require 'mina/rails'
 require 'mina/git'
 require 'mina/rbenv'
-require 'mina/unicorn'
+require 'mina/puma'
 require 'mina_sidekiq/tasks'
 
 set :user, 'yinsigan'
@@ -11,6 +11,7 @@ set :deploy_to, '/home/yinsigan/rails365'
 set :repository, 'git@github.com:yinsigan/rails365.git'
 set :branch, 'master'
 set :term_mode, nil
+set :puma_config, -> { "#{deploy_to}/#{current_path}/config/puma.rb" }
 
 task :environment do
   invoke :'rbenv:load'
@@ -55,7 +56,7 @@ task :deploy => :environment do
     invoke :'deploy:cleanup'
 
     to :launch do
-      invoke :'unicorn:restart'
+      invoke :'puma:phased_restart'
       invoke :'sidekiq:restart'
     end
   end

@@ -31,8 +31,8 @@ gem 'mini_magick', '~> 4.3.3'
 
 # for deploy
 gem 'mina', require: false
-gem 'unicorn', '~> 4.9.0'
-gem 'mina-unicorn', :require => false
+gem 'puma'
+gem 'mina-puma', require: false
 gem 'mina-sidekiq', require: false
 
 gem 'kaminari', '~> 0.16.3'
