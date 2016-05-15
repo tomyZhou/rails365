@@ -1,4 +1,4 @@
-class WebsocketController < ApplicationController
+class WebsocketController < ActionController::Base
   include Tubesock::Hijack
   def ws
     hijack do |tubesock|
