@@ -34,6 +34,7 @@ gem 'mina', require: false
 gem 'puma'
 gem 'mina-puma', require: false
 gem 'mina-sidekiq', require: false
+gem 'mina-logs', require: false
 
 gem 'kaminari', '~> 0.16.3'
 gem 'kaminari-i18n', '~> 0.3.2'
