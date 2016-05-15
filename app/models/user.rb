@@ -4,11 +4,20 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :async, :authentication_keys => [:login]
+  devise :omniauthable, :omniauth_providers => [:github]
 
   validate :validate_username
   validates :username, format: { with: ALLOW_LOGIN_CHARS_REGEXP, message: '只允许数字、大小写字母和下划线' },
                     length: { in: 3..20 }, presence: true,
                     uniqueness: { case_sensitive: true}
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = "from_github_#{auth.info.email}"
+      user.username = Devise.friendly_token[0,20]
+      user.password = Devise.friendly_token[0,20]
+    end
+  end
 
   def validate_username
     if User.where(email: username).exists?

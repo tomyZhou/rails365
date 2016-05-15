@@ -12,3 +12,5 @@ email_domain: "www.rails365.net"
 aliyun_email_username: "hfpp2012@rails365.net"
 aliyun_email_password: ""
 admin_emails: ["hfpp2012@aliyun.com"]
+github_appkey: '36a5e30aefd2e87714d0'
+github_secret: "f098bcc5302f18d0cf243cc50c8a49133949bc60"

@@ -1,6 +1,6 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
-  devise_for :users, :controllers => {:registrations => "registrations"}
+  devise_for :users, :controllers => {:registrations => "registrations", :omniauth_callbacks => "users/omniauth_callbacks"}
   root to: 'home#index'
 
   resources :articles
