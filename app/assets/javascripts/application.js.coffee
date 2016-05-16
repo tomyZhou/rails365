@@ -9,6 +9,7 @@
 #= require bootstrap/tab
 #= require jquery.checkall
 #= require qrcode
+#= require jquery.ba-throttle-debounce
 #= require jquery.fluidbox.min
 #= require jquery.lazyload
 #= require rails-timeago
