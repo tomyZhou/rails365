@@ -5,61 +5,54 @@ else
 end
 
 gem 'rails', '4.2.3'
-gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
-gem 'pg', '~> 0.16.0'
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
+gem 'pg'
 
 gem 'jquery-rails'
-gem 'jbuilder', '~> 2.0'
-gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'bootstrap-sass', '~> 3.3.5'
-gem 'slim-rails', '~> 3.0.1'
+gem 'jbuilder'
+gem 'sdoc', group: :doc
+gem 'bootstrap-sass'
+gem 'slim-rails'
 
 # markdown
-gem 'redcarpet', '~> 3.3.3'
+gem 'redcarpet'
 gem 'rouge', github: "stanhu/rouge"
 
 # configuration
-gem 'figaro', '~> 1.1.1'
+gem 'figaro'
 
 # file upload
-gem 'carrierwave', '~> 0.10.0'
-gem "jquery-fileupload-rails", '~> 0.4.5'
-gem 'carrierwave-aliyun', '~> 0.3.5'
-gem 'mini_magick', '~> 4.3.3'
+gem 'carrierwave'
+gem "jquery-fileupload-rails"
+gem 'carrierwave-aliyun'
+gem 'mini_magick'
 
-# for deploy
-gem 'mina', require: false
-gem 'puma'
-gem 'mina-puma', require: false
-gem 'mina-sidekiq', require: false
-gem 'mina-logs', require: false
-
-gem 'kaminari', '~> 0.16.3'
-gem 'kaminari-i18n', '~> 0.3.2'
-gem 'awesome_print', '~> 1.6.1'
+gem 'kaminari'
+gem 'kaminari-i18n'
+gem 'awesome_print'
 
 # monitor
-gem 'oneapm_rpm', '~> 1.2.2'
+gem 'oneapm_rpm'
 gem 'rack-mini-profiler', require: false
 
 # background
-gem 'sidekiq', '~> 4.0.2'
+gem 'sidekiq'
 
 # notification
 gem 'exception_notification', github: 'smartinez87/exception_notification'
 
 # friendly url
-gem 'friendly_id', '~> 5.1.0'
-gem 'ruby-pinyin', '~> 0.4.6'
-gem 'babosa', '~> 1.0.2'
+gem 'friendly_id'
+gem 'ruby-pinyin'
+gem 'babosa'
 
-gem 'rails-i18n', '~> 4.0.4'
+gem 'rails-i18n'
 
 group :development, :test do
   gem 'byebug'
-  gem 'web-console', '~> 2.0'
+  gem 'web-console'
   gem 'spring'
   gem 'rspec-rails', '~> 3.3.3'
   gem 'database_cleaner', '~> 1.4.1'
@@ -78,35 +71,35 @@ group :development do
   gem 'capistrano-faster-assets'
 end
 
-gem 'sinatra', '~> 1.4.6', :require => nil
-gem 'pghero', '~> 1.2.1'
+gem 'sinatra', :require => nil
+gem 'pghero'
 
 # user authentication
-gem 'devise', '~> 3.5.6'
-gem 'cancancan', '~> 1.10'
-gem 'rails-timeago', '~> 2.0'
-gem 'rucaptcha', '~> 0.3.2.1'
-gem "devise-async", '~> 0.10.1'
+gem 'devise'
+gem 'cancancan'
+gem 'rails-timeago'
+gem 'rucaptcha'
+gem "devise-async"
 gem 'omniauth-github'
 
 # data migrate
-gem 'migration_data', '~> 0.2.1'
+gem 'migration_data'
 
 # theme
-gem 'bootswatch-rails', '~> 3.3.5'
+gem 'bootswatch-rails'
 
 gem 'status-page', github: "rails-engine/status-page"
-gem 'faraday', '~> 0.9.2'
+gem 'faraday'
 
 # admin
-gem 'rails_admin', '~> 0.8.1'
+gem 'rails_admin'
 
 # redis cache
-gem 'redis-namespace', '~> 1.5.2'
-gem 'redis-rails', '~> 4.0.0'
-gem "hiredis", '~> 0.6.0'
-gem 'identity_cache', '~> 0.3.1'
-gem 'cityhash', '~> 0.8.1'
+gem 'redis-namespace'
+gem 'redis-rails'
+gem "hiredis"
+gem 'identity_cache'
+gem 'cityhash'
 
 gem 'tubesock'
 gem 'searchkick'
