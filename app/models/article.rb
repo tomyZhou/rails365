@@ -1,31 +1,25 @@
 require "babosa"
 class Article < ActiveRecord::Base
-  include PgSearch
-  pg_search_scope :search_by_title_or_body,
-                  :against => {
-                    :title => 'A',
-                    :body => 'B'
-                  },
-                  :associated_against => {
-                    :tags => [:name],
-                  },
-                  :using => {
-                    :tsearch => {:dictionary => "testzhcfg", :prefix => true, :negation => true}
-                  }
-
-  acts_as_taggable
-  ActsAsTaggableOn.remove_unused_tags = true
+  searchkick highlight: [:title, :body]
 
   extend FriendlyId
   friendly_id :title, use: [:slugged, :finders, :history]
 
+  include IdentityCache
+  cache_index :slug, :unique => true
   belongs_to :group, counter_cache: true
+  belongs_to :user
 
-  scope :published, -> { where(published: true) }
-  scope :unpublished, -> { where(published: false) }
-  scope :except_body_with_default, -> { published.select(:title, :created_at, :updated_at, :published, :group_id, :slug, :id).includes(:group) }
+  scope :except_body_with_default, -> { select(:title, :created_at, :updated_at, :group_id, :slug, :id, :user_id).includes(:group) }
 
-  validates :title, :body, presence: true
+  def self.cached_recommend_articles(article)
+    group_name = article.group.name || "ruby"
+    Rails.cache.fetch [:slug, "recommend_articles", group_name] do
+      Article.except_body_with_default.search(group_name, limit: 11).to_a
+    end
+  end
+
+  validates :title, :body, :group_id, :user_id, presence: true
   validates :title, uniqueness: true
 
   def normalize_friendly_id(input)
@@ -36,17 +30,36 @@ class Article < ActiveRecord::Base
     title_changed? || super
   end
 
-  def meta_keyword
-    if tags.length >= 4
-      tag_list
-    else
-      (tags.map { |tag| tag.name.downcase } | ENV["meta_primary_keyword"].split(/,\ */)).join(", ")
+  after_commit :clear_cache
+  before_update :clear_before_updated_cache
+  after_update :clear_after_updated_cache
+
+  private
+
+  def clear_cache
+    # 首页
+    Rails.cache.delete "articles"
+    Rails.cache.delete "hot_articles"
+    Rails.cache.delete "groups"
+    # 所有分类页面
+    Rails.cache.delete "group_all"
+    # 所属的分类
+    IdentityCache.cache.delete(group.primary_cache_index_key)
+    # 分类show页面下的文章列表
+    Rails.cache.delete [group.name, "articles"]
+  end
+
+  def clear_before_updated_cache
+    if group_id_changed?
+      group = Group.find(group_id_was)
+      Rails.cache.delete [group.name, 'articles']
+      IdentityCache.cache.delete(group.primary_cache_index_key)
     end
   end
 
-  alias_method :old_tag_list, :tag_list
-  def tag_list
-    super.join(", ")
+  def clear_after_updated_cache
+    # 文章show页面右侧推荐文章列表
+    Rails.cache.delete [slug, "recommend_articles", group.name]
   end
 
 end

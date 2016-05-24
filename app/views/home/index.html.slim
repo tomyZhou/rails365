@@ -3,7 +3,7 @@
     .panel.panel-default
       .panel-body
         .text-center.text-primary
-          | 本站致力于分享nginx, ruby on rails, 运维, 服务器, 架构, postgresql, redis, 日志, 多线程, 消息队列, vim, git, 前端javascript等优秀文章, 且保持高更新频率
+          = @site_info_home_desc
 .row
   - cache @articles do
     .col-md-6
@@ -13,7 +13,7 @@
         .panel-body
           - @articles.each do |article|
             p.clearfix
-              span.pull-right = datetime article.created_at
+              span.pull-right = custom_timeago_tag article.created_at
               = link_to article.title, article_path(article)
   - cache @hot_articles do
     .col-md-6
@@ -23,7 +23,6 @@
         .panel-body
           - @hot_articles.each do |article|
             p.clearfix
-              span.pull-right = article.visit_count
               = link_to article.title, article_path(article)
 
 - cache @groups do
@@ -39,5 +38,5 @@
                 - if group.present?
                   .col-sm-2.group-image
                     = link_to group do
-                      img data-original=group.image_url(:group).to_s width="120px" height="120px" class="lazy"
+                      img data-original=group.image_url(:group).to_s width="120px" height="120px" alt="#{group.name}" class="lazy"
                       h1.text-center.header-group #{group.name}(#{group.articles_count})

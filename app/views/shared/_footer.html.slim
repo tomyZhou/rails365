@@ -1,4 +1,4 @@
-.navbar.navbar-inverse
+.navbar.navbar-default
   .container.text-center
     .row
       .col-lg-12
@@ -13,7 +13,7 @@
                 - site_group.each do |site|
                   - if site.present?
                     li
-                      = link_to site.name, site.url, rel: "nofollow", target: "_blank"
+                      = link_to site.name, site.url, rel: "nofollow", target: "_blank", style: "color: #fff;background: none;"
     .row
       .col-lg-12
         ul.nav.nav-pills.nav-justified

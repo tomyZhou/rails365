@@ -1,27 +1,23 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show]
+  authorize_resource
 
   def index
     @groups = Rails.cache.fetch "group_all" do
       Group.all.to_a
     end
-    set_meta_tags title: "分类列表"
+    @title = "分类列表"
   end
 
   def show
-    @keywords = Rails.cache.fetch "group:#{@group.id}/tag_list" do
-      @group.articles.map(&:meta_keyword).join(", ").split(", ").uniq.first(6).to_a
-    end
-    set_meta_tags title: @group.name, description: ENV["meta_description"], keywords: @keywords.presence || ENV['meta_keyword']
+    @title = @group.name
   end
+
 
   private
     def set_group
-      @group = Rails.cache.fetch "group:#{params[:id]}" do
-        Group.find(params[:id])
-      end
-      @articles = Rails.cache.fetch "group:#{@group.id}/articles" do
-        @group.articles.published.to_a
-      end
+      @group = Group.fetch_by_slug!(params[:id])
+      @articles = @group.fetch_articles
     end
+
 end

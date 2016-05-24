@@ -1,0 +1,16 @@
+.modal-dialog
+  .modal-content
+    .modal-header
+      h1.text-center = t('.forgot_your_password', :default => 'Forgot your password?')
+    .modal-body
+      = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "form-horizontal", role: "form" }) do |f|
+        = devise_error_messages!
+        .form-group
+          .col-sm-12
+            .input-group
+              span.input-group-addon
+                i.glyphicon.glyphicon-user
+              = f.email_field :email, autofocus: true, id: "login-username", class: "form-control input-lg", placeholder: User.human_attribute_name('email')
+        .form-group
+          .col-sm-12
+            = f.submit t('.send_me_reset_password_instructions', :default => "Send me reset password instructions"), id: "btn-login", class: "btn btn-primary btn-lg btn-block"

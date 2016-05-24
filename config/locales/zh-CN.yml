@@ -1,0 +1,9 @@
+zh-CN:
+  activerecord:
+    attributes:
+      article:
+        title: "标题"
+        body: "内容"
+        group_id: "分类"
+    models:
+      article: "文章"

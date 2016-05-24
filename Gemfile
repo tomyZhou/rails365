@@ -1,7 +1,7 @@
-if ENV['RUBYTAOBAO']
-  source 'https://ruby.taobao.org'
+if ENV['RUBYCHINAGEM']
+  source 'https://gems.ruby-china.org'
 else
-  source 'https://rubygems.org'
+  source 'https://ruby.taobao.org'
 end
 
 gem 'rails', '4.2.3'
@@ -31,9 +31,10 @@ gem 'mini_magick', '~> 4.3.3'
 
 # for deploy
 gem 'mina', require: false
-gem 'unicorn', '~> 4.9.0'
-gem 'mina-unicorn', :require => false
+gem 'puma'
+gem 'mina-puma', require: false
 gem 'mina-sidekiq', require: false
+gem 'mina-logs', require: false
 
 gem 'kaminari', '~> 0.16.3'
 gem 'kaminari-i18n', '~> 0.3.2'
@@ -44,31 +45,17 @@ gem 'oneapm_rpm', '~> 1.2.2'
 gem 'rack-mini-profiler', require: false
 
 # background
-gem 'sidekiq', '~> 3.5.1'
+gem 'sidekiq', '~> 4.0.2'
 
 # notification
 gem 'exception_notification', github: 'smartinez87/exception_notification'
-
-# tag
-gem 'acts-as-taggable-on', '~> 3.4'
-
-# seo
-gem 'meta-tags', '~> 2.0.0'
 
 # friendly url
 gem 'friendly_id', '~> 5.1.0'
 gem 'ruby-pinyin', '~> 0.4.6'
 gem 'babosa', '~> 1.0.2'
 
-# full text search
-gem 'pg_search', '~> 1.0.5'
-
 gem 'rails-i18n', '~> 4.0.4'
-
-# redis cache
-gem 'redis-namespace', '~> 1.5.2'
-gem 'redis-rails', '~> 4.0.0'
-gem "hiredis", '~> 0.6.0'
 
 group :development, :test do
   gem 'byebug'
@@ -80,17 +67,47 @@ group :development, :test do
 end
 
 group :development do
-  gem 'rails_db'
   gem 'quiet_assets'
   gem 'pry'
+  gem 'capistrano'
+  gem 'capistrano-rbenv'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano3-unicorn'
+  gem 'capistrano-sidekiq'
+  gem 'capistrano-faster-assets'
 end
 
-group :development do
-  gem 'capistrano', '~> 3.4.0'
-  gem 'capistrano-rbenv', '~> 2.0.3'
-  gem 'capistrano-bundler', '~> 1.1.4'
-  gem 'capistrano-rails', '~> 1.1.3'
-  gem 'capistrano3-unicorn', '~> 0.2.1'
-  gem 'capistrano-sidekiq', '~> 0.5.4'
-  gem 'capistrano-faster-assets', '~> 1.0.2'
-end
+gem 'sinatra', '~> 1.4.6', :require => nil
+gem 'pghero', '~> 1.2.1'
+
+# user authentication
+gem 'devise', '~> 3.5.6'
+gem 'cancancan', '~> 1.10'
+gem 'rails-timeago', '~> 2.0'
+gem 'rucaptcha', '~> 0.3.2.1'
+gem "devise-async", '~> 0.10.1'
+gem 'omniauth-github'
+
+# data migrate
+gem 'migration_data', '~> 0.2.1'
+
+# theme
+gem 'bootswatch-rails', '~> 3.3.5'
+
+gem 'status-page', github: "rails-engine/status-page"
+gem 'faraday', '~> 0.9.2'
+
+# admin
+gem 'rails_admin', '~> 0.8.1'
+
+# redis cache
+gem 'redis-namespace', '~> 1.5.2'
+gem 'redis-rails', '~> 4.0.0'
+gem "hiredis", '~> 0.6.0'
+gem 'identity_cache', '~> 0.3.1'
+gem 'cityhash', '~> 0.8.1'
+
+gem 'tubesock'
+gem 'searchkick'
+gem 'typhoeus'

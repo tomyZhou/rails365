@@ -13,16 +13,10 @@ module Redcarpet
         super extensions.merge(link_attributes: { target: "_blank" })
       end
 
-      def block_code(code, language)
-        # highlight some code with a given language lexer
-        # and formatter: html or terminal256
-        # and block if you want to stream chunks
-        # github.com/jayferd/rouge/blob/master/lib/rouge.rb#L17
-        Rouge.highlight(code, language || 'text', 'html')
-        # watch out you need to provide 'text' as a default,
-        # because when you not provide language in Markdown
-        # you will get error: <RuntimeError: unknown lexer >
-      end
+      # rouge redcarpet plugin已有相应的功能
+      # def block_code(code, language)
+      #   Rouge.highlight(code, language || 'text', 'html')
+      # end
 
       def table(header, body)
         "<table class=\"table table-bordered\">" \

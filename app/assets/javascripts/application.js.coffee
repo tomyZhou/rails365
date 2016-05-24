@@ -6,13 +6,28 @@
 #= require bootstrap/dropdown
 #= require bootstrap/collapse
 #= require bootstrap/alert
+#= require bootstrap/tab
 #= require jquery.checkall
 #= require qrcode
+#= require jquery.ba-throttle-debounce
 #= require jquery.fluidbox.min
 #= require jquery.lazyload
+#= require rails-timeago
+#= require locales/jquery.timeago.zh-CN.js
 
 jQuery ->
   $("img.lazy").lazyload()
+
+$ ->
+  socket = new WebSocket "ws://#{window.location.host}/ws/"
+
+  socket.onmessage = (event) ->
+    if event.data.length
+      new Notification "有消息拉！",
+        body: "#{event.data}"
+        icon: "http://www.rails365.net/favicon.ico"
+
+Notification.requestPermission()
 
 # jQuery ->
 #   flash = [

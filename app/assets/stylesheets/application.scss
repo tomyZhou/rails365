@@ -1,5 +1,6 @@
-@import "spacelab_variables";
+$navbar-border-radius: none;
 @import "bootstrap-sprockets";
+@import "bootswatch/cerulean/variables";
 @import "bootstrap";
 @import "rouge";
 @import "fluidbox.min";
@@ -82,8 +83,9 @@ $c9:#999;
 }
 
 .search-hight-light {
-  span {
+  em {
     color: red;
+    font-style: normal;
   }
 }
 
@@ -93,11 +95,8 @@ $c9:#999;
 .css4 { font-size: 1.6em; }
 
 .nav-justified > li.footer-list > a, .nav-tabs.nav-justified > li.footer-list > a {
-  &:hover {
-    color: #ddd;
-    background-color: #446E9B;
-  }
   color: #ddd;
+  background-color: #2FA4E7;
 }
 
 /* 底部 */
@@ -141,4 +140,12 @@ $c9:#999;
 
 .mr10 {
   margin-right: 10px;
+}
+
+.mr5 {
+  margin-right: 5px;
+}
+
+.article_content p {
+  line-height: 25px;
 }
