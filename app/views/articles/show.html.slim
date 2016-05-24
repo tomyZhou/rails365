@@ -4,6 +4,7 @@
   .row
     .col-md-12.block-margin
       .text-right
+        span.label.label-primary.mr5 = @article.group.try(:name)
         | 由*#{@article.user.try(:login)}*发表于
         = custom_timeago_tag @article.created_at
         - if can? :update, @article
