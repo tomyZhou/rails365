@@ -103,3 +103,4 @@ gem 'cityhash', '~> 0.8.1'
 
 gem 'tubesock'
 gem 'searchkick'
+gem 'typhoeus'
