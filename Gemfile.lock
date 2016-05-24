@@ -101,6 +101,9 @@ GEM
     capistrano-sidekiq (0.5.4)
       capistrano
       sidekiq (>= 3.4)
+    capistrano3-puma (1.2.1)
+      capistrano (~> 3.0)
+      puma (>= 2.6)
     carrierwave (0.11.2)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -242,6 +245,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    puma (3.4.0)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.4)
@@ -427,6 +431,7 @@ DEPENDENCIES
   capistrano-rails
   capistrano-rbenv
   capistrano-sidekiq
+  capistrano3-puma
   carrierwave
   carrierwave-aliyun
   cityhash
@@ -453,6 +458,7 @@ DEPENDENCIES
   pg
   pghero
   pry
+  puma
   quiet_assets
   rack-mini-profiler
   rails (= 4.2.3)

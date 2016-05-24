@@ -67,6 +67,7 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano-sidekiq'
+  gem 'capistrano3-puma'
   gem 'capistrano-faster-assets'
 end
 
@@ -103,3 +104,5 @@ gem 'cityhash'
 gem 'tubesock'
 gem 'searchkick'
 gem 'typhoeus'
+
+gem 'puma'
