@@ -66,7 +66,6 @@ group :development do
   gem 'capistrano-rbenv'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
-  gem 'capistrano3-unicorn'
   gem 'capistrano-sidekiq'
   gem 'capistrano-faster-assets'
 end
