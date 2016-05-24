@@ -5,15 +5,32 @@
   .text-right
     = link_to "添加新文章", new_article_path
 - cache @articles do
-  - @articles.each do |article|
-    - if params[:search].present?
-      h3 = link_to article.title.html_safe, article, class: "search-hight-light"
-    - else
+  - if params[:search].present?
+    div.search-hight-light
+      - @articles.with_details.each do |article, details|
+        - if details[:highlight][:title].present?
+          h4 = link_to details[:highlight][:title].html_safe, article
+        - else
+          h4 = link_to article.title, article
+        = link_to article_url(article), article, class: "text-info"
+        - if details[:highlight][:body].present?
+          p
+            = details[:highlight][:body].html_safe
+        p.text-right
+          - if article.group
+            span.label.label-primary = article.group.name
+          span.text-muted
+            | 由#{article.user.try(:login)}*创建于
+            = custom_timeago_tag article.created_at
+    = paginate @articles
+
+  - else
+    - @articles.each do |article|
       h3 = link_to article.title, article
-    p.text-right
-      - if article.group
-        span.label.label-primary = article.group.name
-      span.text-muted
-        | 由#{article.user.try(:login)}*创建于
-        = custom_timeago_tag article.created_at
-  = paginate @articles
+      p.text-right
+        - if article.group
+          span.label.label-primary = article.group.name
+        span.text-muted
+          | 由#{article.user.try(:login)}*创建于
+          = custom_timeago_tag article.created_at
+    = paginate @articles

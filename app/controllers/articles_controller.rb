@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
 
   def index
     if params[:search].present?
-      @articles = Article.except_body_with_default.search_by_title_or_body(params[:search]).order("id DESC").page(params[:page])
+      @articles = Article.search params[:search], fields: [:title, :body], highlight: true, order: {"_id": "desc"}, page: params[:page], per_page: 20
     else
       @articles = Article.except_body_with_default.order("id DESC").page(params[:page])
     end

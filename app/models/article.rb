@@ -1,14 +1,6 @@
 require "babosa"
 class Article < ActiveRecord::Base
-  include PgSearch
-  pg_search_scope :search_by_title_or_body,
-                  :against => {
-                    :title => 'A',
-                    :body => 'B'
-                  },
-                  :using => {
-                    :tsearch => {:dictionary => "testzhcfg", :prefix => true, :negation => true}
-                  }
+  searchkick highlight: [:title, :body]
 
   extend FriendlyId
   friendly_id :title, use: [:slugged, :finders, :history]
@@ -23,7 +15,7 @@ class Article < ActiveRecord::Base
   def self.cached_recommend_articles(article)
     group_name = article.group.name || "ruby"
     Rails.cache.fetch [:slug, "recommend_articles", group_name] do
-      Article.except_body_with_default.search_by_title_or_body(group_name).limit(11).to_a
+      Article.except_body_with_default.search(group_name, limit: 11).to_a
     end
   end
 

@@ -55,9 +55,6 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'ruby-pinyin', '~> 0.4.6'
 gem 'babosa', '~> 1.0.2'
 
-# full text search
-gem 'pg_search', '~> 1.0.5'
-
 gem 'rails-i18n', '~> 4.0.4'
 
 group :development, :test do
@@ -105,3 +102,4 @@ gem 'identity_cache', '~> 0.3.1'
 gem 'cityhash', '~> 0.8.1'
 
 gem 'tubesock'
+gem 'searchkick'

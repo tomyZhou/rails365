@@ -109,6 +109,14 @@ GEM
     diff-lcs (1.2.5)
     domain_name (0.5.25)
       unf (>= 0.0.5, < 1.0.0)
+    elasticsearch (1.0.17)
+      elasticsearch-api (= 1.0.17)
+      elasticsearch-transport (= 1.0.17)
+    elasticsearch-api (1.0.17)
+      multi_json
+    elasticsearch-transport (1.0.17)
+      faraday
+      multi_json
     erubis (2.7.0)
     execjs (2.6.0)
     factory_girl (4.5.0)
@@ -203,10 +211,6 @@ GEM
     open4 (1.3.4)
     orm_adapter (0.5.0)
     pg (0.16.0)
-    pg_search (1.0.5)
-      activerecord (>= 3.1)
-      activesupport (>= 3.1)
-      arel
     pghero (1.2.1)
       activerecord
     posix-spawn (0.3.11)
@@ -333,6 +337,10 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    searchkick (1.3.0)
+      activemodel
+      elasticsearch (>= 1)
+      hashie
     sidekiq (4.0.2)
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
@@ -420,7 +428,6 @@ DEPENDENCIES
   omniauth-github
   oneapm_rpm (~> 1.2.2)
   pg (~> 0.16.0)
-  pg_search (~> 1.0.5)
   pghero (~> 1.2.1)
   pry
   puma
@@ -439,6 +446,7 @@ DEPENDENCIES
   rucaptcha (~> 0.3.2.1)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  searchkick
   sidekiq (~> 4.0.2)
   sinatra (~> 1.4.6)
   slim-rails (~> 3.0.1)
