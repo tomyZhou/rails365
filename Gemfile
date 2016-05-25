@@ -57,6 +57,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'spring-commands-rspec'
+  gem 'capybara'
 end
 
 group :development do
