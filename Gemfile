@@ -50,11 +50,10 @@ gem 'babosa'
 
 gem 'rails-i18n'
 
+
 group :development, :test do
-  gem 'byebug'
-  gem 'web-console'
   gem 'spring'
-  gem 'rspec-rails', '~> 3.3.3'
+  gem 'rspec-rails', '~> 3.4'
   gem 'database_cleaner', '~> 1.4.1'
   gem 'factory_girl_rails', '~> 4.5.0'
 end
@@ -62,6 +61,7 @@ end
 group :development do
   gem 'quiet_assets'
   gem 'pry'
+  gem 'web-console'
   gem 'capistrano'
   gem 'capistrano-rbenv'
   gem 'capistrano-bundler'
