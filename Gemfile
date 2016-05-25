@@ -54,11 +54,13 @@ gem 'rails-i18n'
 group :development, :test do
   gem 'spring'
   gem 'rspec-rails', '~> 3.4'
-  gem 'database_cleaner', '~> 1.4.1'
+  gem 'database_cleaner'
   gem 'factory_girl_rails'
 end
 
 group :development do
+  gem 'guard'
+  gem 'guard-rspec'
   gem 'quiet_assets'
   gem 'pry'
   gem 'web-console'
