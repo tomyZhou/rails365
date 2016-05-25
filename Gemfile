@@ -62,6 +62,7 @@ end
 group :development do
   gem 'guard'
   gem 'guard-rspec'
+  gem 'guard-bundler', require: false
   gem 'quiet_assets'
   gem 'pry'
   gem 'web-console'
