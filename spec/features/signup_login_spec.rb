@@ -19,9 +19,19 @@ describe "登录和注册功能", :type => :feature do
       expect(page).to have_content('登录账号或密码错误')
     end
 
-    it "成功登录" do
+    it "输入邮箱成功登录" do
       within("#new_user") do
         fill_in 'user_login', :with => user.email
+        fill_in 'user_password', :with => user.password
+      end
+      click_button '登录'
+      expect(page).to have_content '登录成功'
+      expect(page).to have_current_path(root_path)
+    end
+
+    it "输入用户名成功登录" do
+      within("#new_user") do
+        fill_in 'user_login', :with => user.username
         fill_in 'user_password', :with => user.password
       end
       click_button '登录'
