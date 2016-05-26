@@ -7,6 +7,14 @@ describe "登录和注册功能", :type => :feature do
     allow_any_instance_of(ActionController::Base).to receive(:verify_rucaptcha?).and_return(true)
   end
 
+  subject { page }
+
+  describe "登录页面" do
+    before { visit "users/sign_in" }
+
+    it { should have_content('登录') }
+  end
+
   it "成功登录" do
     visit '/users/sign_in'
     within("#new_user") do
@@ -27,6 +35,12 @@ describe "登录和注册功能", :type => :feature do
     click_button '登录'
     expect(page).to have_content '登录账号或密码错误'
     expect(page).to have_current_path("/users/sign_in")
+  end
+
+  describe "注册页面" do
+    before { visit "users/sign_up" }
+
+    it { should have_content('注册') }
   end
 
   it "正常注册" do
@@ -81,4 +95,3 @@ describe "登录和注册功能", :type => :feature do
   end
 
 end
-
