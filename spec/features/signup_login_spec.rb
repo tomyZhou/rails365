@@ -14,6 +14,11 @@ describe "登录和注册功能", :type => :feature do
 
     it { should have_selector('h1', text: "登录") }
 
+    it "没有填任何信息就点登录" do
+      click_button "登录"
+      expect(page).to have_content('登录账号或密码错误')
+    end
+
     it "成功登录" do
       within("#new_user") do
         fill_in 'user_login', :with => user.email
@@ -39,6 +44,11 @@ describe "登录和注册功能", :type => :feature do
     before { visit "users/sign_up" }
 
     it { should have_selector("h1", text: '注册') }
+
+    it "没有填任何信息就点注册" do
+      click_button "注册"
+      expect(page).to have_content("因为5个错误导致此用户保存失")
+    end
 
     it "正常注册" do
       within("#new_user") do
