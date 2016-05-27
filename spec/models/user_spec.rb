@@ -4,9 +4,12 @@ RSpec.describe User, type: :model do
   let(:user) { create :user }
 
   describe "#email" do
-    context "user1@email.com" do
-      let(:user) { build(:user, email: "user1@email.com") }
-      it { expect(user.valid?).to eq true }
+    context "有效的地址" do
+      addresses = %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn]
+      addresses.each do |valid_address|
+        let(:user) { build(:user, email: valid_address) }
+        it { expect(user.valid?).to eq true }
+      end
     end
 
     context "空" do
@@ -15,13 +18,11 @@ RSpec.describe User, type: :model do
     end
 
     context "错误邮箱格式" do
-      let(:user) { build(:user, email: "user1@") }
-      it { expect(user.valid?).to eq false }
-    end
-
-    context "重复" do
-      let(:user_with_same_email) { build(:user, email: user.email)}
-      it { expect(user_with_same_email.valid?).to equal false }
+      addresses =  %w{invalid_email_format 123 $$$ () ☃ bla@bla.}
+      addresses.each do |invalid_address|
+        let(:user) { build(:user, email: invalid_address) }
+        it { expect(user.valid?).to eq false }
+      end
     end
   end
 
@@ -46,11 +47,6 @@ RSpec.describe User, type: :model do
       it { expect(user.valid?).to eq false }
     end
 
-    context "重复" do
-      let(:user_with_same_username) { build(:user, username: user.username) }
-      it { expect(user_with_same_username.valid?).to eq false }
-    end
-
     context "太短" do
       let(:user) { build(:user, username: "us") }
       it { expect(user.valid?).to eq false }
@@ -59,6 +55,22 @@ RSpec.describe User, type: :model do
     context "太长" do
       let(:user) { build(:user, username: "user1uuuuuuuuuuuuuuuu")}
       it { expect(user.valid?).to eq false }
+    end
+  end
+
+  describe "重复的属性" do
+    it "邮箱名不能重复" do
+      user_with_same_email = user.dup
+      user_with_same_email.email = user.email
+      user_with_same_email.save
+      expect(user_with_same_email.valid?).to equal false
+    end
+
+    it "用户名不能重复" do
+      user_with_same_username = user.dup
+      user_with_same_username.username = user.username
+      user_with_same_username.save
+      expect(user_with_same_username.valid?).to eq false
     end
   end
 
@@ -74,8 +86,14 @@ RSpec.describe User, type: :model do
       let(:user) { build(:user, password: "12345678") }
       it { expect(user.valid?).to eq true }
     end
+
     context "少于8位" do
       let(:user) { build(:user, password: "1231231") }
+      it { expect(user.valid?).to eq false }
+    end
+
+    context "和确认密码不匹配" do
+      let(:user) { build(:user, password: "12345678", password_confirmation: "123") }
       it { expect(user.valid?).to eq false }
     end
   end

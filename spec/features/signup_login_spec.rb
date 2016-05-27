@@ -27,6 +27,9 @@ describe "登录和注册功能", type: :feature do
       click_button '登录'
       expect(page).to have_content '登录成功'
       expect(page).to have_current_path(root_path)
+
+      click_link "文章"
+      expect(page).to have_selector("a", text: "添加新文章")
     end
 
     it "输入用户名成功登录" do

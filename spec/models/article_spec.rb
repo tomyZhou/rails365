@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Article, type: :model do
 
+  let(:user) { create(:user) }
+  let(:group) { create(:group) }
   let(:article) { create(:article) }
 
   describe "#title" do
@@ -14,6 +16,13 @@ RSpec.describe Article, type: :model do
       let(:article) { build(:article, title: "") }
       it { expect(article.valid?).to eq false }
     end
+  end
+
+  it "should not be have same title" do
+    article_same_title = article.dup
+    article_same_title.title = article.title
+    article_same_title.save
+    expect(article_same_title.valid?).to eq false
   end
 
   describe "#content" do
@@ -30,7 +39,6 @@ RSpec.describe Article, type: :model do
 
   describe "#user" do
     it "should get user username" do
-      user = create(:user)
       expect(create(:article, user: user).user.username).to eq user.username
     end
 
@@ -42,7 +50,6 @@ RSpec.describe Article, type: :model do
 
   describe "#group" do
     it "should get group name" do
-      group = create(:group)
       expect(create(:article, group: group).group.name).to eq group.name
     end
 
@@ -52,7 +59,6 @@ RSpec.describe Article, type: :model do
     end
 
     it "should get group count" do
-      group = create(:group)
       article = create(:article, group: group)
       expect(group.articles.count).to eq 1
 
