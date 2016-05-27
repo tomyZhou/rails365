@@ -60,8 +60,6 @@ group :development, :test do
   gem 'capybara'
 end
 
-gem 'simplecov', :require => false, :group => :test
-
 group :development do
   gem 'guard'
   gem 'guard-rspec'
