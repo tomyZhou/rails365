@@ -71,4 +71,26 @@ RSpec.describe Article, type: :model do
     article = create(:article, body: '*foo*')
     expect(MyMarkdown.render(article.body)).to eq("<p><em>foo</em></p>\n")
   end
+
+  describe "#friendly_id" do
+    context "第一篇文章" do
+      let(:article) { create(:article, title: "第一篇文章")}
+      it { expect(article.slug).to eq("di-yi-pian-wen-zhang") }
+    end
+
+    context "第一篇文章(一)" do
+      let(:article) { create(:article, title: "第一篇文章(一)") }
+      it { expect(article.slug).to eq("di-yi-pian-wen-zhang-yi") }
+    end
+
+    context "redis第一篇文章(一)" do
+      let(:article) { create(:article, title: "redis第一篇文章(一)") }
+      it { expect(article.slug).to eq "redis-di-yi-pian-wen-zhang-yi" }
+    end
+
+    context "finders" do
+      it { expect(Article.find(article.slug)).to eq Article.find(article.id) }
+    end
+  end
+
 end
