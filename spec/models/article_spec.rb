@@ -61,9 +61,11 @@ RSpec.describe Article, type: :model do
     it "should get group count" do
       article = create(:article, group: group)
       expect(group.articles.count).to eq 1
+      expect(group.reload.articles_count).to eq 1
 
       article.destroy
       expect(group.articles.count).to eq 0
+      expect(group.reload.articles_count).to eq 0
     end
   end
 
@@ -73,6 +75,10 @@ RSpec.describe Article, type: :model do
   end
 
   describe "#friendly_id" do
+    context "slug" do
+      it { expect(article.slug.present?).to eq true }
+    end
+
     context "第一篇文章" do
       let(:article) { create(:article, title: "第一篇文章")}
       it { expect(article.slug).to eq("di-yi-pian-wen-zhang") }
@@ -91,6 +97,27 @@ RSpec.describe Article, type: :model do
     context "finders" do
       it { expect(Article.find(article.slug)).to eq Article.find(article.id) }
     end
+  end
+
+  it "should have friendly_id history" do
+    old_slug = article.slug
+    article.title = article.slug + "(一)"
+    article.save
+    new_slug = article.slug
+    expect(Article.find(new_slug)).to eq Article.find(old_slug)
+  end
+
+  it "should change slug when only title change" do
+    old_slug = article.slug
+    article.title = article.slug + "(一)"
+    article.save
+    new_slug = article.slug
+    expect(new_slug).not_to eq old_slug
+
+    article.body = article.body + "**"
+    article.save
+    new_slug_1 = article.slug
+    expect(new_slug_1).to eq new_slug
   end
 
 end
