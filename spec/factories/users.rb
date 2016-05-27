@@ -4,5 +4,9 @@ FactoryGirl.define do
     username                 "name"
     password                 "password"
   end
+
+  factory :admin, parent: :user do
+    email ENV["admin_emails"]
+  end
 end
 
