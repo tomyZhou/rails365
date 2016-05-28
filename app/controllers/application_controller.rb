@@ -14,23 +14,20 @@ class ApplicationController < ActionController::Base
   end
 
   before_action do
-
     @sites = Admin::Site.cached_all
 
-    @site_info_name = Admin::SiteInfo.fetch_by_key("name").try(:value)
-    @site_info_title = Admin::SiteInfo.fetch_by_key("title").try(:value)
-    @site_info_meta_description = Admin::SiteInfo.fetch_by_key("meta_description").try(:value)
-    @site_info_meta_keyword = Admin::SiteInfo.fetch_by_key("meta_keyword").try(:value)
+    @site_info_name = Admin::SiteInfo.fetch_by_key('name').try(:value)
+    @site_info_title = Admin::SiteInfo.fetch_by_key('title').try(:value)
+    @site_info_meta_description = Admin::SiteInfo.fetch_by_key('meta_description').try(:value)
+    @site_info_meta_keyword = Admin::SiteInfo.fetch_by_key('meta_keyword').try(:value)
 
     # if current_user && current_user.super_admin?
     Rack::MiniProfiler.authorize_request
     # end
-
   end
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:warning] = exception.message
-    redirect_to "/"
+    redirect_to '/'
   end
-
 end

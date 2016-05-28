@@ -1,4 +1,4 @@
-require "babosa"
+require 'babosa'
 class Article < ActiveRecord::Base
   searchkick highlight: [:title, :body]
 
@@ -6,15 +6,15 @@ class Article < ActiveRecord::Base
   friendly_id :title, use: [:slugged, :finders, :history]
 
   include IdentityCache
-  cache_index :slug, :unique => true
+  cache_index :slug, unique: true
   belongs_to :group, counter_cache: true
   belongs_to :user
 
   scope :except_body_with_default, -> { select(:title, :created_at, :updated_at, :group_id, :slug, :id, :user_id).includes(:group) }
 
   def self.cached_recommend_articles(article)
-    group_name = article.group.name || "ruby"
-    Rails.cache.fetch [:slug, "recommend_articles", group_name] do
+    group_name = article.group.name || 'ruby'
+    Rails.cache.fetch [:slug, 'recommend_articles', group_name] do
       Article.except_body_with_default.search(group_name, limit: 11).to_a
     end
   end
@@ -23,7 +23,7 @@ class Article < ActiveRecord::Base
   validates :title, uniqueness: true
 
   def normalize_friendly_id(input)
-    "#{PinYin.of_string(input).to_s.to_slug.normalize.to_s}"
+    PinYin.of_string(input).to_s.to_slug.normalize.to_s
   end
 
   def should_generate_new_friendly_id?
@@ -38,15 +38,15 @@ class Article < ActiveRecord::Base
 
   def clear_cache
     # 首页
-    Rails.cache.delete "articles"
-    Rails.cache.delete "hot_articles"
-    Rails.cache.delete "groups"
+    Rails.cache.delete 'articles'
+    Rails.cache.delete 'hot_articles'
+    Rails.cache.delete 'groups'
     # 所有分类页面
-    Rails.cache.delete "group_all"
+    Rails.cache.delete 'group_all'
     # 所属的分类
     IdentityCache.cache.delete(group.primary_cache_index_key)
     # 分类show页面下的文章列表
-    Rails.cache.delete [group.name, "articles"]
+    Rails.cache.delete [group.name, 'articles']
   end
 
   def clear_before_updated_cache
@@ -59,7 +59,6 @@ class Article < ActiveRecord::Base
 
   def clear_after_updated_cache
     # 文章show页面右侧推荐文章列表
-    Rails.cache.delete [slug, "recommend_articles", group.name]
+    Rails.cache.delete [slug, 'recommend_articles', group.name]
   end
-
 end

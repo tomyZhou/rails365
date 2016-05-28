@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 class PhotoUploader < CarrierWave::Uploader::Base
-
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
@@ -58,5 +57,4 @@ class PhotoUploader < CarrierWave::Uploader::Base
       "#{Time.zone.now.year}/#{@name}.#{file.extension.downcase}"
     end
   end
-
 end

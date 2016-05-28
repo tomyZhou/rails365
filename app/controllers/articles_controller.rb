@@ -6,15 +6,15 @@ class ArticlesController < ApplicationController
 
   def index
     if params[:search].present?
-      @articles = Article.search params[:search], fields: [:title, :body], highlight: true, misspellings: {below: 5}, include: [:group, :user], order: {"_id": "desc"}, page: params[:page], per_page: 20
+      @articles = Article.search params[:search], fields: [:title, :body], highlight: true, misspellings: { below: 5 }, include: [:group, :user], order: { _id: :desc }, page: params[:page], per_page: 20
     else
-      @articles = Article.except_body_with_default.order("id DESC").page(params[:page])
+      @articles = Article.except_body_with_default.order('id DESC').page(params[:page])
     end
 
     @title = '文章列表'
 
     respond_to do |format|
-      format.all { render :index, formats: [:html]}
+      format.all { render :index, formats: [:html] }
     end
   end
 
@@ -53,18 +53,17 @@ class ArticlesController < ApplicationController
 
   private
 
-    def set_article
-      @article = Article.fetch_by_slug!(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      @article = Article.find(params[:id])
-    end
+  def set_article
+    @article = Article.fetch_by_slug!(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    @article = Article.find(params[:id])
+  end
 
-    def find_changed_article
-      @article = Article.find(params[:id])
-    end
+  def find_changed_article
+    @article = Article.find(params[:id])
+  end
 
-    def article_params
-      params.require(:article).permit(:title, :body, :group_id, :user_id)
-    end
-
+  def article_params
+    params.require(:article).permit(:title, :body, :group_id, :user_id)
+  end
 end

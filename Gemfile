@@ -18,14 +18,14 @@ gem 'slim-rails'
 
 # markdown
 gem 'redcarpet'
-gem 'rouge', github: "stanhu/rouge"
+gem 'rouge', github: 'stanhu/rouge'
 
 # configuration
 gem 'config'
 
 # file upload
 gem 'carrierwave'
-gem "jquery-fileupload-rails"
+gem 'jquery-fileupload-rails'
 gem 'carrierwave-aliyun'
 gem 'mini_magick'
 
@@ -50,7 +50,6 @@ gem 'babosa'
 
 gem 'rails-i18n'
 
-
 group :development, :test do
   gem 'spring'
   gem 'rspec-rails', '~> 3.4'
@@ -59,6 +58,8 @@ group :development, :test do
   gem 'spring-commands-rspec'
   gem 'capybara'
 end
+
+gem 'rubocop', require: false
 
 group :development do
   gem 'guard'
@@ -76,7 +77,7 @@ group :development do
   gem 'capistrano-faster-assets'
 end
 
-gem 'sinatra', :require => nil
+gem 'sinatra', require: nil
 gem 'pghero'
 
 # user authentication
@@ -84,7 +85,7 @@ gem 'devise'
 gem 'cancancan'
 gem 'rails-timeago'
 gem 'rucaptcha'
-gem "devise-async"
+gem 'devise-async'
 gem 'omniauth-github'
 
 # data migrate
@@ -93,7 +94,7 @@ gem 'migration_data'
 # theme
 gem 'bootswatch-rails'
 
-gem 'status-page', github: "rails-engine/status-page"
+gem 'status-page', github: 'rails-engine/status-page'
 gem 'faraday'
 
 # admin
@@ -102,7 +103,7 @@ gem 'rails_admin'
 # redis cache
 gem 'redis-namespace'
 gem 'redis-rails'
-gem "hiredis"
+gem 'hiredis'
 gem 'identity_cache'
 gem 'cityhash'
 

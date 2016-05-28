@@ -3,10 +3,6 @@ module ApplicationHelper
     MyMarkdown.render(text)
   end
 
-  def datetime(datetime)
-    datetime.to_time.strftime('%Y-%m-%d %H:%M:%S')
-  end
-
   def bootstrap_form_for(object, options = {}, &block)
     options[:builder] = BootstrapFormBuilder
     form_for(object, options, &block)
@@ -18,6 +14,6 @@ module ApplicationHelper
   end
 
   def custom_timeago_tag(datetime)
-    timeago_tag datetime, :lang => "zh-CN", :limit => 1.years.ago
+    timeago_tag datetime, lang: "zh-CN", limit: 1.years.ago
   end
 end

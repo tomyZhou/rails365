@@ -30,7 +30,8 @@ class RegistrationsController < Devise::RegistrationsController
     Rails.cache.delete "current_user_[#{current_user.id}]" if current_user
   end
 
-protected
+  protected
+
   def set_flash_message!(key, kind, options = {})
     if is_flashing_format?
       set_flash_message(key, kind, options)

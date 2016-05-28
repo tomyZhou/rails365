@@ -3,7 +3,7 @@ class WebsocketController < ActionController::Base
   def ws
     hijack do |tubesock|
       redis_thread = Thread.new do
-        Redis.new.subscribe "ws" do |on|
+        Redis.new.subscribe 'ws' do |on|
           on.message do |channel, message|
             tubesock.send_data message
           end

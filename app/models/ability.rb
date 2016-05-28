@@ -2,7 +2,6 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-
     if user.blank?
       cannot :manage, :all
       basic_read_only
@@ -17,16 +16,13 @@ class Ability
       end
 
       can :read, Group
-
     end
-
   end
 
-protected
+  protected
 
   def basic_read_only
     can :read, Article
     can :read, Group
   end
-
 end
