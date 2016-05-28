@@ -1,16 +1,26 @@
 secret_key_base: "c9906c7a2375a8f9d503f9195359b787db599b9f3ec38f0dfb2228b9e9f52f83168bcc2f5f93a8acb60add8937d7f11bb24c788c014d3494bd83ab934801e8b4"
+
+# 图片存储
 aliyun_access_id: 'your access id'
 aliyun_access_key: 'your access key'
 aliyun_bucket: 'your bucket name'
-# bucket的位置
 aliyun_area: "cn-shenzhen"
-# 设置阿里云自定义域名
 aliyun_host: "http://aliyun.rails365.net"
+
+# openapm
 oneapm_license_key: "your oneapm license key"
+
+# sidekiq
 sidekiq_namespace: "sidekiq"
+
+# email
 email_domain: "www.rails365.net"
 aliyun_email_username: "hfpp2012@rails365.net"
 aliyun_email_password: ""
-admin_emails: ["hfpp2012@aliyun.com"]
+
+# 管理员邮箱
+admin_emails: [ "hfpp2012@aliyun.com", "admin@rails365.com" ]
+
+# github登录
 github_appkey: '36a5e30aefd2e87714d0'
 github_secret: "f098bcc5302f18d0cf243cc50c8a49133949bc60"

@@ -79,7 +79,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.action_mailer.default_url_options = { host: ENV["email_domain"] }
+  config.action_mailer.default_url_options = { host: Settings.email_domain }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default :charset => "utf-8"
@@ -89,8 +89,8 @@ Rails.application.configure do
     port:  25,
     # domain: "domain.of.sender.net",
     authentication: "plain",
-    user_name: ENV["aliyun_email_username"],
-    password: ENV["aliyun_email_password"],
+    user_name: Settings.aliyun_email_username,
+    password: Settings.aliyun_email_password,
     enable_starttls_auto: true,
   }
 end

@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
   end
 
   def super_admin?
-    ENV["admin_emails"].include?(email)
+    Settings.admin_emails.include?(email)
   end
 
 end

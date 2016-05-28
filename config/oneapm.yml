@@ -4,7 +4,7 @@
 
 common: &default_settings
 
-  license_key: "<%= ENV['oneapm_license_key'] %>"
+  license_key: "<%= Settings.oneapm_license_key %>"
 
   # 您在这里填写的app_name会显示在OneAPM的管理后台界面中。
   #

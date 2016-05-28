@@ -21,7 +21,7 @@ gem 'redcarpet'
 gem 'rouge', github: "stanhu/rouge"
 
 # configuration
-gem 'figaro'
+gem 'config'
 
 # file upload
 gem 'carrierwave'

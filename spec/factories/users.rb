@@ -6,7 +6,7 @@ FactoryGirl.define do
   end
 
   factory :admin, parent: :user do
-    email ENV["admin_emails"]
+    email Settings.admin_emails.first
   end
 end
 
