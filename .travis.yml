@@ -14,8 +14,8 @@ rvm:
   - 2.3.0
 
 before_script:
-  - psql -c "CREATE USER \"admin\" WITH CREATEDB PASSWORD 'admin';" -U postgres
-  - psql -c "create database \"rails365_test\" WITH OWNER=\"admin\";" -U postgres
+  - psql -c "CREATE USER \"macintosh1\" WITH CREATEDB PASSWORD '12345678';" -U postgres
+  - psql -c "create database \"rails365_test\" WITH OWNER=\"macintosh1\";" -U postgres
   - cp config/settings.yml.example config/settings.yml
   - cp config/database.yml.example config/database.yml
   - RAILS_ENV=test bundle exec rake db:migrate

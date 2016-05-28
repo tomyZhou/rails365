@@ -16,6 +16,6 @@ test:
   adapter: postgresql
   host: localhost
   database: rails365_test
-  username: admin
-  password: 'admin'
+  username: macintosh1
+  password: '12345678'
   encoding: UTF8
