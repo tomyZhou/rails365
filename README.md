@@ -2,6 +2,8 @@
 
 分享文章和视频 http://rails365.net
 
+[![Code Climate](https://codeclimate.com/github/yinsigan/rails365/badges/gpa.svg)](https://codeclimate.com/github/yinsigan/rails365)
+
 ### 依赖:
 
 * rails 4
