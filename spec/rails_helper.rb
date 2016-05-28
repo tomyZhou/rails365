@@ -64,4 +64,8 @@ RSpec.configure do |config|
     end
   end
 
+  config.render_views
+
+  config.include Devise::TestHelpers, :type => :controller
+  # config.include Devise::TestHelpers, :type => :view
 end
