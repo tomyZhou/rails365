@@ -6,14 +6,14 @@ module ExceptionNotifier
       # do something with the options...
     end
 
-    def call(exception, options={})
+    def call(exception, options = {})
       # send the notification
       @title = exception.message
       body = []
       body << exception.inspect
       if !exception.backtrace.blank?
         body << "\n"
-        body << exception.backtrace[0,100]
+        body << exception.backtrace[0, 100]
       end
 
       env = options[:env]
@@ -30,13 +30,13 @@ module ExceptionNotifier
       unless env.nil?
         request = ActionDispatch::Request.new(env)
 
-        request_items = {:url => request.original_url,
-                         :http_method => request.method,
-                         :ip_address => request.remote_ip,
-                         :parameters => request.filtered_parameters,
-                         :timestamp => Time.current }
-        message += "*HTTP Method:* #{request_items[:http_method].to_s}\n"
-        message += "*Parameters:* #{request_items[:parameters].to_s}\n"
+        request_items = { url: request.original_url,
+                          http_method: request.method,
+                          ip_address: request.remote_ip,
+                          parameters: request.filtered_parameters,
+                          timestamp: Time.current }
+        message += "*HTTP Method:* #{request_items[:http_method]}\n"
+        message += "*Parameters:* #{request_items[:parameters]}\n"
       end
       req = Rack::Request.new(env)
       unless req.params.empty?

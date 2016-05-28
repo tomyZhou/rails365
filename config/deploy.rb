@@ -3,7 +3,7 @@ lock '3.5.0'
 
 set :application, 'rails365'
 set :repo_url, 'git@192.210.137.166:/home/hfpp2012/rails365.git'
-set :branch, "master"
+set :branch, 'master'
 set :deploy_to, "/home/yinsigan/#{fetch(:application)}"
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/settings.yml')
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'pids', 'tmp/sockets')
@@ -15,7 +15,7 @@ set :rbenv_ruby, '2.3.0'
 # set :rbenv_ruby, File.read('.ruby-version').strip
 #
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
-set :rbenv_map_bins, %w{rake gem bundle ruby rails sidekiq sidekiqctl}
+set :rbenv_map_bins, %w( rake gem bundle ruby rails sidekiq sidekiqctl )
 set :rbenv_roles, :all # default value
 
 set :bundle_flags, ''
@@ -52,7 +52,6 @@ set :bundle_flags, ''
 
 after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
-
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
@@ -64,5 +63,4 @@ namespace :deploy do
 
   task :restart do
   end
-
 end

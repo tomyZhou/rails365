@@ -1,7 +1,7 @@
 class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
   delegate :content_tag, :pluralize, to: :@template
 
-  %w[text_field text_area select file_field url_field].each do |method_name|
+  %w( text_field text_area select file_field url_field ).each do |method_name|
     define_method(method_name) do |method, *tag_value|
       content_tag(:div, class: 'form-group') do
         label(method, class: 'col-sm-2 control-label') +
@@ -24,7 +24,7 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
   def error_messages
     if object && object.errors.any?
       content_tag(:div, id: 'error_explanation') do
-        content_tag(:h2, "#{pluralize(object.errors.count, "error")} prohibited this article from being saved:") +
+        content_tag(:h2, "#{pluralize(object.errors.count, 'error')} prohibited this article from being saved:") +
           content_tag(:ul) do
             object.errors.full_messages.map do |msg|
               content_tag(:li, msg)

@@ -1,7 +1,7 @@
 module StatusPage
   class RubyGems < StatusPage::Services::Base
     def service_name
-      "Gems Mirror"
+      'Gems Mirror'
     end
 
     def check!

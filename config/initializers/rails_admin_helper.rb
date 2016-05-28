@@ -1,5 +1,4 @@
 RailsAdmin::ApplicationHelper.class_eval do
-
   def edit_user_link
     return nil unless _current_user.respond_to?(:email)
     return nil unless abstract_model = RailsAdmin.config(_current_user.class).abstract_model
@@ -10,5 +9,4 @@ RailsAdmin::ApplicationHelper.class_eval do
       html.join.html_safe
     end
   end
-
 end

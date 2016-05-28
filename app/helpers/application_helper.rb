@@ -14,6 +14,6 @@ module ApplicationHelper
   end
 
   def custom_timeago_tag(datetime)
-    timeago_tag datetime, lang: "zh-CN", limit: 1.years.ago
+    timeago_tag datetime, lang: 'zh-CN', limit: 1.years.ago
   end
 end

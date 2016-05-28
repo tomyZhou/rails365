@@ -82,15 +82,15 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: Settings.email_domain }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default :charset => "utf-8"
+  config.action_mailer.default charset: 'utf-8'
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:   "smtpdm.aliyun.com",
+    address:   'smtpdm.aliyun.com',
     port:  25,
     # domain: "domain.of.sender.net",
-    authentication: "plain",
+    authentication: 'plain',
     user_name: Settings.aliyun_email_username,
     password: Settings.aliyun_email_password,
-    enable_starttls_auto: true,
+    enable_starttls_auto: true
   }
 end

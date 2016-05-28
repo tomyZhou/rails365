@@ -1,7 +1,7 @@
 class DeviseFormBuilder < ActionView::Helpers::FormBuilder
   delegate :content_tag, :pluralize, to: :@template
 
-  %w[email_field password_field text_field].each do |method_name|
+  %w( email_field password_field text_field ).each do |method_name|
     define_method(method_name) do |method, *tag_value|
       content_tag(:div, class: 'form-group') do
         label(method, class: 'col-sm-3 control-label') +

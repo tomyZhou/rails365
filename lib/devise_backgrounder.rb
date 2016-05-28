@@ -1,5 +1,4 @@
 class DeviseBackgrounder
-
   def self.confirmation_instructions(record, token, opts = {})
     new(:confirmation_instructions, record, token, opts)
   end
@@ -21,5 +20,4 @@ class DeviseBackgrounder
     # actually want to use. The default is Devise::Mailer.
     Devise::Mailer.delay.send(@method, @record, @token, @opts)
   end
-
 end

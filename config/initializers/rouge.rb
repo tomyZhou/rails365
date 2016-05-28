@@ -10,7 +10,7 @@ module Redcarpet
       # github.com/vmg/redcarpet/blob/master/lib/redcarpet/render_man.rb#L9
 
       def initialize(extensions = {})
-        super extensions.merge(link_attributes: { target: "_blank" })
+        super extensions.merge(link_attributes: { target: '_blank' })
       end
 
       # rouge redcarpet plugin已有相应的功能
@@ -25,8 +25,8 @@ module Redcarpet
       end
 
       def image(link, title, content)
-        content &&= content + " "
-        "<a href='#{link.sub("preview_", "")}' class='fluidbox-link'>" \
+        content &&= content + ' '
+        "<a href='#{link.sub('preview_', '')}' class='fluidbox-link'>" \
           "<img src='#{content}#{link}' />" \
         "</a>"
       end
@@ -37,4 +37,3 @@ module Redcarpet
     end
   end
 end
-

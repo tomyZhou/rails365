@@ -1,6 +1,6 @@
 require 'exception_notification/rails'
 require 'exception_notification/sidekiq'
-require "exception_notifier/database_notifier"
+require 'exception_notifier/database_notifier'
 
 ExceptionNotification.configure do |config|
   # config.ignored_exceptions += %w{ActionView::TemplateError}
@@ -42,5 +42,4 @@ ExceptionNotification.configure do |config|
   #   :url => 'http://example.com:5555/hubot/path',
   #   :http_method => :post
   # }
-
 end

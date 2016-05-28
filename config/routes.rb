@@ -1,6 +1,6 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
-  devise_for :users, :controllers => {:registrations => "registrations", :omniauth_callbacks => "users/omniauth_callbacks"}
+  devise_for :users, controllers: { registrations: 'registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
   root to: 'home#index'
 
   resources :articles
@@ -8,24 +8,24 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
 
   %w(404 422 500).each do |code|
-    get code, to: "errors#show", code: code
+    get code, to: 'errors#show', code: code
   end
 
-  patch '/photos', to: "photos#create"
+  patch '/photos', to: 'photos#create'
 
   authenticate :user, lambda { |u| u.super_admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
 
   authenticate :user, lambda { |u| u.super_admin? } do
-    mount PgHero::Engine, at: "pghero"
+    mount PgHero::Engine, at: 'pghero'
   end
 
-  mount RuCaptcha::Engine => "/rucaptcha"
+  mount RuCaptcha::Engine => '/rucaptcha'
 
   mount StatusPage::Engine, at: '/web'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
-  get "/ws", to: "websocket#ws"
+  get '/ws', to: 'websocket#ws'
 end

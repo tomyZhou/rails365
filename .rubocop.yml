@@ -3,6 +3,7 @@ AllCops:
     Enabled: true
   Exclude:
     - 'db/schema.rb'
+    - 'db/migrate/*'
 
 Style/Documentation:
   Enabled: false

@@ -26,7 +26,7 @@ module Rails365
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
     config.autoload_paths << Rails.root.join('lib')
-    config.autoload_paths << Rails.root.join('app', "form_builders")
+    config.autoload_paths << Rails.root.join('app', 'form_builders')
     config.generators.assets = false
     config.generators.helper = false
 
@@ -37,14 +37,14 @@ module Rails365
         helper_specs: false,
         routing_specs: false,
         request_specs: false
-      g.fixture_replacement :factory_girl, dir: "spec/factories"
+      g.fixture_replacement :factory_girl, dir: 'spec/factories'
     end
     config.exceptions_app = self.routes
-    config.cache_store = :redis_store, {host: '127.0.0.1', port: 6379, namespace: "rails365", driver: :hiredis}
-    config.identity_cache_store = :redis_store, {host: '127.0.0.1', port: 6379, namespace: "rails365_cache", driver: :hiredis}
-    config.middleware.delete "Rack::ConditionalGet"
-    config.middleware.delete "Rack::ETag"
-    config.middleware.delete "Rack::Runtime"
-    config.middleware.delete "Rack::Sendfile"
+    config.cache_store = :redis_store, { host: '127.0.0.1', port: 6379, namespace: 'rails365', driver: :hiredis }
+    config.identity_cache_store = :redis_store, { host: '127.0.0.1', port: 6379, namespace: 'rails365_cache', driver: :hiredis }
+    config.middleware.delete 'Rack::ConditionalGet'
+    config.middleware.delete 'Rack::ETag'
+    config.middleware.delete 'Rack::Runtime'
+    config.middleware.delete 'Rack::Sendfile'
   end
 end
