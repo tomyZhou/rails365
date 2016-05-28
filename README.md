@@ -4,7 +4,7 @@
 
 This is the source code of rails365.net website.
 
-[![Code Climate](https://codeclimate.com/github/yinsigan/rails365/badges/gpa.svg)](https://codeclimate.com/github/yinsigan/rails365) [![codecov](https://codecov.io/gh/yinsigan/rails365/branch/master/graph/badge.svg)](https://codecov.io/gh/yinsigan/rails365)
+[![Build Status](https://travis-ci.org/yinsigan/rails365.svg?branch=master)](https://travis-ci.org/yinsigan/rails365) [![Code Climate](https://codeclimate.com/github/yinsigan/rails365/badges/gpa.svg)](https://codeclimate.com/github/yinsigan/rails365) [![codecov](https://codecov.io/gh/yinsigan/rails365/branch/master/graph/badge.svg)](https://codecov.io/gh/yinsigan/rails365)
 
 ### 依赖:
 
