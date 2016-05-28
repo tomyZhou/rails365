@@ -1,6 +1,8 @@
-## README
+## Rails365
 
-分享文章和视频 http://rails365.net
+分享文章和视频 http://www.rails365.net
+
+This is the source code of rails365.net website.
 
 [![Code Climate](https://codeclimate.com/github/yinsigan/rails365/badges/gpa.svg)](https://codeclimate.com/github/yinsigan/rails365)
 
@@ -19,7 +21,7 @@
 ```
 bundle install
 cp config/database.yml.example config/database.yml
-cp config/application.yml.example config/application.yml
+cp config/settings.yml.example config/settings.yml
 ```
 
 ### 参与开发
