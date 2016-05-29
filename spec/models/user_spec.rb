@@ -43,8 +43,11 @@ RSpec.describe User, type: :model do
     end
 
     context '特殊字符' do
-      let(:user) { build(:user, username: '###user###') }
-      it { expect(user.valid?).to eq false }
+      usernames = %w( ###user### %user user. user+ )
+      usernames.each do |username|
+        let(:user) { build(:user, username: username) }
+        it { expect(user.valid?).to eq false }
+      end
     end
 
     context '太短' do
@@ -53,7 +56,7 @@ RSpec.describe User, type: :model do
     end
 
     context '太长' do
-      let(:user) { build(:user, username: 'user1uuuuuuuuuuuuuuuu') }
+      let(:user) { build(:user, username: 'user1' * 5) }
       it { expect(user.valid?).to eq false }
     end
   end

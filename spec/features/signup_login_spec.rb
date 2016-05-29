@@ -10,7 +10,7 @@ describe '登录和注册功能', type: :feature do
   subject { page }
 
   describe '登录页面' do
-    before { visit 'users/sign_in' }
+    before { visit new_user_session_path }
 
     it { should have_selector('h1', text: '登录') }
 
@@ -46,12 +46,12 @@ describe '登录和注册功能', type: :feature do
       end
       click_button '登录'
       expect(page).to have_content '登录账号或密码错误'
-      expect(page).to have_current_path('/users/sign_in')
+      expect(page).to have_current_path(user_session_path)
     end
   end # 登录页面
 
   describe '注册页面' do
-    before { visit 'users/sign_up' }
+    before { visit new_user_registration_path }
 
     it { should have_selector('h1', text: '注册') }
 
@@ -80,7 +80,7 @@ describe '登录和注册功能', type: :feature do
         fill_in 'user_password_confirmation', with: 'password'
       end
       click_button '注册'
-      expect(page).to have_current_path('/users')
+      expect(page).to have_current_path(user_registration_path)
       expect(page).to have_content '电子邮箱已经被使用'
     end
 
@@ -92,7 +92,7 @@ describe '登录和注册功能', type: :feature do
         fill_in 'user_password_confirmation', with: '123'
       end
       click_button '注册'
-      expect(page).to have_current_path('/users')
+      expect(page).to have_current_path(user_registration_path)
       expect(page).to have_content '密码过短'
     end
 
@@ -103,7 +103,7 @@ describe '登录和注册功能', type: :feature do
         fill_in 'user_password_confirmation', with: 'password'
       end
       click_button '注册'
-      expect(page).to have_current_path('/users')
+      expect(page).to have_current_path(user_registration_path)
       expect(page).to have_content '电子邮箱不能为空字符'
     end
   end # 注册页面
