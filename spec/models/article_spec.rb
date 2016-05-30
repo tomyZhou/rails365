@@ -3,34 +3,32 @@ require 'rails_helper'
 RSpec.describe Article, type: :model do
   let(:user) { create(:user) }
   let(:group) { create(:group) }
-  let(:article) { create(:article) }
+  let(:article) { create(:article, user: user, group: group) }
 
   describe '#title' do
-    context '正常' do
+    context 'normal' do
       let(:article) { build(:article, title: 'ttt') }
       it { expect(article.valid?).to eq true }
     end
 
-    context '为空' do
+    context 'blank' do
       let(:article) { build(:article, title: '') }
       it { expect(article.valid?).to eq false }
     end
-  end
 
-  it 'should not be have same title' do
-    article_same_title = article.dup
-    article_same_title.title = article.title
-    article_same_title.save
-    expect(article_same_title.valid?).to eq false
+    context "duplicate" do
+      let(:article_with_same_title) { build(:article, title: article.title, user: user, group: group) }
+      it { expect(article_with_same_title.valid?).to eq false }
+    end
   end
 
   describe '#content' do
-    context '正常' do
+    context 'normal' do
       let(:article) { build(:article, body: 'cccc') }
       it { expect(article.valid?).to eq true }
     end
 
-    context '为空' do
+    context 'blank' do
       let(:article) { build(:article, body: '') }
       it { expect(article.valid?).to eq false }
     end

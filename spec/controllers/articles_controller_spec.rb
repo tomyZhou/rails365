@@ -64,7 +64,7 @@ describe ArticlesController, type: :controller do
     it 'should not work when sumbit invalid article data' do
       sign_in user
       article = create :article, user: user, group: group
-      article.body = article.body + "###"
+      article.body = article.body + '###'
       post :create, article: article.attributes
       expect(response).to be_success
       expect(response.body).to match /标题已经被使用/
@@ -132,6 +132,7 @@ describe ArticlesController, type: :controller do
       delete :destroy, id: article.slug
       expect(response).to redirect_to(articles_path)
       expect(flash[:notice]).to eq '文章成功删除!'
+      expect(Article.count).to eq 0
     end
 
     it 'should only destroy own article when user sign in' do

@@ -24,6 +24,11 @@ RSpec.describe User, type: :model do
         it { expect(user.valid?).to eq false }
       end
     end
+
+    context '重复' do
+      let(:user_with_same_username) { build :user, username: user.username }
+      it { expect(user_with_same_username.valid?).to eq false }
+    end
   end
 
   describe '#username' do
@@ -59,21 +64,10 @@ RSpec.describe User, type: :model do
       let(:user) { build(:user, username: 'user1' * 5) }
       it { expect(user.valid?).to eq false }
     end
-  end
 
-  describe '重复的属性' do
-    it '邮箱名不能重复' do
-      user_with_same_email = user.dup
-      user_with_same_email.email = user.email
-      user_with_same_email.save
-      expect(user_with_same_email.valid?).to equal false
-    end
-
-    it '用户名不能重复' do
-      user_with_same_username = user.dup
-      user_with_same_username.username = user.username
-      user_with_same_username.save
-      expect(user_with_same_username.valid?).to eq false
+    context '重复' do
+      let(:user_with_same_email) { build :user, email: user.email }
+      it { expect(user_with_same_email.valid?).to eq false }
     end
   end
 
