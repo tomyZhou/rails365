@@ -98,7 +98,7 @@ RSpec.describe Article, type: :model do
 
   it 'should have friendly_id history' do
     old_slug = article.slug
-    article.title = article.slug + '(一)'
+    article.title = article.title + '(一)'
     article.save
     new_slug = article.slug
     expect(Article.find(new_slug)).to eq Article.find(old_slug)
@@ -106,7 +106,7 @@ RSpec.describe Article, type: :model do
 
   it 'should change slug when only title change' do
     old_slug = article.slug
-    article.title = article.slug + '(一)'
+    article.title = article.title + '(一)'
     article.save
     new_slug = article.slug
     expect(new_slug).not_to eq old_slug

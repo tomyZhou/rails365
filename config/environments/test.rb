@@ -40,5 +40,5 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   config.cache_store = :redis_store, { host: '127.0.0.1', port: 6379, namespace: 'rails365', driver: :hiredis, db: 1 }
-  config.identity_cache_store = :redis_store, { host: '127.0.0.1', port: 6379, namespace: 'rails365_cache', driver: :hiredis, db: 1 }
+  config.identity_cache_store = :redis_store, { host: '127.0.0.1', port: 6379, namespace: 'rails365', driver: :hiredis, db: 1 }
 end
