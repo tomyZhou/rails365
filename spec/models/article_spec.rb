@@ -17,7 +17,7 @@ RSpec.describe Article, type: :model do
     end
 
     context 'duplicate' do
-      let(:article_with_same_title) { build(:article, title: article.title, user: user, group: group) }
+      let(:article_with_same_title) { build_stubbed(:article, title: article.title) }
       it { expect(article_with_same_title.valid?).to eq false }
     end
   end
