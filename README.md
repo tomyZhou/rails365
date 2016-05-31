@@ -24,6 +24,22 @@ cp config/database.yml.example config/database.yml
 cp config/settings.yml.example config/settings.yml
 ```
 
-### 参与开发
+### 测试:
 
-联系我(hfpp2012@aliyun.com)加入trello
+```
+bundle exec guard
+```
+
+或者
+
+```
+bundle exec spring rspec
+```
+
+## License
+
+Copyright (c) 2015-2016 rails365
+
+Released under the MIT license:
+
+* [www.opensource.org/licenses/MIT](http://www.opensource.org/licenses/MIT)
