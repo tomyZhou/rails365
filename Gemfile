@@ -108,7 +108,10 @@ gem 'hiredis'
 gem 'identity_cache'
 gem 'cityhash'
 
+# websocket
 gem 'tubesock'
+
+# elasticsearch
 gem 'searchkick'
 gem 'typhoeus'
 
