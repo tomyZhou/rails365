@@ -19,20 +19,19 @@ class Article < ActiveRecord::Base
     end
   end
 
-  def self.async_create(article_params, user_id)
+  def self.async_create(user_id, article_params)
     user = User.find(user_id)
     article = Article.new(article_params)
     article.user_id = user.id
     article.save!
-    Redis.new.publish 'ws', "<#{article.title}>文章于#{I18n.l user.created_at, format: :long}创建成功"
   end
 
-  def self.async_update(article_id, user_id, article_params)
-    user = User.find(user_id)
+  def self.async_update(article_id, article_params)
     article = Article.find(article_id)
-    article.user_id = user.id
+    user_id = article.user_id
     article.update!(article_params)
-    Redis.new.publish 'ws', "<#{article.title}>文章于#{I18n.l user.created_at, format: :long}更新成功"
+    article.user_id = user_id
+    article.save(validate: false)
   end
 
   validates :title, :body, :group_id, :user_id, presence: true
@@ -49,8 +48,15 @@ class Article < ActiveRecord::Base
   after_commit :clear_cache
   before_update :clear_before_updated_cache
   after_update :clear_after_updated_cache
+  after_create :publish_create
 
   private
+
+  def publish_create
+    unless Rails.env.test?
+      Redis.new.publish 'ws', "<#{title}>文章于#{I18n.l created_at, format: :long}创建成功"
+    end
+  end
 
   def clear_cache
     # 首页
@@ -76,5 +82,9 @@ class Article < ActiveRecord::Base
   def clear_after_updated_cache
     # 文章show页面右侧推荐文章列表
     Rails.cache.delete [slug, 'recommend_articles', group.name]
+
+    unless Rails.env.test?
+      Redis.new.publish 'ws', "<#{title}>文章于#{I18n.l created_at, format: :long}更新成功"
+    end
   end
 end

@@ -1,7 +1,7 @@
 class CreateArticleWorker
   include Sidekiq::Worker
 
-  def perform(article_params, user_id)
-    Article.async_create(article_params, user_id)
+  def perform(user_id, article_params)
+    Article.async_create(user_id, article_params)
   end
 end

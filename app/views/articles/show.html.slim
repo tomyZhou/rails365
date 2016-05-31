@@ -7,6 +7,8 @@
         span.label.label-primary.mr5 = @article.group.try(:name)
         | 由*#{@article.user.try(:login)}*发表于
         = custom_timeago_tag @article.created_at
+        | *编辑于
+        = custom_timeago_tag @article.updated_at
         - if can? :update, @article
           = link_to "编辑", edit_article_path(@article)
 .row

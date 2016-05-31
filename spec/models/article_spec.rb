@@ -116,4 +116,31 @@ RSpec.describe Article, type: :model do
     new_slug_1 = article.slug
     expect(new_slug_1).to eq new_slug
   end
+
+  describe '#async_create' do
+    let(:creator) { create :user, email: 'other_user@email.com', username: 'other_user' }
+    let(:valid_article_attributes) { attributes_for :article, group_id: group.id, user_id: creator.id }
+
+    it 'should work' do
+      Article.async_create(user.id, valid_article_attributes)
+      expect(Article.count).to eq 1
+
+      article = Article.find_by(title: valid_article_attributes[:title])
+      expect(article.user_id).to eq user.id
+      expect(article.user_id).not_to eq creator.id
+    end
+  end
+
+  describe '#async_update' do
+    let(:editor) { create :user, email: 'other_user@email.com', username: 'other_user' }
+    let(:valid_article_attributes) { attributes_for :article, group_id: group.id, user_id: editor.id, body: 'changed_body' }
+
+    it 'should work' do
+      Article.async_update(article.id, valid_article_attributes)
+      updated_article = Article.find_by(body: 'changed_body')
+      expect(updated_article).to eq article
+      expect(updated_article.user_id).to eq user.id
+      expect(updated_article.user_id).not_to eq editor.id
+    end
+  end
 end

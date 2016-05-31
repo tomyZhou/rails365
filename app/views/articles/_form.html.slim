@@ -9,7 +9,10 @@
       span.glyphicon.glyphicon-picture#image-upload
   = f.text_area :body, class: "form-control", rows: 20, required: true
   = f.select :group_id, Group.all.collect { |p| [ p.name, p.id ] }, include_blank: false
-  = f.hidden_field :user_id, value: current_user.id
+  - if @article.new_record?
+    = f.hidden_field :user_id, value: current_user.id
+  - else
+    = f.hidden_field :user_id, value: @article.user_id
   = f.submit "保存", class: "btn btn-primary"
 
 coffee:

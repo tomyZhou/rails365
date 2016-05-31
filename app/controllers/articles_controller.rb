@@ -35,7 +35,7 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
 
     if @article.valid?
-      CreateArticleWorker.perform_async(article_params, current_user.id)
+      CreateArticleWorker.perform_async(current_user.id, article_params)
       redirect_to articles_path, notice: '文章正在后台创建中，如果创建成功将会有消息提醒!'
     else
       render :new
@@ -43,7 +43,7 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    UpdateArticleWorker.perform_async(params[:id], current_user.id, article_params)
+    UpdateArticleWorker.perform_async(params[:id], article_params)
     redirect_to @article, notice: '文章正在后台更新中，如果更新成功将会有消息提醒!'
   end
 
