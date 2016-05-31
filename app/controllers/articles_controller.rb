@@ -5,11 +5,12 @@ class ArticlesController < ApplicationController
   authorize_resource
 
   def index
-    if params[:search].present?
-      @articles = Article.search params[:search], fields: [:title, :body], highlight: true, misspellings: { below: 5 }, include: [:group, :user], order: { _id: :desc }, page: params[:page], per_page: 20
-    else
-      @articles = Article.except_body_with_default.order('id DESC').page(params[:page])
-    end
+    @articles =
+      if params[:search].present?
+        Article.search params[:search], fields: [:title, :body], highlight: true, misspellings: { below: 5 }, include: [:group, :user], order: { _id: :desc }, page: params[:page], per_page: 20
+      else
+        Article.except_body_with_default.order('id DESC').page(params[:page])
+      end
 
     @title = '文章列表'
 

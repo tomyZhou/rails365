@@ -40,16 +40,16 @@ RSpec.describe Group, type: :model do
     end
 
     context 'finders' do
-      it { expect(Group.find(group.slug)).to eq Group.find(group.id)}
+      it { expect(Group.find(group.slug)).to eq(Group.find(group.id)) }
     end
   end
 
-   it 'should have friendly_id history' do
+  it 'should have friendly_id history' do
     old_slug = group.slug
     group.name = group.name + '(一)'
     group.save
     new_slug = group.slug
-    expect(Group.find(new_slug)).to eq Group.find(old_slug)
+    expect(Group.find(new_slug)).to eq(Group.find(old_slug))
   end
 
   it 'should change slug when only name change' do

@@ -18,7 +18,7 @@ RSpec.describe User, type: :model do
     end
 
     context '错误邮箱格式' do
-      addresses =  %w{ invalid_email_format 123 $$$ () ☃ bla@bla. }
+      addresses = %w{ invalid_email_format 123 $$$ () ☃ bla@bla. }
       addresses.each do |invalid_address|
         let(:user) { build(:user, email: invalid_address) }
         it { expect(user.valid?).to eq false }
@@ -96,7 +96,7 @@ RSpec.describe User, type: :model do
   end
 
   describe '#validate_username' do
-    let(:user_with_wrong_email) { build(:user, email: user.username)}
+    let(:user_with_wrong_email) { build(:user, email: user.username) }
     it { expect(user_with_wrong_email.valid?).to eq false }
   end
 

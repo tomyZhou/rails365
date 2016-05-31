@@ -60,7 +60,7 @@ group :development, :test do
 end
 
 gem 'rubocop', require: false
-gem 'codecov', :require => false, :group => :test
+gem 'codecov', require: false, group: :test
 
 group :development do
   gem 'guard'

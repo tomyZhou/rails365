@@ -16,7 +16,7 @@ RSpec.describe Article, type: :model do
       it { expect(article.valid?).to eq false }
     end
 
-    context "duplicate" do
+    context 'duplicate' do
       let(:article_with_same_title) { build(:article, title: article.title, user: user, group: group) }
       it { expect(article_with_same_title.valid?).to eq false }
     end
