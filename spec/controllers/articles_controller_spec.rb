@@ -42,7 +42,7 @@ describe ArticlesController, type: :controller do
       expect(response.body).to match(/发表文章/)
     end
   end
-  
+
   describe ':create' do
     let(:valid_article_attributes) { attributes_for :article, group_id: group.id, user_id: user.id }
 
