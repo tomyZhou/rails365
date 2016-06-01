@@ -4,9 +4,9 @@
   = devise_error_messages!
   = f.text_field :username, autofocus: true, class: "form-control"
   = f.email_field :email, class: "form-control"
+  = f.password_field :current_password, class: "form-control"
   = f.password_field :password, :autocomplete => "off", class: "form-control"
   = f.password_field :password_confirmation, class: "form-control"
-  = f.password_field :current_password, class: "form-control"
   = f.submit t('.update', :default => "Update"), class: "form-control btn btn-primary"
   /h3
   /  = t('.cancel_my_account', :default => 'Cancel my account')
