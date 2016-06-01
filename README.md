@@ -16,12 +16,39 @@ This is the source code of rails365.net website.
 
 * elasticsearch
 
+* imagemagick
+
 ### 安装:
 
+#### Mac OS X
+
 ```
-bundle install
-cp config/database.yml.example config/database.yml
-cp config/settings.yml.example config/settings.yml
+$ brew install redis postgresql imagemagick gs elasticsearch
+```
+
+#### Ubuntu
+
+```
+$ sudo apt-get install postgresql-9.4 redis-server imagemagick ghostscript
+```
+
+postgresql, redis, elasticsearch服务必须启动好
+
+### 创建数据库
+
+```
+$ psql -c "CREATE USER \"macintosh1\" WITH CREATEDB PASSWORD '12345678';" -U postgres
+$ psql -c "create database \"rails365_dev\" WITH OWNER=\"macintosh1\";" -U postgres
+```
+
+### 运行
+
+```
+$ bundle install
+$ cp config/database.yml.example config/database.yml
+$ cp config/settings.yml.example config/settings.yml
+$ bundle exec rake db:migrate
+$ bundle exec spring rails s
 ```
 
 ### 测试:
