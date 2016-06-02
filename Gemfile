@@ -76,6 +76,7 @@ group :development do
   gem 'capistrano-sidekiq'
   gem 'capistrano3-puma'
   gem 'capistrano-faster-assets'
+  gem 'capistrano-rails-console'
 end
 
 gem 'sinatra', require: nil
