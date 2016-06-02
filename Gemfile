@@ -57,6 +57,8 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'spring-commands-rspec'
   gem 'capybara'
+  gem 'cucumber-rails', :require => false
+  gem "spring-commands-cucumber"
 end
 
 gem 'rubocop', require: false
@@ -66,6 +68,7 @@ group :development do
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-bundler', require: false
+  gem 'guard-cucumber'
   gem 'quiet_assets'
   gem 'pry'
   gem 'web-console'
