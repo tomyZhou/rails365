@@ -29,13 +29,13 @@ $ ->
 
 Notification.requestPermission()
 
-# jQuery ->
-#   flash = [
-#     "info"
-#     "success"
-#     "danger"
-#     "warning"
-#   ]
-#   for key of flash
-#     select = ".alert-autocloseable-" + flash[key]
-#     $(select).delay(5000).fadeOut()  if $(select).length > 0
+jQuery ->
+  flash = [
+    "info"
+    "success"
+    "danger"
+    "warning"
+  ]
+  for key of flash
+    select = ".alert-autocloseable-" + flash[key]
+    $(select).delay(5000).fadeOut()  if $(select).length > 0
