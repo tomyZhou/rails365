@@ -1,13 +1,13 @@
-Feature: Signing in
+Feature: 登录
 
-  Scenario: Unsuccessful signin
-    Given a user visits the signin page
-    When they submit invalid signin information
-    Then they should see an error message
+  Scenario: 非成功登录
+    Given 用户查看登录页面
+    When 提交无效的信息
+    Then 应该看到错误显示
 
-  Scenario: Successful signin
-    Given a user visits the signin page
-      And the user has an account
-    When the user submits valid signin information
-    Then they should see successful information
-      And they should see a signout link
+  Scenario: 成功登录
+    Given 用户查看登录页面
+      And 用户已经有登录账号
+    When 用户提交有效的登录信息
+    Then 用户应该看到成功的消息
+      And 应该看到注销按钮
