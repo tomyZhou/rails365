@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe '登录和注册功能', type: :feature do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { create(:user) }
 
   before do
     allow_any_instance_of(ActionController::Base).to receive(:verify_rucaptcha?).and_return(true)
@@ -36,6 +36,7 @@ describe '登录和注册功能', type: :feature do
       end
       click_button '登录'
       expect(page).to have_content '登录成功'
+      expect(page).to have_link('注销')
       expect(page).to have_current_path(root_path)
     end
 
