@@ -7,12 +7,10 @@ describe '登录和注册功能', type: :feature do
     allow_any_instance_of(ActionController::Base).to receive(:verify_rucaptcha?).and_return(true)
   end
 
-  subject { page }
-
   describe '登录页面' do
     before { visit new_user_session_path }
 
-    it { should have_selector('h1', text: '登录') }
+    it { expect(page).to have_selector('h1', text: '登录') }
 
     it '没有填任何信息就点登录' do
       click_button '登录'
@@ -54,7 +52,7 @@ describe '登录和注册功能', type: :feature do
   describe '注册页面' do
     before { visit new_user_registration_path }
 
-    it { should have_selector('h1', text: '注册') }
+    it { expect(page).to have_selector('h1', text: '注册') }
 
     it '没有填任何信息就点注册' do
       click_button '注册'

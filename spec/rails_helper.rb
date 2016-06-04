@@ -60,12 +60,18 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.include FactoryGirl::Syntax::Methods
+  config.include Warden::Test::Helpers
 
   config.before(:suite) do
+    Warden.test_mode!
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
     Article.reindex
     Rails.cache.clear
+  end
+
+  config.after :each do
+    Warden.test_reset!
   end
 
   config.around(:each) do |example|
