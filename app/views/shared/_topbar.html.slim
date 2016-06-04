@@ -30,8 +30,6 @@ nav.navbar.navbar-default
                 li
                   a href="/admin" 后台管理
               li
-                = link_to 'status', "/web/status"
-              li
                 = link_to '个人中心', user_path(current_user)
               li
                 = link_to('注销', destroy_user_session_path, :method => :delete)

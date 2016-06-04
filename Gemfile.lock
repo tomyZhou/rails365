@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/rails-engine/status-page.git
-  revision: adb5a81eeaa6e5a2f976e2655a9bbd424646c319
-  specs:
-    status-page (0.1.3)
-      rails (>= 4.2)
-
-GIT
   remote: git://github.com/smartinez87/exception_notification.git
   revision: ab4ff8ef5a99521a1207a63d9d4adb4aad7ba79e
   specs:
@@ -588,7 +581,6 @@ DEPENDENCIES
   spring
   spring-commands-cucumber
   spring-commands-rspec
-  status-page!
   tubesock
   typhoeus
   uglifier

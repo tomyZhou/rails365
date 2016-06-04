@@ -23,8 +23,6 @@ Rails.application.routes.draw do
 
   mount RuCaptcha::Engine => '/rucaptcha'
 
-  mount StatusPage::Engine, at: '/web'
-
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   get '/ws', to: 'websocket#ws'

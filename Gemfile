@@ -99,7 +99,6 @@ gem 'migration_data'
 # theme
 gem 'bootswatch-rails'
 
-gem 'status-page', github: 'rails-engine/status-page'
 gem 'faraday'
 
 # admin
