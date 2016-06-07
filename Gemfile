@@ -66,7 +66,7 @@ gem 'codecov', require: false, group: :test
 
 group :development do
   gem 'guard'
-  gem 'guard-rspec'
+  gem 'guard-rspec', require: false
   gem 'guard-bundler', require: false
   gem 'guard-cucumber'
   gem 'quiet_assets'
