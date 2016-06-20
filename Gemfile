@@ -80,6 +80,7 @@ group :development do
   gem 'capistrano3-puma'
   gem 'capistrano-faster-assets'
   gem 'capistrano-rails-console'
+  gem "capistrano-db-tasks", require: false
 end
 
 gem 'sinatra', require: nil
