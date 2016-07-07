@@ -313,6 +313,8 @@ GEM
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.4)
+    rack-attack (4.4.1)
+      rack
     rack-mini-profiler (0.10.1)
       rack (>= 1.2.0)
     rack-pjax (0.8.0)
@@ -562,6 +564,7 @@ DEPENDENCIES
   pry
   puma
   quiet_assets
+  rack-attack
   rack-mini-profiler
   rails (= 4.2.3)
   rails-i18n

@@ -120,3 +120,5 @@ gem 'searchkick'
 gem 'typhoeus'
 
 gem 'puma'
+
+gem 'rack-attack'
