@@ -27,8 +27,12 @@ module ExceptionNotifier
       message += "*Time:* #{Time.zone.now.strftime('%Y-%m-%d %H:%M:%S')}\n"
       message += "*Exception:* `#{exception.message}`\n"
 
+      remote_ip = ''
+
       unless env.nil?
         request = ActionDispatch::Request.new(env)
+
+        remote_ip = request.remote_ip
 
         request_items = { url: request.original_url,
                           http_method: request.method,
@@ -48,11 +52,16 @@ module ExceptionNotifier
       message += "`#{exception.backtrace.first}`"
 
       if Rails.env.production?
-        Admin::ExceptionLog.delay.create(title: @title, body: body.join("\n"), message: message, request_url: title)
+        Admin::ExceptionLog.delay.create(title: @title,
+                                         body: body.join("\n"),
+                                         message: message,
+                                         remote_ip: remote_ip,
+                                         request_url: title)
       else
         Rails.logger.info "\n exception begin======================"
         Rails.logger.info "title: #{title}"
         Rails.logger.info "message: #{message}"
+        Rails.logger.info "remote_ip: #{remote_ip}"
         Rails.logger.info body.join("\n")
         Rails.logger.info "======================exception end\n"
       end
