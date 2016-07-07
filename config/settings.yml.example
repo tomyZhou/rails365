@@ -5,7 +5,7 @@ aliyun_access_id: 'your access id'
 aliyun_access_key: 'your access key'
 aliyun_bucket: 'your bucket name'
 aliyun_area: "cn-shenzhen"
-aliyun_host: "http://aliyun.rails365.net"
+aliyun_host: "https://rails365.oss-cn-shenzhen.aliyuncs.com"
 
 # openapm
 oneapm_license_key: "your oneapm license key"
@@ -24,3 +24,6 @@ admin_emails: [ "hfpp2012@aliyun.com", "admin@rails365.com" ]
 # github登录
 github_appkey: '36a5e30aefd2e87714d0'
 github_secret: "f098bcc5302f18d0cf243cc50c8a49133949bc60"
+
+# ws protocol
+ws_protocol: 'ws'

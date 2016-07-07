@@ -19,7 +19,7 @@ jQuery ->
   $("img.lazy").lazyload()
 
 $ ->
-  socket = new WebSocket "wss://#{window.location.host}/ws/"
+  socket = new WebSocket "<%= Settings.ws_protocol %>://#{window.location.host}/ws/"
 
   socket.onmessage = (event) ->
     if event.data.length
