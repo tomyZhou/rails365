@@ -36,7 +36,7 @@ describe Ability, type: :model do
       it { is_expected.not_to be_able_to(:destroy, Group) }
     end
   end
-  
+
   context 'Guest user' do
     let(:ability) { Ability.new(nil) }
 
@@ -46,7 +46,7 @@ describe Ability, type: :model do
       it { is_expected.not_to be_able_to(:update, Article) }
       it { is_expected.not_to be_able_to(:destroy, Article) }
     end
-    
+
     context 'Group' do
       it { is_expected.to be_able_to(:read, Group) }
       it { is_expected.not_to be_able_to(:create, Group) }
