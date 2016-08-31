@@ -42,10 +42,10 @@ module Rails365
     config.exceptions_app = self.routes
     config.cache_store = :redis_store, { host: '127.0.0.1', port: 6379, namespace: 'rails365', driver: :hiredis }
     config.identity_cache_store = :redis_store, { host: '127.0.0.1', port: 6379, namespace: 'rails365_cache', driver: :hiredis }
-    config.middleware.delete 'Rack::ConditionalGet'
-    config.middleware.delete 'Rack::ETag'
-    config.middleware.delete 'Rack::Runtime'
-    config.middleware.delete 'Rack::Sendfile'
+    # config.middleware.delete 'Rack::ConditionalGet'
+    # config.middleware.delete 'Rack::ETag'
+    # config.middleware.delete 'Rack::Runtime'
+    # config.middleware.delete 'Rack::Sendfile'
     config.middleware.use Rack::Attack
   end
 end
