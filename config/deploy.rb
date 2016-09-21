@@ -4,7 +4,7 @@ lock '3.5.0'
 set :application, 'rails365'
 set :repo_url, 'git@github.com:yinsigan/rails365.git'
 set :branch, 'master'
-set :deploy_to, "/home/yinsigan/#{fetch(:application)}"
+set :deploy_to, "/home/hfpp2012/#{fetch(:application)}"
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/settings.yml')
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'pids', 'tmp/sockets')
 
