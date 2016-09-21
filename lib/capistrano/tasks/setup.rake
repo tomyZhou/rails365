@@ -7,6 +7,19 @@ namespace :logs do
   end
 end
 
+namespace :setup do
+  desc "Create the database."
+  task :create_db do
+    on roles(:app) do
+      within "#{current_path}" do
+        with rails_env: :production do
+          execute :rake, "db:create"
+        end
+      end
+    end
+  end
+end
+
 namespace :load do
   task :defaults do
     load 'capistrano/defaults.rb'
