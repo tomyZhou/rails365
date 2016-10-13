@@ -34,7 +34,6 @@ gem 'kaminari-i18n'
 gem 'awesome_print'
 
 # monitor
-gem 'oneapm_rpm'
 gem 'rack-mini-profiler', require: false
 
 # background

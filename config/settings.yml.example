@@ -7,9 +7,6 @@ aliyun_bucket: 'your bucket name'
 aliyun_area: "cn-shenzhen"
 aliyun_host: "https://rails365.oss-cn-shenzhen.aliyuncs.com"
 
-# openapm
-oneapm_license_key: "your oneapm license key"
-
 # sidekiq
 sidekiq_namespace: "sidekiq"
 
