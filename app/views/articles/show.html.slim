@@ -22,6 +22,16 @@
         div 扫一扫分享到微信
       .panel-body
         #qrcode
+    .panel.panel-default
+      .panel-heading
+        div 微信扫一扫打赏
+      .panel-body
+        = image_tag "wechat_money.jpg", width: 240
+    .panel.panel-default
+      .panel-heading
+        div 支付宝扫一扫打赏
+      .panel-body
+        = image_tag "alipay_money.jpg", width: 240
     - cache @recommend_articles do
       .panel.panel-default
         .panel-heading
