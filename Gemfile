@@ -71,7 +71,7 @@ group :development do
   gem 'quiet_assets'
   gem 'pry'
   gem 'web-console'
-  gem 'capistrano'
+  gem 'capistrano', '~> 3.5.0'
   gem 'capistrano-rbenv'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
