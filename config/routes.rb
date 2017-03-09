@@ -21,8 +21,6 @@ Rails.application.routes.draw do
     mount PgHero::Engine, at: 'pghero'
   end
 
-  mount RuCaptcha::Engine => '/rucaptcha'
-
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   get '/ws', to: 'websocket#ws'
