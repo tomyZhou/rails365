@@ -121,3 +121,5 @@ gem 'typhoeus'
 gem 'puma'
 
 gem 'rack-attack'
+
+gem 'auto-correct'

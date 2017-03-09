@@ -50,6 +50,12 @@ class Article < ActiveRecord::Base
   after_update :clear_after_updated_cache
   after_create :publish_create
 
+  before_save do
+    # 引发 ActiveModel::Dirty 的 change
+    self.title_will_change!
+    self.title.auto_correct!
+  end
+
   private
 
   def publish_create

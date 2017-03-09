@@ -62,6 +62,8 @@ GEM
       activerecord (>= 3.0, < 5.0)
     arel (6.0.4)
     ast (2.3.0)
+    auto-correct (0.1.0.pre0)
+      activesupport (> 3.0.0)
     autoprefixer-rails (6.7.6)
       execjs
     awesome_print (1.7.0)
@@ -512,6 +514,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  auto-correct
   awesome_print
   babosa
   bootstrap-sass
