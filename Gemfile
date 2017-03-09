@@ -89,7 +89,7 @@ gem 'pghero'
 gem 'devise'
 gem 'cancancan'
 gem 'rails-timeago'
-gem 'rucaptcha'
+gem 'rucaptcha', '~> 2.1.0'
 gem 'devise-async'
 gem 'omniauth-github'
 

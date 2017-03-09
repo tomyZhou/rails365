@@ -426,7 +426,7 @@ GEM
       rmmseg-cpp-new (~> 0.3.1)
     ruby-progressbar (1.8.1)
     ruby_dep (1.5.0)
-    rucaptcha (2.0.3)
+    rucaptcha (2.1.0)
       railties (>= 3.2)
     sass (3.4.23)
     sass-rails (5.0.6)
@@ -573,7 +573,7 @@ DEPENDENCIES
   rspec-rails (~> 3.4)
   rubocop
   ruby-pinyin
-  rucaptcha
+  rucaptcha (~> 2.1.0)
   sass-rails
   sdoc
   searchkick
