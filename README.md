@@ -1,6 +1,6 @@
 ## rails365
 
-分享文章和视频 http://www.rails365.net
+分享文章和视频 https://www.rails365.net
 
 This is the source code of rails365.net website.
 
