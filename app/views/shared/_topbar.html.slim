@@ -22,6 +22,8 @@ nav.navbar.navbar-default
           a href='https://chat.rails365.net' target='_blank' 聊天室
         li
           a href='https://file.rails365.net' target='_blank' 私有云
+        li
+          a href='https://nextcloud.rails365.net' target='_blank' nextcloud
       = form_tag "/articles", method: "get", class: "navbar-form navbar-left", role: "search"
         .form-group
           input.form-control placeholder="搜索标题或内容" type="text" name="search" value="#{params[:search].presence}"/
