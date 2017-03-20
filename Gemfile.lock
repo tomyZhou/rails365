@@ -1,5 +1,5 @@
 GIT
-  remote: https://github.com/smartinez87/exception_notification.git
+  remote: https://github.com/smartinez87/exception_notification
   revision: c3efe73c18418a266e820fc1578f1f241d40207c
   specs:
     exception_notification (4.2.1)
@@ -7,7 +7,7 @@ GIT
       activesupport (>= 4.0, < 6)
 
 GIT
-  remote: https://github.com/stanhu/rouge.git
+  remote: https://github.com/stanhu/rouge
   revision: fafe6c111b7273b733908cc73e1ede43a94d5ce2
   specs:
     rouge (1.8.0)

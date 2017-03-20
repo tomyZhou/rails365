@@ -18,7 +18,7 @@ gem 'slim-rails'
 
 # markdown
 gem 'redcarpet'
-gem 'rouge', github: 'stanhu/rouge'
+gem 'rouge', git: 'https://github.com/stanhu/rouge'
 
 # configuration
 gem 'config'
@@ -40,7 +40,7 @@ gem 'rack-mini-profiler', require: false
 gem 'sidekiq'
 
 # notification
-gem 'exception_notification', github: 'smartinez87/exception_notification'
+gem 'exception_notification', git: 'https://github.com/smartinez87/exception_notification'
 
 # friendly url
 gem 'friendly_id'
