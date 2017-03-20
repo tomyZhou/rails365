@@ -1,13 +1,13 @@
 GIT
-  remote: git://github.com/smartinez87/exception_notification.git
-  revision: 3b3ee06b0ea48a504f5d8be2dcfd6ce8de9dc2a8
+  remote: https://github.com/smartinez87/exception_notification.git
+  revision: c3efe73c18418a266e820fc1578f1f241d40207c
   specs:
     exception_notification (4.2.1)
       actionmailer (>= 4.0, < 6)
       activesupport (>= 4.0, < 6)
 
 GIT
-  remote: git://github.com/stanhu/rouge.git
+  remote: https://github.com/stanhu/rouge.git
   revision: fafe6c111b7273b733908cc73e1ede43a94d5ce2
   specs:
     rouge (1.8.0)

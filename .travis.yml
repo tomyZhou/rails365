@@ -13,6 +13,9 @@ services:
 rvm:
   - 2.3.0
 
+before_install:
+  - "bundle config --global github.https true"
+
 before_script:
   - psql -c "CREATE USER \"macintosh1\" WITH CREATEDB PASSWORD '12345678';" -U postgres
   - psql -c "create database \"rails365_test\" WITH OWNER=\"macintosh1\";" -U postgres
