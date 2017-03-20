@@ -123,3 +123,4 @@ gem 'puma'
 gem 'rack-attack'
 
 gem 'auto-correct'
+gem 'dalli'

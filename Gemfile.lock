@@ -154,6 +154,7 @@ GEM
       nokogiri (~> 1.5)
       railties (>= 3, < 5.1)
     cucumber-wire (0.0.1)
+    dalli (2.7.6)
     database_cleaner (1.5.3)
     debug_inspector (0.0.2)
     deep_merge (1.1.1)
@@ -537,6 +538,7 @@ DEPENDENCIES
   coffee-rails
   config
   cucumber-rails
+  dalli
   database_cleaner
   devise
   devise-async
