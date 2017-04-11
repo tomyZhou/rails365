@@ -3,7 +3,7 @@
 
 - if can? :create, Article
   .text-right
-    = link_to "添加新文章", new_article_path, class: 'btn btn-default'
+    = link_to "添加新文章", new_article_path, class: 'btn btn-primary'
 - cache @articles do
   - if params[:search].present?
     div.search-hight-light
