@@ -1,5 +1,5 @@
 .page-header
-  h2.text-primary 所有文章(#{@articles.total_count})
+  h3.text-primary 所有文章(#{@articles.total_count})
 
 - if can? :create, Article
   .text-right
@@ -9,9 +9,9 @@
     div.search-hight-light
       - @articles.with_details.each do |article, details|
         - if details[:highlight][:title].present?
-          h4 = link_to details[:highlight][:title].html_safe, article
+          h2.article-title = link_to details[:highlight][:title].html_safe, article
         - else
-          h4 = link_to article.title, article
+          h2.article-title = link_to article.title, article
         = link_to article_url(article), article, class: "text-info"
         - if details[:highlight][:body].present?
           p
@@ -26,11 +26,14 @@
 
   - else
     - @articles.each do |article|
-      h3 = link_to article.title, article
-      p.text-right.hidden-xs
+      h2.article-title = link_to article.title, article
+      p.text-left.hidden-xs.article-desc
         - if article.group
-          span.label.label-primary.mr5 = article.group.name
+          = link_to group_path(article.group) do
+            span.mr5 = article.group.name
         span.text-muted
-          | 由#{article.user.try(:login)}*创建于
+          | 由 
+          = link_to article.user.try(:login), user_path(article.user)
+          |  创建于
           = custom_timeago_tag article.created_at
     = paginate @articles

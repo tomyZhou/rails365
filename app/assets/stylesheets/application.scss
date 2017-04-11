@@ -161,3 +161,28 @@ pre.highlight {
     overflow-x: auto;
   }
 }
+
+h2.article-title {
+  word-wrap: break-word;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 500;
+  a {
+    &:hover {
+      text-decoration: none;
+      color: #23527c;
+    }
+  }
+}
+
+p.article-desc {
+  font-size: 85%;
+  color: #777;
+  font-weight: 400;
+  a {
+    &:hover {
+      text-decoration: none;
+      color: #23527c;
+    }
+  }
+}
