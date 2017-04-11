@@ -33,7 +33,7 @@
         .panel-body
           - @recommend_articles.each do |recommend_article|
             - unless recommend_article.id == @article.id
-              p.home-p = link_to recommend_article.title, recommend_article
+              p.home-p.box-article = link_to recommend_article.title, recommend_article
 
 javascript:
   $(document).ready(function() {

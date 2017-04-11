@@ -244,3 +244,9 @@ a {
   margin-bottom: 0;
   margin-bottom: -20px;
 }
+
+.box-article {
+  &:last-child {
+    margin-bottom: 5px;
+  }
+}
