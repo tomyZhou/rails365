@@ -263,6 +263,10 @@ GEM
     lumberjack (1.0.11)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
+    md_simple_editor (0.3.0)
+      bootstrap-sass (~> 3.3.7)
+      font-awesome-rails
+      redcarpet (~> 3.4)
     method_source (0.8.2)
     migration_data (0.3.0)
     mime-types (3.1)
@@ -561,6 +565,7 @@ DEPENDENCIES
   kaminari
   kaminari-i18n
   letter_avatar
+  md_simple_editor
   migration_data
   mini_magick
   omniauth-github

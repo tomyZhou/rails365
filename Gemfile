@@ -127,3 +127,6 @@ gem 'dalli'
 
 gem 'letter_avatar'
 gem 'chinese_pinyin'
+
+# markdown editor
+gem 'md_simple_editor'
