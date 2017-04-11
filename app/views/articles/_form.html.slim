@@ -8,7 +8,7 @@
         = file_field_tag "image", class: "form-control", rows: 20
       .text-right
         span.glyphicon.glyphicon-picture#image-upload
-  = f.text_area :body, class: "form-control", rows: 20, required: true, "data-provide": "markdown"
+  = f.text_area :body, class: "form-control", rows: 20, required: true
   = f.select :group_id, Group.all.collect { |p| [ p.name, p.id ] }, include_blank: false
   - if @article.new_record?
     = f.hidden_field :user_id, value: current_user.id
@@ -18,6 +18,10 @@
 
 coffee:
   jQuery ->
+    $("#article_body").markdown
+      autofocus: false
+      savable: false
+      language: "zh"
     FormStorage.init()
     FormStorage.restore()
     $("#image-upload").on 'click', ->
