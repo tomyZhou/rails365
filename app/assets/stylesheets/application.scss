@@ -149,3 +149,15 @@ $c9:#999;
 .article_content p {
   line-height: 25px;
 }
+
+pre.highlight {
+  @media (max-width: 768px) {
+    max-height: 250px;
+  }
+  code {
+    white-space: pre;
+    word-wrap: normal;
+    min-width: 100%;
+    overflow-x: auto;
+  }
+}

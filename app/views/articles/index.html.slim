@@ -16,7 +16,7 @@
         - if details[:highlight][:body].present?
           p
             = details[:highlight][:body].html_safe
-        p.text-right
+        p.text-right.hidden-xs
           - if article.group
             span.label.label-primary.mr5 = article.group.name
           span.text-muted
@@ -27,7 +27,7 @@
   - else
     - @articles.each do |article|
       h3 = link_to article.title, article
-      p.text-right
+      p.text-right.hidden-xs
         - if article.group
           span.label.label-primary.mr5 = article.group.name
         span.text-muted
