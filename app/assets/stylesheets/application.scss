@@ -4,7 +4,7 @@ $navbar-border-radius: none;
 @import "bootstrap";
 @import "rouge";
 @import "fluidbox.min";
-@import "md_simple_editor";
+@import "bootstrap-markdown";
 
 $c3:#333;
 $c6:#666;
@@ -237,12 +237,6 @@ a {
   &:hover {
     text-decoration: none;
   }
-}
-
-.btn-toolbar {
-  margin-left: 16.66666667%;
-  margin-bottom: 0;
-  margin-bottom: -20px;
 }
 
 .box-article {

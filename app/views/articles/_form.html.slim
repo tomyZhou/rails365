@@ -8,8 +8,7 @@
         = file_field_tag "image", class: "form-control", rows: 20
       .text-right
         span.glyphicon.glyphicon-picture#image-upload
-  = md_simple_editor('btn-xs')  do
-    = f.text_area :body, class: "form-control", rows: 20, required: true
+  = f.text_area :body, class: "form-control", rows: 20, required: true, "data-provide": "markdown"
   = f.select :group_id, Group.all.collect { |p| [ p.name, p.id ] }, include_blank: false
   - if @article.new_record?
     = f.hidden_field :user_id, value: current_user.id
