@@ -178,6 +178,7 @@ h2.article-title {
   font-size: 18px;
   line-height: 22px;
   font-weight: 500;
+  margin-top: 10px;
   a {
     &:hover {
       text-decoration: none;
@@ -207,4 +208,12 @@ footer li {
 footer p {
   clear: left;
   margin-bottom: 0;
+}
+
+.avatar-image {
+  display: inline-block;
+  margin-right: 15px;
+  img {
+    border-radius: 50%;
+  }
 }

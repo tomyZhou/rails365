@@ -6,7 +6,7 @@ set :repo_url, 'git@github.com:yinsigan/rails365.git'
 set :branch, 'master'
 set :deploy_to, "/home/hfpp2012/#{fetch(:application)}"
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/settings.yml')
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'pids', 'tmp/sockets')
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'pids', 'tmp/sockets', 'public/system')
 
 set :rbenv_type, :user # or :system, depends on your rbenv setup
 set :rbenv_ruby, '2.3.0'

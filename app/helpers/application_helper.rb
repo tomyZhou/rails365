@@ -1,4 +1,5 @@
 module ApplicationHelper
+  include LetterAvatar::AvatarHelper
   def markdown(text)
     MyMarkdown.render(text)
   end

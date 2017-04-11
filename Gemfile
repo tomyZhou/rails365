@@ -124,3 +124,6 @@ gem 'rack-attack'
 
 gem 'auto-correct'
 gem 'dalli'
+
+gem 'letter_avatar'
+gem 'chinese_pinyin'

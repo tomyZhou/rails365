@@ -19,6 +19,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def letter_avatar_url(size)
+    LetterAvatar.generate(Pinyin.t(self.username), size).sub('public/', '/')
+  end
+
   def validate_username
     if User.where(email: username).exists?
       errors.add(:username, :invalid)

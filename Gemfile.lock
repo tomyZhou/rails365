@@ -119,6 +119,7 @@ GEM
     carrierwave-aliyun (0.8.1)
       aliyun-oss-sdk (>= 0.1.6)
       carrierwave (>= 0.5.7)
+    chinese_pinyin (1.0.1)
     cityhash (0.8.1)
     codecov (0.1.10)
       json
@@ -252,6 +253,7 @@ GEM
     kaminari-i18n (0.4.0)
       kaminari
       rails
+    letter_avatar (0.3.5)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -533,6 +535,7 @@ DEPENDENCIES
   capybara
   carrierwave
   carrierwave-aliyun
+  chinese_pinyin
   cityhash
   codecov
   coffee-rails
@@ -557,6 +560,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   kaminari-i18n
+  letter_avatar
   migration_data
   mini_magick
   omniauth-github
