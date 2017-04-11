@@ -13,11 +13,10 @@ class Article < ActiveRecord::Base
   scope :except_body_with_default, -> { select(:title, :created_at, :updated_at, :group_id, :slug, :id, :user_id).includes(:group) }
 
   def self.cached_recommend_articles(article)
-    # group_name = article.group.name || 'ruby'
-    # Rails.cache.fetch [:slug, 'recommend_articles', group_name] do
-    #   Article.except_body_with_default.search(group_name, limit: 11).to_a
-    # end
-    Article.limit 7
+    group_name = article.group.name || 'ruby'
+    Rails.cache.fetch [:slug, 'recommend_articles', group_name] do
+      Article.except_body_with_default.search(group_name, limit: 11).to_a
+    end
   end
 
   def self.async_create(user_id, article_params)
