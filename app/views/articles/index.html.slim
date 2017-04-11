@@ -8,21 +8,23 @@
   - if params[:search].present?
     div.search-hight-light
       - @articles.with_details.each do |article, details|
-        - if details[:highlight][:title].present?
-          h2.article-title = link_to details[:highlight][:title].html_safe, article
-        - else
-          h2.article-title = link_to article.title, article
-        = link_to article_url(article), article, class: "text-info"
-        - if details[:highlight][:body].present?
-          p
-            = details[:highlight][:body].html_safe
-        p.text-right.hidden-xs
-          - if article.group
-            = link_to group_path(article.group) do
-              span.mr5 = article.group.name
-          span.text-muted
-            | 由 #{link_to article.user.try(:login), user_path(article.user)} 发表于
-            = custom_timeago_tag article.created_at
+        div.mr40
+          - if details[:highlight][:title].present?
+            h2.article-title = link_to details[:highlight][:title].html_safe, article
+          - else
+            h2.article-title = link_to article.title, article
+          p.mb10
+            = link_to article_url(article), article, class: "text-info"
+          - if details[:highlight][:body].present?
+            p
+              = details[:highlight][:body].html_safe
+          p.text-left.hidden-xs.article-desc
+            - if article.group
+              = link_to group_path(article.group) do
+                span.mr5 = article.group.name
+            span
+              | 由 #{link_to article.user.try(:login), user_path(article.user)} 发表于
+              = custom_timeago_tag article.created_at
     div.text-center
       = paginate @articles
 
