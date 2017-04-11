@@ -29,17 +29,5 @@
 
   - else
     - @articles.each do |article|
-      div.mr40.clearfix
-        div.pull-left.avatar-image
-          = image_tag article.user.letter_avatar_url(65)
-        h2.article-title = link_to article.title, article
-        p.text-left.hidden-xs.article-desc
-          span.text-muted
-            - if article.group
-              = link_to group_path(article.group) do
-                span.mr5 = article.group.name
-            | 由 
-            = link_to article.user.try(:login), user_path(article.user)
-            |  创建于
-            = custom_timeago_tag article.created_at
+      = render partial: 'article', locals: { article: article }
     = render 'paginate'

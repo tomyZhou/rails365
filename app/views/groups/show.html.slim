@@ -1,14 +1,9 @@
 .page-header
-  h3
+  h3.text-primary
     = @group.name
     | (#{@group.articles_count})
 
 - cache @articles do
   - @articles.each do |article|
-    div.mr40
-      h2.article-title = link_to article.title, article
-      p.text-left.hidden-xs.article-desc
-        | 由 
-        = link_to article.user.try(:login), user_path(article.user)
-        |&nbsp;创建于
-        = custom_timeago_tag article.created_at
+    = render partial: 'articles/article', locals: { article: article }
+
