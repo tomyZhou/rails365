@@ -8,7 +8,7 @@
               = image_tag "weixin.jpg", width: "120px", height: "120px"
         - cache @sites do
           - @sites.in_groups_of(3).transpose.each do |site_group|
-            .col-md-3
+            .col-md-3.col-xs-6
               ul.nav.nav-pills.nav-stacked
                 - site_group.each do |site|
                   - if site.present?
