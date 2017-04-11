@@ -149,6 +149,10 @@ $c9:#999;
   margin-right: 5px;
 }
 
+.pb0 {
+  padding-bottom: 0;
+}
+
 .article_content p {
   line-height: 25px;
 }
@@ -215,5 +219,21 @@ footer p {
   margin-right: 15px;
   img {
     border-radius: 50%;
+  }
+}
+
+.radis50 {
+  border-radius: 50%;
+}
+
+.text-muted {
+  a {
+    color: #808080;
+  }
+}
+
+a {
+  &:hover {
+    text-decoration: none;
   }
 }
