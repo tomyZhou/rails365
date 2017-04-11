@@ -1,11 +1,14 @@
 .page-header
-  h2
+  h3
     = @group.name
     | (#{@group.articles_count})
 
 - cache @articles do
   - @articles.each do |article|
-    h3 = link_to article.title, article
-    p.text-muted.pull-right
-      | 由*#{article.user.try(:login)}*创建于
-      = custom_timeago_tag article.created_at
+    div.mr40
+      h2.article-title = link_to article.title, article
+      p.text-left.hidden-xs.article-desc
+        | 由 
+        = link_to article.user.try(:login), user_path(article.user)
+        |&nbsp;创建于
+        = custom_timeago_tag article.created_at

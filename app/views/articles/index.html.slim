@@ -26,14 +26,16 @@
 
   - else
     - @articles.each do |article|
-      h2.article-title = link_to article.title, article
-      p.text-left.hidden-xs.article-desc
-        - if article.group
-          = link_to group_path(article.group) do
-            span.mr5 = article.group.name
-        span.text-muted
-          | 由 
-          = link_to article.user.try(:login), user_path(article.user)
-          |  创建于
-          = custom_timeago_tag article.created_at
-    = paginate @articles
+      div.mr40
+        h2.article-title = link_to article.title, article
+        p.text-left.hidden-xs.article-desc
+          - if article.group
+            = link_to group_path(article.group) do
+              span.mr5 = article.group.name
+          span.text-muted
+            | 由 
+            = link_to article.user.try(:login), user_path(article.user)
+            |  创建于
+            = custom_timeago_tag article.created_at
+    div.text-center
+      = paginate @articles

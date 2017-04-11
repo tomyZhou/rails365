@@ -12,7 +12,7 @@
           div 最近的文章
         .panel-body
           - @articles.each do |article|
-            p.clearfix
+            p.clearfix.home-p
               span.pull-right = custom_timeago_tag article.created_at
               = link_to article.title, article_path(article)
   - cache @hot_articles do
@@ -22,7 +22,7 @@
           div 最热门的文章
         .panel-body
           - @hot_articles.each do |article|
-            p.clearfix
+            p.clearfix.home-p
               = link_to article.title, article_path(article)
 
 - cache @groups do
