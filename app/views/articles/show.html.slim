@@ -1,16 +1,19 @@
 - cache [@article, current_user] do
   .page-header
-    h2 = @article.title
+    h4 = @article.title
+    div.text-right
+      - if can? :update, @article
+        = link_to "编辑", edit_article_path(@article)
   .row
     .col-md-12.block-margin
       .text-right
-        span.label.label-primary.mr5 = @article.group.try(:name)
-        | 由#{link_to @article.user.try(:login), user_path(@article.user)}发表于
+        = link_to group_path(@article.group) do
+          span.mr5 = @article.group.try(:name)
+        | 由 #{link_to @article.user.try(:login), user_path(@article.user)} 发表于
         = custom_timeago_tag @article.created_at
-        | *编辑于
+        |  编辑于
         = custom_timeago_tag @article.updated_at
-        - if can? :update, @article
-          = link_to "编辑", edit_article_path(@article)
+
 .row
   .col-md-8
     .article_content
@@ -29,7 +32,7 @@
         .panel-body
           - @recommend_articles.each do |recommend_article|
             - unless recommend_article.id == @article.id
-              p = link_to recommend_article.title, recommend_article
+              p.home-p = link_to recommend_article.title, recommend_article
 
 javascript:
   $(document).ready(function() {
