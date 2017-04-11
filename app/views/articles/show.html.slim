@@ -1,18 +1,19 @@
 - cache [@article, current_user] do
   .page-header
     h4 = @article.title
-    div.text-right
-      - if can? :update, @article
-        = link_to "编辑", edit_article_path(@article)
-  .row
-    .col-md-12.block-margin
-      .text-right
+    p.text-right.article-desc
         = link_to group_path(@article.group) do
           span.mr5 = @article.group.try(:name)
         | 由 #{link_to @article.user.try(:login), user_path(@article.user)} 发表于
         = custom_timeago_tag @article.created_at
         |  编辑于
         = custom_timeago_tag @article.updated_at
+
+.row.block-margin
+  .col-md-12
+    div.text-right
+      - if can? :update, @article
+        = link_to "编辑", edit_article_path(@article), class: 'btn btn-default btn-sm'
 
 .row
   .col-md-8

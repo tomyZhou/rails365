@@ -3,7 +3,7 @@
 
 - if can? :create, Article
   .text-right
-    = link_to "添加新文章", new_article_path
+    = link_to "添加新文章", new_article_path, class: 'btn btn-default'
 - cache @articles do
   - if params[:search].present?
     div.search-hight-light
@@ -25,8 +25,7 @@
             span
               | 由 #{link_to article.user.try(:login), user_path(article.user)} 发表于
               = custom_timeago_tag article.created_at
-    div.text-center
-      = paginate @articles
+    = render 'paginate'
 
   - else
     - @articles.each do |article|
@@ -41,5 +40,4 @@
             = link_to article.user.try(:login), user_path(article.user)
             |  创建于
             = custom_timeago_tag article.created_at
-    div.text-center
-      = paginate @articles
+    = render 'paginate'

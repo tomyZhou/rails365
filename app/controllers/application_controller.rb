@@ -30,4 +30,11 @@ class ApplicationController < ActionController::Base
     flash[:warning] = exception.message
     redirect_to '/'
   end
+
+  private
+  def mobile_device?
+    request.user_agent =~ /Mobile|webOS/
+    # request.user_agent =~ /Mobile|Blackberry|Android/ # OR WHATEVER
+  end
+  helper_method :mobile_device?
 end
