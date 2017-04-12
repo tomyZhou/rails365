@@ -10,19 +10,19 @@
       - @articles.with_details.each do |article, details|
         div.mr40
           - if details[:highlight][:title].present?
-            h2.article-title = link_to details[:highlight][:title].html_safe, article
+            h4 = link_to details[:highlight][:title].html_safe, article
           - else
-            h2.article-title = link_to article.title, article
+            h4 = link_to article.title, article
           p.mb10
             = link_to article_url(article), article, class: "text-info"
           - if details[:highlight][:body].present?
             p
               = details[:highlight][:body].html_safe
           p.text-left.hidden-xs.article-desc
-            - if article.group
-              = link_to group_path(article.group) do
-                span.mr5 = article.group.name
             span.text-muted
+              - if article.group
+                = link_to group_path(article.group) do
+                  span.mr5 = article.group.name
               | 由 #{link_to article.user.try(:login), user_path(article.user)} 发表于
               = custom_timeago_tag article.created_at
     = render 'paginate'
