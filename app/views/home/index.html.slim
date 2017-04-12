@@ -6,14 +6,6 @@
           = @site_info_home_desc
 
 .row
-  .col-md-12
-    .panel.panel-default
-      .panel-body
-        .text-center
-          = image_tag "weixin.jpg", width: "120px", height: "120px"
-        .text-center.text-primary 官方二维码
-
-.row
   - cache @articles do
     .col-md-6
       .panel.panel-default
@@ -47,3 +39,5 @@
                     = link_to group do
                       img data-original=group.image_url(:group).to_s width="120px" height="120px" alt="#{group.name}" class="lazy radis50"
                       p.text-center.header-group.text-primary #{group.name}(#{group.articles_count})
+
+= render 'shared/qrcode'
