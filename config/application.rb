@@ -46,6 +46,6 @@ module Rails365
     # config.middleware.delete 'Rack::ETag'
     # config.middleware.delete 'Rack::Runtime'
     # config.middleware.delete 'Rack::Sendfile'
-    config.middleware.use Rack::Attack
+    # config.middleware.use Rack::Attack
   end
 end

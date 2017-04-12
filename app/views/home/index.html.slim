@@ -21,7 +21,7 @@
           div 最近的文章
         .panel-body.pb0
           - @articles.each do |article|
-            = render partial: 'article', locals: { article: article }
+            = render partial: 'articles/article', locals: { article: article }
 
   - cache @hot_articles do
     .col-md-6
@@ -30,7 +30,7 @@
           div 最热门的文章
         .panel-body.pb0
           - @hot_articles.each do |article|
-            = render partial: 'article', locals: { article: article }
+            = render partial: 'articles/article', locals: { article: article }
 
 - cache @groups do
   .row
@@ -46,4 +46,4 @@
                   .col-sm-2.group-image.col-xs-6
                     = link_to group do
                       img data-original=group.image_url(:group).to_s width="120px" height="120px" alt="#{group.name}" class="lazy radis50"
-                      h1.text-center.header-group.text-primary #{group.name}(#{group.articles_count})
+                      p.text-center.header-group.text-primary #{group.name}(#{group.articles_count})

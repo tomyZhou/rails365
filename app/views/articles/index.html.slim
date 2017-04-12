@@ -1,5 +1,5 @@
 .page-header
-  h3.text-primary 所有文章(#{@articles.total_count})
+  h4.text-primary.title-header 所有文章(#{@articles.total_count})
 
 - if can? :create, Article
   .text-right
@@ -8,11 +8,11 @@
   - if params[:search].present?
     div.search-hight-light
       - @articles.with_details.each do |article, details|
-        div.mr40
+        div.mb20
           - if details[:highlight][:title].present?
-            h4 = link_to details[:highlight][:title].html_safe, article
+            p.article-title = link_to details[:highlight][:title].html_safe, article
           - else
-            h4 = link_to article.title, article
+            p.article-title = link_to article.title, article
           p.mb10
             = link_to article_url(article), article, class: "text-info"
           - if details[:highlight][:body].present?

@@ -124,8 +124,8 @@ $c9:#999;
   padding-top: 15px;
 }
 
-.mr40 {
-  margin-bottom: 40px;
+.mb20 {
+  margin-bottom: 20px;
 }
 
 .group-image {
@@ -139,7 +139,7 @@ $c9:#999;
 
 .header-group {
   margin: 0 0 10.5px;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .mr10 {
@@ -178,20 +178,12 @@ pre.highlight {
   }
 }
 
-h2.article-title {
-  word-wrap: break-word;
-  font-size: 18px;
-  line-height: 22px;
-  margin-top: 10px;
-  a {
-    &:hover {
-      text-decoration: none;
-      color: #e8092f;
-    }
-  }
+.article-title {
+  margin-top: 5px;
+  margin-bottom: 4px;
 }
 
-p.article-desc {
+.article-desc {
   font-size: 85%;
   color: #777;
   font-weight: 400;
@@ -242,4 +234,9 @@ a {
   &:last-child {
     margin-bottom: 5px;
   }
+}
+
+.title-header {
+  font-size: 15px;
+  font-weight: 400;
 }
