@@ -1,0 +1,6 @@
+- cache @apps do
+  .page-header
+    h4.text-primary.title-header 所有演示应用(#{@apps.count})
+
+  = render partial: 'app', locals: { apps: @apps }
+

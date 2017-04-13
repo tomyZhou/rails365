@@ -12,6 +12,10 @@ class HomeController < ApplicationController
       Group.all.to_a
     end
 
+    @apps = Rails.cache.fetch('apps', expires_in: 2.hours) do
+      App.all.to_a
+    end
+
     @site_info_home_desc = Admin::SiteInfo.fetch_by_key('home_desc').try(:value)
 
     respond_to do |format|

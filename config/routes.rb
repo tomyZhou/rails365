@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :articles
   resources :groups, only: [:index, :show]
+  resources :apps, only: [:index]
   resources :users, only: [:show]
 
   %w(404 422 500).each do |code|

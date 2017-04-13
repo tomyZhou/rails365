@@ -31,13 +31,16 @@
         .panel-heading
           div 所有的分类
         .panel-body.pb0
-          - @groups.in_groups_of(6) do |per_group|
-            .row
-              - per_group.each do |group|
-                - if group.present?
-                  .col-sm-2.group-image.col-xs-6
-                    = link_to group do
-                      img data-original=group.image_url(:group).to_s width="120px" height="120px" alt="#{group.name}" class="lazy radis50"
-                      p.text-center.header-group.text-primary #{group.name}(#{group.articles_count})
+          = render partial: 'groups/group', locals: { groups: @groups }
+
+
+- cache @apps do
+  .row
+    .col-md-12
+      .panel.panel-default
+        .panel-heading
+          div 所有的演示应用
+        .panel-body.pb0
+          = render partial: 'apps/app', locals: { apps: @apps }
 
 = render 'shared/qrcode'

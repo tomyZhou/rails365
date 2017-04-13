@@ -5,5 +5,22 @@ zh-CN:
         title: "标题"
         body: "内容"
         group_id: "分类"
+      group:
+        name: '名称'
+        image: '图片'
+      app:
+        name: '名称'
+        link_url: '链接'
+        image: '图片'
+      photo:
+        image: '图片'
+      admin/site:
+        name: '名称'
+        url: '链接'
     models:
       article: "文章"
+      app: '应用'
+      group: '分类'
+      photo: '图片'
+      admin/site: '友情链接'
+      admin/site_info: '站点信息'
