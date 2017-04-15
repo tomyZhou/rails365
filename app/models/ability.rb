@@ -24,5 +24,6 @@ class Ability
   def basic_read_only
     can :read, Article
     can :read, Group
+    can :read, App
   end
 end
