@@ -15,7 +15,7 @@ class Article < ActiveRecord::Base
   def self.cached_recommend_articles(article)
     group_name = article.group.name || 'ruby'
     Rails.cache.fetch [:slug, 'recommend_articles', group_name] do
-      Article.except_body_with_default.search(group_name, limit: 11).to_a
+      Article.except_body_with_default.search(group_name, limit: 11)
     end
   end
 
