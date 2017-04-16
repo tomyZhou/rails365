@@ -26,7 +26,7 @@ module Redcarpet
 
       def image(link, title, content)
         content &&= content + ' '
-        "<a href='#{link.sub('preview_', '')}' class='fluidbox-link'>" \
+        "<a href='#{link}' class='fluidbox-link'>" \
           "<img style='width: 100%;' src='#{content}#{link}' />" \
         "</a>"
       end
