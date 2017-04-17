@@ -10,6 +10,12 @@ class WebsocketController < ActionController::Base
         end
       end
 
+      tubesock.onmessage do |m|
+        # pub the message when we get one
+        # note: this echoes through the sub above
+        Redis.new.publish "ws", m
+      end
+
       tubesock.onclose do
         redis_thread.kill
       end

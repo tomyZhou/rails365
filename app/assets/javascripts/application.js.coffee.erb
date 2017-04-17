@@ -16,6 +16,7 @@
 #= require locales/jquery.timeago.zh-CN.js
 #= require bootstrap-markdown-bundle
 #= require locale/bootstrap-markdown.zh
+#= require toastr.min
 
 jQuery ->
   $("img.lazy").lazyload()
@@ -24,12 +25,10 @@ $ ->
   socket = new WebSocket "<%= Settings.ws_protocol %>://#{window.location.host}/ws/"
 
   socket.onmessage = (event) ->
+    toastr.options.closeDuration = 40000
+    toastr.remove()
     if event.data.length
-      new Notification "有消息拉！",
-        body: "#{event.data}"
-        icon: "http://www.rails365.net/favicon.ico"
-
-Notification.requestPermission()
+      toastr.success("#{event.data}", '有消息啦！')
 
 jQuery ->
   flash = [
