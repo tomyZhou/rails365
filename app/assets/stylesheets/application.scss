@@ -15,6 +15,10 @@ body {
   font-size: 14px;
 }
 
+.navbar-brand>img {
+  height: 100%;
+}
+
 .error-wrap{
   border-top: 1px solid #efefef;
   padding: 20px 0;
@@ -130,7 +134,6 @@ body {
 
 .header-group {
   margin: 0 0 10.5px;
-  font-size: 13px;
 }
 
 .mr10 {
