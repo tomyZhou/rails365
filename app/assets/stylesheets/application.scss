@@ -1,4 +1,5 @@
 $navbar-border-radius: none;
+$navbar-height: 48px;
 @import "bootstrap-sprockets";
 @import "bootswatch/simplex/variables";
 @import "bootstrap";
@@ -9,6 +10,10 @@ $navbar-border-radius: none;
 $c3:#333;
 $c6:#666;
 $c9:#999;
+
+body {
+  font-size: 14px;
+}
 
 .error-wrap{
   border-top: 1px solid #efefef;
