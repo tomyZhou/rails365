@@ -23,9 +23,9 @@
   .col-md-4
     .panel.panel-default.hidden-xs
       .panel-heading
-        div 扫一扫分享到微信
+        div 分享
       .panel-body
-        #qrcode
+        = social_share_button_tag(@article.title)
     - cache @recommend_articles do
       .panel.panel-default
         .panel-heading
