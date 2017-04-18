@@ -14,7 +14,7 @@
     = f.hidden_field :user_id, value: current_user.id
   - else
     = f.hidden_field :user_id, value: @article.user_id
-  = f.submit "保存", class: "btn btn-primary"
+  = f.submit "保存", class: "btn btn-primary", "data-disable-with" => '正在保存...'
 
 coffee:
   jQuery ->

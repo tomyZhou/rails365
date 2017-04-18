@@ -36,15 +36,12 @@ class ArticlesController < ApplicationController
 
     if @article.valid?
       CreateArticleWorker.perform_async(current_user.id, article_params)
-      head :ok, content_type: "text/html"
-    else
-      render :new
     end
   end
 
   def update
     UpdateArticleWorker.perform_async(params[:id], article_params)
-    head :ok, content_type: "text/html"
+    render 'create.js.erb'
   end
 
   def destroy
