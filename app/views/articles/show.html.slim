@@ -27,7 +27,7 @@
       .panel-body
         = social_share_button_tag(@article.title)
     - cache @recommend_articles do
-      .panel.panel-default
+      .panel.panel-default.hidden-xs
         .panel-heading
           div 相关推荐
         .panel-body
@@ -37,9 +37,5 @@
 
 javascript:
   $(document).ready(function() {
-    new QRCode(document.getElementById("qrcode"), {
-      text: "#{article_url(@article)}",
-      width: 128,
-      height: 128});
     $('a.fluidbox-link').fluidbox();
   });
