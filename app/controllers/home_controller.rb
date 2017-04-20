@@ -9,11 +9,11 @@ class HomeController < ApplicationController
     end
 
     @groups = Rails.cache.fetch('groups', expires_in: 2.hours) do
-      Group.all.to_a
+      Group.limit(6)
     end
 
     @apps = Rails.cache.fetch('apps', expires_in: 2.hours) do
-      App.all.to_a
+      App.limit(6)
     end
 
     @site_info_home_desc = Admin::SiteInfo.fetch_by_key('home_desc').try(:value)
