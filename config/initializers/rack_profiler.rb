@@ -1,6 +1,6 @@
 require 'rack-mini-profiler'
 
-if !Rails.env.test?
+if Rails.env.development?
   Rack::MiniProfilerRails.initialize!(Rails.application)
   Rack::MiniProfiler.config.storage_options = { host: '127.0.0.1', port: '6379', db: 2 }
   Rack::MiniProfiler.config.storage = Rack::MiniProfiler::RedisStore
