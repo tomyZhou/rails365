@@ -1,6 +1,7 @@
 $navbar-border-radius: none;
+$navbar-height: 60px;
 @import "bootstrap-sprockets";
-@import "bootswatch/paper/variables";
+@import "bootswatch/cerulean/variables";
 @import "bootstrap";
 @import "rouge";
 @import "fluidbox.min";
@@ -115,7 +116,7 @@ body {
   text-align: left;
   line-height: 100%;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 19px;
   margin: 0;
   color: #020202;
   margin-top: 16px;
@@ -200,7 +201,7 @@ pre.highlight {
 .article-title {
   margin-top: 5px;
   margin-bottom: 4px;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .home-article-title {
@@ -209,7 +210,7 @@ pre.highlight {
 }
 
 .article-desc {
-  font-size: 18px;
+  font-size: 15px;
   color: #777;
   font-weight: 400;
   a {
@@ -262,6 +263,6 @@ a {
 }
 
 .title-header {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 400;
 }
