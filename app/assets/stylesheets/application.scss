@@ -116,7 +116,7 @@ body {
   text-align: left;
   line-height: 100%;
   font-weight: 500;
-  font-size: 19px;
+  font-size: 17px;
   margin: 0;
   color: #020202;
   margin-top: 16px;
@@ -132,9 +132,8 @@ body {
     }
   }
   h5 {
-    &:not(:first-child) {
-      margin-top: 50px;
-    }
+    margin-top: 50px;
+    font-size: 15px;
   }
   p {
     line-height: 40px;
@@ -142,6 +141,11 @@ body {
   img {
     margin-top: 50px;
     margin-bottom: 50px;
+  }
+  ul {
+    li {
+      margin: 15px 0 15px 0;
+    }
   }
 }
 
@@ -201,7 +205,7 @@ pre.highlight {
 .article-title {
   margin-top: 5px;
   margin-bottom: 4px;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .home-article-title {
@@ -210,7 +214,7 @@ pre.highlight {
 }
 
 .article-desc {
-  font-size: 15px;
+  font-size: 13px;
   color: #777;
   font-weight: 400;
   a {
@@ -263,6 +267,6 @@ a {
 }
 
 .title-header {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 400;
 }
