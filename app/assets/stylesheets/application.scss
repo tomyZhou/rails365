@@ -126,6 +126,7 @@ body {
 }
 
 .article_content {
+  background: #fff;
   h4 {
     &:not(:first-child) {
       margin-top: 40px;
@@ -203,7 +204,6 @@ pre.highlight {
 }
 
 .article-title {
-  margin-top: 5px;
   margin-bottom: 4px;
   font-size: 14px;
 }
