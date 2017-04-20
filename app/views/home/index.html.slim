@@ -5,15 +5,6 @@
         .text-center.text-primary
           = @site_info_home_desc
 
-- cache @apps do
-  .row
-    .col-md-12
-      .panel.panel-default
-        .panel-heading
-          div 所有的演示应用
-        .panel-body.pb0
-          = render partial: 'apps/app', locals: { apps: @apps }
-
 .row
   - cache @articles do
     .col-md-6
@@ -41,5 +32,14 @@
           div 所有的分类
         .panel-body.pb0
           = render partial: 'groups/group', locals: { groups: @groups }
+
+- cache @apps do
+  .row
+    .col-md-12
+      .panel.panel-default
+        .panel-heading
+          div 所有的演示应用
+        .panel-body.pb0
+          = render partial: 'apps/app', locals: { apps: @apps }
 
 = render 'shared/qrcode'
