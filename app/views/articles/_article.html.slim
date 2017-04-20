@@ -1,7 +1,7 @@
 div.mb20.clearfix
   div.pull-left.avatar-image
     = image_tag article.user.letter_avatar_url(80)
-  p.article-title = link_to truncate(article.title, length: 30), article
+  p.article-title = link_to truncate(article.title, length: 27), article
   p.text-left.hidden-xs.article-desc
     span.text-muted
       - if article.group
