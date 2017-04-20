@@ -115,12 +115,33 @@ body {
   text-align: left;
   line-height: 100%;
   font-weight: 500;
+  font-size: 20px;
   margin: 0;
   color: #020202;
   margin-top: 16px;
   margin-bottom: 16px;
   border-bottom: 1px solid #eee;
   padding-bottom: 10px;
+}
+
+.article_content {
+  h4 {
+    &:not(:first-child) {
+      margin-top: 60px;
+    }
+  }
+  h5 {
+    &:not(:first-child) {
+      margin-top: 50px;
+    }
+  }
+  p {
+    line-height: 40px;
+  }
+  img {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
 }
 
 .pt15 {
@@ -156,10 +177,6 @@ body {
   padding-bottom: 0;
 }
 
-.article_content p {
-  line-height: 25px;
-}
-
 .mb10 {
   margin-bottom: 10px;
 }
@@ -181,6 +198,12 @@ pre.highlight {
 }
 
 .article-title {
+  margin-top: 5px;
+  margin-bottom: 4px;
+  font-size: 20px;
+}
+
+.home-article-title {
   margin-top: 5px;
   margin-bottom: 4px;
 }
@@ -239,6 +262,6 @@ a {
 }
 
 .title-header {
-  font-size: 15px;
+  font-size: 22px;
   font-weight: 400;
 }
