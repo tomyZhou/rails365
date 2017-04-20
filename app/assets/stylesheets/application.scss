@@ -128,19 +128,19 @@ body {
 .article_content {
   h4 {
     &:not(:first-child) {
-      margin-top: 60px;
+      margin-top: 40px;
     }
   }
   h5 {
-    margin-top: 50px;
+    margin-top: 30px;
     font-size: 15px;
   }
   p {
     line-height: 40px;
   }
   img {
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
   ul {
     li {
