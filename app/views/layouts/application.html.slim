@@ -17,6 +17,7 @@ html
         .row
           .col-md-12
             = render 'shared/flash_messages'
-        = yield
+        .article-body
+          = yield
         = render 'shared/statistics'
         = render 'shared/footer'
