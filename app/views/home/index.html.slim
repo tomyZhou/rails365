@@ -29,7 +29,9 @@
     .col-md-12
       .panel.panel-default
         .panel-heading
-          div 所有的分类
+          div
+            | 分类
+            = link_to '更多', groups_path, class: 'pull-right'
         .panel-body.pb0
           = render partial: 'groups/group', locals: { groups: @groups }
 
@@ -38,7 +40,9 @@
     .col-md-12
       .panel.panel-default
         .panel-heading
-          div 所有的演示应用
+          div
+            | 演示应用
+            = link_to '更多', apps_path, class: 'pull-right'
         .panel-body.pb0
           = render partial: 'apps/app', locals: { apps: @apps }
 
