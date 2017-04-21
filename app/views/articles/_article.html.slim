@@ -2,10 +2,7 @@ div.mb10.clearfix
   div.pull-left.avatar-image
     = image_tag article.user.letter_avatar_url(40)
   p.article-title
-    - if controller_name == 'home'
-      = link_to truncate(article.title, length: 27), article
-    - else
-      = link_to article.title, article
+    = link_to article.title, article
   p.text-left.hidden-xs.article-desc
     span.text-muted
       - if article.group
