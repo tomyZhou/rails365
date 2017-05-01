@@ -35,15 +35,15 @@
         .panel-body.pb0
           = render partial: 'groups/group', locals: { groups: @groups }
 
-- cache @apps do
-  .row
-    .col-md-12
-      .panel.panel-default
-        .panel-heading
-          div
-            | 演示应用
-            = link_to '更多', apps_path, class: 'pull-right'
-        .panel-body.pb0
-          = render partial: 'apps/app', locals: { apps: @apps }
+/ - cache @apps do
+/   .row
+/     .col-md-12
+/       .panel.panel-default
+/         .panel-heading
+/           div
+/             | 演示应用
+/             = link_to '更多', apps_path, class: 'pull-right'
+/         .panel-body.pb0
+/           = render partial: 'apps/app', locals: { apps: @apps }
 
 = render 'shared/qrcode'

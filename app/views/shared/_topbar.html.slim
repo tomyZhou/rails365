@@ -19,8 +19,8 @@ nav.navbar.navbar-default
             | 文章
         li class="#{controller_name == 'groups' && action_name == 'index' ? 'active' : nil}"
           a href="/groups" 分类
-        li class="#{controller_name == 'apps' ? 'active' : nil}"
-          a href='/apps' 演示应用
+        / li class="#{controller_name == 'apps' ? 'active' : nil}"
+        /   a href='/apps' 演示应用
         li class="#{controller_name == 'groups' && params[:id] == 'fen-xiang' ? 'active' : nil}"
           a href='/groups/fen-xiang' 推荐与分享
       = form_tag "/articles", method: "get", class: "navbar-form navbar-left", role: "search"
