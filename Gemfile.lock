@@ -13,7 +13,7 @@ GIT
     rouge (1.8.0)
 
 GEM
-  remote: https://gems.ruby-china.org/
+  remote: https://mirrors.tuna.tsinghua.edu.cn/rubygems/
   specs:
     actionmailer (4.2.3)
       actionpack (= 4.2.3)
