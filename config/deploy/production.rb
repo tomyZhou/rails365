@@ -7,7 +7,8 @@
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
 
-server 'www.rails365.net', user: 'hfpp2012', roles: %w( app db web )
+server '39.108.193.69', user: 'deploy', roles: %w( app db web )
+server '120.77.233.243', user: 'deploy', roles: %w( app db web )
 set :rails_env, 'production'
 set :stage, :production
 

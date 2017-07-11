@@ -72,7 +72,7 @@ group :development do
   gem 'pry'
   gem 'web-console'
   gem 'capistrano', '~> 3.5.0'
-  gem 'capistrano-rbenv'
+  gem 'capistrano-rvm'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano-sidekiq'
