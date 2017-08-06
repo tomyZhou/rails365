@@ -31,7 +31,6 @@
         .panel-heading
           div
             | 分类
-            = link_to '更多', groups_path, class: 'pull-right'
         .panel-body.pb0
           = render partial: 'groups/group', locals: { groups: @groups }
 

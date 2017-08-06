@@ -9,7 +9,7 @@ class HomeController < ApplicationController
     end
 
     @groups = Rails.cache.fetch('groups', expires_in: 2.hours) do
-      Group.limit(6)
+      Group.all
     end
 
     @apps = Rails.cache.fetch('apps', expires_in: 2.hours) do
