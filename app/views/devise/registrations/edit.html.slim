@@ -4,6 +4,7 @@
   = devise_error_messages!
   = f.text_field :username, autofocus: true, class: "form-control"
   = f.email_field :email, class: "form-control"
+  = f.image_file_field :avatar
   = f.password_field :current_password, class: "form-control"
   = f.password_field :password, :autocomplete => "off", class: "form-control"
   = f.password_field :password_confirmation, class: "form-control"

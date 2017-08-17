@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
                        length: { in: 3..20 }, presence: true,
                        uniqueness: { case_sensitive: true }
 
+  mount_uploader :avatar, AvatarUploader
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = "from_github_#{auth.info.email}"
@@ -20,7 +22,7 @@ class User < ActiveRecord::Base
   end
 
   def letter_avatar_url(size)
-    LetterAvatar.generate(Pinyin.t(self.username), size).sub('public/', '/')
+    avatar_url(:small) || LetterAvatar.generate(Pinyin.t(self.username), size).sub('public/', '/')
   end
 
   def validate_username

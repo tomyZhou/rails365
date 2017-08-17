@@ -1,7 +1,7 @@
 class DeviseFormBuilder < ActionView::Helpers::FormBuilder
   delegate :content_tag, :pluralize, to: :@template
 
-  %w( email_field password_field text_field ).each do |method_name|
+  %w( email_field password_field text_field file_field ).each do |method_name|
     define_method(method_name) do |method, *tag_value|
       content_tag(:div, class: 'form-group') do
         label(method, class: 'col-sm-3 control-label') +
@@ -10,6 +10,12 @@ class DeviseFormBuilder < ActionView::Helpers::FormBuilder
           end
       end
     end
+  end
+
+  def image_file_field(method, *tag_value)
+    image_method = "#{method}_url".to_sym
+    
+      file_field(method, *tag_value)
   end
 
   def submit(*tag_value)
