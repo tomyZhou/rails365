@@ -43,7 +43,7 @@ class ArticlesController < ApplicationController
 
   def update
     UpdateArticleWorker.perform_async(params[:id], article_params)
-    render 'create.js.erb'
+    render 'update.js.erb'
   end
 
   def destroy

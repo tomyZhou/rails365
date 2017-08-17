@@ -1,0 +1,5 @@
+<% if @article.errors.any? %>
+  sweetAlert("<%= @article.errors.full_messages.to_sentence %>");
+<% else %>
+  sweetAlert('保存成功！');
+<% end %>
