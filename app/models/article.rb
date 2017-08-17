@@ -63,7 +63,7 @@ class Article < ActiveRecord::Base
 
   def publish_create
     unless Rails.env.test?
-      Redis.new.publish 'ws', "<#{title}>文章于#{I18n.l created_at, format: :long}创建成功"
+      Redis.new.publish 'ws', "<#{title}> 文章于 #{I18n.l created_at, format: :long} 创建成功"
     end
   end
 
@@ -93,7 +93,7 @@ class Article < ActiveRecord::Base
     Rails.cache.delete [slug, 'recommend_articles', group.name]
 
     unless Rails.env.test?
-      Redis.new.publish 'ws', "<#{title}>文章于#{I18n.l created_at, format: :long}更新成功"
+      Redis.new.publish 'ws', "<#{title}> 文章于 #{I18n.l created_at, format: :long} 更新成功"
     end
   end
 end
