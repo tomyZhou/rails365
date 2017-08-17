@@ -1,5 +1,7 @@
 <% if @article.errors.any? %>
   sweetAlert("<%= @article.errors.full_messages.to_sentence %>");
 <% else %>
-  sweetAlert('保存成功！');
+  swal({title: '保存成功！'}, function() {
+    window.location.href = "<%= article_path(@article) %>";
+  });
 <% end %>
