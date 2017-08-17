@@ -5,5 +5,7 @@ class CommentsController < ApplicationController
     @commentable = resource.singularize.classify.constantize.find(id)
     @comment = @commentable.comments.new params.require(:comment).permit(:body).merge(user: current_user)
     @comment.save
+    
+    @comments = @commentable.fetch_comments
   end
 end
