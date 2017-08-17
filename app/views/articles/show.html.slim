@@ -21,8 +21,11 @@
       - cache @article do
         = markdown @article.body
     hr
+    = render 'comment_form'
     div
-      = render 'qr'
+      = render 'comments'
+    .clearfix
+    = render 'qr'
   .col-md-4
     .panel.panel-default.hidden-xs
       .panel-heading

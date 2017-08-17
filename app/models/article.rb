@@ -7,8 +7,11 @@ class Article < ActiveRecord::Base
 
   include IdentityCache
   cache_index :slug, unique: true
+
   belongs_to :group, counter_cache: true
   belongs_to :user
+  has_many :comments
+  cache_has_many :comments, :embed => true
 
   scope :except_body_with_default, -> { select(:title, :created_at, :updated_at, :group_id, :slug, :id, :user_id).includes(:group) }
 

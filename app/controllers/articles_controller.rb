@@ -22,6 +22,8 @@ class ArticlesController < ApplicationController
   def show
     @title = @article.title
     @recommend_articles = Article.cached_recommend_articles(@article)
+    @comments = @article.fetch_comments
+    @comment = @article.comments.build
   end
 
   def new

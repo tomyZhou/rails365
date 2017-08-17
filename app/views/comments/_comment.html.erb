@@ -1,0 +1,12 @@
+<li class="media">
+  <a class="pull-left avatar-image">
+    <%= image_tag comment.user.letter_avatar_url(40) %>
+  </a>
+  <div class="media-body">
+    <h4 class="media-heading">
+      <a href="#fakelink"><%= comment.user.try(:username) %></a>
+      <small><%= custom_timeago_tag comment.created_at %></small>
+    </h4>
+    <p><%= markdown comment.body if comment.body.present? %></p>
+  </div>
+</li>

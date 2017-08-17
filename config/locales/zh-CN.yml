@@ -17,6 +17,8 @@ zh-CN:
       admin/site:
         name: '名称'
         url: '链接'
+      comment:
+        body: '回复内容'
     models:
       article: "文章"
       app: '应用'
@@ -24,3 +26,4 @@ zh-CN:
       photo: '图片'
       admin/site: '友情链接'
       admin/site_info: '站点信息'
+      comment: '评论'

@@ -1,0 +1,7 @@
+<% if @comment.errors.any? %>
+  sweetAlert("<%= @comment.errors.full_messages.to_sentence %>");
+<% else %>
+  swal({title: '提交成功'}, function() {
+    window.location.reload();
+  });
+<% end %>

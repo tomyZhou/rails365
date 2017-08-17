@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
   root to: 'home#index'
 
-  resources :articles
+  # 评论
+  concern :commentable do
+    resources :comments, only: [:create]
+  end
+
+  resources :articles, concerns: [:commentable]
   resources :groups, only: [:index, :show]
   resources :apps, only: [:index]
   resources :users, only: [:show]

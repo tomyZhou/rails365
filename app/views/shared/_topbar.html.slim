@@ -17,7 +17,7 @@ nav.navbar.navbar-default
         li class="#{controller_name == 'articles' ? 'active' : nil}"
           a href="/articles"
             | 文章
-        li class="#{controller_name == 'groups' && action_name == 'index' ? 'active' : nil}"
+        li class="#{controller_name == 'groups' ? 'active' : nil}"
           a href="/groups" 分类
         li class="#{controller_name == 'groups' && params[:id] == 'fen-xiang' ? 'active' : nil}"
           a href='/groups/fen-xiang' 推荐与分享
