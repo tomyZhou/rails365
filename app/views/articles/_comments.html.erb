@@ -1,12 +1,14 @@
-<div class="comments">
-  <div class="total">回复数量: <b><%= @comments.count %></b> </div>
-  <% if @comments.empty? %>
-    <div class="empty-block">
-      暂无评论~~
-    </div>
-  <% else %>
-    <ul class="media-list">
-      <%= render @comments %>
-    </ul>
-  <% end %>
-</div>
+<% cache @comments do %>
+  <div class="comments">
+    <div class="total">回复数量: <b><%= @comments.count %></b> </div>
+    <% if @comments.empty? %>
+      <div class="empty-block">
+        暂无评论~~
+      </div>
+    <% else %>
+      <ul class="media-list">
+        <%= render @comments %>
+      </ul>
+    <% end %>
+  </div>
+<% end %>
