@@ -1,0 +1,8 @@
+div.mb10.clearfix
+  div.pull-left.avatar-image
+    = image_tag book.image_url(:small)
+  p.article-title
+    = link_to book.name, book.url
+  p.text-left.hidden-xs.article-desc
+    span.text-muted
+      = truncate book.desc, length: 40

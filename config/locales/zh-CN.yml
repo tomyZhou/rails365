@@ -21,6 +21,13 @@ zh-CN:
         url: '链接'
       comment:
         body: '回复内容'
+      book:
+        name: '名称'
+        desc: '描述'
+        image: '封面图片'
+        url: '网址'
+        group_id: '所属分类'
+        group: '所属分类'
     models:
       article: "文章"
       app: '应用'
@@ -29,3 +36,4 @@ zh-CN:
       admin/site: '友情链接'
       admin/site_info: '站点信息'
       comment: '评论'
+      book: 'gitbook小书'

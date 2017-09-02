@@ -12,6 +12,10 @@ class HomeController < ApplicationController
       Group.all
     end
 
+    @books = Rails.cache.fetch('books') do
+      Book.all
+    end
+
     respond_to do |format|
       format.all { render :index, formats: [:html] }
     end
