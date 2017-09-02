@@ -1,5 +1,15 @@
 = render 'shared/site_info_home_desc'
 
+- cache @groups do
+  .row
+    .col-md-12
+      .panel.panel-default
+        .panel-heading
+          div
+            | 分类
+        .panel-body.pb0
+          = render partial: 'groups/group', locals: { groups: @groups }
+
 .row
   - cache @articles do
     .col-md-6
@@ -18,15 +28,5 @@
         .panel-body.pb0
           - @hot_articles.each do |article|
             = render partial: 'articles/article', locals: { article: article }
-
-- cache @groups do
-  .row
-    .col-md-12
-      .panel.panel-default
-        .panel-heading
-          div
-            | 分类
-        .panel-body.pb0
-          = render partial: 'groups/group', locals: { groups: @groups }
 
 = render 'shared/qrcode'
