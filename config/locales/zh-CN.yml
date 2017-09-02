@@ -5,6 +5,7 @@ zh-CN:
         title: "标题"
         body: "内容"
         group_id: "分类"
+        weight: '权重'
       group:
         name: '名称'
         image: '图片'
