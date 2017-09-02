@@ -14,7 +14,7 @@ class Group < ActiveRecord::Base
   end
 
   validates :name, presence: true, uniqueness: true
-  validates :image, presence: true
+  validates :image, presence: true, on: :create
 
   def normalize_friendly_id(input)
     PinYin.of_string(input).to_s.to_slug.normalize.to_s

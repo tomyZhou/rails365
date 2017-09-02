@@ -15,13 +15,6 @@ class Article < ActiveRecord::Base
 
   scope :except_body_with_default, -> { select(:title, :created_at, :updated_at, :group_id, :slug, :id, :user_id).includes(:group) }
 
-  def self.cached_recommend_articles(article)
-    group_name = article.group.name || 'ruby'
-    Rails.cache.fetch [:slug, 'recommend_articles', group_name] do
-      Article.except_body_with_default.search(group_name, limit: 11)
-    end
-  end
-
   def self.async_create(user_id, article_params)
     user = User.find(user_id)
     article = Article.new(article_params)
@@ -39,6 +32,13 @@ class Article < ActiveRecord::Base
 
   validates :title, :body, :group_id, :user_id, presence: true
   validates :title, uniqueness: true
+
+  def recommend_articles
+    group_name = Group.fetch(self.group_id).name rescue 'ruby'
+    Rails.cache.fetch "recommend_articles_#{group_name}" do
+      self.class.except_body_with_default.search(group_name, limit: 11)
+    end
+  end
 
   def normalize_friendly_id(input)
     PinYin.of_string(input).to_s.to_slug.normalize.to_s

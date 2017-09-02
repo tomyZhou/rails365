@@ -133,3 +133,5 @@ gem 'rails-bootstrap-markdown'
 
 gem 'social-share-button'
 gem 'sweetalert-rails'
+
+gem 'rails_autolink'

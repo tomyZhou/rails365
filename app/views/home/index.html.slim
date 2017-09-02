@@ -1,9 +1,4 @@
-.row
-  .col-md-12
-    .panel.panel-default
-      .panel-body
-        .text-center.text-primary
-          = @site_info_home_desc
+= render 'shared/site_info_home_desc'
 
 .row
   - cache @articles do

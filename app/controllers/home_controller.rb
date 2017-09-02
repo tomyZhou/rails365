@@ -12,8 +12,6 @@ class HomeController < ApplicationController
       Group.all
     end
 
-    @site_info_home_desc = Admin::SiteInfo.fetch_by_key('home_desc').try(:value)
-
     respond_to do |format|
       format.all { render :index, formats: [:html] }
     end

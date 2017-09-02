@@ -1,0 +1,9 @@
+- if @site_info_home_desc.present?
+  .row
+    - cache  @site_info_home_desc do
+      .col-md-12
+        .panel.panel-default
+          .panel-body
+            .text-center
+              = markdown @site_info_home_desc
+

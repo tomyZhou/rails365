@@ -11,6 +11,8 @@ class GroupsController < ApplicationController
 
   def show
     @title = @group.name
+
+    @site_info_home_desc = @group.desc
   end
 
   private

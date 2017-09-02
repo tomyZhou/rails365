@@ -21,9 +21,13 @@ class ArticlesController < ApplicationController
 
   def show
     @title = @article.title
-    @recommend_articles = Article.cached_recommend_articles(@article)
+
+    @recommend_articles = @article.recommend_articles
+
     @comments = @article.fetch_comments
     @comment = @article.comments.build
+
+    @site_info_home_desc = Group.fetch(@article.group_id).try(:desc)
   end
 
   def new

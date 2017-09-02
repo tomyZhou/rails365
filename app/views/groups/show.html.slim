@@ -1,3 +1,5 @@
+= render 'shared/site_info_home_desc'
+
 .page-header
   h4.text-primary.title-header
     = @group.name
@@ -6,4 +8,3 @@
 - cache @articles do
   - @articles.each do |article|
     = render partial: 'articles/article', locals: { article: article }
-

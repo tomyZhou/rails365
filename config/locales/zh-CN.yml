@@ -8,6 +8,7 @@ zh-CN:
       group:
         name: '名称'
         image: '图片'
+        desc: '描述'
       app:
         name: '名称'
         link_url: '链接'
