@@ -70,7 +70,7 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
-    if current_user.super_admin?
+    if current_user && current_user.super_admin?
       params.require(:article).permit(:title, :body, :group_id, :user_id, :weight)
     else
       params.require(:article).permit(:title, :body, :group_id, :user_id)

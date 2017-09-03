@@ -8,6 +8,6 @@
       = @group.name
       | (#{@group.articles_count})
 
-- cache @articles do
+- cache [@articles, current_user] do
   - @articles.each do |article|
     = render partial: 'articles/article', locals: { article: article }

@@ -13,7 +13,7 @@
           = render partial: 'groups/group', locals: { groups: @groups }
 
 .row
-  - cache @articles do
+  - cache [@articles, current_user] do
     .col-md-6
       .panel.panel-default
         .panel-heading
@@ -22,7 +22,7 @@
           - @articles.each do |article|
             = render partial: 'articles/article', locals: { article: article }
 
-  - cache @hot_articles do
+  - cache [@hot_articles, current_user] do
     .col-md-6
       .panel.panel-default
         .panel-heading

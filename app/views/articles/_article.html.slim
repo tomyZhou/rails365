@@ -12,3 +12,9 @@ div.mb10.clearfix
       = link_to article.user.try(:login), user_path(article.user)
       |  创建于
       = custom_timeago_tag article.created_at
+      | &nbsp;
+    - if current_user && current_user.super_admin?
+      a href="#{edit_article_path(article)}"
+        i class="glyphicon glyphicon-edit" aria-hidden="true"
+        | &nbsp;
+        = article.weight
