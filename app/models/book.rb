@@ -2,7 +2,7 @@ class Book < ActiveRecord::Base
   include IdentityCache
   belongs_to :group
 
-  mount_uploader :image, AvatarUploader
+  mount_uploader :image, PhotoUploader
 
   validates :name, :desc, :url, presence: true
   validates :image, presence: true, on: :create

@@ -9,11 +9,11 @@ class HomeController < ApplicationController
     end
 
     @groups = Rails.cache.fetch('groups', expires_in: 2.hours) do
-      Group.order(weight: :desc)
+      Group.order(weight: :desc).to_a
     end
 
     @books = Rails.cache.fetch('books') do
-      Book.order(weight: :desc)
+      Book.order(weight: :desc).to_a
     end
 
     respond_to do |format|
