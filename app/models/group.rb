@@ -16,7 +16,7 @@ class Group < ActiveRecord::Base
   validates :image, presence: true, on: :create
 
   def fetch_articles
-    Rails.cache.fetch([name, 'articles']) { articles.reorder(weight: :asc, created_at: :desc).to_a }
+    Rails.cache.fetch([name, 'articles']) { articles.reorder(weight: :asc, slug: :asc).to_a }
   end
 
   def normalize_friendly_id(input)
