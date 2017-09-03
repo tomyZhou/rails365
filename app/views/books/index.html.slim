@@ -1,0 +1,10 @@
+= render 'shared/site_info_home_desc'
+
+- cache @books do
+  .page-header
+    h4.text-primary.title-header 所有小书(#{@books.count})
+
+  .row.clearfix
+    - @books.each do |book|
+      .col-md-6
+        = render partial: 'books/book', locals: { book: book }

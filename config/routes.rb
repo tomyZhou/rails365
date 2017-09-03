@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     resources :comments, only: [:create]
   end
 
+  resources :books, only: [:index]
+
   resources :articles, concerns: [:commentable]
   resources :groups, only: [:index, :show]
   resources :apps, only: [:index]

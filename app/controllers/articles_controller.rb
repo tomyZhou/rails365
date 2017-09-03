@@ -27,7 +27,9 @@ class ArticlesController < ApplicationController
     @comments = @article.fetch_comments
     @comment = @article.comments.build
 
-    @site_info_home_desc = Group.fetch(@article.group_id).try(:desc)
+    @site_info_home_desc = Group.fetch_by_id(@article.group_id).try(:desc)
+
+    @books = Group.fetch_by_id(@article.group_id).fetch_books
   end
 
   def new

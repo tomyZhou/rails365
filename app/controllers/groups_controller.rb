@@ -13,6 +13,8 @@ class GroupsController < ApplicationController
     @title = @group.name
 
     @site_info_home_desc = @group.desc
+
+    @books = @group.fetch_books
   end
 
   private

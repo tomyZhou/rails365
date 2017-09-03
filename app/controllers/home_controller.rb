@@ -13,7 +13,7 @@ class HomeController < ApplicationController
     end
 
     @books = Rails.cache.fetch('books') do
-      Book.all
+      Book.order(weight: :desc)
     end
 
     respond_to do |format|

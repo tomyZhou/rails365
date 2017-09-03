@@ -16,6 +16,7 @@ class Ability
       end
 
       can :read, Group
+      can :read, Book
     end
   end
 
@@ -25,5 +26,6 @@ class Ability
     can :read, Article
     can :read, Group
     can :read, App
+    can :read, Book
   end
 end

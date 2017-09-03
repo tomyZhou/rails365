@@ -1,5 +1,7 @@
 = render 'shared/site_info_home_desc'
 
+= render 'shared/books'
+
 - cache [@article, current_user] do
   .page-header
     h4.text-primary.title-header = @article.title

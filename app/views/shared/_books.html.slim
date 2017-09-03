@@ -1,0 +1,12 @@
+- if @books.present?
+  - cache @books do
+    .row
+      .col-md-12
+        .panel.panel-default
+          .panel-heading
+            div
+              | gitbook 小书
+          .panel-body.pb0.clearfix
+            - @books.each do |book|
+              .col-md-6
+                = render partial: 'books/book', locals: { book: book }
