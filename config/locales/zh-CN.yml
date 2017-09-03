@@ -6,6 +6,7 @@ zh-CN:
         body: "内容"
         group_id: "分类"
         weight: '权重'
+        is_home: '是否显示在首页'
       group:
         name: '名称'
         image: '图片'

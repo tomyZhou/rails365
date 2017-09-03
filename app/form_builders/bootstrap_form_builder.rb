@@ -1,7 +1,7 @@
 class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
   delegate :content_tag, :pluralize, to: :@template
 
-  %w( text_field text_area select file_field url_field ).each do |method_name|
+  %w( text_field text_area select file_field url_field check_box).each do |method_name|
     define_method(method_name) do |method, *tag_value|
       content_tag(:div, class: 'form-group') do
         label(method, class: 'col-sm-2 control-label') +
@@ -12,14 +12,14 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
-  def check_box(method)
-    content_tag(:div, class: 'form-group') do
-      label(method, class: 'col-sm-2 control-label') +
-        content_tag(:div, class: 'col-sm-10') do
-          super
-        end
-    end
-  end
+  # def check_box(method)
+  #   content_tag(:div, class: 'form-group') do
+  #     label(method, class: 'col-sm-2 control-label') +
+  #       content_tag(:div, class: 'col-sm-10') do
+  #         super
+  #       end
+  #   end
+  # end
 
   def error_messages
     if object && object.errors.any?

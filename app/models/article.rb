@@ -13,7 +13,7 @@ class Article < ActiveRecord::Base
   has_many :comments
   cache_has_many :comments, :embed => true
 
-  scope :except_body_with_default, -> { select(:title, :created_at, :updated_at, :group_id, :slug, :id, :user_id, :weight).includes(:group) }
+  scope :except_body_with_default, -> { select(:title, :created_at, :updated_at, :group_id, :slug, :id, :user_id, :weight, :is_home).includes(:group) }
 
   def self.async_create(user_id, article_params)
     user = User.find(user_id)
