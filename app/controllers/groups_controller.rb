@@ -4,7 +4,7 @@ class GroupsController < ApplicationController
 
   def index
     @groups = Rails.cache.fetch 'group_all' do
-      Group.all.to_a
+      Group.order(weight: :desc).to_a
     end
     @title = "分类列表"
   end

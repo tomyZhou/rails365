@@ -25,6 +25,7 @@ RailsAdmin.config do |config|
       field :name
       field :image, :carrierwave
       field :desc
+      field :weight
     end
   end
 

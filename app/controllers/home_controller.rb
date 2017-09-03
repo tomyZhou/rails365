@@ -9,7 +9,7 @@ class HomeController < ApplicationController
     end
 
     @groups = Rails.cache.fetch('groups', expires_in: 2.hours) do
-      Group.all
+      Group.order(weight: :desc)
     end
 
     @books = Rails.cache.fetch('books') do

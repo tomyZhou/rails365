@@ -10,6 +10,8 @@ zh-CN:
         name: '名称'
         image: '图片'
         desc: '描述'
+        weight: '权重'
+        articles_count: '文章数量'
       app:
         name: '名称'
         link_url: '链接'
