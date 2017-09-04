@@ -28,6 +28,8 @@ nav.navbar.navbar-default
         ul.nav.navbar-nav.navbar-right
           li.dropdown
             a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
+              span style="margin-right: 10px" class="avatar-image"
+                = image_tag current_user.letter_avatar_url(40), width: '20', height: '20'
               = current_user.login
               span.caret
             ul.dropdown-menu

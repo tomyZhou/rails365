@@ -1,5 +1,5 @@
 - if @books.present?
-  - cache @books do
+  - cache [@books, current_user] do
     .row
       .col-md-12
         .panel.panel-default
