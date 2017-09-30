@@ -1,8 +1,10 @@
 div.video-box
   div
-    = image_tag playlist.image_url(:preview)
+    a href="#{playlist_path(playlist)}"
+      = image_tag playlist.image_url(:preview)
   p.text-left.title
-    = playlist.name
+    a href="#{playlist_path(playlist)}"
+      = playlist.name
   p.text-left.time
     = custom_timeago_tag playlist.created_at
     | &nbsp;*&nbsp; 视频数量：

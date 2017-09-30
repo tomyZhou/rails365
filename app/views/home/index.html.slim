@@ -10,6 +10,18 @@
         .panel-body.pb0.pt15
           - @movies.each do |movie|
             = render partial: 'movies/movie', locals: { movie: movie }
+
+- cache @playlists do
+  .row
+    .col-md-12
+      .panel.panel-default
+        .panel-heading
+          div
+            | 播放列表
+        .panel-body.pb0.pt15
+          - @playlists.each do |playlist|
+            = render partial: 'playlists/playlist', locals: { playlist: playlist }
+
 = render 'shared/books'
 
 - cache @groups do

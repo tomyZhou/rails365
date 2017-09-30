@@ -10,7 +10,7 @@
         span.glyphicon.glyphicon-picture#image-upload
   = f.text_field :mp4_url, class: "form-control"
   = f.text_field :play_time, class: "form-control"
-  = f.image_file_field :image
+  = f.image_file_field :image, required: @movie.new_record?
   = f.text_area :body, class: "form-control", rows: 20, required: true
   = f.select :playlist_id, Playlist.all.collect { |p| [ p.name, p.id ] }, include_blank: false
   - if current_user.super_admin?

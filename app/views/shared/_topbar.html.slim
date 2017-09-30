@@ -22,7 +22,7 @@ nav.navbar.navbar-default
         li class="#{controller_name == 'groups' ? 'active' : nil}"
           a href="/groups" 分类
         li class="#{controller_name == 'books' ? 'active' : nil}"
-          a href="/books" gitbook 小书
+          a href="/books" 小书
       = form_tag "/articles", method: "get", class: "navbar-form navbar-left", role: "search"
         .form-group
           input.form-control placeholder="搜索标题或内容" type="text" name="search" value="#{params[:search].presence}"/

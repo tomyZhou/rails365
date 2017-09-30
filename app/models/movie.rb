@@ -32,8 +32,9 @@ class Movie < ActiveRecord::Base
     movie.save(validate: false)
   end
 
-  validates :title, :body, :playlist_id, :user_id, :image, :play_time, presence: true
+  validates :title, :body, :playlist_id, :user_id, :play_time, presence: true
   validates :title, uniqueness: true
+  validates :image, presence: true, on: :create
 
   def recommend_movies
     playlist_slug = Playlist.fetch(self.playlist_id).slug rescue 'ruby'
