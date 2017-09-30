@@ -12,6 +12,10 @@ class HomeController < ApplicationController
       Group.order(weight: :desc).to_a
     end
 
+    @movies = Rails.cache.fetch('movies') do
+      Movie.order(weight: :desc).to_a
+    end
+
     @books = Rails.cache.fetch('books') do
       Book.order(weight: :desc).to_a
     end

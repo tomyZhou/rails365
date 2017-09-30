@@ -2,6 +2,6 @@
 
 - cache @playlists do
   .page-header
-    h4.text-primary.title-header 所有分类(#{@playlists.count})
+    h4.text-primary.title-header 所有播放列表(#{@playlists.count})
 
   = render partial: 'playlist', locals: { playlists: @playlists }

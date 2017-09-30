@@ -5,14 +5,13 @@ class MoviesController < ApplicationController
   authorize_resource
 
   def index
-    @movies =
-      if params[:search].present?
-        Movie.search params[:search], fields: [:title, :body], highlight: true, misspellings: false, includes: [:playlist, :user], page: params[:page], per_page: 20
-      else
-        Movie.except_body_with_default.order('id DESC').page(params[:page])
-      end
+    @movies = Movie.except_body_with_default.order('id DESC').page(params[:page])
 
-    @title = '文章列表'
+    @playlists = Rails.cache.fetch 'playlist_all' do
+      Playlist.order(weight: :desc).to_a
+    end
+
+    @title = '视频列表'
 
     respond_to do |format|
       format.all { render :index, formats: [:html] }
@@ -42,14 +41,21 @@ class MoviesController < ApplicationController
   def create
     @movie = Movie.new(movie_params)
 
-    if @movie.valid?
-      CreateMovieWorker.perform_async(current_user.id, movie_params)
+    if @movie.save
+      flash[:success] = "创建成功"
+      redirect_to movie_path(@movie)
+    else
+      render :new
     end
   end
 
   def update
-    UpdateMovieWorker.perform_async(params[:id], movie_params)
-    render 'update.js.erb'
+    if @movie.update(movie_params)
+      flash[:success] = "更新成功"
+      redirect_to movie_path(@movie)
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -71,9 +77,9 @@ class MoviesController < ApplicationController
 
   def movie_params
     if current_user && current_user.super_admin?
-      params.require(:movie).permit(:title, :body, :playlist_id, :user_id, :weight)
+      params.require(:movie).permit(:title, :play_time, :body, :playlist_id, :user_id, :weight, :image, :mp4_url)
     else
-      params.require(:movie).permit(:title, :body, :playlist_id, :user_id)
+      params.require(:movie).permit(:title, :play_time, :body, :playlist_id, :user_id, :image, :mp4_url)
     end
   end
 end

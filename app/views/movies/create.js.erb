@@ -1,7 +1,0 @@
-<% if @movie.errors.any? %>
-  sweetAlert("<%= @movie.errors.full_messages.to_sentence %>");
-<% else %>
-  swal({title: '保存成功！'}, function() {
-    window.location.href = "<%= movie_path(@movie) %>";
-  });
-<% end %>

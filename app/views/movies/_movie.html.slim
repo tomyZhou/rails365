@@ -1,20 +1,9 @@
-div.mb10.clearfix
-  div.pull-left.avatar-image
-    = image_tag movie.user.letter_avatar_url(40)
-  p.article-title
-    = link_to movie.title, movie
-  p.text-left.hidden-xs.article-desc
-    span.text-muted
-      - if movie.playlist
-        = link_to playlist_path(movie.playlist) do
-          span.mr5 = movie.playlist.name
-      | 由 
-      = link_to movie.user.try(:login), user_path(movie.user)
-      |  创建于
-      = custom_timeago_tag movie.created_at
-      | &nbsp;
-    - if current_user && current_user.super_admin?
-      a href="#{edit_movie_path(movie)}"
-        i class="glyphicon glyphicon-edit" aria-hidden="true"
-        | &nbsp;
-        = movie.weight
+div.video-box
+  div
+    = image_tag movie.image_url(:preview)
+  p.text-left.title
+    = movie.title
+  p.text-left.time
+    = custom_timeago_tag movie.created_at
+    | &nbsp;*&nbsp;播放时间：
+    = movie.play_time

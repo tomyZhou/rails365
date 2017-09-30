@@ -6,6 +6,7 @@ class CreateMovies < ActiveRecord::Migration
       t.string :slug
       t.string :image
       t.string :mp4_url
+      t.string :play_time
       t.integer :weight, default: 0
       t.belongs_to :user, index: true
       t.belongs_to :playlist, index: true

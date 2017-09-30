@@ -1,8 +1,9 @@
-- playlists.in_groups_of(6) do |per_playlist|
-  .row
-    - per_playlist.each do |playlist|
-      - if playlist.present?
-        .col-sm-2.group-image.col-xs-6
-          = link_to playlist do
-            img data-original=playlist.image_url(:preview).to_s width="60px" height="60px" alt="#{playlist.name}" class="lazy"
-            p.text-center.header-group.text-primary #{playlist.name}(#{playlist.movies_count})
+div.video-box
+  div
+    = image_tag playlist.image_url(:preview)
+  p.text-left.title
+    = playlist.name
+  p.text-left.time
+    = custom_timeago_tag playlist.created_at
+    | &nbsp;*&nbsp; 视频数量：
+    = playlist.movies_count

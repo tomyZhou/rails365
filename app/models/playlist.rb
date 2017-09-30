@@ -8,7 +8,7 @@ class Playlist < ActiveRecord::Base
 
   has_many :movies, -> { order 'created_at DESC' }, dependent: :nullify
 
-  mount_uploader :image, PhotoUploader
+  mount_uploader :image, VideoUploader
 
   validates :name, presence: true, uniqueness: true
   validates :image, presence: true, on: :create

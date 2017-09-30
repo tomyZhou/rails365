@@ -1,5 +1,15 @@
 = render 'shared/site_info_home_desc'
 
+- cache @movies do
+  .row
+    .col-md-12
+      .panel.panel-default
+        .panel-heading
+          div
+            | 视频
+        .panel-body.pb0.pt15
+          - @movies.each do |movie|
+            = render partial: 'movies/movie', locals: { movie: movie }
 = render 'shared/books'
 
 - cache @groups do

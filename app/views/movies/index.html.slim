@@ -7,29 +7,16 @@
   .text-right
     = link_to "添加新视频", new_movie_path, class: 'btn btn-primary'
 - cache @movies do
-  - if params[:search].present?
-    div.search-hight-light
-      - @movies.with_details.each do |movie, details|
-        div.mb20
-          - if details[:highlight][:title].present?
-            p.article-title = link_to details[:highlight][:title].html_safe, movie
-          - else
-            p.article-title = link_to movie.title, movie
-          p.mb10
-            = link_to movie_url(movie), movie, class: "text-info"
-          - if details[:highlight][:body].present?
-            p
-              = details[:highlight][:body].html_safe
-          p.text-left.hidden-xs.article-desc
-            span.text-muted
-              - if movie.group
-                = link_to group_path(movie.group) do
-                  span.mr5 = movie.group.name
-              | 由 #{link_to movie.user.try(:login), user_path(movie.user)} 发表于
-              = custom_timeago_tag movie.created_at
-    = render 'paginate'
-
-  - else
+  div.pt15
     - @movies.each do |movie|
       = render partial: 'movie', locals: { movie: movie }
+    = render 'paginate'
+
+.page-header
+  h4.text-primary.title-header 所有播放列表(#{@playlists.count})
+
+- cache @playlists do
+  div.pt15
+    - @playlists.each do |playlist|
+      = render partial: 'playlists/playlist', locals: { playlist: playlist }
     = render 'paginate'

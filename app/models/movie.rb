@@ -13,7 +13,9 @@ class Movie < ActiveRecord::Base
   has_many :comments, as: 'commentable'
   cache_has_many :comments, :inverse_name => :commentable
 
-  scope :except_body_with_default, -> { select(:title, :created_at, :updated_at, :playlist_id, :slug, :id, :user_id, :weight).includes(:playlist) }
+  scope :except_body_with_default, -> { select(:title, :created_at, :updated_at, :playlist_id, :image, :slug, :id, :play_time, :user_id, :weight).includes(:playlist) }
+
+  mount_uploader :image, VideoUploader
 
   def self.async_create(user_id, movie_params)
     user = User.find(user_id)
@@ -30,7 +32,7 @@ class Movie < ActiveRecord::Base
     movie.save(validate: false)
   end
 
-  validates :title, :body, :playlist_id, :user_id, presence: true
+  validates :title, :body, :playlist_id, :user_id, :image, :play_time, presence: true
   validates :title, uniqueness: true
 
   def recommend_movies

@@ -461,3 +461,30 @@ body .no-padding {
 .navbar-brand {
   padding: 0;
 }
+
+.video-box {
+  margin-right: 4px;
+  display: inline-block;
+  width: 210px;
+  margin-bottom: 24px;
+  overflow: hidden;
+
+  img {
+    width: 210px;
+    height: 118px;
+  }
+
+  .title {
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 10px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.6rem;
+  }
+
+  .time {
+    color: #999999;
+    font-size: 13px;
+  }
+}
