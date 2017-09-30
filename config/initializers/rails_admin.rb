@@ -29,6 +29,15 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model Playlist do
+    edit do
+      field :name
+      field :image, :carrierwave
+      field :desc
+      field :weight
+    end
+  end
+
   ## == Pundit ==
   # config.authorize_with :pundit
 

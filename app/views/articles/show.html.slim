@@ -25,9 +25,9 @@
       - cache @article do
         = markdown @article.body
     hr
-    = render 'comment_form'
+    = render partial: 'comments/form', locals: { object: @article }
     div#comment_box
-      = render 'comments'
+      = render 'comments/comments'
   .col-md-4
     .panel.panel-default.hidden-xs
       .panel-heading

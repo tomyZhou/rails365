@@ -1,0 +1,7 @@
+= render 'shared/site_info_home_desc'
+
+- cache @playlists do
+  .page-header
+    h4.text-primary.title-header 所有分类(#{@playlists.count})
+
+  = render partial: 'playlist', locals: { playlists: @playlists }

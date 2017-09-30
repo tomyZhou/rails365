@@ -3,6 +3,6 @@
 <% else %>
   swal({title: '提交成功'}, function() {
     $("#new_comment textarea").val("");
-    $("#comment_box").html("<%= j(render 'articles/comments') %>");
+    $("#comment_box").html("<%= j(render 'comments/comments') %>");
   });
 <% end %>

@@ -10,20 +10,20 @@ class Article < ActiveRecord::Base
 
   belongs_to :group, counter_cache: true
   belongs_to :user
-  has_many :comments
-  cache_has_many :comments, :embed => true
+  has_many :comments, as: 'commentable'
+  cache_has_many :comments, :inverse_name => :commentable
 
   scope :except_body_with_default, -> { select(:title, :created_at, :updated_at, :group_id, :slug, :id, :user_id, :weight, :is_home).includes(:group) }
 
   def self.async_create(user_id, article_params)
     user = User.find(user_id)
-    article = Article.new(article_params)
+    article = self.new(article_params)
     article.user_id = user.id
     article.save!
   end
 
   def self.async_update(article_id, article_params)
-    article = Article.find(article_id)
+    article = self.find(article_id)
     user_id = article.user_id
     article.update!(article_params)
     article.user_id = user_id
@@ -34,9 +34,9 @@ class Article < ActiveRecord::Base
   validates :title, uniqueness: true
 
   def recommend_articles
-    group_name = Group.fetch(self.group_id).name rescue 'ruby'
-    Rails.cache.fetch "recommend_articles_#{group_name}" do
-      self.class.except_body_with_default.search(group_name, limit: 11)
+    group_slug = Group.fetch(self.group_id).slug rescue 'ruby'
+    Rails.cache.fetch "recommend_articles_#{group_slug}" do
+      self.class.except_body_with_default.search(group_slug, limit: 11)
     end
   end
 
@@ -77,20 +77,20 @@ class Article < ActiveRecord::Base
     # 所属的分类
     IdentityCache.cache.delete(group.primary_cache_index_key)
     # 分类show页面下的文章列表
-    Rails.cache.delete [group.name, 'articles']
+    Rails.cache.delete [group.slug, 'articles']
   end
 
   def clear_before_updated_cache
     if group_id_changed?
       group = Group.find(group_id_was)
-      Rails.cache.delete [group.name, 'articles']
+      Rails.cache.delete [group.slug, 'articles']
       IdentityCache.cache.delete(group.primary_cache_index_key)
     end
   end
 
   def clear_after_updated_cache
     # 文章show页面右侧推荐文章列表
-    Rails.cache.delete [slug, 'recommend_articles', group.name]
+    Rails.cache.delete [slug, 'recommend_articles', group.slug]
 
     unless Rails.env.test?
       Redis.new.publish 'ws', "#{self.title} 文章于 #{I18n.l created_at, format: :long} 更新成功"

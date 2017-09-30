@@ -7,12 +7,24 @@ zh-CN:
         group_id: "分类"
         weight: '权重'
         is_home: '是否显示在首页'
+      movie:
+        title: "名称"
+        body: "内容"
+        playlist_id: "分类"
+        weight: '权重'
+        mp4_url: 'mp4 地址'
       group:
         name: '名称'
         image: '图片'
         desc: '描述'
         weight: '权重'
         articles_count: '文章数量'
+      playlist:
+        name: '名称'
+        image: '图片'
+        desc: '描述'
+        weight: '权重'
+        articles_count: '视频数量'
       app:
         name: '名称'
         link_url: '链接'
@@ -36,6 +48,8 @@ zh-CN:
       article: "文章"
       app: '应用'
       group: '分类'
+      playlist: '播放列表'
+      movie: '视频'
       photo: '图片'
       admin/site: '友情链接'
       admin/site_info: '站点信息'

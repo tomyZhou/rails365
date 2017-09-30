@@ -1,0 +1,49 @@
+= render 'shared/site_info_home_desc'
+
+= render 'shared/books'
+
+- cache [@movie, current_user] do
+  .page-header
+    h4.text-primary.title-header = @movie.title
+    p.text-right.article-desc
+        = link_to playlist_path(@movie.playlist) do
+          span.mr5 = @movie.playlist.try(:name)
+        | 由 #{link_to @movie.user.try(:login), user_path(@movie.user)} 发表于
+        = custom_timeago_tag @movie.created_at
+        |  编辑于
+        = custom_timeago_tag @movie.updated_at
+
+.row.block-margin
+  .col-md-12
+    div.text-right
+      - if can? :update, @movie
+        = link_to "编辑", edit_movie_path(@movie), class: 'btn btn-primary btn-sm'
+
+.row
+  .col-md-8
+    .article_content
+      - cache @movie do
+        = markdown @movie.body
+    hr
+    = render partial: 'comments/form', locals: { object: @movie }
+    div#comment_box
+      = render 'comments/comments'
+  .col-md-4
+    .panel.panel-default.hidden-xs
+      .panel-heading
+        div 分享
+      .panel-body
+        = social_share_button_tag(@movie.title)
+    - cache @recommend_movies do
+      .panel.panel-default.hidden-xs
+        .panel-heading
+          div 相关推荐
+        .panel-body
+          - @recommend_movies.each do |recommend_movie|
+            - unless recommend_movie.id == @movie.id
+              p.home-p.box-article = link_to recommend_movie.title, recommend_movie
+
+javascript:
+  $(document).ready(function() {
+    $('a.fluidbox-link').fluidbox();
+  });

@@ -1,22 +1,20 @@
 require 'babosa'
-class Group < ActiveRecord::Base
+class Playlist < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: [:slugged, :finders, :history]
 
   include IdentityCache
   cache_index :slug, unique: true
 
-  has_many :articles, -> { order 'created_at DESC' }, dependent: :nullify
-  has_many :books
-  cache_has_many :books, :embed => true
+  has_many :movies, -> { order 'created_at DESC' }, dependent: :nullify
 
   mount_uploader :image, PhotoUploader
 
   validates :name, presence: true, uniqueness: true
   validates :image, presence: true, on: :create
 
-  def fetch_articles
-    Rails.cache.fetch([self.slug, 'articles']) { articles.reorder(weight: :asc, slug: :asc).to_a }
+  def fetch_movies
+    Rails.cache.fetch([self.slug, 'movies']) { movies.reorder(weight: :asc, slug: :asc).to_a }
   end
 
   def normalize_friendly_id(input)
@@ -32,7 +30,7 @@ class Group < ActiveRecord::Base
   private
 
   def clear_cache
-    Rails.cache.delete 'groups'
-    Rails.cache.delete 'group_all'
+    Rails.cache.delete 'playlists'
+    Rails.cache.delete 'playlist_all'
   end
 end
