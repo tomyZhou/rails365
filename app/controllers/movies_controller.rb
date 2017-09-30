@@ -24,8 +24,6 @@ class MoviesController < ApplicationController
     @recommend_movies = @movie.recommend_movies
 
     @comments = @movie.fetch_comments
-    logger.info @movie.id
-    logger.info @comments
     @comment = @movie.comments.build
 
     @site_info_home_desc = Playlist.fetch_by_id(@movie.playlist_id).try(:desc)

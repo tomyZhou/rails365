@@ -2,10 +2,10 @@ div.video-box
   div
     a href="#{playlist_path(playlist)}"
       = image_tag playlist.image_url(:preview)
-  p.text-left.title
+  p.title
     a href="#{playlist_path(playlist)}"
       = playlist.name
-  p.text-left.time
+  p.time
     = custom_timeago_tag playlist.created_at
     | &nbsp;*&nbsp; 视频数量：
     = playlist.movies_count

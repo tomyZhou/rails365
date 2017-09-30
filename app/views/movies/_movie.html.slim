@@ -1,9 +1,11 @@
 div.video-box
   div
-    = image_tag movie.image_url(:preview)
-  p.text-left.title
-    = movie.title
-  p.text-left.time
+    a href="#{movie_path(movie)}"
+      = image_tag movie.image_url(:preview)
+  p.title
+    a href="#{movie_path(movie)}"
+      = movie.title
+  p.time
     = custom_timeago_tag movie.created_at
     | &nbsp;*&nbsp;播放时间：
     = movie.play_time

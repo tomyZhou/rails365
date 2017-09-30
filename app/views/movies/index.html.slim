@@ -7,7 +7,7 @@
   .text-right
     = link_to "添加新视频", new_movie_path, class: 'btn btn-primary'
 - cache @movies do
-  div.pt15
+  div.pt15.home-video
     - @movies.each do |movie|
       = render partial: 'movie', locals: { movie: movie }
     = render 'paginate'
@@ -16,7 +16,7 @@
   h4.text-primary.title-header 所有播放列表(#{@playlists.count})
 
 - cache @playlists do
-  div.pt15
+  div.pt15.home-video
     - @playlists.each do |playlist|
       = render partial: 'playlists/playlist', locals: { playlist: playlist }
     = render 'paginate'

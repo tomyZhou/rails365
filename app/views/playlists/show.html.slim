@@ -9,5 +9,6 @@
       | (#{@playlist.movies_count})
 
 - cache [@movies, current_user] do
-  - @movies.each do |movie|
-    = render partial: 'movies/movie', locals: { movie: movie }
+  div.home-video
+    - @movies.each do |movie|
+      = render partial: 'movies/movie', locals: { movie: movie }

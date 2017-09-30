@@ -7,7 +7,7 @@
         .panel-heading
           div
             | 视频
-        .panel-body.pb0.pt15
+        .panel-body.pb0.pt15.home-video
           - @movies.each do |movie|
             = render partial: 'movies/movie', locals: { movie: movie }
 
@@ -18,7 +18,7 @@
         .panel-heading
           div
             | 播放列表
-        .panel-body.pb0.pt15
+        .panel-body.pb0.pt15.home-video
           - @playlists.each do |playlist|
             = render partial: 'playlists/playlist', locals: { playlist: playlist }
 

@@ -27,5 +27,7 @@ class Ability
     can :read, Group
     can :read, App
     can :read, Book
+    can :read, Movie
+    can :read, Playlist
   end
 end

@@ -1,10 +1,8 @@
 = render 'shared/site_info_home_desc'
 
-= render 'shared/books'
-
 - cache [@movie, current_user] do
   .page-header
-    h4.text-primary.title-header = @movie.title
+    h4.text-primary.my-title = @movie.title
     p.text-right.article-desc
         = link_to playlist_path(@movie.playlist) do
           span.mr5 = @movie.playlist.try(:name)
@@ -23,7 +21,20 @@
   .col-md-8
     .article_content
       - cache @movie do
-        = markdown @movie.body
+        div.video-block
+          video src="#{@movie.mp4_url}" controls="controls" autoplay
+            你的浏览器不支持该视频播放
+        p.text-left.time
+          | 创建于
+          = custom_timeago_tag @movie.created_at
+          | &nbsp;*&nbsp;播放时间：
+          = @movie.play_time
+          |  播放列表 
+          = link_to playlist_path(@movie.playlist) do
+            span.mr5 = @movie.playlist.try(:name)
+        hr
+        div
+          = markdown @movie.body
     hr
     = render partial: 'comments/form', locals: { object: @movie }
     div#comment_box
