@@ -22,7 +22,7 @@
     .article_content
       - cache @movie do
         div.video-block
-          video src="#{@movie.mp4_url}" controls="controls" autoplay
+          video src="#{@movie.mp4_url}" controls="controls" autoplay=true poster="#{@movie.image_url}"
             你的浏览器不支持该视频播放
         p.text-left.time
           | 创建于
