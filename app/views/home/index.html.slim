@@ -19,8 +19,7 @@
           div
             | 播放列表
         .panel-body.pb0.pt15.home-video
-          - @playlists.each do |playlist|
-            = render partial: 'playlists/playlist', locals: { playlist: playlist }
+          = render partial: 'playlists/playlist', locals: { playlists: @playlists }
 
 = render 'shared/books'
 

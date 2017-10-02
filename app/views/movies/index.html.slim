@@ -17,6 +17,5 @@
 
 - cache @playlists do
   div.pt15.home-video
-    - @playlists.each do |playlist|
-      = render partial: 'playlists/playlist', locals: { playlist: playlist }
+    = render partial: 'playlists/playlist', locals: { playlists: @playlists }
     = render 'paginate'

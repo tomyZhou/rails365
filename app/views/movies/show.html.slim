@@ -32,6 +32,8 @@
           |  播放列表 
           = link_to playlist_path(@movie.playlist) do
             span.mr5 = @movie.playlist.try(:name)
+        - if @movie.present?
+          p = link_to '用 youtube 播放', @movie.youtube_url, target: "_blank"
         hr
         div
           = markdown @movie.body

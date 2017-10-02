@@ -15,6 +15,7 @@ zh-CN:
         mp4_url: 'mp4 地址'
         image: '图片'
         play_time: "播放时间"
+        youtube_url: 'youtube 在线地址'
       group:
         name: '名称'
         image: '图片'
