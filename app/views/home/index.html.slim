@@ -1,5 +1,36 @@
 = render 'shared/site_info_home_desc'
 
+.row
+  - cache [@articles, current_user] do
+    .col-md-6
+      .panel.panel-default
+        .panel-heading
+          div 最近的文章
+        .panel-body.pb0
+          - @articles.each do |article|
+            = render partial: 'articles/article', locals: { article: article }
+
+  - cache [@hot_articles, current_user] do
+    .col-md-6
+      .panel.panel-default
+        .panel-heading
+          div 最热门的文章
+        .panel-body.pb0
+          - @hot_articles.each do |article|
+            = render partial: 'articles/article', locals: { article: article }
+
+= render 'shared/books'
+
+- cache @groups do
+  .row
+    .col-md-12
+      .panel.panel-default
+        .panel-heading
+          div
+            | 分类
+        .panel-body.pb0
+          = render partial: 'groups/group', locals: { groups: @groups }
+
 - cache @movies do
   .row
     .col-md-12
@@ -20,36 +51,5 @@
             | 播放列表
         .panel-body.pb0.pt15.home-video
           = render partial: 'playlists/playlist', locals: { playlists: @playlists }
-
-= render 'shared/books'
-
-- cache @groups do
-  .row
-    .col-md-12
-      .panel.panel-default
-        .panel-heading
-          div
-            | 分类
-        .panel-body.pb0
-          = render partial: 'groups/group', locals: { groups: @groups }
-
-.row
-  - cache [@articles, current_user] do
-    .col-md-6
-      .panel.panel-default
-        .panel-heading
-          div 最近的文章
-        .panel-body.pb0
-          - @articles.each do |article|
-            = render partial: 'articles/article', locals: { article: article }
-
-  - cache [@hot_articles, current_user] do
-    .col-md-6
-      .panel.panel-default
-        .panel-heading
-          div 最热门的文章
-        .panel-body.pb0
-          - @hot_articles.each do |article|
-            = render partial: 'articles/article', locals: { article: article }
 
 = render 'shared/qrcode'
