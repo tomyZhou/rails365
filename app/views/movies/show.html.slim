@@ -22,7 +22,7 @@
     .article_content
       - cache @movie do
         div.video-block
-          video src="#{@movie.mp4_url}" controls="controls" autoplay=true poster="#{@movie.image_url}"
+          video src="#{@movie.mp4_url}" controls="controls" poster="#{@movie.image_url}"
             你的浏览器不支持该视频播放
         p.text-left.time
           | 创建于
@@ -32,7 +32,7 @@
           |  播放列表 
           = link_to playlist_path(@movie.playlist) do
             span.mr5 = @movie.playlist.try(:name)
-        - if @movie.present?
+        - if @movie.youtube_url.present?
           p = link_to '用 youtube 播放', @movie.youtube_url, target: "_blank"
         hr
         div

@@ -1,5 +1,16 @@
 = render 'shared/site_info_home_desc'
 
+- cache @movies do
+  .row
+    .col-md-12
+      .panel.panel-default
+        .panel-heading
+          div
+            | 视频
+        .panel-body.pb0.pt15.home-video
+          - @movies.each do |movie|
+            = render partial: 'movies/movie', locals: { movie: movie }
+
 .row
   - cache [@articles, current_user] do
     .col-md-6
@@ -30,17 +41,6 @@
             | 分类
         .panel-body.pb0
           = render partial: 'groups/group', locals: { groups: @groups }
-
-- cache @movies do
-  .row
-    .col-md-12
-      .panel.panel-default
-        .panel-heading
-          div
-            | 视频
-        .panel-body.pb0.pt15.home-video
-          - @movies.each do |movie|
-            = render partial: 'movies/movie', locals: { movie: movie }
 
 - cache @playlists do
   .row
