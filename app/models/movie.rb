@@ -32,7 +32,7 @@ class Movie < ActiveRecord::Base
     movie.save(validate: false)
   end
 
-  validates :title, :body, :playlist_id, :user_id, :play_time, presence: true
+  validates :title, :body, :playlist_id, :user_id, presence: true
   validates :title, uniqueness: true
   validates :image, presence: true, on: :create
 

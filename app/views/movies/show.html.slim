@@ -31,13 +31,17 @@
         p.text-left.time
           | 创建于
           = custom_timeago_tag @movie.created_at
-          | &nbsp;*&nbsp;播放时间：
-          = @movie.play_time
           |  播放列表 
           = link_to playlist_path(@movie.playlist) do
             span.mr5 = @movie.playlist.try(:name)
         - if @movie.youtube_url.present?
           p = link_to '用 youtube 播放', @movie.youtube_url, target: "_blank"
+        h5 下载地址
+        div
+          - if @movie.download_url.present?
+            = markdown @movie.download_url
+          - else
+            | 暂无
         hr
         div
           = markdown @movie.body

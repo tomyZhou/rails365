@@ -17,7 +17,7 @@ class HomeController < ApplicationController
     end
 
     @movies = Rails.cache.fetch('movies') do
-      Movie.except_body_with_default.order(id: :desc).limit(20).to_a
+      Movie.except_body_with_default.order(updated_at: :desc).limit(20).to_a
     end
 
     @books = Rails.cache.fetch('books') do

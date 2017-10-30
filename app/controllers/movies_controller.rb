@@ -5,7 +5,7 @@ class MoviesController < ApplicationController
   authorize_resource
 
   def index
-    @movies = Movie.except_body_with_default.order('id DESC').page(params[:page])
+    @movies = Movie.except_body_with_default.order('id DESC').page(params[:page]).per(20)
 
     @playlists = Rails.cache.fetch 'playlist_all' do
       Playlist.order(weight: :desc).to_a
@@ -75,9 +75,9 @@ class MoviesController < ApplicationController
 
   def movie_params
     if current_user && current_user.super_admin?
-      params.require(:movie).permit(:title, :play_time, :body, :playlist_id, :user_id, :weight, :image, :mp4_url, :youtube_url, :is_finished)
+      params.require(:movie).permit(:title, :play_time, :body, :playlist_id, :user_id, :weight, :image, :mp4_url, :youtube_url, :is_finished, :download_url)
     else
-      params.require(:movie).permit(:title, :play_time, :body, :playlist_id, :user_id, :image, :mp4_url, :youtube_url, :is_finished)
+      params.require(:movie).permit(:title, :play_time, :body, :playlist_id, :user_id, :image, :mp4_url, :youtube_url, :is_finished, :download_url)
     end
   end
 end
