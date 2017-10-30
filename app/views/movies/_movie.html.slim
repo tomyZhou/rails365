@@ -6,6 +6,9 @@ div.video-box
     a href="#{movie_path(movie)}"
       = movie.title
   p.time
-    = custom_timeago_tag movie.created_at
-    | &nbsp;*&nbsp;播放时间：
-    = movie.play_time
+    - if movie.is_finished
+      span class="label label-success" 已完结
+    - else
+      span class="label label-warning" 持续更新中
+    |  * 
+    = link_to movie.playlist.try(:name), playlist_path(movie.playlist)

@@ -10,7 +10,11 @@
         = custom_timeago_tag @movie.created_at
         |  编辑于
         = custom_timeago_tag @movie.updated_at
-
+        |  
+        - if @movie.is_finished
+          span class="label label-success" 已完结
+        - else
+          span class="label label-warning" 持续更新中
 .row.block-margin
   .col-md-12
     div.text-right

@@ -75,9 +75,9 @@ class MoviesController < ApplicationController
 
   def movie_params
     if current_user && current_user.super_admin?
-      params.require(:movie).permit(:title, :play_time, :body, :playlist_id, :user_id, :weight, :image, :mp4_url, :youtube_url)
+      params.require(:movie).permit(:title, :play_time, :body, :playlist_id, :user_id, :weight, :image, :mp4_url, :youtube_url, :is_finished)
     else
-      params.require(:movie).permit(:title, :play_time, :body, :playlist_id, :user_id, :image, :mp4_url, :youtube_url)
+      params.require(:movie).permit(:title, :play_time, :body, :playlist_id, :user_id, :image, :mp4_url, :youtube_url, :is_finished)
     end
   end
 end
