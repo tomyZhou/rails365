@@ -5,7 +5,8 @@
         .panel.panel-default
           .panel-heading
             div
-              | gitbook 小书
+              span gitbook 小书
+              = link_to '更多>>', books_path, class: "pull-right"
           .panel-body.pb0.clearfix
             - @books.each do |book|
               .col-md-6

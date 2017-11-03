@@ -1,6 +1,15 @@
 = render 'shared/site_info_home_desc'
 
 - cache [@movie, current_user] do
+  div
+    = link_to "首页", root_path
+    | &nbsp;&nbsp;/&nbsp;&nbsp;
+    = link_to "所有视频", movies_path
+    | &nbsp;&nbsp;/&nbsp;&nbsp;
+    = link_to @movie.playlist.try(:name), playlist_path(@movie.playlist)
+    | &nbsp;&nbsp;/&nbsp;&nbsp;
+    = @movie.title
+
   .page-header
     h4.text-primary.my-title = @movie.title
     p.text-right.article-desc

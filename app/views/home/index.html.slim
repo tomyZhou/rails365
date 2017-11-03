@@ -6,7 +6,9 @@
       .panel.panel-default
         .panel-heading
           div
-            | 免费视频(在线观看+网盘下载)
+            span
+              | 免费视频(在线观看+网盘下载)
+            = link_to '更多>>', movies_path, class: "pull-right"
         .panel-body.pb0.pt15.home-video
           - @movies.each do |movie|
             = render partial: 'movies/movie', locals: { movie: movie }
@@ -16,7 +18,9 @@
     .col-md-6
       .panel.panel-default
         .panel-heading
-          div 最近的文章
+          div
+            span 最近的文章
+            = link_to '更多>>', articles_path, class: "pull-right"
         .panel-body.pb0
           - @articles.each do |article|
             = render partial: 'articles/article', locals: { article: article }
@@ -25,7 +29,9 @@
     .col-md-6
       .panel.panel-default
         .panel-heading
-          div 最热门的文章
+          div
+            span 最热门的文章
+            = link_to '更多>>', articles_path, class: "pull-right"
         .panel-body.pb0
           - @hot_articles.each do |article|
             = render partial: 'articles/article', locals: { article: article }
@@ -38,7 +44,8 @@
       .panel.panel-default
         .panel-heading
           div
-            | 分类
+            span 分类
+            = link_to '更多>>', groups_path, class: "pull-right"
         .panel-body.pb0
           = render partial: 'groups/group', locals: { groups: @groups }
 
@@ -51,5 +58,3 @@
             | 播放列表
         .panel-body.pb0.pt15.home-video
           = render partial: 'playlists/playlist', locals: { playlists: @playlists }
-
-= render 'shared/qrcode'

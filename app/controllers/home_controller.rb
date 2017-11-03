@@ -9,11 +9,11 @@ class HomeController < ApplicationController
     end
 
     @groups = Rails.cache.fetch('groups', expires_in: 2.hours) do
-      Group.order(weight: :desc).to_a
+      Group.order(weight: :desc).limit(Group.count - (Group.count % 6)).to_a
     end
 
     @playlists = Rails.cache.fetch('playlists') do
-      Playlist.order(weight: :desc).to_a
+      Playlist.order(weight: :desc).limit(Playlist.count - (Playlist.count % 5)).to_a
     end
 
     @movies = Rails.cache.fetch('movies') do
