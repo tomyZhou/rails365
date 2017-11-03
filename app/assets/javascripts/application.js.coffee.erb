@@ -29,10 +29,16 @@ $ ->
   socket = new WebSocket "<%= Settings.ws_protocol %>://#{window.location.host}/ws/"
 
   socket.onmessage = (event) ->
-    toastr.options.closeDuration = 40000
-    toastr.remove()
+    # toastr.options.closeDuration = 40000
+    # toastr.remove()
+    # if event.data.length
+    #   toastr.success("#{event.data}", '有消息啦！')
     if event.data.length
-      toastr.success("#{event.data}", '有消息啦！')
+      new Notification "有消息拉！",
+        body: "#{event.data}"
+        icon: "https://www.rails365.net/favicon.ico"
+
+Notification.requestPermission()
 
 jQuery ->
   flash = [
