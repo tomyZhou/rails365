@@ -18,6 +18,7 @@ zh-CN:
         youtube_url: 'youtube 在线地址'
         is_finished: "是否完结"
         download_url: '下载地址'
+        author: '发布者'
       group:
         name: '名称'
         image: '图片'

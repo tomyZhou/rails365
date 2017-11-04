@@ -66,7 +66,7 @@ class Movie < ActiveRecord::Base
 
   def publish_create
     unless Rails.env.test?
-      Redis.new.publish 'ws', "#{self.title} 视频于 #{I18n.l created_at, format: :long} 创建成功"
+      Redis.new.publish 'ws', "上传 #{self.title} 视频"
     end
   end
 
@@ -95,7 +95,7 @@ class Movie < ActiveRecord::Base
     Rails.cache.delete [slug, 'recommend_movies', playlist.slug]
 
     unless Rails.env.test?
-      Redis.new.publish 'ws', "#{self.title} 视频于 #{I18n.l created_at, format: :long} 更新成功"
+      Redis.new.publish 'ws', "更新 #{self.title} 视频"
     end
   end
 end

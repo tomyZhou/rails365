@@ -12,3 +12,5 @@ div.video-box
       span class="label label-warning" 持续更新中
     |  * 
     = link_to movie.playlist.try(:name), playlist_path(movie.playlist)
+  p.time
+    = custom_timeago_tag movie.created_at

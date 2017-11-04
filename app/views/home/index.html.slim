@@ -55,6 +55,7 @@
       .panel.panel-default
         .panel-heading
           div
-            | 播放列表
+            span 播放列表
+            = link_to '更多>>', movies_path, class: "pull-right"
         .panel-body.pb0.pt15.home-video
           = render partial: 'playlists/playlist', locals: { playlists: @playlists }
