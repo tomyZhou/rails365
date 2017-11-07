@@ -63,7 +63,7 @@ class Article < ActiveRecord::Base
 
   def publish_create
     unless Rails.env.test?
-      Redis.new.publish 'ws', "创建 #{self.title} 文章"
+      Redis.new.publish 'ws', {title: 'rails365 上传了文章', content: self.title}.to_json
     end
   end
 
@@ -93,7 +93,7 @@ class Article < ActiveRecord::Base
     Rails.cache.delete [slug, 'recommend_articles', group.slug]
 
     unless Rails.env.test?
-      Redis.new.publish 'ws', "更新 #{self.title} 文章"
+      Redis.new.publish 'ws', {title: 'rails365 更新了文章', content: self.title}.to_json
     end
   end
 end
