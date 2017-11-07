@@ -43,6 +43,9 @@
           |  播放列表 
           = link_to playlist_path(@movie.playlist) do
             span.mr5 = @movie.playlist.try(:name)
+          - if @movie.mp4_name.present?
+            | • 
+            = @movie.mp4_name
         - if @movie.youtube_url.present?
           p = link_to '用 youtube 播放', @movie.youtube_url, target: "_blank"
         h5 下载地址
