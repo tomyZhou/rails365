@@ -37,9 +37,9 @@ class Movie < ActiveRecord::Base
   validates :image, presence: true, on: :create
 
   def recommend_movies
-    playlist_slug = Playlist.fetch(self.playlist_id).slug rescue 'ruby'
-    Rails.cache.fetch "recommend_movies_#{playlist_slug}" do
-      self.class.except_body_with_default.search(playlist_slug, limit: 11)
+    playlist = Playlist.fetch(self.playlist_id)
+    Rails.cache.fetch "recommend_movies_#{playlist.slug}" do
+      self.class.except_body_with_default.search(playlist.name, fields: [:title, :body], limit: 11)
     end
   end
 

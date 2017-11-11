@@ -21,7 +21,7 @@ class MoviesController < ApplicationController
   def show
     @title = @movie.title
 
-    # @recommend_movies = @movie.recommend_movies
+    @recommend_movies = @movie.recommend_movies
 
     @comments = @movie.fetch_comments
     @comment = @movie.comments.build

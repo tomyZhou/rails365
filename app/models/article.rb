@@ -34,9 +34,9 @@ class Article < ActiveRecord::Base
   validates :title, uniqueness: true
 
   def recommend_articles
-    group_slug = Group.fetch(self.group_id).slug rescue 'ruby'
-    Rails.cache.fetch "recommend_articles_#{group_slug}" do
-      self.class.except_body_with_default.search(group_slug, limit: 11)
+    group = Group.fetch(self.group_id)
+    Rails.cache.fetch "recommend_articles_#{group.slug}" do
+      self.class.except_body_with_default.search(group.name, fields: [:title, :body], limit: 11)
     end
   end
 

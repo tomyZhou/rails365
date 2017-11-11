@@ -71,6 +71,14 @@
         div 分享
       .panel-body
         = social_share_button_tag(@movie.title)
+    - cache @recommend_movies do
+      .panel.panel-default.hidden-xs
+        .panel-heading
+          div 相关推荐
+        .panel-body
+          - @recommend_movies.each do |recommend_movie|
+            - unless recommend_movie.id == @movie.id
+              p.home-p.box-article = link_to recommend_movie.title, movie_path(recommend_movie)
 
 javascript:
   $(document).ready(function() {
