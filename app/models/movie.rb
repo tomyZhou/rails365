@@ -43,6 +43,13 @@ class Movie < ActiveRecord::Base
     end
   end
 
+  def playlist_movies
+    playlist = Playlist.fetch(self.playlist_id)
+    Rails.cache.fetch "playlist_movies_#{playlist.slug}" do
+      self.class.except_body_with_default.where(playlist: playlist).order(weight: :asc, id: :asc)
+    end
+  end
+
   def normalize_friendly_id(input)
     PinYin.of_string(input).to_s.to_slug.normalize.to_s
   end
@@ -92,7 +99,9 @@ class Movie < ActiveRecord::Base
 
   def clear_after_updated_cache
     # 文章show页面右侧推荐文章列表
-    Rails.cache.delete [slug, 'recommend_movies', playlist.slug]
+    Rails.cache.delete "recommend_movies_#{playlist.slug}"
+
+    Rails.cache.delete "playlist_movies_#{playlist.slug}"
 
     unless Rails.env.test?
       Redis.new.publish 'ws', {title: 'rails365 更新了视频', content: self.title}.to_json

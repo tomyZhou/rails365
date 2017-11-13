@@ -4,7 +4,7 @@ div.video-box
       = image_tag movie.image_url(:preview)
   p.title
     a href="#{movie_path(movie)}"
-      = truncate movie.title, length: 20
+      = truncate movie.title, length: 25
   p.time
     - if movie.is_finished
       span class="label label-success" 已完结

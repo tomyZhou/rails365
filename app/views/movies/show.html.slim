@@ -79,6 +79,18 @@
           - @recommend_movies.each do |recommend_movie|
             - unless recommend_movie.id == @movie.id
               p.home-p.box-article = link_to recommend_movie.title, movie_path(recommend_movie)
+    - cache [@movie, @playlist_movies] do
+      .panel.panel-default.hidden-xs
+        .panel-heading
+          div 播放列表
+        .panel-body
+          - @playlist_movies.each do |playlist_movie|
+            - if playlist_movie.id == @movie.id
+              p.home-p.box-article
+                i.glyphicon.glyphicon-play
+                = link_to playlist_movie.title, movie_path(playlist_movie)
+            - else
+              p.home-p.box-article = link_to playlist_movie.title, movie_path(playlist_movie)
 
 javascript:
   $(document).ready(function() {

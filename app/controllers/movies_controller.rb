@@ -22,6 +22,7 @@ class MoviesController < ApplicationController
     @title = @movie.title
 
     @recommend_movies = @movie.recommend_movies
+    @playlist_movies = @movie.playlist_movies
 
     @comments = @movie.fetch_comments
     @comment = @movie.comments.build
