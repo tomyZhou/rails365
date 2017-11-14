@@ -14,9 +14,9 @@ class ArticlesController < ApplicationController
 
     @title = '文章列表'
 
-    respond_to do |format|
-      format.all { render :index, formats: [:html] }
-    end
+    # respond_to do |format|
+    #   format.all { render :index, formats: [:html, :js] }
+    # end
   end
 
   def show

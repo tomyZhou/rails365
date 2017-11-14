@@ -135,3 +135,4 @@ gem 'social-share-button'
 gem 'sweetalert-rails'
 
 gem 'rails_autolink'
+gem 'jquery-infinite-pages'

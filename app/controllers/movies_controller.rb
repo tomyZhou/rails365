@@ -13,15 +13,15 @@ class MoviesController < ApplicationController
 
     @title = '视频列表'
 
-    respond_to do |format|
-      format.all { render :index, formats: [:html] }
-    end
+    # respond_to do |format|
+    #   format.all { render :index, formats: [:html] }
+    # end
   end
 
   def show
     @title = @movie.title
 
-    @recommend_movies = @movie.recommend_movies
+    # @recommend_movies = @movie.recommend_movies
     @playlist_movies = @movie.playlist_movies
 
     @comments = @movie.fetch_comments

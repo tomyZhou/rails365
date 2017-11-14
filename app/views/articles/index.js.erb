@@ -1,0 +1,11 @@
+$("<%= j render(:partial => 'index', :object => @articles) %>")
+  .appendTo($(".infinite-table"));
+
+// Update pagination link
+<% if @articles.last_page? %>
+  $('.pagination').html("");
+  $('.pagination-text').html("");
+<% else %>
+  $('.pagination')
+    .html("<%=j link_to_next_page(@articles, '下一页', :remote => true) %>");
+<% end %>

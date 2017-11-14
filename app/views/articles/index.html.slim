@@ -30,6 +30,8 @@
     = render 'paginate'
 
   - else
-    - @articles.each do |article|
-      = render partial: 'article', locals: { article: article }
-    = render 'paginate'
+    .infinite-table
+      = render partial: 'index', object: @articles
+    .pagination.hidden
+      = link_to_next_page(@articles, 'Next Page', :remote => true)
+    .pagination-text 正在加载下一页...

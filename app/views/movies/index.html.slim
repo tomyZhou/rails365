@@ -8,9 +8,11 @@
     = link_to "添加新视频", new_movie_path, class: 'btn btn-primary'
 - cache @movies do
   div.pt15.home-video
-    - @movies.each do |movie|
-      = render partial: 'movie', locals: { movie: movie }
-    = render 'paginate'
+    .infinite-table
+      = render partial: 'index', object: @movies
+    .pagination.hidden
+      = link_to_next_page(@movies, '下一页', :remote => true)
+    .pagination-text 正在加载下一页...
 
 .page-header
   h4.text-primary.title-header 所有播放列表(#{@playlists.count})

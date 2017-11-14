@@ -21,6 +21,7 @@
 #= require social-share-button/wechat
 #= require sweetalert
 #= require devise
+#= require jquery.infinite-pages
 
 jQuery ->
   $("img.lazy").lazyload()
@@ -52,3 +53,15 @@ jQuery ->
   for key of flash
     select = ".alert-autocloseable-" + flash[key]
     $(select).delay(5000).fadeOut()  if $(select).length > 0
+
+jQuery ->
+  $('.pagination').infinitePages
+    debug: true
+    loading: ->
+      # jQuery callback on the nav element
+      $(".pagination-text").text("正在加载下一页...")
+    success: ->
+      # called after successful ajax call
+    error: ->
+      # called after failed ajax call
+      $(".pagination-text").text("Trouble! Please drink some coconut water and click again")
