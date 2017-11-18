@@ -28,4 +28,16 @@ class HomeController < ApplicationController
       format.all { render :index, formats: [:html] }
     end
   end
+
+  def find
+    if params[:search].present?
+      if params[:tp] == "movie"
+        redirect_to movies_path(tp: 'movie', search: params[:search])
+      else
+        redirect_to articles_path(tp: 'article', search: params[:search])
+      end
+    else
+      redirect_to root_path
+    end
+  end
 end

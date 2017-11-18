@@ -5,7 +5,11 @@ class MoviesController < ApplicationController
   authorize_resource
 
   def index
-    @movies = Movie.except_body_with_default.order('id DESC').page(params[:page]).per(20)
+    if params[:search].present?
+      @movies = Movie.search params[:search], fields: [:title, :body], includes: [:playlist], page: params[:page], per_page: 20
+    else
+      @movies = Movie.except_body_with_default.order('id DESC').page(params[:page]).per(20)
+    end
 
     @playlists = Rails.cache.fetch 'playlist_all' do
       Playlist.order(weight: :desc).to_a

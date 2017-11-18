@@ -34,4 +34,5 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   get '/ws', to: 'websocket#ws'
+  get 'find', to: 'home#find'
 end

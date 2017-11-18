@@ -23,8 +23,9 @@ nav.navbar.navbar-default
           a href="/groups" 分类
         li class="#{controller_name == 'books' ? 'active' : nil}"
           a href="/books" 小书
-      = form_tag "/articles", method: "get", class: "navbar-form navbar-left", role: "search"
+      = form_tag "/find", method: "get", class: "navbar-form navbar-left", role: "search"
         .form-group
+          = select_tag :tp, options_for_select({"视频" => 'movie', "文章" => 'article'}, "#{params[:tp].presence || 'movie'}"), class: "form-control mr5"
           input.form-control placeholder="搜索标题或内容" type="text" name="search" value="#{params[:search].presence}"/
       - if user_signed_in?
         ul.nav.navbar-nav.navbar-right
