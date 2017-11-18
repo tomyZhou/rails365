@@ -3,9 +3,9 @@ $("<%= j render(:partial => 'index', :object => @movies) %>")
 
 // Update pagination link
 <% if @movies.last_page? %>
-  $('.pagination').html("");
+  $('.my-pagination').html("");
   $('.pagination-text').html("没有更多了");
 <% else %>
-  $('.pagination')
+  $('.my-pagination')
     .html("<%=j link_to_next_page(@movies, '下一页', :remote => true) %>");
 <% end %>

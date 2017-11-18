@@ -1,0 +1,10 @@
+div.video-box
+  div
+    a href="#{soft_path(soft)}"
+      = image_tag soft.image_url(:preview)
+  p.title
+    a href="#{soft_path(soft)}"
+      = truncate soft.title, length: 25
+  p.time
+  p.time
+    = custom_timeago_tag soft.created_at

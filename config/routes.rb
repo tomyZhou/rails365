@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :books, only: [:index]
 
   resources :articles, concerns: [:commentable]
+  resources :softs, concerns: [:commentable]
   resources :movies, concerns: [:commentable]
   resources :groups, only: [:index, :show]
   resources :playlists, only: [:index, :show]
