@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :async, authentication_keys: [:login]
   devise :omniauthable, omniauth_providers: [:github]
 
+  act_as_liker
+
   validate :validate_username
   validates :username, format: { with: ALLOW_LOGIN_CHARS_REGEXP, message: '只允许数字、大小写字母和下划线' },
                        length: { in: 3..20 }, presence: true,

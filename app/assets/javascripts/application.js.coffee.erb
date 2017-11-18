@@ -65,3 +65,6 @@ jQuery ->
     error: ->
       # called after failed ajax call
       $(".pagination-text").text("Trouble! Please drink some coconut water and click again")
+
+$(document).ajaxError (e, xhr, settings) ->
+  window.location.href = "/users/sign_in" if xhr.status is 401

@@ -18,6 +18,7 @@ class Ability
       can :read, Group
       can :read, Book
       can :read, Movie
+      can :like, Movie
       can :read, Playlist
     end
   end

@@ -1,7 +1,7 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:show]
-  before_action :find_changed_movie, only: [:edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :find_changed_movie, only: [:edit, :update, :destroy, :like]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :like]
   authorize_resource
 
   def index
@@ -64,6 +64,11 @@ class MoviesController < ApplicationController
   def destroy
     @movie.destroy
     redirect_to movies_path, notice: '视频成功删除!'
+  end
+
+  def like
+    current_user.toggle_like(@movie)
+    @movie.clear_like_cache
   end
 
   private

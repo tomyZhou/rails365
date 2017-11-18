@@ -1,0 +1,2 @@
+var movie_id = "#movie-id-" + "<%= @movie.id %>";
+$(movie_id).text("<%= @movie.likers_by(User).count %>");

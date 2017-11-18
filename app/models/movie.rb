@@ -8,6 +8,8 @@ class Movie < ActiveRecord::Base
   include IdentityCache
   cache_index :slug, unique: true
 
+  act_as_likee
+
   belongs_to :playlist, counter_cache: true
   belongs_to :user
   has_many :comments, as: 'commentable'
@@ -69,7 +71,13 @@ class Movie < ActiveRecord::Base
     self.title.auto_correct!
   end
 
-  private
+  def clear_like_cache
+    self.clear_cache
+    self.clear_before_updated_cache
+    self.clear_after_updated_cache
+  end
+
+  protected
 
   def publish_create
     unless Rails.env.test?
@@ -85,7 +93,7 @@ class Movie < ActiveRecord::Base
     Rails.cache.delete 'playlist_all'
     # 所属的分类
     IdentityCache.cache.delete(playlist.primary_cache_index_key)
-    # 分类show页面下的文章列表
+    # 分类show页面下的视频列表
     Rails.cache.delete [playlist.slug, 'movies']
   end
 
@@ -98,7 +106,7 @@ class Movie < ActiveRecord::Base
   end
 
   def clear_after_updated_cache
-    # 文章show页面右侧推荐文章列表
+    # 文章show页面右侧推荐视频列表
     Rails.cache.delete "recommend_movies_#{playlist.slug}"
 
     Rails.cache.delete "playlist_movies_#{playlist.slug}"

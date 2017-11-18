@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   resources :books, only: [:index]
 
   resources :articles, concerns: [:commentable]
-  resources :movies, concerns: [:commentable]
+  resources :movies, concerns: [:commentable] do
+    get :like, on: :member
+  end
   resources :groups, only: [:index, :show]
   resources :playlists, only: [:index, :show]
   resources :apps, only: [:index]

@@ -12,5 +12,10 @@ div.video-box
       span class="label label-warning" 持续更新中
     |  * 
     = link_to movie.playlist.try(:name), playlist_path(movie.playlist)
+    |  * 
+    span.blue id="movie-id-#{movie.id}" = movie.likers_by(User).count
+    |  
+    = link_to like_movie_path(movie), remote: true do
+      i.glyphicon.glyphicon-thumbs-up
   p.time
     = custom_timeago_tag movie.created_at

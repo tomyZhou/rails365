@@ -136,3 +136,4 @@ gem 'sweetalert-rails'
 
 gem 'rails_autolink'
 gem 'jquery-infinite-pages'
+gem 'like_system'
