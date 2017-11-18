@@ -12,6 +12,10 @@ class ArticlesController < ApplicationController
         Article.except_body_with_default.order('id DESC').page(params[:page])
       end
 
+    @groups = Rails.cache.fetch 'group_all' do
+      Group.order(weight: :desc).to_a
+    end
+
     @title = '文章列表'
 
     # respond_to do |format|

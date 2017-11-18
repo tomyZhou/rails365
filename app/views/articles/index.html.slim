@@ -1,37 +1,53 @@
 = render 'shared/site_info_home_desc'
 
-.page-header
-  h4.text-primary.title-header 所有文章(#{@articles.total_count})
-
 - if can? :create, Article
-  .text-right
-    = link_to "添加新文章", new_article_path, class: 'btn btn-primary'
-- cache @articles do
-  - if params[:search].present?
-    div.search-hight-light
-      - @articles.with_details.each do |article, details|
-        div.mb20
-          - if details[:highlight][:title].present?
-            p.article-title = link_to details[:highlight][:title].html_safe, article
-          - else
-            p.article-title = link_to article.title, article
-          p.mb10
-            = link_to article_url(article), article, class: "text-info"
-          - if details[:highlight][:body].present?
-            p
-              = details[:highlight][:body].html_safe
-          p.text-left.hidden-xs.article-desc
-            span.text-muted
-              - if article.group
-                = link_to group_path(article.group) do
-                  span.mr5 = article.group.name
-              | 由 #{link_to article.user.try(:login), user_path(article.user)} 发表于
-              = custom_timeago_tag article.created_at
-    = render 'paginate'
+  .row.mb10
+    .col-sm-12
+      .text-right
+        = link_to "添加新文章", new_article_path, class: 'btn btn-primary'
+.row
+  .col-md-8
+    .panel.panel-default
+      .panel-heading
+        span 所有文章(#{@articles.total_count})
+      .panel-body
+        - cache @articles do
+          - if params[:search].present?
+            div.search-hight-light
+              - @articles.with_details.each do |article, details|
+                div.mb20
+                  - if details[:highlight][:title].present?
+                    p.article-title = link_to details[:highlight][:title].html_safe, article
+                  - else
+                    p.article-title = link_to article.title, article
+                  p.mb10
+                    = link_to article_url(article), article, class: "text-info"
+                  - if details[:highlight][:body].present?
+                    p
+                      = details[:highlight][:body].html_safe
+                  p.text-left.hidden-xs.article-desc
+                    span.text-muted
+                      - if article.group
+                        = link_to group_path(article.group) do
+                          span.mr5 = article.group.name
+                      | 由 #{link_to article.user.try(:login), user_path(article.user)} 发表于
+                      = custom_timeago_tag article.created_at
+            = render 'paginate'
 
-  - else
-    .infinite-table
-      = render partial: 'index', object: @articles
-    .pagination.hidden
-      = link_to_next_page(@articles, 'Next Page', :remote => true)
-    .pagination-text 正在加载下一页...
+          - else
+            .infinite-table
+              = render partial: 'index', object: @articles
+            .pagination.hidden
+              = link_to_next_page(@articles, 'Next Page', :remote => true)
+            .pagination-text 正在加载下一页...
+
+  .col-md-4
+    - cache @groups do
+      .row
+        .col-md-12
+          .panel.panel-default
+            .panel-heading
+              div
+                span 所有分类(#{@groups.count})
+            .panel-body.pb0
+              = render partial: 'groups/article_group', locals: { groups: @groups }

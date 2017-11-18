@@ -1,0 +1,8 @@
+- groups.in_groups_of(6) do |per_group|
+  .row
+    - per_group.each do |group|
+      - if group.present?
+        .col-sm-6.group-image.col-xs-6
+          = link_to group do
+            img data-original=group.image_url(:group).to_s width="60px" height="60px" alt="#{group.name}" class="lazy"
+            p.text-center.header-group #{group.name}(#{group.articles_count})
