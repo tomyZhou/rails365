@@ -1,10 +1,14 @@
-div.video-box
-  div
-    a href="#{soft_path(soft)}"
-      = image_tag soft.image_url(:preview)
-  p.title
-    a href="#{soft_path(soft)}"
-      = truncate soft.title, length: 25
-  p.time
-  p.time
-    = custom_timeago_tag soft.created_at
+div.mb10.clearfix
+  div.pull-left.avatar-image
+    = image_tag soft.image_url(:preview)
+  p.article-title
+    = link_to soft.title, soft_path(soft)
+  p.text-left.hidden-xs.article-desc
+    span.text-muted
+      | 创建于
+      = custom_timeago_tag soft.created_at
+      | &nbsp;
+    - if current_user && current_user.super_admin?
+      a href="#{edit_soft_path(soft)}"
+        i class="glyphicon glyphicon-edit" aria-hidden="true"
+        | &nbsp;

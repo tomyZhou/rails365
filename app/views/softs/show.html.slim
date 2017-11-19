@@ -1,0 +1,67 @@
+= render 'shared/site_info_home_desc'
+
+- cache [@soft, current_user] do
+  div
+    = link_to "首页", root_path
+    | &nbsp;&nbsp;/&nbsp;&nbsp;
+    = link_to "所有下载资源", softs_path
+    | &nbsp;&nbsp;/&nbsp;&nbsp;
+    = @soft.title
+
+  .page-header
+    h4.text-primary.my-title = @soft.title
+    p.text-right.article-desc
+        | 由 #{link_to @soft.user.try(:login), user_path(@soft.user)} 发表于
+        = custom_timeago_tag @soft.created_at
+        |  编辑于
+        = custom_timeago_tag @soft.updated_at
+.row.block-margin
+  .col-md-12
+    div.text-right
+      - if can? :update, @soft
+        = link_to "编辑", edit_soft_path(@soft), class: 'btn btn-primary btn-sm'
+
+.row
+  .col-md-8
+    .article_content
+      - cache @soft do
+        p.text-left.time
+          | 创建于
+          = custom_timeago_tag @soft.created_at
+        h5 下载地址
+        div
+          - if @soft.download_url.present?
+            = markdown @soft.download_url
+          - else
+            | 暂无
+        hr
+        
+        div
+          = markdown @soft.body
+    hr
+    = render partial: 'comments/form', locals: { object: @soft }
+    div#comment_box
+      = render 'comments/comments'
+  .col-md-4
+    .panel.panel-default.hidden-xs
+      .panel-heading
+        div 分享
+      .panel-body
+        = social_share_button_tag(@soft.title)
+    /- cache [@soft, @playlist_softs] do
+    /  .panel.panel-default.hidden-xs
+    /    .panel-heading
+    /      div 播放列表
+    /    .panel-body
+    /      - @playlist_softs.each do |playlist_soft|
+    /        - if playlist_soft.id == @soft.id
+    /          p.home-p.box-article
+    /            i.glyphicon.glyphicon-play
+    /            = link_to playlist_soft.title, soft_path(playlist_soft)
+    /        - else
+    /          p.home-p.box-article = link_to playlist_soft.title, soft_path(playlist_soft)
+
+javascript:
+  $(document).ready(function() {
+    $('a.fluidbox-link').fluidbox();
+  });

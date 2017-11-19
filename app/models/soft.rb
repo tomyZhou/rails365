@@ -12,9 +12,9 @@ class Soft < ActiveRecord::Base
   has_many :comments, as: 'commentable'
   cache_has_many :comments, :inverse_name => :commentable
 
-  scope :except_body_with_default, -> { select(:title, :name, :image) }
+  scope :except_body_with_default, -> { select(:title, :name, :image, :updated_at, :slug, :created_at) }
 
-  mount_uploader :image, VideoUploader
+  mount_uploader :image, SoftUploader
 
   def self.async_create(user_id, soft_params)
     user = User.find(user_id)
@@ -31,7 +31,7 @@ class Soft < ActiveRecord::Base
     soft.save(validate: false)
   end
 
-  validates :title, :body, :user_id, presence: true
+  validates :title, :body, :user_id, :name, :tag, presence: true
   validates :title, uniqueness: true
   validates :image, presence: true, on: :create
 
