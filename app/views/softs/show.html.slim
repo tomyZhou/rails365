@@ -28,7 +28,7 @@
           .pull-right
             = image_tag @soft.image_url(:small), class: "soft-markdown-image"
           = markdown @soft.body
-        div
+        div.text-center
           = link_to '立即下载', @soft.actual_download_url, class: "btn btn-primary", target: "_blank"
           |  密码： #{@soft.actual_download_password}
     hr

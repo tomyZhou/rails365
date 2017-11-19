@@ -46,10 +46,6 @@
             = @movie.mp4_name
         - if @movie.youtube_url.present?
           p = link_to '用 youtube 播放', @movie.youtube_url, target: "_blank"
-        - if @movie.baidu_download?
-          div
-            = link_to '立即下载', @movie.actual_download_url, class: "btn btn-primary", target: "_blank"
-            |  密码： #{@movie.actual_download_password}
         hr
         / 为了兼容以前的数据内容
         - if !@movie.body.include?('视频内容搬运于网络') && @movie.author.present?
@@ -57,6 +53,10 @@
             p 视频内容搬运于网络，由 #{@movie.author} 发布，本站提供下载链接是为了提高用户体验，而不是以盈利为目的，如有版本问题，请联系我（邮箱：hfpp2012@gmail.com），即可删除信息。
         div
           = markdown @movie.body
+        - if @movie.baidu_download?
+          div.text-center
+            = link_to '立即下载', @movie.actual_download_url, class: "btn btn-primary", target: "_blank"
+            |  密码： #{@movie.actual_download_password}
     hr
     = render partial: 'comments/form', locals: { object: @movie }
     div#comment_box
