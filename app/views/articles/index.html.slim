@@ -30,9 +30,12 @@
                           span.mr5 = article.group.name
                       | 由 #{link_to article.user.try(:login), user_path(article.user)} 发表于
                       = custom_timeago_tag article.created_at
-            = render 'paginate'
+            div.text-center
+              = paginate @articles
 
           - else
+            div
+              = paginate @articles
             .infinite-table
               = render partial: 'index', object: @articles
             .my-pagination.hidden
