@@ -33,6 +33,8 @@ class HomeController < ApplicationController
     if params[:search].present?
       if params[:tp] == "movie"
         redirect_to movies_path(tp: 'movie', search: params[:search])
+      elsif params[:tp] == "soft"
+        redirect_to softs_path(tp: 'soft', search: params[:search])
       else
         redirect_to articles_path(tp: 'article', search: params[:search])
       end
