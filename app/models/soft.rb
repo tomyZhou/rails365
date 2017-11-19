@@ -56,11 +56,27 @@ class Soft < ActiveRecord::Base
     self.title.auto_correct!
   end
 
+  def baidu_download?
+    self.download_url.present? && self.download_url.include?('baidu') ? true : false
+  end
+
+  def actual_download_url
+    if baidu_download?
+      self.download_url.partition(' ').first.partition(':').last
+    end
+  end
+
+  def actual_download_password
+    if baidu_download?
+      self.download_url.partition(' ').last.partition(':').last
+    end
+  end
+
   private
 
   def publish_create
     unless Rails.env.test?
-      Redis.new.publish 'ws', {title: 'rails365 上传了资源', content: self.title}.to_json
+      Redis.new.publish 'ws', { title: 'rails365 上传了资源', content: self.title }.to_json
     end
   end
 
@@ -71,7 +87,7 @@ class Soft < ActiveRecord::Base
 
   def clear_after_updated_cache
     unless Rails.env.test?
-      Redis.new.publish 'ws', {title: 'rails365 更新了资源', content: self.title}.to_json
+      Redis.new.publish 'ws', { title: 'rails365 更新了资源', content: self.title }.to_json
     end
   end
 end

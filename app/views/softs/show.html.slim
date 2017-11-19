@@ -3,16 +3,17 @@
     = link_to "首页", root_path
     | &nbsp;&nbsp;/&nbsp;&nbsp;
     = link_to "所有下载资源", softs_path
-    | &nbsp;&nbsp;/&nbsp;&nbsp;
-    = @soft.title
 
   .page-header
     h4.text-primary.my-title = @soft.title
     p.text-right.article-desc
-        | 由 #{link_to @soft.user.try(:login), user_path(@soft.user)} 发表于
+        |  
+        = @soft.tag
+        |  由 #{link_to @soft.user.try(:login), user_path(@soft.user)} 发表于
         = custom_timeago_tag @soft.created_at
         |  编辑于
         = custom_timeago_tag @soft.updated_at
+
 .row.block-margin
   .col-md-12
     div.text-right
@@ -23,19 +24,13 @@
   .col-md-8
     .article_content
       - cache @soft do
-        p.text-left.time
-          | 创建于
-          = custom_timeago_tag @soft.created_at
-        h5 下载地址
-        div
-          - if @soft.download_url.present?
-            = markdown @soft.download_url
-          - else
-            | 暂无
-        hr
-        
-        div
+        div.clearfix
+          .pull-right
+            = image_tag @soft.image_url(:small), class: "soft-markdown-image"
           = markdown @soft.body
+        div
+          = link_to '立即下载', @soft.actual_download_url, class: "btn btn-primary", target: "_blank"
+          |  密码： #{@soft.actual_download_password}
     hr
     = render partial: 'comments/form', locals: { object: @soft }
     div#comment_box

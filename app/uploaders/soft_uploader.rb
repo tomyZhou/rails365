@@ -50,9 +50,12 @@ class SoftUploader < CarrierWave::Uploader::Base
   #   "something.jpg" if original_filename
   # end
 
-
   version :preview do
     process resize_to_limit: [256, 256]
+  end
+
+  version :small do
+    process resize_to_limit: [128, 128]
   end
 
   def filename

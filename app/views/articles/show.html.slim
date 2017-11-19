@@ -9,8 +9,7 @@
     = link_to "所有文章", articles_path
     | &nbsp;&nbsp;/&nbsp;&nbsp;
     = link_to @article.group.try(:name), group_path(@article.group)
-    | &nbsp;&nbsp;/&nbsp;&nbsp;
-    = @article.title
+
   .page-header
     h4.text-primary.my-title = @article.title
     p.text-right.article-desc
