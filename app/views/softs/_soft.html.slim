@@ -1,9 +1,13 @@
 div.mb10.clearfix
-  div.pull-left.avatar-image
-    = image_tag soft.image_url(:preview)
+  div.pull-left.soft-image
+    a href="#{soft_path(soft)}"
+      = image_tag soft.image_url(:preview)
   p.article-title
     = link_to soft.title, soft_path(soft)
   p.text-left.hidden-xs.article-desc
+    span.text-muted
+      = soft.tag
+      |  
     span.text-muted
       | 创建于
       = custom_timeago_tag soft.created_at
