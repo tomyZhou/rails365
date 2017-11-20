@@ -136,3 +136,4 @@ gem 'sweetalert-rails'
 
 gem 'rails_autolink'
 gem 'jquery-infinite-pages'
+gem 'google-analytics-rails', '1.1.1'

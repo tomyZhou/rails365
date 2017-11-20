@@ -93,4 +93,5 @@ Rails.application.configure do
     password: Settings.aliyun_email_password,
     enable_starttls_auto: true
   }
+  GA.tracker = "UA-109884023-1"
 end
