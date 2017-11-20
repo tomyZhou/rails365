@@ -70,11 +70,11 @@
     .panel.panel-default
       - cache @movie_liked_count do
         .panel-heading
-          div 收藏（<span id="movie-id-#{@movie.id}">#{@movie_liked_count}</span>）
+          div 收藏（<span id="movie-id-#{@movie.id}">#{@movie.likers_by(User).count}</span>）
       .panel-body
         - if current_user
           - cache @movie_is_likee do
-            - if @movie_is_likee
+            - if @movie.liked_by?(current_user)
               = link_to like_movie_path(@movie), remote: true do
                 i#heart.glyphicon.glyphicon-heart
             - else
