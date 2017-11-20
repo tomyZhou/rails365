@@ -7,6 +7,9 @@ class User < ActiveRecord::Base
   devise :omniauthable, omniauth_providers: [:github]
 
   act_as_liker
+  has_many :like_movies, through: "likees", source: :likee, source_type: "Movie"
+
+  has_many :articles
 
   validate :validate_username
   validates :username, format: { with: ALLOW_LOGIN_CHARS_REGEXP, message: '只允许数字、大小写字母和下划线' },
@@ -24,7 +27,7 @@ class User < ActiveRecord::Base
   end
 
   def letter_avatar_url(size)
-    avatar_url(:small) || LetterAvatar.generate(Pinyin.t(self.username), size).sub('public/', '/')
+    avatar_url || LetterAvatar.generate(Pinyin.t(self.username), size).sub('public/', '/')
   end
 
   def validate_username

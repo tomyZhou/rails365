@@ -18,7 +18,11 @@ Rails.application.routes.draw do
   resources :groups, only: [:index, :show]
   resources :playlists, only: [:index, :show]
   resources :apps, only: [:index]
-  resources :users, only: [:show]
+  resources :users, only: [:show] do
+    member do
+      get :articles
+    end
+  end
 
   %w(404 422 500).each do |code|
     get code, to: 'errors#show', code: code
