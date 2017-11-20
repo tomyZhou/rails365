@@ -1,0 +1,9 @@
+.page-header
+  h3 更新下载资源
+
+.row.block-margin
+  .col-md-12
+    .text-right
+      = link_to '删除', soft_path(@soft), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary btn-sm'
+
+= render 'form'

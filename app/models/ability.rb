@@ -19,6 +19,7 @@ class Ability
       can :read, Book
       can :read, Movie
       can :like, Movie
+      can :read, Soft
       can :read, Playlist
     end
   end
@@ -31,6 +32,7 @@ class Ability
     can :read, App
     can :read, Book
     can :read, Movie
+    can :read, Soft
     can :read, Playlist
   end
 end

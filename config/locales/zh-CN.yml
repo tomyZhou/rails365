@@ -51,6 +51,15 @@ zh-CN:
         group_id: '所属分类'
         group: '所属分类'
         weight: '权重'
+      soft:
+        name: '名称'
+        title: '标题'
+        image: 'logo'
+        body: '内容'
+        download_url: '下载地址'
+        user_id: '用户'
+        user: '用户'
+        tag: '标签分类'
     models:
       article: "文章"
       app: '应用'
@@ -62,3 +71,4 @@ zh-CN:
       admin/site_info: '站点信息'
       comment: '评论'
       book: 'gitbook小书'
+      soft: '资源下载'

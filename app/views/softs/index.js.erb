@@ -1,11 +1,11 @@
-$("<%= j render(:partial => 'index', :object => @movies) %>")
+$("<%= j render(:partial => 'index', :object => @softs) %>")
   .appendTo($(".infinite-table"));
 
 // Update pagination link
-<% if @movies.last_page? %>
+<% if @softs.last_page? %>
   $('.my-pagination').html("");
   $('.pagination-text').html("没有更多了");
 <% else %>
   $('.my-pagination')
-    .html("<%=j link_to_next_page(@movies, '下一页', :remote => true) %>");
+    .html("<%=j link_to_next_page(@softs, '下一页', :remote => true) %>");
 <% end %>

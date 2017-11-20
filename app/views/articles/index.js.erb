@@ -3,9 +3,9 @@ $("<%= j render(:partial => 'index', :object => @articles) %>")
 
 // Update pagination link
 <% if @articles.last_page? %>
-  $('.pagination').html("");
+  $('.my-pagination').html("");
   $('.pagination-text').html("");
 <% else %>
-  $('.pagination')
+  $('.my-pagination')
     .html("<%=j link_to_next_page(@articles, '下一页', :remote => true) %>");
 <% end %>

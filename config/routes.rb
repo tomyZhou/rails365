@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :movies, concerns: [:commentable] do
     get :like, on: :member
   end
+  resources :softs, concerns: [:commentable]
   resources :groups, only: [:index, :show]
   resources :playlists, only: [:index, :show]
   resources :apps, only: [:index]
