@@ -29,9 +29,10 @@
             = image_tag @soft.image_url(:small), class: "soft-markdown-image"
           = markdown @soft.body
         hr
-        div.text-center
-          = link_to '立即下载', @soft.actual_download_url, class: "btn btn-primary", target: "_blank"
-          |  密码： #{@soft.actual_download_password}
+        - if @soft.baidu_download?
+          div.text-center
+            = link_to '立即下载', @soft.actual_download_url, class: "btn btn-primary", target: "_blank"
+            |  密码： #{@soft.actual_download_password}
     = render partial: 'comments/form', locals: { object: @soft }
     div#comment_box
       = render 'comments/comments'
@@ -41,6 +42,14 @@
         div 分享
       .panel-body
         = social_share_button_tag(@soft.title)
+    - if @soft.baidu_download?
+      .panel.panel-default
+        .panel-heading
+          div 下载
+        .panel-body
+          div
+            = link_to '立即下载', @soft.actual_download_url, class: "btn btn-primary", target: "_blank"
+            |  密码： #{@soft.actual_download_password}
     /- cache [@soft, @playlist_softs] do
     /  .panel.panel-default.hidden-xs
     /    .panel-heading

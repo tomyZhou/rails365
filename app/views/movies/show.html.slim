@@ -77,6 +77,15 @@
           - else
             i#heart.glyphicon.glyphicon-heart-empty
 
+    - if @movie.baidu_download?
+      .panel.panel-default
+        .panel-heading
+          div 下载
+        .panel-body
+          div
+            = link_to '立即下载', @movie.actual_download_url, class: "btn btn-primary", target: "_blank"
+            |  密码： #{@movie.actual_download_password}
+
     /- cache @recommend_movies do
     /  .panel.panel-default.hidden-xs
     /    .panel-heading
