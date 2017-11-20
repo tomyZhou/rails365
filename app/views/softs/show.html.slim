@@ -60,18 +60,8 @@
           div
             = link_to '立即下载', @soft.actual_download_url, class: "btn btn-primary", target: "_blank"
             |  密码： #{@soft.actual_download_password}
-    /- cache [@soft, @playlist_softs] do
-    /  .panel.panel-default.hidden-xs
-    /    .panel-heading
-    /      div 播放列表
-    /    .panel-body
-    /      - @playlist_softs.each do |playlist_soft|
-    /        - if playlist_soft.id == @soft.id
-    /          p.home-p.box-article
-    /            i.glyphicon.glyphicon-play
-    /            = link_to playlist_soft.title, soft_path(playlist_soft)
-    /        - else
-    /          p.home-p.box-article = link_to playlist_soft.title, soft_path(playlist_soft)
+          div.pt15
+            = link_to "Mac 应用无法打开或文件损坏的处理方法", "https://www.rails365.net/articles/mac-ying-yong-wu-fa-da-kai-huo-wen-jian-sun-huai-de-chu-li-fang-fa"
 
 javascript:
   $(document).ready(function() {
