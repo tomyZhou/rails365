@@ -1,0 +1,7 @@
+var movie_id = "#movie-id-" + "<%= @article.id %>";
+$(movie_id).text("<%= @article.likers_by(User).count %>");
+<% if @article.liked_by?(current_user) %>
+  $("#heart").removeClass('glyphicon-heart-empty').addClass('glyphicon-heart');
+<% else %>
+  $("#heart").removeClass('glyphicon-heart').addClass('glyphicon-heart-empty');
+<% end %>

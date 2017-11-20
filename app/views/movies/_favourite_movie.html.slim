@@ -1,0 +1,15 @@
+div.mb10.clearfix
+  div.pull-left.soft-image
+    a href="#{movie_path(movie)}"
+      = image_tag movie.image_url(:preview), class: "favourite_movie"
+  p.article-title
+    = link_to movie.title, movie_path(movie)
+  p.text-left.hidden-xs.article-desc
+    span.text-muted
+      | 创建于
+      = custom_timeago_tag movie.created_at
+      | &nbsp;
+    - if current_user && current_user.super_admin?
+      a href="#{edit_movie_path(movie)}"
+        i class="glyphicon glyphicon-edit" aria-hidden="true"
+        | &nbsp;

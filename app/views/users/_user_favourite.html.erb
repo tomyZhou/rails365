@@ -11,7 +11,10 @@
     <div class="tab-content admin-tab-content pt30">
       <div role="tabpanel" class="tab-pane active show">
         <% @favourite_movies.each do |movie| %>
-          <%= render partial: 'movies/movie', locals: { movie: movie } %>
+          <%= render partial: 'movies/favourite_movie', locals: { movie: movie } %>
+        <% end %>
+        <% @favourite_articles.each do |article| %>
+          <%= render partial: 'articles/article', locals: { article: article } %>
         <% end %>
       </div>
     </div>

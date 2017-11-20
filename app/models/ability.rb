@@ -19,6 +19,8 @@ class Ability
       can :read, Book
       can :read, Movie
       can :like, Movie
+      can :like, Article
+      can :like, Soft
       can :read, Soft
       can :read, Playlist
     end

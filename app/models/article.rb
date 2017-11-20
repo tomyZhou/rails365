@@ -5,6 +5,8 @@ class Article < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: [:slugged, :finders, :history]
 
+  act_as_likee
+
   include IdentityCache
   cache_index :slug, unique: true
 

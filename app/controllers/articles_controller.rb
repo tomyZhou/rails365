@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show]
-  before_action :find_changed_article, only: [:edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :find_changed_article, only: [:edit, :update, :destroy, :like]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :like]
   authorize_resource
 
   def index
@@ -59,6 +59,10 @@ class ArticlesController < ApplicationController
   def destroy
     @article.destroy
     redirect_to articles_path, notice: '文章成功删除!'
+  end
+
+  def like
+    current_user.toggle_like(@article)
   end
 
   private
