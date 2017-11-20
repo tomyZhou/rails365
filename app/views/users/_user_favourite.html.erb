@@ -16,6 +16,9 @@
         <% @favourite_articles.each do |article| %>
           <%= render partial: 'articles/article', locals: { article: article } %>
         <% end %>
+        <% @favourite_softs.each do |soft| %>
+          <%= render partial: 'softs/soft', locals: { soft: soft } %>
+        <% end %>
       </div>
     </div>
 

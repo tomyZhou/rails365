@@ -8,6 +8,8 @@ class Soft < ActiveRecord::Base
   include IdentityCache
   cache_index :slug, unique: true
 
+  act_as_likee
+
   belongs_to :user
   has_many :comments, as: 'commentable'
   cache_has_many :comments, :inverse_name => :commentable

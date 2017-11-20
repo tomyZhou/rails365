@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   act_as_liker
   has_many :like_movies, through: "likees", source: :likee, source_type: "Movie"
   has_many :like_articles, through: "likees", source: :likee, source_type: "Article"
+  has_many :like_softs, through: "likees", source: :likee, source_type: "Soft"
 
   has_many :articles
 

@@ -1,7 +1,7 @@
 class SoftsController < ApplicationController
   before_action :set_soft, only: [:show]
-  before_action :find_changed_soft, only: [:edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :find_changed_soft, only: [:edit, :update, :destroy, :like]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :like]
   authorize_resource
 
   def index
@@ -55,6 +55,10 @@ class SoftsController < ApplicationController
   def destroy
     @soft.destroy
     redirect_to softs_path, notice: '成功删除!'
+  end
+
+  def like
+    current_user.toggle_like(@soft)
   end
 
   private

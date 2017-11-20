@@ -8,15 +8,16 @@ Rails.application.routes.draw do
     resources :comments, only: [:create]
   end
 
+  # 收藏
+  concern :like do
+    get :like, on: :member
+  end
+
   resources :books, only: [:index]
 
-  resources :articles, concerns: [:commentable] do
-    get :like, on: :member
-  end
-  resources :movies, concerns: [:commentable] do
-    get :like, on: :member
-  end
-  resources :softs, concerns: [:commentable]
+  resources :articles, concerns: [:commentable, :like]
+  resources :movies, concerns: [:commentable, :like]
+  resources :softs, concerns: [:commentable, :like]
   resources :groups, only: [:index, :show]
   resources :playlists, only: [:index, :show]
   resources :apps, only: [:index]
