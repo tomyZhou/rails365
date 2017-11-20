@@ -71,11 +71,6 @@ class Movie < ActiveRecord::Base
     self.title.auto_correct!
   end
 
-  def clear_like_cache(user)
-    Rails.cache.delete "movie_#{self.id}_is_likee_by_#{user.id}"
-    Rails.cache.delete "like_movie_#{self.id}_count"
-  end
-
   def baidu_download?
     self.download_url.present? && self.download_url.include?('baidu') ? true : false
   end

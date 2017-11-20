@@ -32,12 +32,6 @@ class MoviesController < ApplicationController
     @comment = @movie.comments.build
 
     @site_info_home_desc = Playlist.fetch_by_id(@movie.playlist_id).try(:desc)
-    @movie_liked_count = Rails.cache.fetch "like_movie_#{@movie.id}_count" do
-      @movie.likers_by(User).count
-    end
-    @movie_is_likee = Rails.cache.fetch "movie_#{@movie.id}_is_likee_by_#{current_user.id}" do
-      @movie.liked_by?(current_user)
-    end if current_user
   end
 
   def new
@@ -74,7 +68,6 @@ class MoviesController < ApplicationController
 
   def like
     current_user.toggle_like(@movie)
-    @movie.clear_like_cache(current_user)
   end
 
   private

@@ -53,11 +53,11 @@
             p 视频内容搬运于网络，由 #{@movie.author} 发布，本站提供下载链接是为了提高用户体验，而不是以盈利为目的，如有版本问题，请联系我（邮箱：hfpp2012@gmail.com），即可删除信息。
         div
           = markdown @movie.body
+        hr
         - if @movie.baidu_download?
           div.text-center
             = link_to '立即下载', @movie.actual_download_url, class: "btn btn-primary", target: "_blank"
             |  密码： #{@movie.actual_download_password}
-    hr
     = render partial: 'comments/form', locals: { object: @movie }
     div#comment_box
       = render 'comments/comments'
@@ -68,21 +68,13 @@
       .panel-body
         = social_share_button_tag(@movie.title)
     .panel.panel-default
-      - cache @movie_liked_count do
-        .panel-heading
-          div 收藏（<span id="movie-id-#{@movie.id}">#{@movie.likers_by(User).count}</span>）
+      .panel-heading
+        div 收藏（<span id="movie-id-#{@movie.id}">#{@movie.likers_by(User).count}</span>）
       .panel-body
-        - if current_user
-          - cache @movie_is_likee do
-            - if @movie.liked_by?(current_user)
-              = link_to like_movie_path(@movie), remote: true do
-                i#heart.glyphicon.glyphicon-heart
-            - else
-              = link_to like_movie_path(@movie), remote: true do
-                i#heart.glyphicon.glyphicon-heart-empty
-
-        - else
-          = link_to like_movie_path(@movie), remote: true do
+        = link_to like_movie_path(@movie), remote: true do
+          - if current_user && @movie.liked_by?(current_user)
+            i#heart.glyphicon.glyphicon-heart
+          - else
             i#heart.glyphicon.glyphicon-heart-empty
 
     /- cache @recommend_movies do
