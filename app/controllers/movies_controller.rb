@@ -68,7 +68,6 @@ class MoviesController < ApplicationController
 
   def like
     current_user.toggle_like(@movie)
-    @movie.clear_like_cache
   end
 
   private

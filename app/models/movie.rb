@@ -38,12 +38,12 @@ class Movie < ActiveRecord::Base
   validates :title, uniqueness: true
   validates :image, presence: true, on: :create
 
-  def recommend_movies
-    playlist = Playlist.fetch(self.playlist_id)
-    Rails.cache.fetch "recommend_movies_#{playlist.slug}" do
-      self.class.except_body_with_default.search(playlist.name, fields: [:title, :body], limit: 11)
-    end
-  end
+  # def recommend_movies
+  #   playlist = Playlist.fetch(self.playlist_id)
+  #   Rails.cache.fetch "recommend_movies_#{playlist.slug}" do
+  #     self.class.except_body_with_default.search(playlist.name, fields: [:title, :body], limit: 11)
+  #   end
+  # end
 
   def playlist_movies
     playlist = Playlist.fetch(self.playlist_id)
@@ -69,12 +69,6 @@ class Movie < ActiveRecord::Base
     # 引发 ActiveModel::Dirty 的 change
     self.title_will_change!
     self.title.auto_correct!
-  end
-
-  def clear_like_cache
-    self.clear_cache
-    self.clear_before_updated_cache
-    self.clear_after_updated_cache
   end
 
   protected
@@ -107,7 +101,7 @@ class Movie < ActiveRecord::Base
 
   def clear_after_updated_cache
     # 文章show页面右侧推荐视频列表
-    Rails.cache.delete "recommend_movies_#{playlist.slug}"
+    # Rails.cache.delete "recommend_movies_#{playlist.slug}"
 
     Rails.cache.delete "playlist_movies_#{playlist.slug}"
 
