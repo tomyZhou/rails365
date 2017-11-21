@@ -23,6 +23,8 @@ nav.navbar.navbar-default
           a href="/softs" 资源下载
         li class="#{controller_name == 'groups' ? 'active' : nil}"
           a href="/groups" 分类
+        li class="#{controller_name == 'playlists' ? 'active' : nil}"
+          a href="/playlists" 播放列表
         li class="#{controller_name == 'books' ? 'active' : nil}"
           a href="/books" 小书
       = form_tag "/find", method: "get", class: "navbar-form navbar-left", role: "search"

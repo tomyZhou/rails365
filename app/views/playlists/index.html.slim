@@ -1,0 +1,6 @@
+- cache @playlists do
+  .page-header
+    h4.text-primary.title-header 所有播放列表(#{@playlists.count})
+
+  div.home-video
+    = render partial: 'playlists/playlist', locals: { playlists: @playlists }

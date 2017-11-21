@@ -13,10 +13,3 @@
     .pagination-text
       /- unless @movies.last_page?
       /  | 正在加载下一页...
-
-.page-header.hidden-xs
-  h4.text-primary.title-header 所有播放列表(#{@playlists.count})
-
-- cache @playlists do
-  div.pt15.home-video.hidden-xs
-    = render partial: 'playlists/playlist', locals: { playlists: @playlists }
