@@ -41,8 +41,6 @@
             .my-pagination.hidden
               = link_to_next_page(@articles, 'Next Page', :remote => true)
             .pagination-text
-              - unless @articles.last_page?
-                | 正在加载下一页...
 
   .col-md-4
     - cache @groups do
