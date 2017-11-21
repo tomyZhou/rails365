@@ -35,7 +35,7 @@
 
           - else
             div
-              = paginate @articles
+              = paginate @articles, window: 3
             .infinite-table
               = render partial: 'index', object: @articles
             .my-pagination.hidden
