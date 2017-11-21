@@ -16,6 +16,8 @@ class ArticlesController < ApplicationController
       Group.order(weight: :desc).to_a
     end
 
+    @users = User.where(id: Article.pluck(:user_id).uniq)
+
     @title = '文章列表'
 
     # respond_to do |format|
