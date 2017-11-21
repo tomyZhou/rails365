@@ -5,7 +5,7 @@ $(document).on('ready', function () {
       var more_posts_url = $('.my-pagination a').attr('href');
       if (!isLoading && more_posts_url && $(window).scrollTop() > $(document).height() - $(window).height() - 60) {
         isLoading = true;
-        $('.pagination-text').html("正在加载下一页...");
+        $('.pagination-text').html("正在加载下一页 <img src='/assets/ajax-loader.gif' />");
         $.getScript(more_posts_url).done(function (data,textStatus,jqxhr) {
           isLoading = false;
         }).fail(function() {

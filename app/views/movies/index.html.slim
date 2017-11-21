@@ -11,8 +11,8 @@
     .my-pagination.hidden
       = link_to_next_page(@movies, '下一页', :remote => true)
     .pagination-text
-      - unless @movies.last_page?
-        | 正在加载下一页...
+      /- unless @movies.last_page?
+      /  | 正在加载下一页...
 
 .page-header.hidden-xs
   h4.text-primary.title-header 所有播放列表(#{@playlists.count})
