@@ -11,8 +11,3 @@ div.mb10.clearfix
     span.text-muted
       | 创建于
       = custom_timeago_tag soft.created_at
-      | &nbsp;
-    - if current_user && current_user.super_admin?
-      a href="#{edit_soft_path(soft)}"
-        i class="glyphicon glyphicon-edit" aria-hidden="true"
-        | &nbsp;

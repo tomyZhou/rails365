@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   end
 
   def change_profile
+    @no_search = true
   end
 
   def update_profile
@@ -32,6 +33,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:username, :email, :avatar)
+    params.require(:user).permit(:username, :avatar)
   end
 end

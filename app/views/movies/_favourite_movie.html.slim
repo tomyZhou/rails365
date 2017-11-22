@@ -8,8 +8,3 @@ div.mb10.clearfix
     span.text-muted
       | 创建于
       = custom_timeago_tag movie.created_at
-      | &nbsp;
-    - if current_user && current_user.super_admin?
-      a href="#{edit_movie_path(movie)}"
-        i class="glyphicon glyphicon-edit" aria-hidden="true"
-        | &nbsp;
