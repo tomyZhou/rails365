@@ -17,4 +17,14 @@ module ApplicationHelper
   def custom_timeago_tag(datetime)
     timeago_tag datetime, lang: 'zh-CN', limit: 1.years.ago
   end
+
+  def search_params
+    if ['articles', 'books', 'groups'].include?(controller_name)
+      "articles"
+    elsif ['movies', 'playlists'].include?(controller_name)
+      "movies"
+    else
+      "softs"
+    end
+  end
 end

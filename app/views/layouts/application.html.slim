@@ -18,10 +18,12 @@ html
     = render "shared/topbar"
     #content
       .container.pt15
+          
         .row
           .col-md-12
             = render 'shared/flash_messages'
         .article-body
+          = render 'shared/search'
           = yield
         = render 'shared/statistics'
         = render 'shared/footer'

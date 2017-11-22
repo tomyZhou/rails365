@@ -705,3 +705,10 @@ ul.tabs-admin li {
   margin-bottom: 10px;
   font-size: 12px;
 }
+
+.search-form .select-input {
+  -webkit-appearance: none;
+  -webkit-border-radius: 0px;
+  border-right: none;
+  text-align-last: center;
+}

@@ -27,11 +27,7 @@ nav.navbar.navbar-default
           a href="/playlists" 播放列表
         li class="#{controller_name == 'books' ? 'active' : nil}"
           a href="/books" 小书
-      = form_tag "/find", method: "get", class: "navbar-form navbar-left", role: "search"
-        .form-group
-          = select_tag :tp, options_for_select({"视频" => 'movies', "文章" => 'articles', "下载资源" => "softs"}, "#{params[:tp].presence || controller_name || 'movies'}"), class: "form-control mr5"
-          input.form-control.mr5 placeholder="搜索标题或内容" type="text" name="search" value="#{params[:search].presence}"/
-          = submit_tag "提交", class: "btn btn-default"
+      
       - if user_signed_in?
         ul.nav.navbar-nav.navbar-right
           li.dropdown
