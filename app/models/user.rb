@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = "from_github_#{auth.info.email}"
-      user.username = Devise.friendly_token[0, 20]
+      user.username = auth.nickname
       user.password = Devise.friendly_token[0, 20]
     end
   end
