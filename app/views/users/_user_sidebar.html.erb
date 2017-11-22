@@ -11,10 +11,13 @@
     </p>
     <% if current_user && current_user == @user %>
       <p class="text-center">
-        <%= link_to "修改个人信息", edit_user_registration_path %>
+        <%= link_to "修改密码", edit_user_registration_path %>
+      </p>
+      <p class="text-center">
+        <%= link_to "修改个人信息", change_profile_users_path %>
       </p>
     <% end %>
-    
+
     <hr>
     <div class="row">
       <div class="col-md-6 mb20 text-right">
@@ -26,7 +29,7 @@
         <p class="text-small text-muted">收藏</p>
       </div>
     </div>
-    
+
   </div>
   <!--content-->
 

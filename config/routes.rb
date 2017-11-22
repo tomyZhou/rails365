@@ -25,6 +25,10 @@ Rails.application.routes.draw do
     member do
       get :articles
     end
+    collection do
+      get :change_profile
+      post :update_profile
+    end
   end
 
   %w(404 422 500).each do |code|
