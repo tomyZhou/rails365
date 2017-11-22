@@ -21,10 +21,10 @@ module ApplicationHelper
   def search_params
     if ['articles', 'books', 'groups'].include?(controller_name)
       "articles"
-    elsif ['movies', 'playlists'].include?(controller_name)
-      "movies"
-    else
+    elsif ['softs'].include?(controller_name)
       "softs"
+    else
+      "movies"
     end
   end
 end
