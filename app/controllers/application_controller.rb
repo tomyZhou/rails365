@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  layout :layout_by_resource
+
   protected
 
   def configure_permitted_parameters
@@ -40,4 +42,12 @@ class ApplicationController < ActionController::Base
     # request.user_agent =~ /Mobile|Blackberry|Android/ # OR WHATEVER
   end
   helper_method :mobile_device?
+
+  def layout_by_resource
+    if devise_controller?
+      "devise"
+    else
+      "application"
+    end
+  end
 end
