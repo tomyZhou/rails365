@@ -38,7 +38,7 @@ class Article < ActiveRecord::Base
   def recommend_articles
     group = Group.fetch(self.group_id)
     Rails.cache.fetch "recommend_articles_#{group.slug}" do
-      self.class.except_body_with_default.search(group.name, fields: [:title, :body], limit: 11)
+      self.class.except_body_with_default.search(group.name, fields: [:title, :body], limit: 21)
     end
   end
 
