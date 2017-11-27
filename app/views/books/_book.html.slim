@@ -7,6 +7,3 @@ div.mb10.clearfix
     p.text-left.hidden-xs.article-desc
       span.text-muted
         = book.desc
-      - if current_user && current_user.super_admin?
-        | &nbsp;
-        = book.weight
