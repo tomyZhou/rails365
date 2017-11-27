@@ -21,7 +21,7 @@ class HomeController < ApplicationController
     end
 
     @books = Rails.cache.fetch('books') do
-      Book.order(weight: :desc).to_a
+      Book.order(weight: :desc).limit(Book.count - (Book.count % 2)).to_a
     end
 
     respond_to do |format|
