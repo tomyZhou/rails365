@@ -12,5 +12,8 @@ div.video-box
       span class="label label-warning" 持续更新中
     |  * 
     = link_to movie.playlist.try(:name), playlist_path(movie.playlist)
+    - if movie.is_original
+      |  * 
+      span class="label label-danger" 原创
   p.time
     = custom_timeago_tag movie.created_at

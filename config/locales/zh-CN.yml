@@ -20,6 +20,7 @@ zh-CN:
         download_url: '下载地址'
         author: '发布者'
         mp4_name: '视频名称'
+        is_original: '是否原创'
       group:
         name: '名称'
         image: '图片'
