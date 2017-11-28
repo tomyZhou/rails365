@@ -1,16 +1,3 @@
-- cache @movies do
-  .row
-    .col-md-12
-      .panel.panel-default
-        .panel-heading
-          div
-            span
-              | 免费视频(在线观看+网盘下载)
-            = link_to '更多>>', movies_path, class: "pull-right"
-        .panel-body.pb0.pt15.home-video
-          - @movies.each do |movie|
-            = render partial: 'movies/movie', locals: { movie: movie }
-
 .row
   - cache [@articles, current_user] do
     .col-md-6
@@ -33,6 +20,19 @@
         .panel-body.pb0
           - @hot_articles.each do |article|
             = render partial: 'articles/article', locals: { article: article }
+
+- cache @movies do
+  .row
+    .col-md-12
+      .panel.panel-default
+        .panel-heading
+          div
+            span
+              | 免费视频(在线观看+网盘下载)
+            = link_to '更多>>', movies_path, class: "pull-right"
+        .panel-body.pb0.pt15.home-video
+          - @movies.each do |movie|
+            = render partial: 'movies/movie', locals: { movie: movie }
 
 = render 'shared/books'
 
