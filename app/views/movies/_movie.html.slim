@@ -4,14 +4,14 @@ div.video-box
       = image_tag movie.image_url(:preview)
   p.title
     a href="#{movie_path(movie)}"
-      = truncate movie.title, length: 25
+      = movie.title
   p.time
     - if movie.is_finished
       span class="label label-success" 已完结
     - else
       span class="label label-warning" 持续更新中
     |  * 
-    = link_to movie.playlist.try(:name), playlist_path(movie.playlist)
+    = link_to truncate(movie.playlist.try(:name), length: 10), playlist_path(movie.playlist)
     - if movie.is_original
       |  * 
       span class="label label-danger" 原创
