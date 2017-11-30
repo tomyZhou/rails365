@@ -37,14 +37,7 @@
     div#comment_box
       = render 'comments/comments'
   .col-md-4
-    - if @books.present?
-      - cache @books do
-        .panel.panel-default.hidden-xs
-          .panel-heading
-            div 相关 gitbook 小书
-          .panel-body
-            - @books.each do |book|
-              = render partial: 'books/book', locals: { book: book }
+    = render 'shared/relative_books'
     .panel.panel-default.hidden-xs
       .panel-heading
         div 分享

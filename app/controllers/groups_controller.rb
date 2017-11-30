@@ -14,6 +14,8 @@ class GroupsController < ApplicationController
 
     @site_info_home_desc = @group.desc
 
+    @users = User.where(id: Article.pluck(:user_id).uniq)
+
     @books = @group.fetch_books
   end
 

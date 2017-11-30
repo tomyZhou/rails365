@@ -1,13 +1,16 @@
 = render 'shared/site_info_home_desc'
 
-= render 'shared/books'
-
-- cache @group do
-  .page-header
-    h4.text-primary.title-header
-      = @group.name
-      | (#{@group.articles_count})
-
-- cache [@articles, current_user] do
-  - @articles.each do |article|
-    = render partial: 'articles/article', locals: { article: article }
+.row
+  .col-md-8
+    .panel.panel-default
+      .panel-heading
+        span
+          = @group.name
+          | (#{@group.articles_count})
+      .panel-body
+        - cache @articles do
+          - @articles.each do |article|
+            = render partial: 'articles/article', locals: { article: article }
+  .col-md-4
+    = render 'shared/relative_books'
+    = render 'shared/activity_users'

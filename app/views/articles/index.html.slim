@@ -45,18 +45,8 @@
   .col-md-4.hidden-xs
     .row
       .col-md-12
-        .panel.panel-default
-          .panel-heading
-            div
-              span 活跃用户
-          .panel-body.pb0.text-center
-            - @users.each do |user|
-              .col-md-6
-                div.mb5
-                  = link_to articles_user_path(user) do
-                    img.round-image src="#{user.letter_avatar_url(60)}" alt="" width=60 height=60
-                div.mb10
-                  = link_to user.username, articles_user_path(user)
+        = render 'shared/activity_users'
+          
 
     - cache @groups do
       .row
