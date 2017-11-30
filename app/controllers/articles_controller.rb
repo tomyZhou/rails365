@@ -9,7 +9,7 @@ class ArticlesController < ApplicationController
       if params[:search].present?
         Article.search params[:search], fields: [:title, :body], highlight: true, misspellings: false, includes: [:group, :user], page: params[:page], per_page: 20
       else
-        Article.except_body_with_default.order('updated_at DESC').page(params[:page])
+        Article.except_body_with_default.order('id DESC').page(params[:page])
       end
 
     @groups = Rails.cache.fetch 'group_all' do
