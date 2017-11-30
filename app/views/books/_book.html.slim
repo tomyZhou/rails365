@@ -1,9 +1,10 @@
 div.mb10.clearfix
-  = link_to book.url, target: "_blank" do
     div.pull-left style="margin-right: 10px"
-      img data-original=book.image_url(:group).to_s width="60px" height="60px" alt="#{book.name}" class="lazy"
+      = link_to book.url, target: "_blank" do
+        img data-original=book.image_url(:group).to_s width="60px" height="60px" alt="#{book.name}" class="lazy"
     p.book-title
-      = book.name
+      = link_to book.url, target: "_blank" do
+        = book.name
     p.text-left.hidden-xs.article-desc
       span.text-muted
         = book.desc
