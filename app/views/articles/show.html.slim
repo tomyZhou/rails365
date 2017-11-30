@@ -2,7 +2,7 @@
 
 - cache [@article, current_user] do
   .page-header
-    h4.text-primary.my-title = @article.title
+    h4.text-primary.my-title style="max-width: 500px;" = @article.title
     p.text-right.article-desc
       = link_to "首页", root_path
       | &nbsp;&nbsp;/&nbsp;&nbsp;
