@@ -1,24 +1,14 @@
 = render 'shared/site_info_home_desc'
 
-= render 'shared/books'
-
 - cache [@article, current_user] do
-  div
-    = link_to "首页", root_path
-    | &nbsp;&nbsp;/&nbsp;&nbsp;
-    = link_to "所有文章", articles_path
-    | &nbsp;&nbsp;/&nbsp;&nbsp;
-    = link_to @article.group.try(:name), group_path(@article.group)
-
   .page-header
     h4.text-primary.my-title = @article.title
     p.text-right.article-desc
-        = link_to group_path(@article.group) do
-          span.mr5 = @article.group.try(:name)
-        | 由 #{link_to @article.user.try(:login), user_path(@article.user)} 发表于
-        = custom_timeago_tag @article.created_at
-        |  编辑于
-        = custom_timeago_tag @article.updated_at
+      = link_to "首页", root_path
+      | &nbsp;&nbsp;/&nbsp;&nbsp;
+      = link_to "所有文章", articles_path
+      | &nbsp;&nbsp;/&nbsp;&nbsp;
+      = link_to @article.group.try(:name), group_path(@article.group)
 
 .row.block-margin
   .col-md-12
@@ -28,14 +18,33 @@
 
 .row
   .col-md-8
-    .article_content
-      - cache @article do
-        = markdown @article.body
-    hr
+    .panel.panel-default
+      .panel-heading
+        div.article-desc.clearfix
+          = link_to group_path(@article.group) do
+            span.mr5 = @article.group.try(:name)
+          | 由 #{link_to @article.user.try(:login), user_path(@article.user)} 发表于
+          = custom_timeago_tag @article.created_at
+          |  编辑于
+          = custom_timeago_tag @article.updated_at
+          a href="#{group_path(@article.group)}" class="pull-right"
+            = image_tag @article.group.image_url, class: "small-icon"
+      .panel-body
+        .article_content
+          - cache @article do
+            = markdown @article.body
     = render partial: 'comments/form', locals: { object: @article }
     div#comment_box
       = render 'comments/comments'
   .col-md-4
+    - if @books.present?
+      - cache @books do
+        .panel.panel-default.hidden-xs
+          .panel-heading
+            div 相关 gitbook 小书
+          .panel-body
+            - @books.each do |book|
+              = render partial: 'books/book', locals: { book: book }
     .panel.panel-default.hidden-xs
       .panel-heading
         div 分享

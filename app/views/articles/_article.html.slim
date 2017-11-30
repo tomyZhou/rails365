@@ -1,4 +1,8 @@
 div.mb10.clearfix
+  - unless controller_name == "home"
+    div.pull-right.soft-image
+      a href="#{group_path(article.group)}"
+        = image_tag article.group.image_url
   p.article-title
     = link_to article.title, article
   p.text-left.article-desc
