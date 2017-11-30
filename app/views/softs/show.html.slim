@@ -1,18 +1,10 @@
 - cache [@soft, current_user] do
-  div
-    = link_to "首页", root_path
-    | &nbsp;&nbsp;/&nbsp;&nbsp;
-    = link_to "所有下载资源", softs_path
-
   .page-header
     h4.text-primary.my-title = @soft.title
     p.text-right.article-desc
-        |  
-        = @soft.tag
-        |  由 #{link_to @soft.user.try(:login), user_path(@soft.user)} 发表于
-        = custom_timeago_tag @soft.created_at
-        |  编辑于
-        = custom_timeago_tag @soft.updated_at
+      = link_to "首页", root_path
+      | &nbsp;&nbsp;/&nbsp;&nbsp;
+      = link_to "所有下载资源", softs_path
 
 .row.block-margin
   .col-md-12
@@ -22,20 +14,30 @@
 
 .row
   .col-md-8
-    .article_content
-      - cache @soft do
-        div.clearfix
-          .pull-right
-            = image_tag @soft.image_url(:small), class: "soft-markdown-image"
-          = markdown @soft.body
-        hr
-        - if @soft.baidu_download?
-          div.text-center
-            = link_to '立即下载', @soft.actual_download_url, class: "btn btn-primary", target: "_blank"
-            |  密码： #{@soft.actual_download_password}
-    = render partial: 'comments/form', locals: { object: @soft }
-    div#comment_box
-      = render 'comments/comments'
+    .panel.panel-default
+      .panel-heading
+        .article-desc
+          |  
+          = @soft.tag
+          |  由 #{link_to @soft.user.try(:login), user_path(@soft.user)} 发表于
+          = custom_timeago_tag @soft.created_at
+          |  编辑于
+          = custom_timeago_tag @soft.updated_at
+      .panel-body
+        .article_content
+          - cache @soft do
+            div.clearfix
+              .pull-right
+                = image_tag @soft.image_url(:small), class: "soft-markdown-image"
+              = markdown @soft.body
+            hr
+            - if @soft.baidu_download?
+              div.text-center
+                = link_to '立即下载', @soft.actual_download_url, class: "btn btn-primary", target: "_blank"
+                |  密码： #{@soft.actual_download_password}
+        = render partial: 'comments/form', locals: { object: @soft }
+        div#comment_box
+          = render 'comments/comments'
   .col-md-4
     .panel.panel-default.hidden-xs
       .panel-heading
