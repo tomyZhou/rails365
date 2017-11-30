@@ -20,6 +20,19 @@ namespace :setup do
   end
 end
 
+namespace :setup do
+  desc "baidu article"
+  task :baidu_article do
+    on roles(:app) do
+      within "#{current_path}" do
+        with rails_env: :production do
+          execute :rake, "baidu_article:puts"
+        end
+      end
+    end
+  end
+end
+
 namespace :load do
   task :defaults do
     load 'capistrano/defaults.rb'
