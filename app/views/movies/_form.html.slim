@@ -23,6 +23,7 @@
     = f.hidden_field :user_id, value: @movie.user_id
   = f.check_box :is_finished
   = f.check_box :is_original
+  = f.check_box :is_english
   = f.select :serial_id, Serial.all.collect { |p| [ p.name, p.id ] }, include_blank: false
   = f.submit "保存", class: "btn btn-primary", "data-disable-with" => '正在保存...'
 

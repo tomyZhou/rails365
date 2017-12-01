@@ -22,6 +22,7 @@ zh-CN:
         mp4_name: '视频名称'
         is_original: '是否原创'
         serial_id: '视频分类'
+        is_english: '是否英语'
       serial:
         name: '名称'
         weight: '权重'
