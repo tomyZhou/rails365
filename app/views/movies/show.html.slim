@@ -22,21 +22,22 @@
   .col-md-8
     .panel.panel-default
       .panel-heading
-        div.article-desc
-          - if @movie.is_original
-            span class="label label-danger" 原创
-            |  * 
-          = link_to playlist_path(@movie.playlist) do
-            span.mr5 = @movie.playlist.try(:name)
-          | 由 #{link_to @movie.user.try(:login), user_path(@movie.user)} 发表于
-          = custom_timeago_tag @movie.created_at
-          |  编辑于
-          = custom_timeago_tag @movie.updated_at
-          |  
-          - if @movie.is_finished
-            span class="label label-success" 已完结
-          - else
-            span class="label label-warning" 持续更新中
+        - cache ["panel-heading", @movie] do
+          div.article-desc
+            - if @movie.is_original
+              span class="label label-danger" 原创
+              |  * 
+            = link_to playlist_path(@movie.playlist) do
+              span.mr5 = @movie.playlist.try(:name)
+            | 由 #{link_to @movie.user.try(:login), user_path(@movie.user)} 发表于
+            = custom_timeago_tag @movie.created_at
+            |  编辑于
+            = custom_timeago_tag @movie.updated_at
+            |  
+            - if @movie.is_finished
+              span class="label label-success" 已完结
+            - else
+              span class="label label-warning" 持续更新中
       .panel-body
         .article_content
           - cache @movie do

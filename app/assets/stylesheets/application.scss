@@ -740,3 +740,16 @@ ul.tabs-admin li {
     color: #0288d1;
   }
 }
+
+.article-user-card {
+  padding-top: 15px;
+  padding-left: 15px;
+  .name {
+    font-weight: 600;
+  }
+}
+
+.article-markdown-image {
+  width: 80px;
+  height: 80px;
+}

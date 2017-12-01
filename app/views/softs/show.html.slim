@@ -16,13 +16,14 @@
   .col-md-8
     .panel.panel-default
       .panel-heading
-        .article-desc
-          |  
-          = @soft.tag
-          |  由 #{link_to @soft.user.try(:login), user_path(@soft.user)} 发表于
-          = custom_timeago_tag @soft.created_at
-          |  编辑于
-          = custom_timeago_tag @soft.updated_at
+        - cache ["panel-heading", @soft] do
+          .article-desc
+            |  
+            = @soft.tag
+            |  由 #{link_to @soft.user.try(:login), user_path(@soft.user)} 发表于
+            = custom_timeago_tag @soft.created_at
+            |  编辑于
+            = custom_timeago_tag @soft.updated_at
       .panel-body
         .article_content
           - cache @soft do

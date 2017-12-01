@@ -20,18 +20,20 @@
   .col-md-8
     .panel.panel-default
       .panel-heading
-        div.article-desc.clearfix
-          = link_to group_path(@article.group) do
-            span.mr5 = @article.group.try(:name)
-          | 由 #{link_to @article.user.try(:login), user_path(@article.user)} 发表于
-          = custom_timeago_tag @article.created_at
-          |  编辑于
-          = custom_timeago_tag @article.updated_at
-          a href="#{group_path(@article.group)}" class="pull-right"
-            = image_tag @article.group.image_url, class: "small-icon"
+        - cache ["panel-heading", @article]
+          div.article-desc.clearfix
+            = link_to group_path(@article.group) do
+              span.mr5 = @article.group.try(:name)
+            | 由 #{link_to @article.user.try(:login), user_path(@article.user)} 发表于
+            = custom_timeago_tag @article.created_at
+            |  编辑于
+            = custom_timeago_tag @article.updated_at
+            a href="#{group_path(@article.group)}" class="pull-right"
+              = image_tag @article.group.image_url, class: "small-icon"
       .panel-body
         .article_content
           - cache @article do
+            
             = markdown @article.body
     = render partial: 'comments/form', locals: { object: @article }
     div#comment_box
@@ -52,6 +54,22 @@
             i#heart.glyphicon.glyphicon-heart
           - else
             i#heart.glyphicon.glyphicon-heart-empty
+    - cache ["username", @article] do
+      .panel.panel-default.hidden-xs
+        .panel-heading
+          div 作者：#{@article.user.username}
+        .panel-body
+          div.text-left
+            = link_to user_path(@article.user) do
+              = image_tag @article.user.letter_avatar_url(100), class: "article-markdown-image"
+    - cache ["group", @article] do
+      .panel.panel-default.hidden-xs
+        .panel-heading
+          div 所属分类：#{@article.group.try(:name)}
+        .panel-body
+          div.text-left
+            = link_to group_path(@article.group) do
+              = image_tag @article.group.image_url, class: "article-markdown-image"
     - cache @recommend_articles do
       .panel.panel-default.hidden-xs
         .panel-heading
@@ -60,6 +78,7 @@
           - @recommend_articles.each do |recommend_article|
             - unless recommend_article.id == @article.id
               p.home-p.box-article = link_to recommend_article.title, article_path(recommend_article)
+
 
 javascript:
   $(document).ready(function() {
