@@ -12,6 +12,8 @@ class MoviesController < ApplicationController
       @movies = @serial.movies.except_body_with_default.order('id DESC').page(params[:page]).per(20)
     elsif params[:filter].present? && params[:filter] == 'original'
       @movies = Movie.except_body_with_default.where(is_original: true).order('id DESC').page(params[:page]).per(20)
+    elsif params[:filter].present? && params[:filter] == 'other'
+      @movies = Movie.except_body_with_default.where("serial_id is null").order('id DESC').page(params[:page]).per(20)
     else
       @movies = Movie.except_body_with_default.order('id DESC').page(params[:page]).per(20)
     end

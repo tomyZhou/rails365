@@ -16,7 +16,7 @@ class Movie < ActiveRecord::Base
   has_many :comments, as: 'commentable'
   cache_has_many :comments, :inverse_name => :commentable
 
-  scope :except_body_with_default, -> { select(:title, :is_original, :created_at, :updated_at, :is_finished, :playlist_id, :image, :slug, :id, :play_time, :user_id, :weight).includes(:playlist) }
+  scope :except_body_with_default, -> { select(:title, :serial_id, :is_original, :created_at, :updated_at, :is_finished, :playlist_id, :image, :slug, :id, :play_time, :user_id, :weight).includes(:playlist) }
 
   mount_uploader :image, VideoUploader
 
@@ -122,8 +122,8 @@ class Movie < ActiveRecord::Base
 
     Rails.cache.delete "playlist_movies_#{playlist.slug}"
 
-    # unless Rails.env.test?
-    #   Redis.new.publish 'ws', {title: 'rails365 更新了视频', content: self.title}.to_json
-    # end
+    unless Rails.env.test?
+      Redis.new.publish 'ws', {title: 'rails365 更新了视频', content: self.title}.to_json
+    end
   end
 end
