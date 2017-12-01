@@ -10,7 +10,7 @@ zh-CN:
       movie:
         title: "名称"
         body: "内容"
-        playlist_id: "分类"
+        playlist_id: "播放列表"
         weight: '权重'
         mp4_url: 'mp4 地址'
         image: '图片'
@@ -21,6 +21,11 @@ zh-CN:
         author: '发布者'
         mp4_name: '视频名称'
         is_original: '是否原创'
+        serial_id: '视频分类'
+      serial:
+        name: '名称'
+        weight: '权重'
+        movies_count: '视频数量'
       group:
         name: '名称'
         image: '图片'
@@ -73,3 +78,4 @@ zh-CN:
       comment: '评论'
       book: 'gitbook小书'
       soft: '资源下载'
+      serial: '视频分类'

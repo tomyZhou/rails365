@@ -7,12 +7,21 @@ class MoviesController < ApplicationController
   def index
     if params[:search].present?
       @movies = Movie.search params[:search], fields: [:title, :body], includes: [:playlist], page: params[:page], per_page: 20
+    elsif params[:name].present?
+      @serial = Serial.find(params[:name])
+      @movies = @serial.movies.except_body_with_default.order('id DESC').page(params[:page]).per(20)
+    elsif params[:filter].present? && params[:filter] == 'original'
+      @movies = Movie.except_body_with_default.where(is_original: true).order('id DESC').page(params[:page]).per(20)
     else
       @movies = Movie.except_body_with_default.order('id DESC').page(params[:page]).per(20)
     end
 
     @playlists = Rails.cache.fetch 'playlist_all' do
       Playlist.order(weight: :desc).to_a
+    end
+
+    @serials = Rails.cache.fetch('serials') do
+      Serial.order(weight: :desc).to_a
     end
 
     @title = '视频列表'

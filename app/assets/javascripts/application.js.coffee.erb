@@ -26,6 +26,14 @@
 jQuery ->
   $("img.lazy").lazyload()
 
+  $(".sub-nav a").hover (->
+    if !$(this).hasClass('current')
+      $(this).addClass('current')
+    ), ->
+      if !$(this).hasClass('active')
+        $(this).removeClass('current')
+
+
 $ ->
   socket = new WebSocket "<%= Settings.ws_protocol %>://#{window.location.host}/ws/"
 

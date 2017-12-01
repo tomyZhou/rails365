@@ -721,3 +721,22 @@ ul.tabs-admin li {
   width: 15px;
   height: 15px;
 }
+
+.sub-nav {
+  text-align: center;
+  padding-top: 4px;
+  a {
+    display: inline-block;
+    padding: 18px 0px;
+    margin: 0 20px;
+    color: rgba(0,0,0,0.54);
+    font-size: 14px;
+    border-bottom: 4px solid transparent;
+    font-weight: 500;
+  }
+  a.current {
+    text-decoration: none;
+    border-color: #0288d1;
+    color: #0288d1;
+  }
+}

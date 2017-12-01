@@ -11,6 +11,7 @@ class Movie < ActiveRecord::Base
   act_as_likee
 
   belongs_to :playlist, counter_cache: true
+  belongs_to :serial, counter_cache: true
   belongs_to :user
   has_many :comments, as: 'commentable'
   cache_has_many :comments, :inverse_name => :commentable
@@ -121,8 +122,8 @@ class Movie < ActiveRecord::Base
 
     Rails.cache.delete "playlist_movies_#{playlist.slug}"
 
-    unless Rails.env.test?
-      Redis.new.publish 'ws', {title: 'rails365 更新了视频', content: self.title}.to_json
-    end
+    # unless Rails.env.test?
+    #   Redis.new.publish 'ws', {title: 'rails365 更新了视频', content: self.title}.to_json
+    # end
   end
 end

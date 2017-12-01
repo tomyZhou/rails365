@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   resources :articles, concerns: [:commentable, :like]
   resources :movies, concerns: [:commentable, :like]
+  get "/movies/all/:name", to: "movies#index", as: :all_movies
+  get "/movies/q/:filter", to: "movies#index", as: :q_movies
   resources :softs, concerns: [:commentable, :like]
   resources :groups, only: [:index, :show]
   resources :playlists, only: [:index, :show]

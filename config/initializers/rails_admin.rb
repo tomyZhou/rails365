@@ -38,6 +38,13 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model Serial do
+    edit do
+      field :name
+      field :weight
+    end
+  end
+
   ## == Pundit ==
   # config.authorize_with :pundit
 

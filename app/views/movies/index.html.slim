@@ -1,5 +1,7 @@
 .page-header
-  h4.text-primary.title-header 所有视频(#{@movies.total_count})
+  h4.text-center.text-primary.title-header 所有视频(#{@movies.total_count})
+
+  = render 'sub_nav'
 
 - if can? :create, Movie
   .text-right
