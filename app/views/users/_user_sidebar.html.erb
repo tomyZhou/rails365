@@ -20,11 +20,11 @@
 
     <hr>
     <div class="row">
-      <div class="col-md-6 mb20 text-right">
+      <div class="col-md-6 col-xs-6 mb20 text-right">
         <p><a href="<%= articles_user_path(@user) %>"><%= @articles.total_count %></a></p>
         <h6 class="text-muted">文章</h6>
       </div>
-      <div class="col-md-6 mb20 text-left">
+      <div class="col-md-6 col-xs-6 mb20 text-left">
         <p><a href="<%= user_path(@user) %>"><%= @favourite_movies.count.to_i + @favourite_articles.count.to_i + @favourite_softs.count.to_i %></a></p>
         <p class="text-small text-muted">收藏</p>
       </div>
