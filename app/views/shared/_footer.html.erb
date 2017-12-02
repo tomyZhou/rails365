@@ -1,16 +1,105 @@
-<footer class='hidden-xs pt15'>
-  <div class="row">
-    <div class="col-lg-12">
+<footer class="footer1 hidden-xs">
+  <hr>
+  <div class="container">
 
-      <ul class="list-unstyled">
-        <li class="pull-right"><a href="#top">回到顶部</a></li>
-        <% cache @sites do %>
-          <% @sites.each do |site| %>
-            <li><a target="_blank" href="<%= site.url %>"><%= site.name %></a></li>
-          <% end %>
+    <div class="row"><!-- row -->
+
+      <% cache @sites do %>
+        <% @sites.in_groups_of(5).each do |site_group| %>
+          <div class="col-lg-3 col-md-3"><!-- widgets column left -->
+            <ul class="list-unstyled clear-margins"><!-- widgets -->
+
+              <li class="widget-container widget_nav_menu"><!-- widgets list -->
+
+                <h1 class="title-widget">友情链接</h1>
+
+                <ul>
+                  <% site_group.compact.each do |site| %>
+                    <li><a target="_blank" href="<%= site.url %>"><i class="fa fa-angle-double-right"></i><%= site.name %></a></li>
+                  <% end %>
+                </ul>
+
+              </li>
+
+            </ul>
+
+
+          </div><!-- widgets column left end -->
         <% end %>
-      </ul>
-      <p class="block-margin text-center">© 2015 - Rails365 Inc. All rights reserved 粤ICP备15004902号-2 QQ群号: 84220592</a></p>
+      <% end %>
+
+
+      <div class="col-lg-3 col-md-3"><!-- widgets column left -->
+
+        <ul class="list-unstyled clear-margins"><!-- widgets -->
+
+          <li class="widget-container widget_nav_menu"><!-- widgets list -->
+
+            <h1 class="title-widget">我们相关</h1>
+
+            <ul>
+              <li><a href="#"><i class="fa fa-angle-double-right"></i> 关于我们</a></li>
+              <li><a href="#"><i class="fa fa-angle-double-right"></i> 服务条款</a></li>
+              <li><a href="#"><i class="fa fa-angle-double-right"></i> 版权声明</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div><!-- widgets column left end -->
+      <div class="col-lg-3 col-md-3"><!-- widgets column center -->
+        <ul class="list-unstyled clear-margins"><!-- widgets -->
+          <li class="widget-container widget_recent_news"><!-- widgets list -->
+            <h1 class="title-widget">联系我们</h1>
+            <div class="footerp"> 
+              <h2 class="title-median">hfpp2012</h2>
+              <p><b>Email:</b> <a href="mailto:hfpp2012@gmail.com">hfpp2012@gmail.com</a></p>
+              <p><b>QQ群：</b>84220592</p>
+            </div>
+
+            <div class="social-icons">
+
+              <ul class="nomargin">
+
+                <a target="_blank" href="https://twitter.com/hfpp2012"><i class="fa fa-twitter-square fa-3x social-tw" id="social"></i></a>
+                <a href="mailto:hfpp2012@gmail.com"><i class="fa fa-envelope-square fa-3x social-em" id="social"></i></a>
+
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </footer>
+<!--header-->
+
+<div class="footer-bottom">
+
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+
+        <div class="copyright">
+
+          © 2015 - Rails365 Inc. All rights reserved 粤ICP备15004902号-2
+
+        </div>
+
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+
+        <div class="design" style="margin-right: 10px;">
+
+          <p class="mt5">分享有趣、有用的编程技术文章和视频教程</p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

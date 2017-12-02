@@ -560,6 +560,7 @@ DEPENDENCIES
   exception_notification!
   factory_girl_rails
   faraday
+  font-awesome-rails
   friendly_id
   google-analytics-rails (= 1.1.1)
   guard
