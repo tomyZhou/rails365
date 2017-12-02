@@ -2,12 +2,12 @@
   <div class="status-upload">
     <%= form_for [object, @comment], html: {class: "form-horizontal"}, remote: true do |f| %>
       <%= f.text_area :body, placeholder: "请使用 Markdown 格式书写 ;-)，代码片段粘贴时请注意使用高亮语法。" %>
-      <ul>
-        <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Audio"><i class="fa fa-music"></i></a></li>
-        <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Video"><i class="fa fa-video-camera"></i></a></li>
-        <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Sound Record"><i class="fa fa-microphone"></i></a></li>
-        <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Picture"><i class="fa fa-picture-o"></i></a></li>
-      </ul>
+      <!-- <ul> -->
+      <!--   <li><a title="" data&#45;toggle="tooltip" data&#45;placement="bottom" data&#45;original&#45;title="Audio"><i class="fa fa&#45;music"></i></a></li> -->
+      <!--   <li><a title="" data&#45;toggle="tooltip" data&#45;placement="bottom" data&#45;original&#45;title="Video"><i class="fa fa&#45;video&#45;camera"></i></a></li> -->
+      <!--   <li><a title="" data&#45;toggle="tooltip" data&#45;placement="bottom" data&#45;original&#45;title="Sound Record"><i class="fa fa&#45;microphone"></i></a></li> -->
+      <!--   <li><a title="" data&#45;toggle="tooltip" data&#45;placement="bottom" data&#45;original&#45;title="Picture"><i class="fa fa&#45;picture&#45;o"></i></a></li> -->
+      <!-- </ul> -->
       <button type="submit" class="btn btn-success green" data-disable-with="正在提交">回复</button>
     <% end %>
   </div><!-- Status Upload  -->
