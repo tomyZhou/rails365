@@ -1,10 +1,17 @@
 div.mb10.clearfix
     div.pull-left style="margin-right: 10px"
       = link_to book.url, target: "_blank" do
-        img data-original=book.image_url(:group).to_s width="60px" height="60px" alt="#{book.name}" class="lazy"
+        img data-original=book.image_url.to_s width="87px" height="116px" alt="#{book.name}" class="lazy"
     p.book-title
       = link_to book.url, target: "_blank" do
         = book.name
     p.text-left.article-desc
-      span.text-muted
+      span
         = book.desc
+    p.article-desc
+      span.text-muted
+        |创建于
+        = custom_timeago_tag book.created_at
+      span.text-muted.hidden-xs
+        |  * 更新于
+        = custom_timeago_tag book.updated_at
