@@ -38,4 +38,7 @@ class HomeController < ApplicationController
       redirect_to articles_path(tp: 'articles', search: params[:search])
     end
   end
+
+  def about_us
+  end
 end
