@@ -2,7 +2,7 @@
   - cache @books do
     .panel.panel-default.hidden-xs
       .panel-heading
-        div 相关 gitbook 小书
+        div 相关 小书
       .panel-body
         - @books.each do |book|
           = render partial: 'books/book', locals: { book: book }
