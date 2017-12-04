@@ -1,7 +1,7 @@
 div.mb10.clearfix
     div.pull-left style="margin-right: 10px"
       = link_to book.url, target: "_blank" do
-        img data-original=book.image_url.to_s width="87px" height="116px" alt="#{book.name}" class="lazy"
+        img data-original=book.image_url(:book).to_s width="87px" height="116px" alt="#{book.name}" class="lazy"
     p.book-title
       = link_to book.url, target: "_blank" do
         = book.name
