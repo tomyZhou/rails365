@@ -33,7 +33,6 @@
       .panel-body
         .article_content
           - cache @article do
-            
             = markdown @article.body
     = render partial: 'comments/form', locals: { object: @article }
     div#comment_box
@@ -45,6 +44,11 @@
         div 分享
       .panel-body
         = social_share_button_tag(@article.title)
+    .panel.panel-default.hidden-xs
+      .panel-heading
+        div 欢迎关注我的头条号(获得第一时间更新信息)
+      .panel-body
+        = image_tag "toutiao.png", width: "100%"
     .panel.panel-default
       .panel-heading
         div 收藏（<span id="movie-id-#{@article.id}">#{@article.likers_by(User).count}</span>）
