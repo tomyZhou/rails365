@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:create]
   end
 
-  # 收藏
+  # 喜欢
   concern :like do
     get :like, on: :member
   end
