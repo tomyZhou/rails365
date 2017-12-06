@@ -28,8 +28,13 @@ nav.navbar.navbar-default
         li class="#{controller_name == 'books' ? 'active' : nil}"
           a href="/books" 小书
       
-      - if user_signed_in?
-        ul.nav.navbar-nav.navbar-right
+      ul.nav.navbar-nav.navbar-right
+        li
+          = link_to new_article_path, class: 'btn btn-primary' do
+            i.glyphicon.glyphicon-plus
+            |  写文章
+
+        - if user_signed_in?
           li.dropdown
             a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
               span style="margin-right: 10px" class="avatar-image"
@@ -44,8 +49,14 @@ nav.navbar.navbar-default
                 = link_to '个人中心', user_path(current_user)
               li
                 = link_to('注销', destroy_user_session_path, :method => :delete)
-      - else
-        ul.nav.navbar-nav.navbar-right
+              - if can? :create, Movie
+                li
+                  = link_to "添加新视频", new_movie_path
+
+              - if can? :create, Soft
+                li
+                  = link_to "添加新下载资源", new_soft_path
+        - else
           li
             = link_to('注册', new_registration_path(:user))
           li

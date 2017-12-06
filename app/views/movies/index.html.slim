@@ -3,9 +3,6 @@
 
   = render 'sub_nav'
 
-- if can? :create, Movie
-  .text-right
-    = link_to "添加新视频", new_movie_path, class: 'btn btn-primary'
 - cache @movies do
   div.pt15.home-video
     .infinite-table
