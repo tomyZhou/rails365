@@ -44,11 +44,16 @@
         div 分享
       .panel-body
         = social_share_button_tag(@article.title)
-    .panel.panel-default.hidden-xs
+    .panel.panel-default
       .panel-heading
-        div 欢迎关注我的头条号(获得第一时间更新信息)
+        div 欢迎关注
       .panel-body
-        = image_tag "toutiao.png", width: "100%"
+        = link_to "https://juejin.im/user/58649ccd1b69e675fce22698", target: '_blank' do
+          = image_tag "juejin.png", class: "share_logo"
+        = link_to "https://toutiao.io/subjects/124922", target: "_blank" do
+          = image_tag "toutiao.png", class: "share_logo"
+        div.text-muted.share_text
+          | www.rails365.net 前后端一起来，关注前端 react vue webpack angular 等，关注后端 nginx, redis, postgresql, ruby, nodejs, docker 等，分享有用，有趣，高质量的编程技术文章和视频教程
     .panel.panel-default
       .panel-heading
         div 收藏（<span id="movie-id-#{@article.id}">#{@article.likers_by(User).count}</span>）
@@ -59,7 +64,7 @@
           - else
             i#heart.glyphicon.glyphicon-heart-empty
     - cache ["username", @article] do
-      .panel.panel-default.hidden-xs
+      .panel.panel-default
         .panel-heading
           div 作者：#{@article.user.username}
         .panel-body
@@ -67,7 +72,7 @@
             = link_to user_path(@article.user) do
               = image_tag @article.user.letter_avatar_url(100), class: "article-markdown-image"
     - cache ["group", @article] do
-      .panel.panel-default.hidden-xs
+      .panel.panel-default
         .panel-heading
           div 所属分类：#{@article.group.try(:name)}
         .panel-body
@@ -75,7 +80,7 @@
             = link_to group_path(@article.group) do
               = image_tag @article.group.image_url, class: "article-markdown-image"
     - cache @recommend_articles do
-      .panel.panel-default.hidden-xs
+      .panel.panel-default
         .panel-heading
           div 相关推荐
         .panel-body

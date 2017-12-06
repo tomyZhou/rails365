@@ -5,13 +5,19 @@
     <div class="row"><!-- row -->
 
       <% cache @sites do %>
-        <% @sites.in_groups_of(5).each do |site_group| %>
+        <% @sites.in_groups_of(5).each_with_index do |site_group, index| %>
           <div class="col-lg-3 col-md-3"><!-- widgets column left -->
             <ul class="list-unstyled clear-margins"><!-- widgets -->
 
               <li class="widget-container widget_nav_menu"><!-- widgets list -->
 
-                <h1 class="title-widget">友情链接</h1>
+                <h1 class="title-widget">
+                  <% if index == 0 %>
+                    友情链接
+                  <% else %>
+                    关注我们
+                  <% end %>
+                </h1>
 
                 <ul>
                   <% site_group.compact.each do |site| %>
