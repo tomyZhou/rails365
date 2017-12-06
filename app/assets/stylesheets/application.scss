@@ -42,7 +42,7 @@ body {
 }
 
 .my-title {
-  font-weight: 400;
+  font-weight: 500;
   line-height: 2.4rem;
   color: rgb(17, 17, 17);
   font-size: 20px;
@@ -124,6 +124,9 @@ body {
 
 #content {
   padding-bottom: 60px;
+  @media (max-width: 768px) {
+    margin-left: 19px;
+  }
 }
 
 .block-margin {
@@ -781,7 +784,8 @@ ul.tabs-admin li {
   padding-right: 0;
   padding-bottom: 20px;
   margin-left: -20px;
-  padding-left: 0;/*	border-top-width: 4px;
+  padding-right: 20px;
+  padding-left: 20px;/*	border-top-width: 4px;
   border-top-style: solid;
   border-top-color: #003;*/
 }
@@ -943,4 +947,8 @@ Only Needed in Multi-Coloured Variation
 }
 .icon-love {
   animation: heartbeat 1s infinite;
+}
+
+.panel-default>.panel-heading {
+  background-color: #fff;
 }
