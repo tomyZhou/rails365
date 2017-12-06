@@ -20,23 +20,20 @@
   .col-md-8
     .panel.panel-default
       .panel-heading
-        - cache ["panel-heading", @article]
-          div.article-desc.clearfix
-            = link_to group_path(@article.group) do
-              span.mr5 = @article.group.try(:name)
-            | 由 #{link_to @article.user.try(:login), user_path(@article.user)} 发表于
-            = custom_timeago_tag @article.created_at
-            |  编辑于
-            = custom_timeago_tag @article.updated_at
-            /a href="#{group_path(@article.group)}" class="pull-right"
-            /  = image_tag @article.group.image_url, class: "small-icon"
+        div.article-desc.clearfix
+          | #{@article.read_count} 次阅读 * 
+          |  发表于
+          = custom_timeago_tag @article.created_at
+          |  编辑于
+          = custom_timeago_tag @article.updated_at
+          /a href="#{group_path(@article.group)}" class="pull-right"
+          /  = image_tag @article.group.image_url, class: "small-icon"
       .panel-body
         .article_content
           - cache @article do
             = markdown @article.body
         div
-          | 阅读 #{@article.read_count} * 
-          = link_to " 关注我们 ", "#follow"
+          = link_to "关注我们 ", "#follow"
           = render 'shared/heartbeat'
 
     = render partial: 'comments/form', locals: { object: @article }
