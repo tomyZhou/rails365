@@ -61,6 +61,30 @@ class Article < ActiveRecord::Base
     self.title.auto_correct!
   end
 
+  def self.update_visit_count
+    self.find_each do |article|
+      article.visit_count = article.read_count
+      article.save validate: false
+    end
+    Rails.cache.delete "hot_articles"
+  end
+
+  def self.init_random_read_count
+    self.find_each do |article|
+      article.visit_count = rand(1000)
+      article.save validate: false
+      $redis.set("user_#{article.id}_count", article.visit_count)
+    end
+  end
+
+  def read_count
+    $redis.get("user_#{self.id}_count") || 0
+  end
+
+  def increment_read_count
+    $redis.incr "user_#{self.id}_count"
+  end
+
   private
 
   def publish_create
@@ -93,9 +117,5 @@ class Article < ActiveRecord::Base
   def clear_after_updated_cache
     # 文章show页面右侧推荐文章列表
     Rails.cache.delete [slug, 'recommend_articles', group.slug]
-
-    unless Rails.env.test?
-      Redis.new.publish 'ws', {title: 'rails365 更新了文章', content: self.title}.to_json
-    end
   end
 end

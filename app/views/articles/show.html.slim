@@ -28,16 +28,16 @@
             = custom_timeago_tag @article.created_at
             |  编辑于
             = custom_timeago_tag @article.updated_at
-            a href="#{group_path(@article.group)}" class="pull-right"
-              = image_tag @article.group.image_url, class: "small-icon"
+            /a href="#{group_path(@article.group)}" class="pull-right"
+            /  = image_tag @article.group.image_url, class: "small-icon"
       .panel-body
         .article_content
           - cache @article do
             = markdown @article.body
         div
-          = link_to " 关注 ", "#follow"
+          | 阅读 #{@article.read_count} * 
+          = link_to " 关注我们 ", "#follow"
           = render 'shared/heartbeat'
-          | 我们接收最新的更新信息
 
     = render partial: 'comments/form', locals: { object: @article }
     div#comment_box

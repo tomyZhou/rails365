@@ -36,6 +36,8 @@ class ArticlesController < ApplicationController
     @site_info_home_desc = Group.fetch_by_id(@article.group_id).try(:desc)
 
     @books = Group.fetch_by_id(@article.group_id).fetch_books
+
+    @article.increment_read_count
   end
 
   def new
