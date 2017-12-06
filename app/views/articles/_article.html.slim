@@ -1,15 +1,14 @@
-- cache [article, article.read_count] do
-  div.mb10.clearfix
-    div.pull-right
-      span class="badge" = article.read_count
-    p.article-title
-      = link_to article.title, article
-    p.text-left.article-desc
-      span.text-muted
-        - if article.group
-          = link_to group_path(article.group) do
-            span.mr5 = article.group.name
-        | 由 
-        = link_to article.user.try(:login), user_path(article.user)
-        |  创建于
-        = custom_timeago_tag article.created_at
+div.mb10.clearfix
+  /div.pull-right
+  /  span class="badge" = article.read_count
+  p.article-title
+    = link_to article.title, article
+  p.text-left.article-desc
+    span.text-muted
+      - if article.group
+        = link_to group_path(article.group) do
+          span.mr5 = article.group.name
+      | 由 
+      = link_to article.user.try(:login), user_path(article.user)
+      |  创建于
+      = custom_timeago_tag article.created_at

@@ -1,5 +1,5 @@
 .row
-  - cache [@articles, current_user] do
+  - cache @articles do
     .col-md-6
       .panel.panel-default
         .panel-heading
@@ -10,7 +10,7 @@
           - @articles.each do |article|
             = render partial: 'articles/article', locals: { article: article }
 
-  - cache [@hot_articles, current_user] do
+  - cache @hot_articles do
     .col-md-6
       .panel.panel-default
         .panel-heading
