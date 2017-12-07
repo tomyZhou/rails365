@@ -19,15 +19,13 @@ nav.navbar.navbar-custom
         li class="#{controller_name == 'articles' ? 'active' : nil}"
           a href="/articles"
             | 文章
-        li class="#{controller_name == 'softs' ? 'active' : nil}"
-          a href="/softs" 资源下载
         li class="#{controller_name == 'groups' ? 'active' : nil}"
           a href="/groups" 分类
         li class="#{controller_name == 'playlists' ? 'active' : nil}"
           a href="/playlists" 播放列表
         li class="#{controller_name == 'books' ? 'active' : nil}"
           a href="/books" 小书
-      
+
       ul.nav.navbar-nav.navbar-right
         li
           a href="" class='search_btn'
@@ -52,7 +50,7 @@ nav.navbar.navbar-custom
                   i class="fa fa-user-o" aria-hidden="true"
                   |  个人中心
               li
-                = link_to destroy_user_session_path, :method => :delete do
+                = link_to destroy_user_session_path, :method => :delete, data: { confirm: "确定登出吗？我们需要你！" } do
                   i class="fa fa-sign-out" aria-hidden="true"
                   |  注销
               - if can? :create, Movie

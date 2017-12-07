@@ -25,12 +25,29 @@ body {
   max-width: 960px;
 }
 
+.navbar > .container .navbar-brand {
+  @media (min-width: 768px) {
+    margin-left: 0;
+  }
+}
+
+.article-left {
+  @media (min-width: 768px) {
+    margin-right: -5px;
+  }
+}
+
+.article-right {
+  @media (min-width: 768px) {
+    margin-left: -5px;
+  }
+}
+
 // a {
 //   color: #555;
 // }
 
 .article-body {
-  margin-left: -20px;
 }
 
 .white-bg {
@@ -136,7 +153,6 @@ body {
 #content {
   padding-bottom: 60px;
   @media (max-width: 768px) {
-    margin-left: 19px;
   }
 }
 
@@ -795,7 +811,6 @@ ul.tabs-admin li {
   padding-top: 30px;
   padding-right: 0;
   padding-bottom: 20px;
-  margin-left: -20px;
   padding-right: 20px;
   padding-left: 20px;/*	border-top-width: 4px;
   border-top-style: solid;
@@ -899,7 +914,6 @@ Only Needed in Multi-Coloured Variation
 .footer-bottom {
   background-color: #15224f;
   min-height: 30px;
-  margin-left: -20px;
 }
 .copyright {
   color: #fff;

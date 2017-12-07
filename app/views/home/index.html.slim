@@ -1,6 +1,6 @@
 .row
-  - cache @articles do
-    .col-md-6
+  - cache [@articles, current_user] do
+    .col-md-6.article-left
       .panel.panel-default
         .panel-heading
           div
@@ -10,8 +10,8 @@
           - @articles.each do |article|
             = render partial: 'articles/article', locals: { article: article }
 
-  - cache @hot_articles do
-    .col-md-6
+  - cache [@hot_articles, current_user] do
+    .col-md-6.article-right
       .panel.panel-default
         .panel-heading
           div
@@ -21,7 +21,7 @@
           - @hot_articles.each do |article|
             = render partial: 'articles/article', locals: { article: article }
 
-- cache @movies do
+- cache [@movies, current_user] do
   .row
     .col-md-12
       .panel.panel-default
