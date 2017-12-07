@@ -53,6 +53,25 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.random_like
+    self.find_each do |user|
+      articles = Article.limit(rand(Article.count))
+      articles.each do |article|
+        user.like article
+      end
+
+      movies = Movie.limit(rand(Movie.count))
+      movies.each do |movie|
+        user.like movie
+      end
+
+      softs = Soft.limit(rand(Soft.count))
+      softs.each do |soft|
+        user.like soft
+      end
+    end
+  end
+
   attr_writer :login
 
   def login
