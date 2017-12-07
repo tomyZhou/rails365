@@ -1,14 +1,11 @@
-= render 'shared/site_info_home_desc'
+.white-bg
+  - cache @playlist do
+    .page-header
+      h4.text-primary.title-header
+        = @playlist.name
+        | (#{@playlist.movies_count})
 
-= render 'shared/books'
-
-- cache @playlist do
-  .page-header
-    h4.text-primary.title-header
-      = @playlist.name
-      | (#{@playlist.movies_count})
-
-- cache [@movies, current_user] do
-  div.home-video
-    - @movies.each do |movie|
-      = render partial: 'movies/movie', locals: { movie: movie }
+  - cache [@movies, current_user] do
+    div.home-video
+      - @movies.each do |movie|
+        = render partial: 'movies/movie', locals: { movie: movie }

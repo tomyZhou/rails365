@@ -1,21 +1,20 @@
-- cache [@soft, current_user] do
-  .page-header
-    h1.text-primary.my-title = @soft.title
-    p.text-right.article-desc
-      = link_to "首页", root_path
-      | &nbsp;&nbsp;/&nbsp;&nbsp;
-      = link_to "所有下载资源", softs_path
-
-.row.block-margin
-  .col-md-12
-    div.text-right
-      - if can? :update, @soft
+- if can? :update, @soft
+  .row.block-margin
+    .col-md-12
+      div.text-right
         = link_to "编辑", edit_soft_path(@soft), class: 'btn btn-primary btn-sm'
 
 .row
   .col-md-8
     .panel.panel-default
-      .panel-heading
+      .panel-body
+        - cache [@soft, current_user] do
+          .page-header
+            p.text-right.article-desc
+              = link_to "首页", root_path
+              | &nbsp;&nbsp;/&nbsp;&nbsp;
+              = link_to "所有下载资源", softs_path
+            h1.text-primary.my-title = @soft.title
         .article-desc
           | #{@soft.read_count} 次阅读 
           = @soft.tag
@@ -23,7 +22,6 @@
           = custom_timeago_tag @soft.created_at
           |  编辑于
           = custom_timeago_tag @soft.updated_at
-      .panel-body
         .article_content
           - cache @soft do
             div.clearfix

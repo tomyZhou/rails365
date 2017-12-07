@@ -1,28 +1,24 @@
 = render 'shared/site_info_home_desc'
 
-.white-bg
-  - cache [@movie, current_user] do
-
-    .page-header
-      h1.text-primary.my-title style="max-width: 500px;" = @movie.title
-      p.text-right.article-desc
-        = link_to "首页", root_path
-        | &nbsp;&nbsp;/&nbsp;&nbsp;
-        = link_to "所有视频", movies_path
-        | &nbsp;&nbsp;/&nbsp;&nbsp;
-        = link_to @movie.playlist.try(:name), playlist_path(@movie.playlist)
-        
-      
+- if can? :update, @movie
   .row.block-margin
     .col-md-12
       div.text-right
-        - if can? :update, @movie
-          = link_to "编辑", edit_movie_path(@movie), class: 'btn btn-primary btn-sm'
+        = link_to "编辑", edit_movie_path(@movie), class: 'btn btn-primary btn-sm'
 
 .row
   .col-md-8
     .panel.panel-default
-      .panel-heading
+      .panel-body
+        - cache [@movie, current_user] do
+          .page-header
+            p.text-right.article-desc
+              = link_to "首页", root_path
+              | &nbsp;&nbsp;/&nbsp;&nbsp;
+              = link_to "所有视频", movies_path
+              | &nbsp;&nbsp;/&nbsp;&nbsp;
+              = link_to @movie.playlist.try(:name), playlist_path(@movie.playlist)
+            h1.text-primary.my-title style="max-width: 500px;" = @movie.title
         - cache ["panel-heading", @movie] do
           div.article-desc
             - if @movie.is_original
@@ -37,7 +33,6 @@
               span class="label label-success" 已完结
             - else
               span class="label label-warning" 持续更新中
-      .panel-body
         .article_content
           div.video-block
             video src="#{@movie.mp4_url}" controls="controls" poster="#{@movie.image_url}"

@@ -1,9 +1,9 @@
 = render 'shared/site_info_home_desc'
 
-.row.block-margin
-  .col-md-12
-    div.text-right
-      - if can? :update, @article
+- if can? :update, @article
+  .row.block-margin
+    .col-md-12
+      div.text-right
         = link_to "编辑", edit_article_path(@article), class: 'btn btn-primary btn-sm'
 
 .row
@@ -12,13 +12,13 @@
       .panel-body
         - cache [@article, current_user] do
           .page-header
-            h1.text-primary.my-title style="max-width: 500px;" = @article.title
             p.text-right.article-desc
               = link_to "首页", root_path
               | &nbsp;&nbsp;/&nbsp;&nbsp;
               = link_to "所有文章", articles_path
               | &nbsp;&nbsp;/&nbsp;&nbsp;
               = link_to @article.group.try(:name), group_path(@article.group)
+            h1.text-primary.my-title style="max-width: 500px;" = @article.title
         div.article-desc.clearfix
           | #{@article.read_count} 次阅读 * 
           |  发表于

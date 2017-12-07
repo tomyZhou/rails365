@@ -13,7 +13,7 @@ class HomeController < ApplicationController
     end
 
     @playlists = Rails.cache.fetch('playlists') do
-      Playlist.order(weight: :desc).limit(Playlist.count - (Playlist.count % 5)).to_a
+      Playlist.order(weight: :desc).limit(Playlist.count - (Playlist.count % 4)).to_a
     end
 
     @movies = Rails.cache.fetch('movies') do
