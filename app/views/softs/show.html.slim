@@ -16,14 +16,13 @@
   .col-md-8
     .panel.panel-default
       .panel-heading
-        - cache ["panel-heading", @soft] do
-          .article-desc
-            |  
-            = @soft.tag
-            |  由 #{link_to @soft.user.try(:login), user_path(@soft.user)} 发表于
-            = custom_timeago_tag @soft.created_at
-            |  编辑于
-            = custom_timeago_tag @soft.updated_at
+        .article-desc
+          | #{@soft.read_count} 次阅读 
+          = @soft.tag
+          |  发表于
+          = custom_timeago_tag @soft.created_at
+          |  编辑于
+          = custom_timeago_tag @soft.updated_at
       .panel-body
         .article_content
           - cache @soft do
@@ -33,7 +32,7 @@
               = markdown @soft.body
             hr
             - if @soft.baidu_download?
-              div.text-center
+              div.text-left
                 = link_to '立即下载', @soft.actual_download_url, class: "btn btn-primary", target: "_blank"
                 |  密码： #{@soft.actual_download_password}
         = render partial: 'comments/form', locals: { object: @soft }
