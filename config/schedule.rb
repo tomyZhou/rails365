@@ -20,5 +20,5 @@
 # Learn more: http://github.com/javan/whenever
 
 every 2.hours do
-  runner "ExtraMarginWorker.perform_async"
+  runner "UpdateReadCountWorker.perform_async"
 end

@@ -26,6 +26,7 @@ require 'capistrano/rails/migrations'
 
 require 'capistrano/sidekiq'
 require 'capistrano/puma'
+require "whenever/capistrano"
 require 'capistrano/rails/console'
 require 'capistrano-db-tasks'
 
