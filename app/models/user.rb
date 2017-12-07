@@ -58,16 +58,19 @@ class User < ActiveRecord::Base
       articles = Article.limit(rand(Article.count))
       articles.each do |article|
         user.like article
+        article.update_like_count
       end
 
       movies = Movie.limit(rand(Movie.count))
       movies.each do |movie|
         user.like movie
+        movie.update_like_count
       end
 
       softs = Soft.limit(rand(Soft.count))
       softs.each do |soft|
         user.like soft
+        soft.update_like_count
       end
     end
   end
