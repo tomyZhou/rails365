@@ -365,10 +365,11 @@ a {
 .media-list {
   padding-left: 0;
   list-style: none;
+  background: #fff;
   .media {
     overflow: hidden;
     zoom: 1;
-    padding: 5px 20px;
+    padding: 10px 10px 5px 10px;;
     border-bottom: 1px solid #eaeaea;
     &:first-child {
       margin-top: 0;
@@ -420,7 +421,6 @@ body .no-padding {
   -o-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
   box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
   float: left;
-  margin-top: 30px;
   padding: 25px 30px;
   position: relative;
   width: 100%;
@@ -518,7 +518,7 @@ body .no-padding {
     background-color: #fff;
     padding-bottom: 12px;
     padding: 15px 22px;
-    padding-left: 0;
+    padding-left: 10px;
   }
 }
 
@@ -787,7 +787,7 @@ ul.tabs-admin li {
 
 .footer1 {
   background: #fff repeat scroll left top;
-  padding-top: 2px;
+  padding-top: 30px;
   padding-right: 0;
   padding-bottom: 20px;
   margin-left: -20px;

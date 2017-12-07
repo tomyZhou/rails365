@@ -1,15 +1,5 @@
 = render 'shared/site_info_home_desc'
 
-- cache [@article, current_user] do
-  .page-header
-    h1.text-primary.my-title style="max-width: 500px;" = @article.title
-    p.text-right.article-desc
-      = link_to "首页", root_path
-      | &nbsp;&nbsp;/&nbsp;&nbsp;
-      = link_to "所有文章", articles_path
-      | &nbsp;&nbsp;/&nbsp;&nbsp;
-      = link_to @article.group.try(:name), group_path(@article.group)
-
 .row.block-margin
   .col-md-12
     div.text-right
@@ -19,16 +9,22 @@
 .row
   .col-md-8
     .panel.panel-default
-      .panel-heading
+      .panel-body
+        - cache [@article, current_user] do
+          .page-header
+            h1.text-primary.my-title style="max-width: 500px;" = @article.title
+            p.text-right.article-desc
+              = link_to "首页", root_path
+              | &nbsp;&nbsp;/&nbsp;&nbsp;
+              = link_to "所有文章", articles_path
+              | &nbsp;&nbsp;/&nbsp;&nbsp;
+              = link_to @article.group.try(:name), group_path(@article.group)
         div.article-desc.clearfix
           | #{@article.read_count} 次阅读 * 
           |  发表于
           = custom_timeago_tag @article.created_at
           |  编辑于
           = custom_timeago_tag @article.updated_at
-          /a href="#{group_path(@article.group)}" class="pull-right"
-          /  = image_tag @article.group.image_url, class: "small-icon"
-      .panel-body
         .article_content
           - cache @article do
             = markdown @article.body
