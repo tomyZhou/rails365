@@ -85,7 +85,7 @@ class Movie < ActiveRecord::Base
     self.find_each do |movie|
       movie.visit_count = rand(1000)
       movie.save validate: false
-      $redis.set("user_soft_#{movie.id}_count", movie.visit_count)
+      $redis.set("user_movie_#{movie.id}_count", movie.visit_count)
     end
   end
 
