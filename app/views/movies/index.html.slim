@@ -1,14 +1,15 @@
-.page-header
-  h4.text-center.text-primary.title-header 所有视频(#{@movies.total_count})
+.white-bg
+  .page-header
+    h4.text-center.text-primary.title-header 所有视频(#{@movies.total_count})
 
-  = render 'sub_nav'
+    = render 'sub_nav'
 
-- cache @movies do
-  div.pt15.home-video
-    .infinite-table
-      = render partial: 'index', object: @movies
-    .my-pagination.hidden
-      = link_to_next_page(@movies, '下一页', :remote => true)
-    .pagination-text
-      /- unless @movies.last_page?
-      /  | 正在加载下一页...
+  - cache @movies do
+    div.pt15.home-video
+      .infinite-table
+        = render partial: 'index', object: @movies
+      .my-pagination.hidden
+        = link_to_next_page(@movies, '下一页', :remote => true)
+      .pagination-text
+        /- unless @movies.last_page?
+        /  | 正在加载下一页...

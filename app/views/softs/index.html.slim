@@ -1,12 +1,13 @@
-.page-header
-  h4.text-primary.title-header 所有下载资源(#{@softs.total_count})
+.white-bg
+  .page-header
+    h4.text-primary.title-header 所有下载资源(#{@softs.total_count})
 
-- cache @softs do
-  div.pt15.home-video
-    .infinite-table
-      = render partial: 'index', object: @softs
-    .my-pagination.hidden
-      = link_to_next_page(@softs, '下一页', :remote => true)
-    .pagination-text
-      /- unless @softs.last_page?
-      /  | 正在加载下一页...
+  - cache @softs do
+    div.pt15.home-video
+      .infinite-table
+        = render partial: 'index', object: @softs
+      .my-pagination.hidden
+        = link_to_next_page(@softs, '下一页', :remote => true)
+      .pagination-text
+        /- unless @softs.last_page?
+        /  | 正在加载下一页...

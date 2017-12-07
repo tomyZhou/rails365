@@ -6,7 +6,7 @@
           div
             span 最近的文章
             = link_to '更多>>', articles_path, class: "pull-right"
-        .panel-body.pb0
+        .panel-body.pb0.article-panel-box
           - @articles.each do |article|
             = render partial: 'articles/article', locals: { article: article }
 
@@ -17,7 +17,7 @@
           div
             span 最热门的文章
             = link_to '更多>>', articles_path, class: "pull-right"
-        .panel-body.pb0
+        .panel-body.pb0.article-panel-box
           - @hot_articles.each do |article|
             = render partial: 'articles/article', locals: { article: article }
 

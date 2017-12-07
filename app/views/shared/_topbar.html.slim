@@ -1,4 +1,4 @@
-nav.navbar.navbar-default
+nav.navbar.navbar-custom
 
   .container
     .navbar-header
@@ -33,25 +33,28 @@ nav.navbar.navbar-default
           a href="" class='search_btn'
             i class="fa fa-search" aria-hidden="true"
         li
-          = link_to new_article_path, class: 'btn btn-primary' do
-            i.glyphicon.glyphicon-plus
+          = link_to new_article_path do
+            i class="fa fa-sticky-note-o" aria-hidden="true"
             |  写文章
 
         - if user_signed_in?
-          li.dropdown
+          li.dropdown.text-right
             a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
               span style="margin-right: 10px" class="avatar-image"
                 = image_tag current_user.letter_avatar_url(40), width: '20', height: '20'
-              = current_user.login
               span.caret
             ul.dropdown-menu
               - if current_user.super_admin?
                 li
                   a href="/admin" 后台管理
               li
-                = link_to '个人中心', user_path(current_user)
+                = link_to user_path(current_user) do
+                  i class="fa fa-user-o" aria-hidden="true"
+                  |  个人中心
               li
-                = link_to('注销', destroy_user_session_path, :method => :delete)
+                = link_to destroy_user_session_path, :method => :delete do
+                  i class="fa fa-sign-out" aria-hidden="true"
+                  |  注销
               - if can? :create, Movie
                 li
                   = link_to "添加新视频", new_movie_path
@@ -66,6 +69,10 @@ nav.navbar.navbar-default
               span.caret
             ul.dropdown-menu
               li
-                = link_to('注册', new_registration_path(:user))
+                = link_to new_registration_path(:user) do
+                  i class="fa fa-user-plus" aria-hidden="true"
+                  |  注册
               li
-                = link_to('登录', new_session_path(:user))
+                = link_to new_session_path(:user)
+                  i class="fa fa-sign-in" aria-hidden="true"
+                  | &nbsp;&nbsp;登录

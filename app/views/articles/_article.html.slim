@@ -1,4 +1,4 @@
-div.mb10.clearfix
+div.clearfix.article-box
   /div.pull-right
   /  span class="badge" = article.read_count
   p.article-title
@@ -15,7 +15,7 @@ div.mb10.clearfix
       |  
       = article.read_count
       |  次阅读
-  p.article-desc
+  div.article-desc
     .btn-group
       = link_to like_article_path(article), remote: true do
         button class='btn btn-default btn-muted'

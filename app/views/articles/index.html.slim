@@ -29,8 +29,6 @@
               = paginate @articles
 
           - else
-            div
-              = paginate @articles, window: 3
             .infinite-table
               = render partial: 'index', object: @articles
             .my-pagination.hidden
@@ -41,7 +39,7 @@
     .row
       .col-md-12
         = render 'shared/activity_users'
-          
+
 
     - cache @groups do
       .row

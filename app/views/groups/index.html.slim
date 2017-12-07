@@ -1,5 +1,6 @@
-- cache @groups do
-  .page-header
-    h4.text-primary.title-header 所有分类(#{@groups.count})
+.white-bg
+  - cache @groups do
+    .page-header
+      h4.text-primary.title-header 所有分类(#{@groups.count})
 
-  = render partial: 'group', locals: { groups: @groups }
+    = render partial: 'group', locals: { groups: @groups }
