@@ -1,6 +1,6 @@
 var soft_id = ".soft-id-" + "<%= @soft.id %>";
 var soft_count = ".soft-count-" + "<%= @soft.id %>";
-$(soft_id).text("<%= @soft.likers_by(User).count %>");
+$(soft_id).text("<%= @soft.like_count %>");
 <% if @soft.liked_by?(current_user) %>
   $(soft_count).removeClass('fa-heart-o').addClass('fa-heart');
 <% else %>

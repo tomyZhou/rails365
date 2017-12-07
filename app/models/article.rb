@@ -15,7 +15,7 @@ class Article < ActiveRecord::Base
   has_many :comments, as: 'commentable'
   cache_has_many :comments, :inverse_name => :commentable
 
-  scope :except_body_with_default, -> { select(:title, :created_at, :updated_at, :group_id, :slug, :id, :user_id, :weight, :is_home).includes(:group) }
+  scope :except_body_with_default, -> { select(:title, :like_count, :created_at, :updated_at, :group_id, :slug, :id, :user_id, :weight, :is_home).includes(:group) }
 
   def self.async_create(user_id, article_params)
     user = User.find(user_id)
@@ -74,6 +74,12 @@ class Article < ActiveRecord::Base
       article.visit_count = rand(1000)
       article.save validate: false
       $redis.set("user_#{article.id}_count", article.visit_count)
+    end
+  end
+
+  def self.init_like_count
+    self.find_each do |article|
+      article.update_like_count
     end
   end
 
