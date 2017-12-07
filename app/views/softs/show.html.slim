@@ -47,13 +47,13 @@
         = social_share_button_tag(@soft.title)
     .panel.panel-default
       .panel-heading
-        div 喜欢（<span id="movie-id-#{@soft.id}">#{@soft.likers_by(User).count}</span>）
+        div 喜欢（<span class="soft-id-#{@soft.id}">#{@soft.likers_by(User).count}</span>）
       .panel-body
         = link_to like_soft_path(@soft), remote: true do
           - if current_user && @soft.liked_by?(current_user)
-            i#heart.glyphicon.glyphicon-heart
+            i class="soft-count-#{@soft.id} fa fa-heart"
           - else
-            i#heart.glyphicon.glyphicon-heart-empty
+            i class="soft-count-#{@soft.id} fa fa-heart-o"
 
     - if @soft.baidu_download?
       .panel.panel-default

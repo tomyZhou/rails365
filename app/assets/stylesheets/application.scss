@@ -952,3 +952,12 @@ Only Needed in Multi-Coloured Variation
 .panel-default>.panel-heading {
   background-color: #fff;
 }
+
+.btn-muted {
+  padding: 3px 10px;
+  border-radius: 0;
+}
+
+.btn:focus {
+  outline: none;
+}

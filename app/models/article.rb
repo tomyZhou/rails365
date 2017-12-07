@@ -85,6 +85,11 @@ class Article < ActiveRecord::Base
     $redis.incr "user_#{self.id}_count"
   end
 
+  def update_like_count
+    self.like_count = self.likers_by(User).count
+    self.save validate: false
+  end
+
   private
 
   def publish_create

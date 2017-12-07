@@ -60,13 +60,13 @@
         = social_share_button_tag(@article.title)
     .panel.panel-default
       .panel-heading
-        div 喜欢（<span id="movie-id-#{@article.id}">#{@article.likers_by(User).count}</span>）
+        div 喜欢（<span class="article-id-#{@article.id}">#{@article.likers_by(User).count}</span>）
       .panel-body
         = link_to like_article_path(@article), remote: true do
           - if current_user && @article.liked_by?(current_user)
-            i#heart.glyphicon.glyphicon-heart
+            i class="article-count-#{@article.id} fa fa-heart"
           - else
-            i#heart.glyphicon.glyphicon-heart-empty
+            i class="article-count-#{@article.id} fa fa-heart-o"
     - cache ["username", @article] do
       .panel.panel-default
         .panel-heading

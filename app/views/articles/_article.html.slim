@@ -12,3 +12,14 @@ div.mb10.clearfix
       = link_to article.user.try(:login), user_path(article.user)
       |  创建于
       = custom_timeago_tag article.created_at
+  p.article-desc
+    .btn-group
+      = link_to like_article_path(article), remote: true do
+        button class='btn btn-default btn-muted'
+          - if current_user && article.liked_by?(current_user)
+            i class="article-count-#{article.id} fa fa-heart"
+          - else
+            i class="article-count-#{article.id} fa fa-heart-o"
+          |  
+          span class="text-muted" class="article-id-#{article.id}"
+            = article.likers_by(User).count

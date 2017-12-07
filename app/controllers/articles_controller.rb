@@ -67,6 +67,7 @@ class ArticlesController < ApplicationController
 
   def like
     current_user.toggle_like(@article)
+    @article.update_like_count
   end
 
   private
