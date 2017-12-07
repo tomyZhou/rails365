@@ -9,6 +9,7 @@ class Soft < ActiveRecord::Base
   cache_index :slug, unique: true
 
   act_as_likee
+  include LikeConcern
 
   belongs_to :user
   has_many :comments, as: 'commentable'
@@ -17,21 +18,6 @@ class Soft < ActiveRecord::Base
   scope :except_body_with_default, -> { select(:title, :like_count, :name, :image, :tag, :id, :updated_at, :slug, :created_at) }
 
   mount_uploader :image, SoftUploader
-
-  def self.async_create(user_id, soft_params)
-    user = User.find(user_id)
-    soft = self.new(soft_params)
-    soft.user_id = user.id
-    soft.save!
-  end
-
-  def self.async_update(soft_id, soft_params)
-    soft = self.find(soft_id)
-    user_id = soft.user_id
-    soft.update!(soft_params)
-    soft.user_id = user_id
-    soft.save(validate: false)
-  end
 
   validates :title, :body, :user_id, :name, :tag, presence: true
   validates :title, uniqueness: true
@@ -58,57 +44,9 @@ class Soft < ActiveRecord::Base
     self.title.auto_correct!
   end
 
-  # 订阅量
-  def self.update_visit_count
-    self.find_each do |soft|
-      soft.visit_count = soft.read_count
-      soft.save validate: false
-    end
-  end
+  include ReadCountConcern
 
-  def self.init_random_read_count
-    self.find_each do |soft|
-      soft.visit_count = rand(1000)
-      soft.save validate: false
-      $redis.set("user_soft_#{soft.id}_count", soft.visit_count)
-    end
-  end
-
-  def read_count
-    $redis.get("user_soft_#{self.id}_count") || 0
-  end
-
-  def increment_read_count
-    $redis.incr "user_soft_#{self.id}_count"
-  end
-
-  # 喜欢
-  def update_like_count
-    self.like_count = self.likers_by(User).count
-    self.save validate: false
-  end
-
-  def self.init_like_count
-    self.find_each do |soft|
-      soft.update_like_count
-    end
-  end
-
-  def baidu_download?
-    self.download_url.present? && self.download_url.include?('baidu') ? true : false
-  end
-
-  def actual_download_url
-    if baidu_download?
-      self.download_url.partition(' ').first.partition(':').last
-    end
-  end
-
-  def actual_download_password
-    if baidu_download?
-      self.download_url.partition(' ').last.partition(':').last
-    end
-  end
+  include BaiduDownloadConcern
 
   private
 

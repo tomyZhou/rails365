@@ -12,6 +12,9 @@ div.mb10.clearfix
       = link_to article.user.try(:login), user_path(article.user)
       |  创建于
       = custom_timeago_tag article.created_at
+      |  
+      = article.read_count
+      |  次阅读
   p.article-desc
     .btn-group
       = link_to like_article_path(article), remote: true do

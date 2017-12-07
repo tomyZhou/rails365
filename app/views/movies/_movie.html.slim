@@ -17,6 +17,9 @@ div.video-box
       span class="label label-danger" 原创
   p.time
     = custom_timeago_tag movie.created_at
+    |  
+    = movie.read_count
+    |  次播放
   div.text-left
     .btn-group
       = link_to like_movie_path(movie), remote: true do

@@ -9,6 +9,7 @@ class Movie < ActiveRecord::Base
   cache_index :slug, unique: true
 
   act_as_likee
+  include LikeConcern
 
   belongs_to :playlist, counter_cache: true
   belongs_to :serial, counter_cache: true
@@ -19,21 +20,6 @@ class Movie < ActiveRecord::Base
   scope :except_body_with_default, -> { select(:title, :like_count, :serial_id, :is_original, :created_at, :updated_at, :is_finished, :playlist_id, :image, :slug, :id, :play_time, :user_id, :weight).includes(:playlist) }
 
   mount_uploader :image, VideoUploader
-
-  def self.async_create(user_id, movie_params)
-    user = User.find(user_id)
-    movie = self.new(movie_params)
-    movie.user_id = user.id
-    movie.save!
-  end
-
-  def self.async_update(movie_id, movie_params)
-    movie = self.find(movie_id)
-    user_id = movie.user_id
-    movie.update!(movie_params)
-    movie.user_id = user_id
-    movie.save(validate: false)
-  end
 
   validates :title, :body, :playlist_id, :user_id, presence: true
   validates :title, uniqueness: true
@@ -72,58 +58,9 @@ class Movie < ActiveRecord::Base
     self.title.auto_correct!
   end
 
-  # 阅读量
-  def self.update_visit_count
-    self.find_each do |movie|
-      movie.visit_count = movie.read_count
-      movie.save validate: false
-    end
-    Rails.cache.delete "movies"
-  end
+  include ReadCountConcern
 
-  def self.init_random_read_count
-    self.find_each do |movie|
-      movie.visit_count = rand(1000)
-      movie.save validate: false
-      $redis.set("user_movie_#{movie.id}_count", movie.visit_count)
-    end
-  end
-
-  def read_count
-    $redis.get("user_movie_#{self.id}_count") || 0
-  end
-
-  def increment_read_count
-    $redis.incr "user_movie_#{self.id}_count"
-  end
-
-  # 喜欢
-  def self.init_like_count
-    self.find_each do |movie|
-      movie.update_like_count
-    end
-  end
-
-  def update_like_count
-    self.like_count = self.likers_by(User).count
-    self.save validate: false
-  end
-
-  def baidu_download?
-    self.download_url.present? && self.download_url.include?('baidu') ? true : false
-  end
-
-  def actual_download_url
-    if baidu_download?
-      self.download_url.partition(' ').first.partition(':').last
-    end
-  end
-
-  def actual_download_password
-    if baidu_download?
-      self.download_url.partition(' ').last.partition(':').last
-    end
-  end
+  include BaiduDownloadConcern
 
   private
 

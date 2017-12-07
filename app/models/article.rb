@@ -6,6 +6,7 @@ class Article < ActiveRecord::Base
   friendly_id :title, use: [:slugged, :finders, :history]
 
   act_as_likee
+  include LikeConcern
 
   include IdentityCache
   cache_index :slug, unique: true
@@ -64,10 +65,11 @@ class Article < ActiveRecord::Base
   # 订阅量
   def self.update_visit_count
     self.find_each do |article|
-      article.visit_count = article.read_count
-      article.save validate: false
+      if article.visit_count != article.read_count.to_i
+        article.visit_count = article.read_count.to_i
+        article.save validate: false
+      end
     end
-    Rails.cache.delete "hot_articles"
   end
 
   def self.init_random_read_count
@@ -78,25 +80,7 @@ class Article < ActiveRecord::Base
     end
   end
 
-  def read_count
-    $redis.get("user_#{self.id}_count") || 0
-  end
-
-  def increment_read_count
-    $redis.incr "user_#{self.id}_count"
-  end
-
-  # 喜欢
-  def update_like_count
-    self.like_count = self.likers_by(User).count
-    self.save validate: false
-  end
-
-  def self.init_like_count
-    self.find_each do |article|
-      article.update_like_count
-    end
-  end
+  include ReadCountConcern
 
   private
 
