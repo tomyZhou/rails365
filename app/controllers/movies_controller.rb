@@ -67,6 +67,7 @@ class MoviesController < ApplicationController
 
   def update
     if @movie.update(movie_params)
+      Redis.new.publish 'ws', {title: 'rails365 更新了视频', content: @movie.title}.to_json
       flash[:success] = "更新成功"
       redirect_to movie_path(@movie)
     else
@@ -81,6 +82,7 @@ class MoviesController < ApplicationController
 
   def like
     current_user.toggle_like(@movie)
+    @movie.update_like_count
   end
 
   private

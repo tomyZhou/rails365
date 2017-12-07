@@ -58,15 +58,16 @@
         div 分享
       .panel-body
         = social_share_button_tag(@article.title)
-    .panel.panel-default
-      .panel-heading
-        div 喜欢（<span class="article-id-#{@article.id}">#{@article.like_count}</span>）
-      .panel-body
-        = link_to like_article_path(@article), remote: true do
-          - if current_user && @article.liked_by?(current_user)
-            i class="article-count-#{@article.id} fa fa-heart"
-          - else
-            i class="article-count-#{@article.id} fa fa-heart-o"
+    - cache [@article, current_user, "like"]
+      .panel.panel-default
+        .panel-heading
+          div 喜欢（<span class="article-id-#{@article.id}">#{@article.like_count}</span>）
+        .panel-body
+          = link_to like_article_path(@article), remote: true do
+            - if current_user && @article.liked_by?(current_user)
+              i class="article-count-#{@article.id} fa fa-heart"
+            - else
+              i class="article-count-#{@article.id} fa fa-heart-o"
     - cache ["username", @article] do
       .panel.panel-default
         .panel-heading

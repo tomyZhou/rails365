@@ -49,13 +49,50 @@ class Soft < ActiveRecord::Base
   end
 
   after_commit :clear_cache
-  after_update :clear_after_updated_cache
+  # after_update :clear_after_updated_cache
   after_create :publish_create
 
   before_save do
     # 引发 ActiveModel::Dirty 的 change
     self.title_will_change!
     self.title.auto_correct!
+  end
+
+    # 订阅量
+  def self.update_visit_count
+    self.find_each do |soft|
+      soft.visit_count = soft.read_count
+      soft.save validate: false
+    end
+    Rails.cache.delete "hot_articles"
+  end
+
+  def self.init_random_read_count
+    self.find_each do |soft|
+      soft.visit_count = rand(1000)
+      soft.save validate: false
+      $redis.set("user_soft_#{soft.id}_count", soft.visit_count)
+    end
+  end
+
+  def read_count
+    $redis.get("user_soft_#{self.id}_count") || 0
+  end
+
+  def increment_read_count
+    $redis.incr "user_soft_#{self.id}_count"
+  end
+
+  # 喜欢
+  def update_like_count
+    self.like_count = self.likers_by(User).count
+    self.save validate: false
+  end
+
+  def self.init_like_count
+    self.find_each do |soft|
+      soft.update_like_count
+    end
   end
 
   def baidu_download?
@@ -88,8 +125,5 @@ class Soft < ActiveRecord::Base
   end
 
   def clear_after_updated_cache
-    unless Rails.env.test?
-      Redis.new.publish 'ws', { title: 'rails365 更新了资源', content: self.title }.to_json
-    end
   end
 end

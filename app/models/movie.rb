@@ -72,6 +72,43 @@ class Movie < ActiveRecord::Base
     self.title.auto_correct!
   end
 
+  # 阅读量
+  def self.update_visit_count
+    self.find_each do |movie|
+      movie.visit_count = movie.read_count
+      movie.save validate: false
+    end
+    Rails.cache.delete "hot_articles"
+  end
+
+  def self.init_random_read_count
+    self.find_each do |movie|
+      movie.visit_count = rand(1000)
+      movie.save validate: false
+      $redis.set("user_soft_#{movie.id}_count", movie.visit_count)
+    end
+  end
+
+  def read_count
+    $redis.get("user_movie_#{self.id}_count") || 0
+  end
+
+  def increment_read_count
+    $redis.incr "user_movie_#{self.id}_count"
+  end
+
+  # 喜欢
+  def self.init_like_count
+    self.find_each do |movie|
+      movie.update_like_count
+    end
+  end
+
+  def update_like_count
+    self.like_count = self.likers_by(User).count
+    self.save validate: false
+  end
+
   def baidu_download?
     self.download_url.present? && self.download_url.include?('baidu') ? true : false
   end
@@ -121,9 +158,5 @@ class Movie < ActiveRecord::Base
     # Rails.cache.delete "recommend_movies_#{playlist.slug}"
 
     Rails.cache.delete "playlist_movies_#{playlist.slug}"
-
-    unless Rails.env.test?
-      Redis.new.publish 'ws', {title: 'rails365 更新了视频', content: self.title}.to_json
-    end
   end
 end

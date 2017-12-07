@@ -61,6 +61,7 @@ class Article < ActiveRecord::Base
     self.title.auto_correct!
   end
 
+  # 订阅量
   def self.update_visit_count
     self.find_each do |article|
       article.visit_count = article.read_count
@@ -77,12 +78,6 @@ class Article < ActiveRecord::Base
     end
   end
 
-  def self.init_like_count
-    self.find_each do |article|
-      article.update_like_count
-    end
-  end
-
   def read_count
     $redis.get("user_#{self.id}_count") || 0
   end
@@ -91,9 +86,16 @@ class Article < ActiveRecord::Base
     $redis.incr "user_#{self.id}_count"
   end
 
+  # 喜欢
   def update_like_count
     self.like_count = self.likers_by(User).count
     self.save validate: false
+  end
+
+  def self.init_like_count
+    self.find_each do |article|
+      article.update_like_count
+    end
   end
 
   private

@@ -45,15 +45,16 @@
         div 分享
       .panel-body
         = social_share_button_tag(@soft.title)
-    .panel.panel-default
-      .panel-heading
-        div 喜欢（<span class="soft-id-#{@soft.id}">#{@soft.like_count}</span>）
-      .panel-body
-        = link_to like_soft_path(@soft), remote: true do
-          - if current_user && @soft.liked_by?(current_user)
-            i class="soft-count-#{@soft.id} fa fa-heart"
-          - else
-            i class="soft-count-#{@soft.id} fa fa-heart-o"
+    - cache [@soft, current_user, 'like']
+      .panel.panel-default
+        .panel-heading
+          div 喜欢（<span class="soft-id-#{@soft.id}">#{@soft.like_count}</span>）
+        .panel-body
+          = link_to like_soft_path(@soft), remote: true do
+            - if current_user && @soft.liked_by?(current_user)
+              i class="soft-count-#{@soft.id} fa fa-heart"
+            - else
+              i class="soft-count-#{@soft.id} fa fa-heart-o"
 
     - if @soft.baidu_download?
       .panel.panel-default
