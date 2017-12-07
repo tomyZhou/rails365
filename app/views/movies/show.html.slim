@@ -27,9 +27,7 @@
             - if @movie.is_original
               span class="label label-danger" 原创
               |  * 
-            = link_to playlist_path(@movie.playlist) do
-              span.mr5 = @movie.playlist.try(:name)
-            | 由 #{link_to @movie.user.try(:login), user_path(@movie.user)} 发表于
+            |  发表于
             = custom_timeago_tag @movie.created_at
             |  编辑于
             = custom_timeago_tag @movie.updated_at
@@ -40,33 +38,30 @@
               span class="label label-warning" 持续更新中
       .panel-body
         .article_content
-          - cache @movie do
-            div.video-block
-              video src="#{@movie.mp4_url}" controls="controls" poster="#{@movie.image_url}"
-                你的浏览器不支持该视频播放
-            p.text-left.time
-              | 创建于
-              = custom_timeago_tag @movie.created_at
-              |  播放列表 
-              = link_to playlist_path(@movie.playlist) do
-                span.mr5 = @movie.playlist.try(:name)
-              - if @movie.mp4_name.present?
-                | • 
-                = @movie.mp4_name
-            - if @movie.youtube_url.present?
-              p = link_to '用 youtube 播放', @movie.youtube_url, target: "_blank"
-            hr
-            / 为了兼容以前的数据内容
-            - if !@movie.body.include?('视频内容搬运于网络') && @movie.author.present?
-              div
-                p 视频内容搬运于网络，由 #{@movie.author} 发布，本站提供下载链接是为了提高用户体验，而不是以盈利为目的，如有版本问题，请联系我（邮箱：hfpp2012@gmail.com），即可删除信息。
+          div.video-block
+            video src="#{@movie.mp4_url}" controls="controls" poster="#{@movie.image_url}"
+              你的浏览器不支持该视频播放
+          p.text-left.time
+            | #{@movie.read_count} 次播放 * 
+            = link_to playlist_path(@movie.playlist) do
+              span.mr5 = @movie.playlist.try(:name)
+            - if @movie.mp4_name.present?
+              = @movie.mp4_name
+
+          - if @movie.youtube_url.present?
+            p = link_to '用 youtube 播放', @movie.youtube_url, target: "_blank"
+          hr
+          / 为了兼容以前的数据内容
+          - if !@movie.body.include?('视频内容搬运于网络') && @movie.author.present?
             div
-              = markdown @movie.body
-            - if @movie.baidu_download?
-              hr
-              div.text-center
-                = link_to '立即下载', @movie.actual_download_url, class: "btn btn-primary", target: "_blank"
-                |  密码： #{@movie.actual_download_password}
+              p 视频内容搬运于网络，由 #{@movie.author} 发布，本站提供下载链接是为了提高用户体验，而不是以盈利为目的，如有版本问题，请联系我（邮箱：hfpp2012@gmail.com），即可删除信息。
+          div
+            = markdown @movie.body
+          - if @movie.baidu_download?
+            hr
+            div.text-center
+              = link_to '立即下载', @movie.actual_download_url, class: "btn btn-primary", target: "_blank"
+              |  密码： #{@movie.actual_download_password}
         = render partial: 'comments/form', locals: { object: @movie }
         div#comment_box
           = render 'comments/comments'
