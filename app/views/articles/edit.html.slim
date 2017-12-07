@@ -1,9 +1,10 @@
-.page-header
-  h3 更新文章
+.white-bg
+  .page-header
+    h3 更新文章
 
-.row.block-margin
-  .col-md-12
-    .text-right
-      = link_to '删除', article_path(@article), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary btn-sm'
+  .row.block-margin
+    .col-md-12
+      .text-right
+        = link_to '删除', article_path(@article), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary btn-sm'
 
-= render 'form'
+  = render 'form'
