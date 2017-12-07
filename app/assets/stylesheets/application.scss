@@ -10,6 +10,7 @@ $navbar-height: 60px;
 @import "social-share-button";
 @import "sweetalert";
 @import "font-awesome";
+@import "login";
 
 $c3:#333;
 $c6:#666;
@@ -1020,6 +1021,10 @@ Only Needed in Multi-Coloured Variation
   color: #71777c;
 }
 
+.navbar-custom .navbar-nav > li > a.blue-style {
+  color: #007fff;
+}
+
 .navbar-custom .navbar-nav > .active > a {
   color: #007fff;
   background-color:transparent;
@@ -1043,4 +1048,9 @@ Only Needed in Multi-Coloured Variation
 }
 .navbar-custom .icon-bar {
   background-color: #fff;
+}
+
+.blue-login:after {
+  content: "\B7";
+  margin: 0 .4rem;
 }

@@ -19,6 +19,8 @@ nav.navbar.navbar-custom
         li class="#{controller_name == 'articles' ? 'active' : nil}"
           a href="/articles"
             | 文章
+        li.hidden class="#{controller_name == 'softs' ? 'active' : nil}"
+          a href="/softs" 资源下载
         li class="#{controller_name == 'groups' ? 'active' : nil}"
           a href="/groups" 分类
         li class="#{controller_name == 'playlists' ? 'active' : nil}"
@@ -31,7 +33,7 @@ nav.navbar.navbar-custom
           a href="" class='search_btn'
             i class="fa fa-search" aria-hidden="true"
         li
-          = link_to new_article_path do
+          = link_to new_article_path, class: "blue-style" do
             i class="fa fa-sticky-note-o" aria-hidden="true"
             |  写文章
 
@@ -61,16 +63,11 @@ nav.navbar.navbar-custom
                 li
                   = link_to "添加新下载资源", new_soft_path
         - else
-          li.dropdown
-            a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
-              | 加入我们
-              span.caret
-            ul.dropdown-menu
-              li
-                = link_to new_registration_path(:user) do
-                  i class="fa fa-user-plus" aria-hidden="true"
-                  |  注册
-              li
-                = link_to new_session_path(:user)
-                  i class="fa fa-sign-in" aria-hidden="true"
-                  | &nbsp;&nbsp;登录
+          li
+            = link_to new_registration_path(:user), class: "blue-style" do
+              i class="fa fa-user-plus" aria-hidden="true"
+              |  注册
+          li
+            = link_to new_session_path(:user), class: "blue-style" do
+              i class="fa fa-sign-in" aria-hidden="true"
+              |  登录
