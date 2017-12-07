@@ -78,7 +78,7 @@ class Movie < ActiveRecord::Base
       movie.visit_count = movie.read_count
       movie.save validate: false
     end
-    Rails.cache.delete "hot_articles"
+    Rails.cache.delete "movies"
   end
 
   def self.init_random_read_count

@@ -58,13 +58,12 @@ class Soft < ActiveRecord::Base
     self.title.auto_correct!
   end
 
-    # 订阅量
+  # 订阅量
   def self.update_visit_count
     self.find_each do |soft|
       soft.visit_count = soft.read_count
       soft.save validate: false
     end
-    Rails.cache.delete "hot_articles"
   end
 
   def self.init_random_read_count

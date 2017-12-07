@@ -139,3 +139,5 @@ gem 'jquery-infinite-pages'
 gem 'like_system'
 gem 'google-analytics-rails', '1.1.1'
 gem "font-awesome-rails"
+
+gem 'whenever', :require => false
