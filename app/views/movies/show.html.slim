@@ -1,5 +1,3 @@
-= render 'shared/site_info_home_desc'
-
 - if can? :update, @movie
   .row.block-margin
     .col-md-12
@@ -7,32 +5,18 @@
         = link_to "编辑", edit_movie_path(@movie), class: 'btn btn-primary btn-sm'
 
 .row
-  .col-md-8
+  .col-md-8.article-left
     .panel.panel-default
       .panel-body
-        - cache [@movie, current_user] do
-          .page-header
-            p.text-right.article-desc
-              = link_to "首页", root_path
-              | &nbsp;&nbsp;/&nbsp;&nbsp;
-              = link_to "所有视频", movies_path
-              | &nbsp;&nbsp;/&nbsp;&nbsp;
-              = link_to @movie.playlist.try(:name), playlist_path(@movie.playlist)
-            h1.text-primary.my-title style="max-width: 500px;" = @movie.title
-        - cache ["panel-heading", @movie] do
-          div.article-desc
-            - if @movie.is_original
-              span class="label label-danger" 原创
-              |  * 
-            |  发表于
-            = custom_timeago_tag @movie.created_at
-            |  编辑于
-            = custom_timeago_tag @movie.updated_at
-            |  
-            - if @movie.is_finished
-              span class="label label-success" 已完结
-            - else
-              span class="label label-warning" 持续更新中
+        - cache [@movie, "user-title"]
+          div
+            h1.my-title = @movie.title
+            div.article-desc
+              |发布于 
+              span.dian = custom_timeago_tag @movie.created_at
+              span #{@movie.read_count} 次观看
+              - if can? :update, @movie
+                  = link_to "编辑", edit_movie_path(@movie), class: 'before-dian'
         .article_content
           div.video-block
             video src="#{@movie.mp4_url}" controls="controls" poster="#{@movie.image_url}"
@@ -53,11 +37,6 @@
               p 视频内容搬运于网络，由 #{@movie.author} 发布，本站提供下载链接是为了提高用户体验，而不是以盈利为目的，如有版本问题，请联系我（邮箱：hfpp2012@gmail.com），即可删除信息。
           div
             = markdown @movie.body
-          - if @movie.baidu_download?
-            hr
-            div.text-center
-              = link_to '立即下载', @movie.actual_download_url, class: "btn btn-primary", target: "_blank"
-              |  密码： #{@movie.actual_download_password}
         = render partial: 'comments/form', locals: { object: @movie }
         div#comment_box
           = render 'comments/comments'

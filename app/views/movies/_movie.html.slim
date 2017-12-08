@@ -5,21 +5,10 @@ div.video-box
   p.title
     a href="#{movie_path(movie)}"
       = movie.title
+  
   p.time
-    - if movie.is_finished
-      span class="label label-success" 已完结
-    - else
-      span class="label label-warning" 持续更新中
-    |  * 
-    = link_to truncate(movie.playlist.try(:name), length: 10), playlist_path(movie.playlist)
-    - if movie.is_original
-      |  * 
-      span class="label label-danger" 原创
-  p.time
-    = custom_timeago_tag movie.created_at
-    |  
-    = movie.read_count
-    |  次播放
+    span.dian #{movie.read_count} 次观看
+    span = custom_timeago_tag(movie.created_at)
   div.text-left
     .btn-group
       = link_to like_movie_path(movie), remote: true do

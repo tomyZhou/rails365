@@ -4,8 +4,7 @@
       .panel-body.clearfix
         - cache [@article, "group-title"] do
           div.text-left.article-desc
-            = link_to "首页", root_path
-            | &nbsp;&nbsp;/&nbsp;&nbsp;
+            span.dian = link_to "首页", root_path
             = link_to @article.group.try(:name), group_path(@article.group)
         - cache [@article, "user-title"]
           div.clearfix
@@ -13,7 +12,7 @@
               = image_tag @article.user.letter_avatar_url(100), class: "article-markdown-image round-image"
             div
               h1.my-title = @article.title
-              div.article-desc.clearfix
+              div.article-desc
                 span.dian #{@article.user.username}
                 | 发布于 
                 span.dian = custom_timeago_tag @article.created_at
