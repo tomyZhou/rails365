@@ -6,6 +6,6 @@
           = select_tag :tp, options_for_select({ "文章" => 'articles', "视频" => 'movies' }, "#{params[:tp].presence || search_params || 'articles'}"), class: "form-control select-input"
           span.input-group-btn
             input.form-control.search-input placeholder="搜索标题或内容" type="text" name="search" value="#{params[:search].presence}" style="width: 540px; border-radius: 0"
-            button type="submit" class="btn btn-primary"
+            button type="submit" class="btn btn-primary" style="background: #007fff;"
               i class="glyphicon glyphicon-search"
               |  搜索

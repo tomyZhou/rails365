@@ -11,8 +11,6 @@ class PlaylistsController < ApplicationController
 
   def show
     @title = @playlist.name
-
-    @site_info_home_desc = @playlist.desc
   end
 
   private

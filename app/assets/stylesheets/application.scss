@@ -1180,7 +1180,7 @@ Only Needed in Multi-Coloured Variation
 }
 
 .heart-green {
-  color: #1dc400;
+  color: rgb(232, 47, 47);
 }
 
 .btn:focus {
@@ -1190,4 +1190,11 @@ Only Needed in Multi-Coloured Variation
 
 .like-button {
   background: white !important;
+}
+
+.btn-comment {
+  background: #007fff;
+  &:hover {
+    background: #007fff;
+  }
 }

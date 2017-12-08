@@ -38,17 +38,14 @@
             .pagination-text.article-box
 
   .col-md-4.hidden-xs.article-right
-    .row
-      .col-md-12
-        = render 'shared/activity_users'
+    = render 'shared/follow'    
+    = render 'shared/activity_users'
 
 
     - cache @groups do
-      .row
-        .col-md-12
-          .panel.panel-default
-            .panel-heading
-              div.custom-panel-heading
-                span 热门分类
-            .panel-body.pb0
-              = render partial: 'groups/article_group', locals: { groups: @groups }
+      .panel.panel-default
+        .panel-heading
+          div.custom-panel-heading
+            span 热门分类
+        .panel-body.pb0
+          = render partial: 'groups/article_group', locals: { groups: @groups }

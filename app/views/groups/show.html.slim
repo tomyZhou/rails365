@@ -1,11 +1,9 @@
-= render 'shared/site_info_home_desc'
-
 .row
   .col-md-8
     .panel.panel-default
       .panel-heading
-        span
-          = @group.name
+        div.custom-panel-heading
+          span = @group.name
       .panel-body
         - cache @articles do
           - @articles.each do |article|

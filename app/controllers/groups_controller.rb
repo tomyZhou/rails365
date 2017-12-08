@@ -12,8 +12,6 @@ class GroupsController < ApplicationController
   def show
     @title = @group.name
 
-    @site_info_home_desc = @group.desc
-
     @users = User.where(id: Article.pluck(:user_id).uniq)
 
     @books = @group.fetch_books
