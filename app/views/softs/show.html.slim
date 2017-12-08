@@ -1,66 +1,60 @@
-- if can? :update, @soft
-  .row.block-margin
-    .col-md-12
-      div.text-right
-        = link_to "编辑", edit_soft_path(@soft), class: 'btn btn-primary btn-sm'
-
 .row
-  .col-md-8
+  .col-md-8.article-left
     .panel.panel-default
       .panel-body
-        - cache [@soft, current_user] do
-          .page-header
-            p.text-right.article-desc
-              = link_to "首页", root_path
-              | &nbsp;&nbsp;/&nbsp;&nbsp;
-              = link_to "所有下载资源", softs_path
-            h1.text-primary.my-title = @soft.title
-        .article-desc
-          | #{@soft.read_count} 次阅读 
-          = @soft.tag
-          |  发表于
-          = custom_timeago_tag @soft.created_at
-          |  编辑于
-          = custom_timeago_tag @soft.updated_at
+        - cache [@soft, "title"] do
+          div.text-left.article-desc
+            span.dian = link_to "首页", root_path
+            span = link_to "下载资源", softs_path
+          div
+            h1.my-title = @soft.title
+            .article-desc
+              | 发布于 
+              span.dian = custom_timeago_tag @soft.created_at
+              span.dian = @soft.tag
+              span #{@soft.read_count} 次点击
+              - if can? :update, @soft
+                = link_to "编辑", edit_soft_path(@soft), class: 'before-dian'
         .article_content
           - cache @soft do
             div.clearfix
               .pull-right
                 = image_tag @soft.image_url(:small), class: "soft-markdown-image"
               = markdown @soft.body
-            hr
-            - if @soft.baidu_download?
-              div.text-left
-                = link_to '立即下载', @soft.actual_download_url, class: "btn btn-primary", target: "_blank"
-                |  密码： #{@soft.actual_download_password}
-        = render partial: 'comments/form', locals: { object: @soft }
-        div#comment_box
-          = render 'comments/comments'
-  .col-md-4
+            
+    = render partial: 'comments/form', locals: { object: @soft }
+    div#comment_box
+      = render 'comments/comments'
+  .col-md-4.article-right
     .panel.panel-default.hidden-xs
       .panel-heading
         div 分享
       .panel-body
         = social_share_button_tag(@soft.title)
     - cache [@soft, current_user, 'like']
+      - like = current_user && @soft.liked_by?(current_user) ? true : false
       .panel.panel-default
         .panel-heading
-          div 喜欢（<span class="soft-id-#{@soft.id}">#{@soft.like_count}</span>）
+          div 
+            | 喜欢 
+            - if like
+              span class="heart-green soft-id-#{@soft.id}" #{@soft.like_count}
+            - else
+              span class="soft-id-#{@soft.id}" #{@soft.like_count}
         .panel-body
           = link_to like_soft_path(@soft), remote: true do
-            - if current_user && @soft.liked_by?(current_user)
-              i class="soft-count-#{@soft.id} fa fa-heart"
+            - if like
+              i class="real-ray soft-count-#{@soft.id} fa fa-heart heart-green"
             - else
-              i class="soft-count-#{@soft.id} fa fa-heart-o"
+              i class="real-ray soft-count-#{@soft.id} fa fa-heart-o"
 
     - if @soft.baidu_download?
       .panel.panel-default
         .panel-heading
-          div 下载
+          div 下载密码：#{@soft.actual_download_password}
         .panel-body
           div
-            = link_to '立即下载', @soft.actual_download_url, class: "btn btn-primary", target: "_blank"
-            |  密码： #{@soft.actual_download_password}
+            = link_to '立即下载', @soft.actual_download_url, class: "btn btn-sm btn-primary", target: "_blank"
           div.pt15
             = link_to "Mac 应用无法打开或文件损坏的处理方法", "https://www.rails365.net/articles/mac-ying-yong-wu-fa-da-kai-huo-wen-jian-sun-huai-de-chu-li-fang-fa"
 

@@ -2,9 +2,13 @@
   .col-md-8.article-left
     .panel.panel-default
       .panel-heading
-        div.custom-panel-heading.real-ray.hot-title
-          = link_to '最新', root_path, class: "link-color dian #{params[:find].present? ? nil : 'link-active-color'}"
-          = link_to '最热', root_path(find: 'hot'), class: "link-color #{params[:find].present? ? 'link-active-color' : nil}"
+          - if params[:search].present?
+            div.custom-panel-heading.real-ray
+              p 共找到 <span class="blue">#{@articles.count}</span> 条关于 <span class="blue">#{params[:search]}</span> 的搜索结果
+          - else
+            div.custom-panel-heading.real-ray.hot-title
+              = link_to '最新', root_path, class: "link-color dian #{params[:find].present? ? nil : 'link-active-color'}"
+              = link_to '最热', root_path(find: 'hot'), class: "link-color #{params[:find].present? ? 'link-active-color' : nil}"
       .panel-body
         - cache @articles do
           - if params[:search].present?
@@ -16,17 +20,16 @@
                   - else
                     p.article-title = link_to article.title, article
                   p.mb10
-                    = link_to article_url(article), article, class: "text-info"
+                    = link_to article_url(article), article, class: "blue"
                   - if details[:highlight][:body].present?
                     p
                       = details[:highlight][:body].html_safe
                   p.text-left.hidden-xs.article-desc
-                    span.text-muted
-                      - if article.group
-                        = link_to group_path(article.group) do
-                          span.mr5 = article.group.name
-                      | 由 #{link_to article.user.try(:login), user_path(article.user)} 发表于
-                      = custom_timeago_tag article.created_at
+                    span.dian #{link_to article.user.try(:login), user_path(article.user)}
+                    - if article.group
+                      = link_to group_path(article.group) do
+                        span.dian = article.group.name
+                    = custom_timeago_tag article.created_at
             div.text-center
               = paginate @articles
 
@@ -38,7 +41,6 @@
             .pagination-text.article-box
 
   .col-md-4.hidden-xs.article-right
-    = render 'shared/follow'    
     = render 'shared/activity_users'
 
 
@@ -49,3 +51,4 @@
             span 热门分类
         .panel-body.pb0
           = render partial: 'groups/article_group', locals: { groups: @groups }
+    = render 'shared/follow'

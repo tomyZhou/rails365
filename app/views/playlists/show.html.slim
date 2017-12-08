@@ -3,7 +3,6 @@
     .page-header
       h4.text-primary.title-header
         = @playlist.name
-        | (#{@playlist.movies_count})
 
   - cache [@movies, current_user] do
     div.home-video

@@ -17,15 +17,4 @@ div.article-box
     .btn-group
       = link_to like_article_path(article), remote: true do
         button class='btn btn-default btn-muted like-button'
-          - if current_user && article.liked_by?(current_user)
-            i class="article-count-#{article.id} fa fa-heart heart-green"
-          - else
-            i class="article-count-#{article.id} fa fa-heart-o"
-          - if current_user && article.liked_by?(current_user)
-            |  
-            span class="article-id-#{article.id} heart-green"
-              = article.like_count
-          - else
-            |  
-            span class="article-id-#{article.id}"
-              = article.like_count
+          = render partial: 'articles/like', locals: { article: article }

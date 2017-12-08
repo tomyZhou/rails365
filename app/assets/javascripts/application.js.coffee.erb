@@ -30,9 +30,14 @@ jQuery ->
     ), ->
       if !$(this).hasClass('active')
         $(this).removeClass('current')
+
   $(".search_btn").on 'click', (event) ->
     event.preventDefault()
     $(".search-form").toggleClass('hidden')
+
+  $(".sticker").sticky
+    topSpacing: 0
+    zIndex: 9999
 
 
 

@@ -5,13 +5,10 @@ div.mb10.clearfix
   p.article-title
     = link_to soft.title, soft_path(soft)
   p.text-left.hidden-xs.article-desc
-    span.text-muted
+    span.dian
       = soft.tag
-      |  
-    span.text-muted
-      | 创建于
+    span.dian
       = custom_timeago_tag soft.created_at
     span.text-muted
-      |  
       = soft.read_count
-      |  次阅读
+      |  次点击

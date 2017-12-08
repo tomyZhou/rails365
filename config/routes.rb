@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   resources :softs, concerns: [:commentable, :like]
   resources :groups, only: [:index, :show]
   resources :playlists, only: [:index, :show]
-  resources :apps, only: [:index]
+  # resources :apps, only: [:index]
   resources :users, only: [:show] do
     member do
       get :articles

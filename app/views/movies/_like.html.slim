@@ -1,0 +1,10 @@
+- if current_user && movie.liked_by?(current_user)
+  i class="movie-count-#{movie.id} fa fa-heart heart-green"
+  span.mr5
+  span class="movie-id-#{movie.id} heart-green"
+    = movie.like_count
+- else
+  i class="movie-count-#{movie.id} fa fa-heart-o"
+  span.mr5
+  span class="movie-id-#{movie.id}"
+    = movie.like_count

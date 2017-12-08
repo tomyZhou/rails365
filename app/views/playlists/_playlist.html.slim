@@ -4,7 +4,7 @@
       a href="#{playlist_path(playlist)}"
         = image_tag playlist.image_url(:preview)
     p.title
-      a href="#{playlist_path(playlist)}"
+      a href="#{playlist_path(playlist)}" class="real-ray"
         = playlist.name
     p.time
       = custom_timeago_tag playlist.created_at

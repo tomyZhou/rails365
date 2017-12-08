@@ -14,6 +14,8 @@ $navbar-height: 60px;
 $c3:#333;
 $c6:#666;
 $c9:#999;
+$c90:#909090;
+$blue: #007fff;
 
 body {
   font-size: 14px;
@@ -26,21 +28,32 @@ body {
 }
 
 .real-ray {
-  color: #333;
+  color: $c3;
+}
+
+a.real-ray {
+  text-decoration: none;
+  &:hover {
+    color: $c3;
+    text-decoration: none;
+  }
+  &:focus {
+    color: $c3;
+  }
 }
 
 .link-color {
-  color: #909090;
+  color: $c90;
 }
 
 .link-active-color {
-  color: #007fff;
+  color: $blue;
 }
 
 .hot-title {
   padding-left: 15px;
   a:hover {
-    color: #909090;
+    color: $c90;
   }
 }
 
@@ -197,7 +210,7 @@ body {
 
 .search-hight-light {
   em {
-    color: red;
+    color: rgb(232, 47, 47);
     font-style: normal;
   }
 }
@@ -346,10 +359,10 @@ pre.highlight {
 
 .article-desc {
   font-size: 1.3rem;
-  color: #909090;
+  color: $c90;
   font-weight: 400;
   a {
-    color: #909090;
+    color: $c90;
     &:hover {
       text-decoration: none;
     }
@@ -647,7 +660,10 @@ body .no-padding {
 }
 
 .blue {
-  color: #2FA4E7;
+  color: $blue;
+}
+a.blue:hover {
+  color: $blue;
 }
 .soft-markdown-image {
   width: 128px;
@@ -831,14 +847,14 @@ ul.tabs-admin li {
     padding: 18px 0px;
     margin: 0 20px;
     color: rgba(0,0,0,0.54);
-    font-size: 14px;
+    font-size: 15px;
     border-bottom: 4px solid transparent;
     font-weight: 500;
   }
   a.current {
     text-decoration: none;
-    border-color: #0288d1;
-    color: #0288d1;
+    border-color: $blue;
+    color: $blue;
   }
 }
 
@@ -1082,11 +1098,11 @@ Only Needed in Multi-Coloured Variation
 }
 
 .navbar-custom .navbar-nav > li > a.blue-style {
-  color: #007fff;
+  color: $blue;
 }
 
 .navbar-custom .navbar-nav > .active > a {
-  color: #007fff;
+  color: $blue;
   background-color:transparent;
 }
 
@@ -1097,7 +1113,7 @@ Only Needed in Multi-Coloured Variation
 .navbar-custom .navbar-nav > .open >a {
   text-decoration: none;
   background-color: #fff;
-  color: #007fff;
+  color: $blue;
 }
 
 .navbar-custom .navbar-brand {
@@ -1135,7 +1151,7 @@ Only Needed in Multi-Coloured Variation
 .username {
   font-size: 1.4rem;
   font-weight: 600;
-  color: #333;
+  color: $c3;
   margin-right: .6rem;
 }
 
@@ -1143,10 +1159,10 @@ Only Needed in Multi-Coloured Variation
   margin: .3rem 0 .5rem;
   font-size: 1.4rem;
   line-height: 1.7;
-  color: #333;
+  color: $c3;
 }
 .footer-html {
-  color: #909090;
+  color: $c90;
   font-size: 1.3rem;
 }
 
@@ -1161,7 +1177,7 @@ Only Needed in Multi-Coloured Variation
 .image-author {
   margin-bottom: 10px;
   a:hover {
-    color: #333;
+    color: $c3;
   }
   .image-right {
     p {
@@ -1174,7 +1190,7 @@ Only Needed in Multi-Coloured Variation
     }
   }
   .position {
-    color: #909090;
+    color: $c90;
     font-size: 1.2rem;
   }
 }
@@ -1185,7 +1201,7 @@ Only Needed in Multi-Coloured Variation
 
 .btn:focus {
   outline: none !important;
-  box-shadow:none
+  box-shadow: none;
 }
 
 .like-button {
@@ -1193,8 +1209,24 @@ Only Needed in Multi-Coloured Variation
 }
 
 .btn-comment {
-  background: #007fff;
+  background: $blue;
   &:hover {
-    background: #007fff;
+    background: $blue;
   }
+}
+
+a {
+  color: $blue;
+  &:hover {
+    color: $blue;
+  }
+  &:focus {
+    color: $blue;
+  }
+}
+
+.reprint {
+  line-height: 60px;
+  color: #bbb;
+  margin-bottom: 15px;
 }

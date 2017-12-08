@@ -1,0 +1,10 @@
+- if current_user && article.liked_by?(current_user)
+  i class="article-count-#{article.id} fa fa-heart heart-green"
+  span.mr5
+  span class="article-id-#{article.id} heart-green"
+    = article.like_count
+- else
+  i class="article-count-#{article.id} fa fa-heart-o"
+  span.mr5
+  span class="article-id-#{article.id}"
+    = article.like_count

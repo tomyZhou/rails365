@@ -9,7 +9,6 @@ class UsersController < ApplicationController
 
   def change_profile
     Rails.cache.delete "current_user_[#{current_user.id}]" if current_user
-    @no_search = true
   end
 
   def update_profile
@@ -30,7 +29,6 @@ class UsersController < ApplicationController
     @favourite_movies = @user.like_movies
     @favourite_softs = @user.like_softs
     @articles = @user.articles.order('id DESC').page(params[:page])
-    @no_search = true
   end
 
   def user_params

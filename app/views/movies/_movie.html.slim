@@ -3,9 +3,9 @@ div.video-box
     a href="#{movie_path(movie)}"
       = image_tag movie.image_url(:preview)
   p.title
-    a href="#{movie_path(movie)}"
+    a href="#{movie_path(movie)}" class="real-ray"
       = movie.title
-  
+
   p.time
     span.dian #{movie.read_count} 次观看
     span = custom_timeago_tag(movie.created_at)
@@ -13,14 +13,4 @@ div.video-box
     .btn-group
       = link_to like_movie_path(movie), remote: true do
         button class='btn btn-default btn-muted like-button'
-          - if current_user && movie.liked_by?(current_user)
-            i class="movie-count-#{movie.id} fa fa-heart heart-green"
-          - else
-            i class="movie-count-#{movie.id} fa fa-heart-o"
-          |  
-          - if current_user && movie.liked_by?(current_user)
-            span class="movie-id-#{movie.id} heart-green"
-              = movie.like_count
-          - else
-            span class="movie-id-#{movie.id}"
-              = movie.like_count
+          = render partial: 'like', locals: { movie: movie }
