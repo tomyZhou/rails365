@@ -594,6 +594,11 @@ body .no-padding {
     display: inline-block;
     margin-bottom: 10px;
 
+    @media (max-width: 768px) {
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
     img {
       width: 210px;
       height: 118px;
@@ -610,11 +615,18 @@ body .no-padding {
       width: 210px;
       overflow: hidden;
       line-height: 18px;
+
+      @media (max-width: 768px) {
+        text-align: left;
+      }
     }
 
     .time {
       color: #999999;
       font-size: 13px;
+      @media (max-width: 768px) {
+        text-align: left;
+      }
     }
   }
 }
