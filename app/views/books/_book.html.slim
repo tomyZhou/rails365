@@ -9,9 +9,4 @@ div.mb10.clearfix
       span
         = book.desc
     p.article-desc
-      span.text-muted
-        |创建于
-        = custom_timeago_tag book.created_at
-      span.text-muted.hidden-xs
-        |  * 更新于
-        = custom_timeago_tag book.updated_at
+      span.text-muted 发表于 #{custom_timeago_tag(book.created_at)}

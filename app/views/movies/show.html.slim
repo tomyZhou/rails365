@@ -1,9 +1,3 @@
-- if can? :update, @movie
-  .row.block-margin
-    .col-md-12
-      div.text-right
-        = link_to "编辑", edit_movie_path(@movie), class: 'btn btn-primary btn-sm'
-
 .row
   .col-md-8.article-left
     .panel.panel-default
@@ -21,15 +15,6 @@
           div.video-block
             video src="#{@movie.mp4_url}" controls="controls" poster="#{@movie.image_url}"
               你的浏览器不支持该视频播放
-          p.text-left.time
-            | #{@movie.read_count} 次播放 * 
-            = link_to playlist_path(@movie.playlist) do
-              span.mr5 = @movie.playlist.try(:name)
-            - if @movie.mp4_name.present?
-              = @movie.mp4_name
-
-          - if @movie.youtube_url.present?
-            p = link_to '用 youtube 播放', @movie.youtube_url, target: "_blank"
           hr
           / 为了兼容以前的数据内容
           - if !@movie.body.include?('视频内容搬运于网络') && @movie.author.present?

@@ -1,9 +1,7 @@
 <div class="sub-nav">
   <a class="<%= current_page?("/movies") ? 'current active' : nil %>" href="/movies">全部</a>
-  <%= link_to '原创', q_movies_path("original"), class: "#{params[:filter] == "original" ? 'current active' : nil}" %>
   <% @serials.each do |serial| %>
     <%= link_to serial.name, all_movies_path(serial.slug), class: "#{params[:name] == serial.slug ? 'current active' : nil}" %>
   <% end %>
   <%= link_to '其他', q_movies_path("other"), class: "#{params[:filter] == "other" ? 'current active' : nil}" %>
-  <%= link_to '英语', q_movies_path("english"), class: "#{params[:filter] == "english" ? 'current active' : nil}" %>
 </div>
