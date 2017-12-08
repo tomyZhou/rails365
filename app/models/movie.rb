@@ -17,7 +17,6 @@ class Movie < ActiveRecord::Base
   has_many :comments, as: 'commentable'
   cache_has_many :comments, :inverse_name => :commentable
 
-  default_scope -> { where(is_original: true) }
   scope :except_body_with_default, -> { select(:title, :like_count, :serial_id, :is_original, :created_at, :updated_at, :is_finished, :playlist_id, :image, :slug, :id, :play_time, :user_id, :weight).includes(:playlist) }
 
   mount_uploader :image, VideoUploader
