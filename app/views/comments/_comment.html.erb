@@ -3,10 +3,10 @@
     <%= image_tag comment.user.letter_avatar_url(40), width: 40, height: 40 %>
   </a>
   <div class="media-body">
-    <h4 class="media-heading">
-      <a href="#fakelink"><%= comment.user.try(:username) %></a>
-      <small><%= custom_timeago_tag comment.created_at %></small>
-    </h4>
-    <p><%= markdown comment.body if comment.body.present? %></p>
+    <div class="media-heading">
+      <a href="<%= user_path(comment.user) %>" class="username"><%= comment.user.try(:username) %></a>
+    </div>
+    <div class="content-html"><%= markdown comment.body if comment.body.present? %></div>
+    <div class="footer-html"><%= custom_timeago_tag comment.created_at %></div>
   </div>
 </li>

@@ -4,7 +4,7 @@
 
 This is the source code of rails365.net website.
 
-[![Build Status](https://travis-ci.org/yinsigan/rails365.svg?branch=master)](https://travis-ci.org/yinsigan/rails365) [![Code Climate](https://codeclimate.com/github/yinsigan/rails365/badges/gpa.svg)](https://codeclimate.com/github/yinsigan/rails365) [![codecov](https://codecov.io/gh/yinsigan/rails365/branch/master/graph/badge.svg)](https://codecov.io/gh/yinsigan/rails365) [![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/yinsigan/rails365/blob/master/LICENSE)
+[![codecov](https://codecov.io/gh/yinsigan/rails365/branch/master/graph/badge.svg)](https://codecov.io/gh/yinsigan/rails365) [![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/yinsigan/rails365/blob/master/LICENSE)
 
 ### 依赖:
 
@@ -17,6 +17,8 @@ This is the source code of rails365.net website.
 * elasticsearch
 
 * imagemagick
+
+* memcached
 
 ### 安装:
 
@@ -32,14 +34,7 @@ $ brew install redis postgresql imagemagick gs elasticsearch
 $ sudo apt-get install postgresql-9.4 redis-server imagemagick ghostscript
 ```
 
-postgresql, redis, elasticsearch服务必须启动好
-
-### 创建数据库
-
-```
-$ psql -c "CREATE USER \"macintosh1\" WITH CREATEDB PASSWORD '12345678';" -U postgres
-$ psql -c "create database \"rails365_dev\" WITH OWNER=\"macintosh1\";" -U postgres
-```
+postgresql, redis, elasticsearch, memcached 服务必须启动好
 
 ### 运行
 

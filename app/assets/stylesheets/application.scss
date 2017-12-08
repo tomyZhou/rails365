@@ -25,8 +25,19 @@ body {
   max-width: 960px;
 }
 
+.real-ray {
+  color: #333;
+}
+
 .dian {
   &:after {
+    content: "\B7";
+    margin: 0 .4rem;
+  }
+}
+
+.before-dian {
+  &:before {
     content: "\B7";
     margin: 0 .4rem;
   }
@@ -78,9 +89,11 @@ body {
 
 .my-title {
   font-weight: 500;
+  max-width: 500px;
   line-height: 2.4rem;
+  margin-top: 12px;
   color: rgb(17, 17, 17);
-  font-size: 20px;
+  font-size: 2.0rem;
 }
 
 .navbar {
@@ -319,7 +332,6 @@ pre.highlight {
 .article-desc {
   font-size: 1.3rem;
   color: #909090;
-  cursor: pointer;
   font-weight: 400;
   a {
     color: #909090;
@@ -402,10 +414,10 @@ a {
   .media {
     overflow: hidden;
     zoom: 1;
-    padding: 10px 10px 5px 10px;;
+    padding: 0 10px 5px 10px;;
     border-bottom: 1px solid #eaeaea;
     &:first-child {
-      margin-top: 0;
+      padding-top: 15px;
     }
     >.pull-left {
       margin-right: 10px;
@@ -812,8 +824,9 @@ ul.tabs-admin li {
 }
 
 .article-markdown-image {
-  width: 80px;
-  height: 80px;
+  width: 52px;
+  height: 52px;
+  margin-top: 12px;
 }
 
 /* footer */
@@ -1069,4 +1082,34 @@ Only Needed in Multi-Coloured Variation
 .custom-panel-heading {
   height: 27px;
   line-height: 27px;
+}
+
+.custom-article-page-header {
+  padding: 0;
+}
+
+.sweet-alert button {
+  padding: 5px 19px;
+}
+
+.sweet-alert h2 {
+  font-size: 25px;
+}
+
+.username {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #333;
+  margin-right: .6rem;
+}
+
+.content-html {
+  margin: .3rem 0 .5rem;
+  font-size: 1.4rem;
+  line-height: 1.7;
+  color: #333;
+}
+.footer-html {
+  color: #909090;
+  font-size: 1.3rem;
 }
