@@ -1,14 +1,15 @@
-.page-header
-  h2 = t('.title', :resource => resource_class.model_name.human , :default => "Edit #{resource_name.to_s.humanize}")
-= deivse_form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: {method: :put, class: "form-horizontal"}) do |f|
-  = devise_error_messages!
-  /= f.text_field :username, autofocus: true, class: "form-control"
-  /= f.email_field :email, class: "form-control"
-  /= f.image_file_field :avatar
-  = f.password_field :current_password, class: "form-control"
-  = f.password_field :password, :autocomplete => "off", class: "form-control"
-  = f.password_field :password_confirmation, class: "form-control"
-  = f.submit t('.update', :default => "Update"), class: "form-control btn btn-primary"
+.white-bg
+  .page-header.text-center
+    h4 = t('.title', :resource => resource_class.model_name.human , :default => "Edit #{resource_name.to_s.humanize}")
+  = deivse_form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: {method: :put, class: "form-horizontal"}) do |f|
+    = devise_error_messages!
+    /= f.text_field :username, autofocus: true, class: "form-control"
+    /= f.email_field :email, class: "form-control"
+    /= f.image_file_field :avatar
+    = f.password_field :current_password, class: "form-control"
+    = f.password_field :password, :autocomplete => "off", class: "form-control"
+    = f.password_field :password_confirmation, class: "form-control"
+    = f.submit t('.update', :default => "Update"), class: "form-control btn btn-primary"
   /h3
   /  = t('.cancel_my_account', :default => 'Cancel my account')
   /p

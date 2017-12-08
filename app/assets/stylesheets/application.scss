@@ -1113,3 +1113,32 @@ Only Needed in Multi-Coloured Variation
   color: #909090;
   font-size: 1.3rem;
 }
+
+.no-right-padding {
+  padding-right: 0;
+}
+
+.no-left-padding {
+  padding-left: 0;
+}
+
+.image-author {
+  margin-bottom: 10px;
+  a:hover {
+    color: #333;
+  }
+  .image-right {
+    p {
+      line-height: 24px;
+      margin: 0;
+    }
+    p.middle {
+      height: 45px;
+      line-height: 45px;
+    }
+  }
+  .position {
+    color: #909090;
+    font-size: 1.2rem;
+  }
+}

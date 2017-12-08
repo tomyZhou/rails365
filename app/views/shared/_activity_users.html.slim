@@ -1,12 +1,16 @@
 .panel.panel-default
   .panel-heading
     div.custom-panel-heading
-      span 活跃用户
-  .panel-body.pb0.text-center
+      span 活跃原创作者
+  .panel-body.text-left
     - @users.each do |user|
-      .col-md-6
-        div.mb5
+      div.clearfix.row.image-author
+        .col-sm-3.no-right-padding
           = link_to articles_user_path(user) do
-            img.round-image src="#{user.letter_avatar_url(60)}" alt="" width=60 height=60
-        div.mb10
-          = link_to user.username, articles_user_path(user)
+            = image_tag user.letter_avatar_url(100), class: "round-image", width: 45, height: 45
+        .col-sm-9.no-left-padding
+          - position_class = user.position.present? ? nil : "middle"
+          div.image-right
+            p class="#{position_class}" = link_to user.hello_name, articles_user_path(user), class: "real-ray"
+            - if user.position.present?
+              p.position = user.signature_name

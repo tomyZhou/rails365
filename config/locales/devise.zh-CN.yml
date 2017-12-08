@@ -9,6 +9,9 @@ zh-CN:
         password_confirmation: "密码确认"
         remember_me: "记住登录信息"
         avatar: "头像"
+        nickname: "昵称"
+        position: "职位"
+        company_name: "公司"
     models:
       user: "用户"
   devise:

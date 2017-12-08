@@ -75,6 +75,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def hello_name
+    self.nickname || self.username
+  end
+
+  def signature_name
+    self.company_name.present? ? "#{self.position} @ #{self.company_name}" : self.position
+  end
+
   attr_writer :login
 
   def login

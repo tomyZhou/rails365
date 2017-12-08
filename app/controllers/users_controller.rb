@@ -8,12 +8,13 @@ class UsersController < ApplicationController
   end
 
   def change_profile
+    Rails.cache.delete "current_user_[#{current_user.id}]" if current_user
     @no_search = true
   end
 
   def update_profile
+    Rails.cache.delete "current_user_[#{current_user.id}]" if current_user
     if current_user.update(user_params)
-      Rails.cache.delete "current_user_[#{current_user.id}]" if current_user
       flash[:success] = "更新成功"
       redirect_to change_profile_users_path
     else
@@ -33,6 +34,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:username, :avatar)
+    params.require(:user).permit(:username, :avatar, :nickname, :company_name, :position)
   end
 end

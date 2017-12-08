@@ -1,5 +1,5 @@
 .row
-  .col-md-8
+  .col-md-8.article-left
     .panel.panel-default
       .panel-heading
         div.custom-panel-heading
@@ -36,7 +36,7 @@
               = link_to_next_page(@articles, 'Next Page', :remote => true)
             .pagination-text
 
-  .col-md-4.hidden-xs
+  .col-md-4.hidden-xs.article-right
     .row
       .col-md-12
         = render 'shared/activity_users'
