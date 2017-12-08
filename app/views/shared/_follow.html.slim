@@ -8,3 +8,9 @@
       = image_tag "juejin.png", class: "share_logo"
     = link_to "https://toutiao.io/subjects/124922", target: "_blank" do
       = image_tag "toutiao.png", class: "share_logo"
+
+coffee:
+  jQuery ->
+    $("#follow").sticky
+      topSpacing: 0
+      zIndex: 9999
