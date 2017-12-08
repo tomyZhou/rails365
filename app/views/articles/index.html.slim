@@ -2,8 +2,9 @@
   .col-md-8.article-left
     .panel.panel-default
       .panel-heading
-        div.custom-panel-heading
-          span 所有文章
+        div.custom-panel-heading.real-ray.hot-title
+          = link_to '最新', root_path, class: "link-color dian #{params[:find].present? ? nil : 'link-active-color'}"
+          = link_to '最热', root_path(find: 'hot'), class: "link-color #{params[:find].present? ? 'link-active-color' : nil}"
       .panel-body
         - cache @articles do
           - if params[:search].present?

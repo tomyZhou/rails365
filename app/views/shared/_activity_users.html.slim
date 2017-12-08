@@ -13,4 +13,4 @@
           div.image-right
             p class="#{position_class}" = link_to user.hello_name, articles_user_path(user), class: "real-ray"
             - if user.position.present?
-              p.position = user.signature_name
+              p.position = truncate user.signature_name, length: 20

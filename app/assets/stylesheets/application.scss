@@ -29,6 +29,21 @@ body {
   color: #333;
 }
 
+.link-color {
+  color: #909090;
+}
+
+.link-active-color {
+  color: #007fff;
+}
+
+.hot-title {
+  padding-left: 15px;
+  a:hover {
+    color: #909090;
+  }
+}
+
 .dian {
   &:after {
     content: "\B7";
