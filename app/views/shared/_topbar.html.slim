@@ -10,20 +10,17 @@ nav.navbar.navbar-custom
       a.navbar-brand href="/" = image_tag "logo.png"
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       ul.nav.navbar-nav
-        li class="#{controller_name == 'home' ? 'active' : nil}"
+        li class="#{controller_name == 'articles' ? 'active' : nil}"
           a href="/"
             | 首页
             span.sr-only (current)
         li class="#{controller_name == 'movies' ? 'active' : nil}"
           a href="/movies" 视频
-        li class="#{controller_name == 'articles' ? 'active' : nil}"
-          a href="/articles"
-            | 文章
         li.hidden class="#{controller_name == 'softs' ? 'active' : nil}"
           a href="/softs" 资源下载
-        li class="#{controller_name == 'groups' ? 'active' : nil}"
+        li.hidden class="#{controller_name == 'groups' ? 'active' : nil}"
           a href="/groups" 分类
-        li class="#{controller_name == 'playlists' ? 'active' : nil}"
+        li.hidden class="#{controller_name == 'playlists' ? 'active' : nil}"
           a href="/playlists" 播放列表
         li class="#{controller_name == 'books' ? 'active' : nil}"
           a href="/books" 小书
@@ -42,7 +39,6 @@ nav.navbar.navbar-custom
             a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
               span style="margin-right: 10px" class="avatar-image"
                 = image_tag current_user.letter_avatar_url(40), width: '20', height: '20'
-              span.caret
             ul.dropdown-menu
               - if current_user.super_admin?
                 li

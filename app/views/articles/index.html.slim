@@ -2,7 +2,8 @@
   .col-md-8
     .panel.panel-default
       .panel-heading
-        span 所有文章(#{@articles.total_count})
+        div.custom-panel-heading
+          span 所有文章
       .panel-body
         - cache @articles do
           - if params[:search].present?
@@ -46,7 +47,7 @@
         .col-md-12
           .panel.panel-default
             .panel-heading
-              div
-                span 所有分类(#{@groups.count})
+              div.custom-panel-heading
+                span 热门分类
             .panel-body.pb0
               = render partial: 'groups/article_group', locals: { groups: @groups }

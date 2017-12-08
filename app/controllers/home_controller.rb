@@ -30,12 +30,10 @@ class HomeController < ApplicationController
   end
 
   def find
-    if params[:tp] == "movies"
-      redirect_to movies_path(tp: 'movies', search: params[:search])
-    elsif params[:tp] == "softs"
-      redirect_to softs_path(tp: 'softs', search: params[:search])
-    else
+    if params[:tp] == "articles"
       redirect_to articles_path(tp: 'articles', search: params[:search])
+    else
+      redirect_to movies_path(tp: 'movies', search: params[:search])
     end
   end
 

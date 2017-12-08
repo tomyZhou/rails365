@@ -3,12 +3,7 @@ $navbar-height: 60px;
 @import "bootstrap-sprockets";
 @import "bootswatch/cerulean/variables";
 @import "bootstrap";
-@import "rouge";
-@import "fluidbox.min";
-@import "bootstrap-markdown";
-@import "toastr.min";
-@import "social-share-button";
-@import "sweetalert";
+@import "login";
 @import "font-awesome";
 
 $c3:#333;
@@ -23,13 +18,6 @@ body {
 
 .container {
   max-width: 960px;
-}
-
-.dian {
-  &:after {
-    content: "\B7";
-    margin: 0 .4rem;
-  }
 }
 
 .navbar > .container .navbar-brand {
@@ -298,12 +286,8 @@ pre.highlight {
 }
 
 .article-title {
-  a {
-    font-size: 1.6rem;
-    font-weight: 600;
-    line-height: 1.2;
-    color: #2e3135;
-  }
+  margin-bottom: 4px;
+  font-size: 1.4rem;
 }
 
 .book-title {
@@ -317,14 +301,13 @@ pre.highlight {
 }
 
 .article-desc {
-  font-size: 1.3rem;
-  color: #909090;
-  cursor: pointer;
+  font-size: 13px;
+  color: #777;
   font-weight: 400;
   a {
-    color: #909090;
     &:hover {
       text-decoration: none;
+      color: #e8092f;
     }
   }
 }
@@ -992,7 +975,7 @@ Only Needed in Multi-Coloured Variation
 }
 
 .btn-muted {
-  padding: 3px 10px;
+  padding: 3px 0;
   border-radius: 0;
 }
 
@@ -1064,9 +1047,4 @@ Only Needed in Multi-Coloured Variation
 .blue-login:after {
   content: "\B7";
   margin: 0 .4rem;
-}
-
-.custom-panel-heading {
-  height: 27px;
-  line-height: 27px;
 }

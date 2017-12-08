@@ -11,7 +11,6 @@
 #= require qrcode
 #= require jquery.ba-throttle-debounce
 #= require jquery.fluidbox.min
-#= require jquery.lazyload
 #= require rails-timeago
 #= require locales/jquery.timeago.zh-CN.js
 #= require bootstrap-markdown-bundle
@@ -24,8 +23,6 @@
 #= require infinite_scroll
 
 jQuery ->
-  $("img.lazy").lazyload()
-
   $(".sub-nav a").hover (->
     if !$(this).hasClass('current')
       $(this).addClass('current')

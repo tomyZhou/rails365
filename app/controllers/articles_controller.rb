@@ -18,7 +18,7 @@ class ArticlesController < ApplicationController
 
     @users = User.where(id: Article.pluck(:user_id).uniq)
 
-    @title = '文章列表'
+    @title = '首页'
 
     # respond_to do |format|
     #   format.all { render :index, formats: [:html, :js] }
