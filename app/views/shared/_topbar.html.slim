@@ -36,9 +36,8 @@ nav.navbar.navbar-custom
 
         - if user_signed_in?
           li.dropdown.text-right
-            a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
-              span style="margin-right: 10px" class="avatar-image"
-                = image_tag current_user.letter_avatar_url(40), width: '20', height: '20'
+            a.dropdown-toggle.navbar-avatar aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
+              = image_tag current_user.letter_avatar_url(40), width: '30', height: '30', class: "round-image"
             ul.dropdown-menu
               - if current_user.super_admin?
                 li

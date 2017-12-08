@@ -1043,6 +1043,15 @@ Only Needed in Multi-Coloured Variation
 
 .navbar-custom .navbar-nav > li > a {
   color: #71777c;
+  font-size: 16px;
+}
+
+.navbar-custom .navbar-nav > li > a.navbar-avatar {
+  margin-left: 0 !important;
+  line-height: 32px;
+  position: relative;
+  display: block;
+  padding: 13px 15px 12px;
 }
 
 .navbar-custom .navbar-nav > li > a.blue-style {
@@ -1141,4 +1150,17 @@ Only Needed in Multi-Coloured Variation
     color: #909090;
     font-size: 1.2rem;
   }
+}
+
+.heart-green {
+  color: #1dc400;
+}
+
+.btn:focus {
+  outline: none !important;
+  box-shadow:none
+}
+
+.like-button {
+  background: white !important;
 }

@@ -2,7 +2,9 @@ var article_id = ".article-id-" + "<%= @article.id %>";
 var article_count = ".article-count-" + "<%= @article.id %>";
 $(article_id).text("<%= @article.like_count %>");
 <% if @article.liked_by?(current_user) %>
-  $(article_count).removeClass('fa-heart-o').addClass('fa-heart');
+  $(article_count).removeClass('fa-heart-o').addClass('fa-heart heart-green');
+  $(article_id).addClass("heart-green");
 <% else %>
-  $(article_count).removeClass('fa-heart').addClass('fa-heart-o');
+  $(article_count).removeClass('fa-heart heart-green').addClass('fa-heart-o');
+  $(article_id).removeClass("heart-green");
 <% end %>

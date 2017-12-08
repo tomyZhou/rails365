@@ -2,7 +2,9 @@ var movie_id = ".movie-id-" + "<%= @movie.id %>";
 var movie_count = ".movie-count-" + "<%= @movie.id %>";
 $(movie_id).text("<%= @movie.like_count %>");
 <% if @movie.liked_by?(current_user) %>
-  $(movie_count).removeClass('fa-heart-o').addClass('fa-heart');
+  $(movie_count).removeClass('fa-heart-o').addClass('fa-heart heart-green');
+  $(movie_id).addClass("heart-green");
 <% else %>
-  $(movie_count).removeClass('fa-heart').addClass('fa-heart-o');
+  $(movie_count).removeClass('fa-heart heart-green').addClass('fa-heart-o');
+  $(movie_id).removeClass("heart-green");
 <% end %>
