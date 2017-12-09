@@ -6,22 +6,21 @@
           div.text-left.article-desc
             span.dian = link_to "首页", root_path
             = link_to @article.group.try(:name), group_path(@article.group)
-        - cache [@article, "user-title"]
-          div.clearfix
-            = link_to user_path(@article.user), class: "pull-right" do
-              = image_tag @article.user.letter_avatar_url(100), class: "article-markdown-image round-image"
-            div
-              h1.my-title = @article.title
-              div.article-desc
-                span.dian #{@article.user.username}
-                span.mr5 发布于
-                span.dian = custom_timeago_tag @article.created_at
-                span #{@article.read_count} 次阅读
-                - if can? :update, @article
-                  = link_to "编辑", edit_article_path(@article), class: 'before-dian'
-            .article_content
-              - cache @article do
-                = markdown @article.body
+        div.clearfix
+          = link_to user_path(@article.user), class: "pull-right" do
+            = image_tag @article.user.letter_avatar_url(100), class: "article-markdown-image round-image"
+          div
+            h1.my-title = @article.title
+            div.article-desc
+              span.dian #{@article.user.username}
+              span.mr5 发布于
+              span.dian = custom_timeago_tag @article.created_at
+              span #{@article.read_count} 次阅读
+              - if can? :update, @article
+                = link_to "编辑", edit_article_path(@article), class: 'before-dian'
+          .article_content
+            - cache @article do
+              = markdown @article.body
 
     p.reprint 本站文章均为原创内容，如需转载请注明出处，谢谢。
     = render partial: 'comments/form', locals: { object: @article }

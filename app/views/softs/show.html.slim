@@ -2,26 +2,25 @@
   .col-md-8.article-left
     .panel.panel-default
       .panel-body
-        - cache [@soft, "title"] do
-          div.text-left.article-desc
-            span.dian = link_to "首页", root_path
-            span = link_to "下载资源", softs_path
-          div
-            h1.my-title = @soft.title
-            .article-desc
-              | 发布于 
-              span.dian = custom_timeago_tag @soft.created_at
-              span.dian = @soft.tag
-              span #{@soft.read_count} 次点击
-              - if can? :update, @soft
-                = link_to "编辑", edit_soft_path(@soft), class: 'before-dian'
+        div.text-left.article-desc
+          span.dian = link_to "首页", root_path
+          span = link_to "下载资源", softs_path
+        div
+          h1.my-title = @soft.title
+          .article-desc
+            | 发布于
+            span.dian = custom_timeago_tag @soft.created_at
+            span.dian = @soft.tag
+            span #{@soft.read_count} 次点击
+            - if can? :update, @soft
+              = link_to "编辑", edit_soft_path(@soft), class: 'before-dian'
         .article_content
           - cache @soft do
             div.clearfix
               .pull-right
                 = image_tag @soft.image_url(:small), class: "soft-markdown-image"
               = markdown @soft.body
-            
+
     = render partial: 'comments/form', locals: { object: @soft }
     div#comment_box
       = render 'comments/comments'
@@ -35,18 +34,11 @@
       - like = current_user && @soft.liked_by?(current_user) ? true : false
       .panel.panel-default
         .panel-heading
-          div 
-            | 喜欢 
-            - if like
-              span class="heart-green soft-id-#{@soft.id}" #{@soft.like_count}
-            - else
-              span class="soft-id-#{@soft.id}" #{@soft.like_count}
+          div
+            span 喜欢
         .panel-body
-          = link_to like_soft_path(@soft), remote: true do
-            - if like
-              i class="real-ray soft-count-#{@soft.id} fa fa-heart heart-green"
-            - else
-              i class="real-ray soft-count-#{@soft.id} fa fa-heart-o"
+          = link_to like_soft_path(@soft), remote: true, class: "real-ray" do
+            = render partial: 'like', locals: { soft: @soft }
 
     - if @soft.baidu_download?
       .panel.panel-default

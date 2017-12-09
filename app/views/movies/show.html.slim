@@ -2,15 +2,14 @@
   .col-md-8.article-left
     .panel.panel-default
       .panel-body
-        - cache [@movie, "user-title"]
-          div
-            h1.my-title = @movie.title
-            div.article-desc
-              span.mr5 发布于
-              span.dian = custom_timeago_tag @movie.created_at
-              span #{@movie.read_count} 次观看
-              - if can? :update, @movie
-                  = link_to "编辑", edit_movie_path(@movie), class: 'before-dian'
+        div
+          h1.my-title = @movie.title
+          div.article-desc
+            span.mr5 发布于
+            span.dian = custom_timeago_tag @movie.created_at
+            span #{@movie.read_count} 次观看
+            - if can? :update, @movie
+                = link_to "编辑", edit_movie_path(@movie), class: 'before-dian'
         .article_content
           div.video-block.mb20
             video src="#{@movie.mp4_url}" controls="controls" poster="#{@movie.image_url}"
@@ -28,7 +27,8 @@
             div
               p 视频内容搬运于网络，由 #{@movie.author} 发布，本站提供下载链接是为了提高用户体验，而不是以盈利为目的，如有版本问题，请联系我（邮箱：hfpp2012@gmail.com），即可删除信息。
           div
-            = markdown @movie.body
+            - cache [@movie, "markdown"] do
+              = markdown @movie.body
             - if @movie.baidu_download?
               div
                 = link_to '立即下载', @movie.actual_download_url, class: "btn btn-sm mr5 btn-primary", target: "_blank"
