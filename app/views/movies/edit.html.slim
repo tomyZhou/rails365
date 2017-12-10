@@ -1,9 +1,10 @@
-.page-header
-  h3 更新视频
+.white-bg
+  .page-header
+    h3.text-center 更新视频
 
-.row.block-margin
-  .col-md-12
-    .text-right
-      = link_to '删除', movie_path(@movie), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary btn-sm'
+  .row.block-margin
+    .col-md-12
+      .text-right
+        = link_to '删除', movie_path(@movie), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm'
 
-= render 'form'
+  = render 'form'
