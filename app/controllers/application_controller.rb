@@ -50,4 +50,10 @@ class ApplicationController < ActionController::Base
       "application"
     end
   end
+
+  def mobile_device?
+    request.user_agent =~ /Mobile|webOS/
+    # request.user_agent =~ /Mobile|Blackberry|Android/ # OR WHATEVER
+  end
+  helper_method :mobile_device?
 end

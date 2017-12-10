@@ -1,68 +1,92 @@
-nav.navbar.navbar-custom.navbar-fixed-top
-
-  .container
-    .navbar-header
-      button.navbar-toggle.collapsed aria-expanded="false" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"
-        span.sr-only
-        span.icon-bar
-        span.icon-bar
-        span.icon-bar
-      a.navbar-brand href="/" = image_tag "logo.png"
-    #bs-example-navbar-collapse-1.collapse.navbar-collapse
-      ul.nav.navbar-nav
-        li class="#{controller_name == 'articles' ? 'active' : nil}"
-          a href="/"
-            | 首页
-            span.sr-only (current)
-        li class="#{controller_name == 'movies' ? 'active' : nil}"
-          a href="/movies" 视频
-        li.hidden class="#{controller_name == 'softs' ? 'active' : nil}"
-          a href="/softs" 资源下载
-        li.hidden class="#{controller_name == 'groups' ? 'active' : nil}"
-          a href="/groups" 分类
-        li.hidden class="#{controller_name == 'playlists' ? 'active' : nil}"
-          a href="/playlists" 播放列表
-        li class="#{controller_name == 'books' ? 'active' : nil}"
-          a href="/books" 小书
-
-      ul.nav.navbar-nav.navbar-right
-        li
-          a href="" class='search_btn'
-            i class="fa fa-search" aria-hidden="true"
-        li
-          = link_to new_article_path, class: "blue-style" do
-            i class="fa fa-sticky-note-o" aria-hidden="true"
-            |  写文章
-
-        - if user_signed_in?
-          li.dropdown.text-right
-            a.dropdown-toggle.navbar-avatar aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
-              = image_tag current_user.letter_avatar_url(40), width: '30', height: '30', class: "round-image"
-            ul.dropdown-menu
-              - if current_user.super_admin?
-                li
-                  a href="/admin" 后台管理
+- if mobile_device?
+  nav.navbar.navbar-custom.navbar-fixed-top
+    .container
+      .navbar-header
+        a.navbar-brand href="/" = image_tag "logo.png"
+        ul.nav.navbar-nav
+          li.dropdown.thumb-dropdown
+            a.dropdown-toggle.mobile-navbar-button.blue-style data-toggle="dropdown" href="#" style="margin-left: 30px;"
+              | 首页
+              span.caret
+            ul.dropdown-menu.mobile-menu role="menu"
               li
-                = link_to user_path(current_user) do
-                  i class="fa fa-user-o" aria-hidden="true"
-                  |  个人中心
+                a href="/movies" 视频
               li
-                = link_to destroy_user_session_path, :method => :delete, data: { confirm: "确定登出吗？我们需要你！" } do
-                  i class="fa fa-sign-out" aria-hidden="true"
-                  |  注销
-              - if can? :create, Movie
-                li
-                  = link_to "添加新视频", new_movie_path
-
-              - if can? :create, Soft
-                li
-                  = link_to "添加新下载资源", new_soft_path
-        - else
-          li
-            = link_to new_registration_path(:user), class: "blue-style" do
-              i class="fa fa-user-plus" aria-hidden="true"
-              |  注册
+                a href="/books" 小书
+        ul.nav.navbar-nav.navbar-right.pull-right style="margin-right: 25px"
           li
             = link_to new_session_path(:user), class: "blue-style" do
-              i class="fa fa-sign-in" aria-hidden="true"
               |  登录
+          li
+            = link_to new_registration_path(:user), class: "blue-style" do
+              |  注册
+
+
+
+- else
+  nav.navbar.navbar-custom.navbar-fixed-top
+
+    .container
+      .navbar-header
+        button.navbar-toggle.collapsed aria-expanded="false" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"
+          span.sr-only
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand href="/" = image_tag "logo.png"
+      #bs-example-navbar-collapse-1.collapse.navbar-collapse
+        ul.nav.navbar-nav
+          li class="#{controller_name == 'articles' ? 'active' : nil}"
+            a href="/"
+              | 首页
+              span.sr-only (current)
+          li class="#{controller_name == 'movies' ? 'active' : nil}"
+            a href="/movies" 视频
+          li.hidden class="#{controller_name == 'softs' ? 'active' : nil}"
+            a href="/softs" 资源下载
+          li.hidden class="#{controller_name == 'groups' ? 'active' : nil}"
+            a href="/groups" 分类
+          li.hidden class="#{controller_name == 'playlists' ? 'active' : nil}"
+            a href="/playlists" 播放列表
+          li class="#{controller_name == 'books' ? 'active' : nil}"
+            a href="/books" 小书
+
+        ul.nav.navbar-nav.navbar-right
+          li
+            a href="" class='search_btn'
+              i class="fa fa-search" aria-hidden="true"
+          li
+            = link_to new_article_path, class: "blue-style" do
+              i class="fa fa-sticky-note-o" aria-hidden="true"
+              |  写文章
+
+          - if user_signed_in?
+            li.dropdown.text-right
+              a.dropdown-toggle.navbar-avatar aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
+                = image_tag current_user.letter_avatar_url(40), width: '30', height: '30', class: "round-image"
+              ul.dropdown-menu
+                - if current_user.super_admin?
+                  li
+                    a href="/admin" 后台管理
+                li
+                  = link_to user_path(current_user) do
+                    i class="fa fa-user-o" aria-hidden="true"
+                    |  个人中心
+                li
+                  = link_to destroy_user_session_path, :method => :delete, data: { confirm: "确定登出吗？我们需要你！" } do
+                    i class="fa fa-sign-out" aria-hidden="true"
+                    |  注销
+                - if can? :create, Movie
+                  li
+                    = link_to "添加新视频", new_movie_path
+
+                - if can? :create, Soft
+                  li
+                    = link_to "添加新下载资源", new_soft_path
+          - else
+            li
+              = link_to new_session_path(:user), class: "blue-style" do
+                |  登录
+            li
+              = link_to new_registration_path(:user), class: "blue-style" do
+                |  注册
