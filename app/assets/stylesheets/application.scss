@@ -31,6 +31,10 @@ body {
   color: $c3;
 }
 
+.pl15 {
+  padding-left: 15px;
+}
+
 a.real-ray {
   text-decoration: none;
   &:hover {
@@ -200,6 +204,7 @@ a.real-ray {
 
 #content {
   padding-bottom: 60px;
+  margin-top: 60px;
   @media (max-width: 768px) {
   }
 }
@@ -625,6 +630,9 @@ body .no-padding {
     @media (max-width: 768px) {
       padding-bottom: 10px;
       border-bottom: 1px solid #eee;
+      &:last-child {
+        border-bottom: none;
+      }
     }
 
     img {
@@ -1080,7 +1088,7 @@ Only Needed in Multi-Coloured Variation
 }
 
 .navbar {
-  border: none;
+  border-bottom: 1px solid #eee;
   box-shadow: none;
 }
 
