@@ -336,6 +336,9 @@ pre.highlight {
     font-weight: 600;
     line-height: 1.2;
     color: #2e3135;
+    &:hover {
+      color: #2e3135;
+    }
   }
 }
 
@@ -785,6 +788,7 @@ ul.tabs-admin li {
   max-width: 100px;
   margin: 0 auto;
   margin-bottom: 20px;
+  border-radius: 50%;
   display: block;
 }
 
@@ -1302,4 +1306,61 @@ a {
   @media (max-width: 768px) {
     height: 45px;
   }
+}
+
+.m-widget4 .m-widget4__item {
+  display: table;
+  padding-top: 1.15rem;
+  padding-bottom: 1.25rem;
+}
+
+.m-widget4__item {
+  border-bottom: .07rem dashed #ebedf2;
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.m-widget4 .m-widget4__item .m-widget4__img {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.m-widget4 .m-widget4__item .m-widget4__img.m-widget4__img--pic img {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  vertical-align: middle;
+  border-style: none;
+}
+
+.m-widget4 .m-widget4__item .m-widget4__info {
+  display: table-cell;
+  width: 100%;
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+  font-size: 1rem;
+  vertical-align: middle;
+}
+
+.m-widget4.m-widget4--progress .m-widget4__info {
+  width: 50%;
+}
+
+.m-widget4__item .m-widget4__title {
+  color: #575962;
+}
+
+.m-widget4 .m-widget4__item .m-widget4__info .m-widget4__title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #575962;
+}
+
+.m-widget4__item .m-widget4__sub {
+  color: #7b7e8a;
+}
+
+.m-widget4 .m-widget4__item .m-widget4__info .m-widget4__sub {
+  font-size: 1.3rem;
 }
