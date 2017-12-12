@@ -1096,8 +1096,14 @@ Only Needed in Multi-Coloured Variation
   padding: 13px 15px 12px;
 }
 
-.navbar-custom .navbar-nav > li > a.blue-style {
-  color: $blue;
+.navbar-custom .navbar-nav > li > a.primary-btn {
+  color: white;
+  background: $blue;
+  font-size: 15px;
+  &:hover {
+    color: white;
+    background: $blue;
+  }
 }
 
 .navbar-custom .navbar-nav > .active > a {
@@ -1363,4 +1369,10 @@ a {
 
 .m-widget4 .m-widget4__item .m-widget4__info .m-widget4__sub {
   font-size: 1.3rem;
+}
+
+.navbar .primary-btn {
+  color: white;
+  padding: 5px 10px;
+  margin-top: 15px;
 }
