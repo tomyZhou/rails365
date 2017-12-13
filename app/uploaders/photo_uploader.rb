@@ -47,6 +47,17 @@ class PhotoUploader < CarrierWave::Uploader::Base
     process resize_to_limit: [87, 116]
   end
 
+  process :make_watermark => "https://rails365.oss-cn-shenzhen.aliyuncs.com/watermark_logo.png"
+  def make_watermark(watermark)
+    manipulate! do |img|
+      img = img.composite(MiniMagick::Image.open(watermark, "jpg")) do |c|
+        c.gravity "SouthEast"
+      end
+      img = yield(img) if block_given?
+      img
+    end
+  end
+
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   # def extension_white_list
