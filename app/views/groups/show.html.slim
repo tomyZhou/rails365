@@ -10,4 +10,11 @@
             = render partial: 'articles/article', locals: { article: article }
   .col-md-4
     = render 'shared/relative_books'
+    - cache @groups do
+      .panel.panel-default
+        .panel-heading
+          div.custom-panel-heading
+            span 热门分类
+        .panel-body.pb0.pt25
+          = render partial: 'groups/article_group', locals: { groups: @groups }
     = render 'shared/activity_users'

@@ -15,6 +15,10 @@ class GroupsController < ApplicationController
     @users = User.where(id: Article.pluck(:user_id).uniq)
 
     @books = @group.fetch_books
+
+    @groups = Rails.cache.fetch 'group_all' do
+      Group.order(weight: :desc).to_a
+    end
   end
 
   private
