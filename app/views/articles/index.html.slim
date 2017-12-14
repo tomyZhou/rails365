@@ -9,6 +9,11 @@
             div.custom-panel-heading.real-ray.hot-title
               = link_to '最新', root_path, class: "link-color dian #{params[:find].present? ? nil : 'link-active-color'}"
               = link_to '最热', root_path(find: 'hot'), class: "link-color #{params[:find].present? ? 'link-active-color' : nil}"
+              = link_to 'webpack', articles_path(search: 'webpack', tp: 'articles'), class: "link-color pull-right"
+              = link_to 'websocket', articles_path(search: 'websocket', tp: 'articles'), class: "link-color dian pull-right hidden-xs"
+              = link_to 'ruby', articles_path(search: 'ruby', tp: 'articles'), class: "link-color dian pull-right"
+              = link_to 'docker', articles_path(search: 'docker', tp: 'articles'), class: "link-color dian pull-right"
+              = link_to 'nginx', articles_path(search: 'nginx', tp: 'articles'), class: "link-color dian pull-right"
       .panel-body
         - cache @articles do
           - if params[:search].present?
