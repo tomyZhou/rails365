@@ -4,6 +4,8 @@
       | 欢迎关注
       = render 'shared/heartbeat'
   .panel-body
+    = link_to "https://xiaozhuanlan.com/rails365", target: "_blank" do
+      = image_tag "xiaozhuanlan.png", class: "share_logo"
     = link_to "https://juejin.im/user/58649ccd1b69e675fce22698", target: '_blank' do
       = image_tag "juejin.png", class: "share_logo"
     = link_to "https://toutiao.io/subjects/124922", target: "_blank" do
