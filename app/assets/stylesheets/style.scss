@@ -1475,3 +1475,10 @@ a {
     bottom: 30px;
   }
 }
+
+/* 重写 markdown code 样式 */
+
+code {
+  background-color: #f8f8f8;
+  color: #4e5980;
+}
