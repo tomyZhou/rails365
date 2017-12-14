@@ -113,6 +113,6 @@ class Article < ActiveRecord::Base
 
   def clear_after_updated_cache
     # 文章show页面右侧推荐文章列表
-    Rails.cache.delete [slug, 'recommend_articles', group.slug]
+    Rails.cache.delete "recommend_articles_#{self.group.slug}"
   end
 end
