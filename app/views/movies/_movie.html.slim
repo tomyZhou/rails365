@@ -13,4 +13,4 @@ div.video-box
     .btn-group
       = link_to like_movie_path(movie), remote: true do
         button class='btn btn-default btn-muted like-button'
-          = render partial: 'like', locals: { movie: movie }
+          = render partial: 'movies/like', locals: { movie: movie }
