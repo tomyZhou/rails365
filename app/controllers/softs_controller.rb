@@ -1,7 +1,7 @@
 class SoftsController < ApplicationController
   before_action :set_soft, only: [:show]
   before_action :find_changed_soft, only: [:edit, :update, :destroy, :like]
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :like]
+  before_action :authenticate_user!
   authorize_resource
 
   def index

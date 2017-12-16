@@ -88,6 +88,10 @@
                   = link_to user_path(current_user) do
                     i class="fa fa-user-o" aria-hidden="true"
                     |  个人中心
+                /li
+                /  = link_to softs_path do
+                /    i class="fa fa-download" aria-hidden="true"
+                /    |  资源下载
                 li.divider
                 li
                   = link_to destroy_user_session_path, :method => :delete, data: { confirm: "确定登出吗？我们需要你！" } do
