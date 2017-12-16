@@ -46,7 +46,7 @@ class SoftsController < ApplicationController
 
   def update
     if @soft.update(soft_params)
-      Redis.new.publish 'ws', { title: 'rails365 更新了资源', content: @soft.title }.to_json
+      # Redis.new.publish 'ws', { title: 'rails365 更新了资源', content: @soft.title }.to_json
       flash[:success] = "更新成功"
       redirect_to soft_path(@soft)
     else
