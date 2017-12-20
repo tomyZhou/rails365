@@ -49,12 +49,14 @@ class PhotoUploader < CarrierWave::Uploader::Base
 
   process :make_watermark => "https://rails365.oss-cn-shenzhen.aliyuncs.com/watermark_logo.png"
   def make_watermark(watermark)
-    manipulate! do |img|
-      img = img.composite(MiniMagick::Image.open(watermark, "jpg")) do |c|
-        c.gravity "SouthEast"
+    if model.class.to_s.underscore != 'group' && file.extension.downcase != 'gif'
+      manipulate! do |img|
+        img = img.composite(MiniMagick::Image.open(watermark, "jpg")) do |c|
+          c.gravity "SouthEast"
+        end
+        img = yield(img) if block_given?
+        img
       end
-      img = yield(img) if block_given?
-      img
     end
   end
 
