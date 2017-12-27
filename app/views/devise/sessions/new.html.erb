@@ -23,7 +23,7 @@
         </div>
         <div class="oauth-box text-left">
           第三方账号登录：
-          <%= link_to class: "btn btn-link" do %>
+          <%= link_to omniauth_authorize_path(:user, :github), class: "btn btn-link" do %>
             <i class="fa fa-github" aria-hidden="true"></i>
           <% end %>
         </div>
