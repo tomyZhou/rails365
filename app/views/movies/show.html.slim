@@ -40,7 +40,7 @@
     - cache [@movie, @playlist_movies] do
       .panel.panel-default.sticker
         .panel-heading
-          div 播放列表
+          div = @movie.playlist.try(:name)
         .panel-body
           - @playlist_movies.each_with_index do |playlist_movie, index|
             - if playlist_movie.id == @movie.id
