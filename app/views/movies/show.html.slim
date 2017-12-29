@@ -38,7 +38,7 @@
       = render 'comments/comments'
   .col-md-4.article-right
     - cache [@movie, @playlist_movies] do
-      .panel.panel-default.sticker
+      .panel.panel-default
         .panel-heading
           div = @movie.playlist.try(:name)
         .panel-body
