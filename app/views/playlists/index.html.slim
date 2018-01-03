@@ -1,7 +1,4 @@
 .white-bg
   - cache @playlists do
-    .page-header
-      h1.text-primary.title-header 播放列表
-
     div.home-video
       = render partial: 'playlists/playlist', locals: { playlists: @playlists }
