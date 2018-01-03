@@ -7,8 +7,8 @@
               p 共找到 <span class="blue">#{@articles.total_count}</span> 条关于 <span class="blue">#{params[:search]}</span> 的搜索结果
           - else
             div.custom-panel-heading.real-ray.hot-title
-              = link_to '最新', root_path, class: "link-color dian #{params[:find].present? ? nil : 'link-active-color'}"
-              = link_to '最热', root_path(find: 'hot'), class: "link-color #{params[:find].present? ? 'link-active-color' : nil}"
+              = link_to '最新', articles_path, class: "link-color dian #{params[:find].present? ? nil : 'link-active-color'}"
+              = link_to '最热', articles_path(find: 'hot'), class: "link-color #{params[:find].present? ? 'link-active-color' : nil}"
               = link_to 'webpack', articles_path(search: 'webpack', tp: 'articles'), class: "link-color pull-right"
               = link_to 'ruby', articles_path(search: 'ruby', tp: 'articles'), class: "link-color dian pull-right"
               = link_to 'docker', articles_path(search: 'docker', tp: 'articles'), class: "link-color dian pull-right hidden-xs"
