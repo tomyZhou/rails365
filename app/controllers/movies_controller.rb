@@ -18,10 +18,6 @@ class MoviesController < ApplicationController
       @movies = Movie.except_body_with_default.where(is_original: true).order('id DESC').page(params[:page]).per(20)
     end
 
-    @playlists = Rails.cache.fetch 'playlist_all' do
-      Playlist.order(weight: :desc).to_a
-    end
-
     @serials = Rails.cache.fetch('serials') do
       Serial.order(weight: :desc).to_a
     end
