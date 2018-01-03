@@ -35,6 +35,7 @@ RailsAdmin.config do |config|
       field :image, :carrierwave
       field :desc
       field :weight
+      field :is_original
     end
   end
 

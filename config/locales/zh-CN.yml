@@ -39,6 +39,7 @@ zh-CN:
         desc: '描述'
         weight: '权重'
         articles_count: '视频数量'
+        is_original: "是否原创"
       app:
         name: '名称'
         link_url: '链接'
