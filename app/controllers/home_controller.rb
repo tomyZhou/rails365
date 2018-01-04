@@ -1,32 +1,27 @@
 class HomeController < ApplicationController
   def index
-    @articles = Rails.cache.fetch 'articles' do
-      Article.except_body_with_default.order('id DESC').limit(10).to_a
+    @articles =
+      if params[:search].present?
+        Article.search params[:search], fields: [:title, :body], highlight: true, misspellings: false, includes: [:group, :user], page: params[:page], per_page: 20
+      elsif params[:find].present? && params[:find] == 'hot'
+        Article.except_body_with_default.order('visit_count DESC').page(params[:page])
+      else
+        Article.except_body_with_default.order('id DESC').page(params[:page])
+      end
+
+    @groups = Rails.cache.fetch 'group_all' do
+      Group.order(weight: :desc).to_a
     end
 
-    @hot_articles = Rails.cache.fetch 'hot_articles' do
-      Article.except_body_with_default.order(visit_count: :desc).limit(10).to_a
+    @users = User.where(id: Article.pluck(:user_id).uniq)
+
+    @movies = Rails.cache.fetch "movies" do
+      Movie.except_body_with_default.where(is_original: true).order('id DESC').limit(4)
     end
 
-    @groups = Rails.cache.fetch('groups', expires_in: 2.hours) do
-      Group.order(weight: :desc).limit(Group.count - (Group.count % 6)).to_a
-    end
-
-    @playlists = Rails.cache.fetch('playlists') do
-      Playlist.order(weight: :desc).limit(Playlist.count - (Playlist.count % 4)).to_a
-    end
-
-    @movies = Rails.cache.fetch('movies') do
-      Movie.except_body_with_default.order(updated_at: :desc).limit(20).to_a
-    end
-
-    @books = Rails.cache.fetch('books') do
-      Book.order(weight: :desc).limit(Book.count - (Book.count % 2)).to_a
-    end
-
-    respond_to do |format|
-      format.all { render :index, formats: [:html] }
-    end
+    # respond_to do |format|
+    #   format.all { render :index, formats: [:html] }
+    # end
   end
 
   def find

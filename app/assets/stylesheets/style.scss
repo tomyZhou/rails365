@@ -1482,3 +1482,11 @@ code {
   background-color: #f8f8f8;
   color: #4e5980;
 }
+
+
+.home-container {
+  @media (min-width: 768px) {
+    margin-right: 10px;
+    margin-bottom: 20px;
+  }
+}

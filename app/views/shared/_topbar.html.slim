@@ -13,8 +13,8 @@
                 a href="/playlists"
                  | 播放列表
               li
-                a href="/articles"
-                 | 文章
+                a href="/movies"
+                 | 视频
               li
                 a href="/groups"
                  | 分类
@@ -60,15 +60,15 @@
         a.navbar-brand href="/" = image_tag "logo.png"
       #bs-example-navbar-collapse-1.collapse.navbar-collapse
         ul.nav.navbar-nav
-          li class="#{controller_name == 'movies' ? 'active' : nil}"
+          li class="#{controller_name == 'articles' ? 'active' : nil}"
             a href="/"
               | 首页
               span.sr-only (current)
+          li class="#{controller_name == 'movies' ? 'active' : nil}"
+            a href="/movies"
+              | 视频
           li class="#{controller_name == 'playlists' ? 'active' : nil}"
             a href="/playlists" 播放列表
-          li class="#{controller_name == 'articles' ? 'active' : nil}"
-            a href="/articles"
-              | 文章
           li.hidden class="#{controller_name == 'softs' ? 'active' : nil}"
             a href="/softs" 资源下载
           li class="#{controller_name == 'groups' ? 'active' : nil}"

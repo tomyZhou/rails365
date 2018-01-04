@@ -20,6 +20,10 @@ class ArticlesController < ApplicationController
 
     @users = User.where(id: Article.pluck(:user_id).uniq)
 
+    @movies = Rails.cache.fetch "movies" do
+      Movie.except_body_with_default.where(is_original: true).order('id DESC').limit(4)
+    end
+
     # respond_to do |format|
     #   format.all { render :index, formats: [:html, :js] }
     # end
