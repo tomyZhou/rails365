@@ -11,7 +11,7 @@ class Movie < ActiveRecord::Base
   act_as_likee
   include LikeConcern
 
-  belongs_to :playlist, counter_cache: true
+  belongs_to :playlist, counter_cache: true, touch: true
   belongs_to :serial, counter_cache: true
   belongs_to :user
   has_many :comments, as: 'commentable'
