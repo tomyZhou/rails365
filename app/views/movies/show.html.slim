@@ -37,6 +37,7 @@
     div#comment_box
       = render 'comments/comments'
   .col-md-4.article-right
+    = render 'shared/wechatpay'
     - cache [@movie, @playlist_movies] do
       .panel.panel-default
         .panel-heading
