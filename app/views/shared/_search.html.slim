@@ -1,4 +1,4 @@
-- check_hidden = params[:search].present? ? nil : 'hidden'
+- check_hidden = params[:search].present? || (controller_name == "movies" && action_name == "index") ? nil : 'hidden'
 .text-center.search-form.hidden-xs class="#{check_hidden}"
   = form_tag "/find", method: "get", class: "navbar-form", role: "search"
     .form-group.mb20

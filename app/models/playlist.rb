@@ -32,5 +32,6 @@ class Playlist < ActiveRecord::Base
   def clear_cache
     Rails.cache.delete 'playlists'
     Rails.cache.delete 'playlist_all'
+    Rails.cache.delete 'article_playlists'
   end
 end

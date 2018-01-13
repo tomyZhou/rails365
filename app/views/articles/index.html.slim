@@ -51,8 +51,24 @@
             .pagination-text.article-box
 
   .col-md-4.hidden-xs.article-right
-    = render 'shared/activity_users'
+    .panel.panel-default
+      .panel-heading
+        div.custom-panel-heading
+          span
+            | 最新视频
+            = render 'shared/heartbeat'
+      .panel-body.text-left
+        .m-widget4
+          - @movies.each do |movie|
+            .m-widget4__item
+              .m-widget4__info
+                p
+                  = link_to movie.title, movie_path(movie), class: 'm-widget4__title'
+                p
+                  span.m-widget4__sub.dian #{movie.read_count} 次观看
+                  span.m-widget4__sub = custom_timeago_tag(movie.created_at)
 
+    = render 'shared/activity_users'
 
     - cache @groups do
       .panel.panel-default
