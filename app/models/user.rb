@@ -21,9 +21,10 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
 
   def self.from_omniauth(auth)
+    ap auth.extra.raw_info.login
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.username = auth.nickname
+      user.email = "from_github_#{auth.info.email}"
+      user.username = auth.extra.raw_info.login
       user.password = Devise.friendly_token[0, 20]
     end
   end

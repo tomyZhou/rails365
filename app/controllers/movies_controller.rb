@@ -22,7 +22,7 @@ class MoviesController < ApplicationController
       Serial.order(weight: :desc).to_a
     end
 
-    @title = '视频列表'
+    @title = 'web 编程视频'
 
     # respond_to do |format|
     #   format.all { render :index, formats: [:html] }
