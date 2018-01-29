@@ -9,8 +9,8 @@ div.video-box
   p.time
     span.dian #{movie.read_count} 次观看
     span = custom_timeago_tag(movie.created_at)
-  div.text-left
-    .btn-group
-      = link_to like_movie_path(movie), remote: true do
-        button class='btn btn-default btn-muted like-button'
-          = render partial: 'movies/like', locals: { movie: movie }
+  /div.text-left
+  /  .btn-group
+  /    = link_to like_movie_path(movie), remote: true do
+  /      button class='btn btn-default btn-muted like-button'
+  /        = render partial: 'movies/like', locals: { movie: movie }

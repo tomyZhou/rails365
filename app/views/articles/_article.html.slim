@@ -13,8 +13,8 @@ div.article-box
     span #{article.read_count} 次点击
   p.article-title
     = link_to article.title, article
-  div.article-desc
-    .btn-group
-      = link_to like_article_path(article), remote: true do
-        button class='btn btn-default btn-muted like-button'
-          = render partial: 'articles/like', locals: { article: article }
+  /div.article-desc
+  /  .btn-group
+  /    = link_to like_article_path(article), remote: true do
+  /      button class='btn btn-default btn-muted like-button'
+  /        = render partial: 'articles/like', locals: { article: article }
