@@ -2,6 +2,10 @@
   .col-md-8.article-left
     .panel.panel-default
       .panel-body
+        - cache [@movie, "playlist-title"] do
+          div.text-left.article-desc
+            span.dian = link_to "首页", root_path
+            = link_to @movie.playlist.try(:name), playlist_path(@movie.playlist)
         div
           h1.my-title = @movie.title
           div.article-desc
