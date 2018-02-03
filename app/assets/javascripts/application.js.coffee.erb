@@ -40,6 +40,9 @@ jQuery ->
     topSpacing: 70
     zIndex: 9
 
+  $(".playlist-angle").on 'click', ->
+    $(this).next().toggleClass('hidden');
+
 
 
 $ ->

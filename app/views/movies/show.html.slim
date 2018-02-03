@@ -41,13 +41,13 @@
     div#comment_box
       = render 'comments/comments'
   .col-md-4.article-right
-    = render 'shared/wechatpay'
-    = render 'shared/qqgroup'
     - cache [@movie, @playlist_movies] do
       .panel.panel-default
-        .panel-heading
-          div = @movie.playlist.try(:name)
-        .panel-body
+        .panel-heading.playlist-angle
+          div
+            | 播放列表目录 
+            i class="fa fa-angle-down"
+        .panel-body.hidden
           - @playlist_movies.each_with_index do |playlist_movie, index|
             - if playlist_movie.id == @movie.id
               p.home-p.box-article
@@ -57,6 +57,8 @@
               p.home-p.box-article
                 span.dian = index + 1
                 = link_to playlist_movie.title, movie_path(playlist_movie), class: "real-ray"
+    = render 'shared/wechatpay'
+    = render 'shared/qqgroup'
 
 javascript:
   $(document).ready(function() {
