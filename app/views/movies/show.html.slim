@@ -24,6 +24,11 @@
                 = render partial: 'like', locals: { movie: @movie }
 
             .pull-right = social_share_button_tag(@movie.title)
+          .clearfix style="margin-top: 15px;"
+            - if @prev_movie.present?
+              = link_to '<<上一集', movie_path(@prev_movie), class: "pull-left"
+            - if @next_movie.present?
+              = link_to '下一集>>', movie_path(@next_movie), class: "pull-right"
 
           hr
           / 为了兼容以前的数据内容

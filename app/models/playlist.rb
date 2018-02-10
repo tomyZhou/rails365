@@ -6,7 +6,7 @@ class Playlist < ActiveRecord::Base
   include IdentityCache
   cache_index :slug, unique: true
 
-  has_many :movies, -> { order 'created_at DESC' }, dependent: :nullify
+  has_many :movies, -> { order 'weight DESC' }, dependent: :nullify
 
   mount_uploader :image, VideoUploader
 
