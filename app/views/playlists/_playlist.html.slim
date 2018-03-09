@@ -2,7 +2,7 @@
   div.video-box
     div
       a href="#{playlist_path(playlist)}"
-        = image_tag playlist.image_url(:preview)
+        = image_tag playlist.image_url(:preview), alt: playlist.name
     p.title
       a href="#{playlist_path(playlist)}" class="real-ray"
         = playlist.name

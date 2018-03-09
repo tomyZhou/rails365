@@ -1,7 +1,7 @@
 div.video-box
   div
     a href="#{movie_path(movie)}"
-      = image_tag movie.image_url(:preview)
+      = image_tag movie.image_url(:preview), alt: movie.title
   p.title
     a href="#{movie_path(movie)}" class="real-ray"
       = movie.title

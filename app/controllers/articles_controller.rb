@@ -21,7 +21,7 @@ class ArticlesController < ApplicationController
     @users = User.where(id: Article.pluck(:user_id).uniq)
 
     @playlists = Rails.cache.fetch 'article_playlists' do
-      Playlist.where(is_original: true).order(weight: :desc).limit(3).to_a
+      Playlist.where(is_original: true).order(weight: :desc).limit(4).to_a
     end
 
     @movies = Rails.cache.fetch "movies" do

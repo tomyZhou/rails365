@@ -1,8 +1,8 @@
-/- unless params[:search].present?
-/  .white-bg.home-container
-/    - cache @movies do
-/      div.pt15.home-video
-/        = render partial: 'movies/index', object: @movies
+- unless params[:search].present?
+  .white-bg.home-container
+    - cache @movies do
+      div.pt15.home-video
+        = render partial: 'movies/index', object: @movies
 .row
   .col-md-8.article-left
     .panel.panel-default
@@ -51,24 +51,23 @@
             .pagination-text.article-box
 
   .col-md-4.hidden-xs.article-right
-    .panel.panel-default
-      .panel-heading
-        div.custom-panel-heading
-          span
-            | 最新视频
-            = render 'shared/heartbeat'
-      .panel-body.text-left
-        .m-widget4
-          - @movies.each do |movie|
-            .m-widget4__item
-              .m-widget4__info
-                p
-                  = link_to movie.title, movie_path(movie), class: 'm-widget4__title'
-                p
-                  span.m-widget4__sub.dian #{movie.read_count} 次观看
-                  span.m-widget4__sub = custom_timeago_tag(movie.created_at)
-
-    = render 'shared/activity_users'
+    = render 'shared/follow'
+    /.panel.panel-default
+    /  .panel-heading
+    /    div.custom-panel-heading
+    /      span
+    /        | 最新视频
+    /        = render 'shared/heartbeat'
+    /  .panel-body.text-left
+    /    .m-widget4
+    /      - @movies.each do |movie|
+    /        .m-widget4__item
+    /          .m-widget4__info
+    /            p
+    /              = link_to movie.title, movie_path(movie), class: 'm-widget4__title'
+    /            p
+    /              span.m-widget4__sub.dian #{movie.read_count} 次观看
+    /              span.m-widget4__sub = custom_timeago_tag(movie.created_at)
 
     - cache @groups do
       .panel.panel-default
@@ -77,4 +76,6 @@
             span 热门分类
         .panel-body.pb0.pt25
           = render partial: 'groups/article_group', locals: { groups: @groups }
-    = render 'shared/follow'
+    .sticker
+      = render 'shared/activity_users'
+      = render 'shared/qqgroup'

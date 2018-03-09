@@ -1,4 +1,4 @@
-.panel.panel-default.sticker
+.panel.panel-default
   .panel-heading
     div.custom-panel-heading
       | 热门播放列表
@@ -9,7 +9,7 @@
         - @playlists.each do |playlist|
           div
             a href="#{playlist_path(playlist)}"
-              = image_tag playlist.image_url(:preview), style: "width: 100%; margin-bottom: 10px;"
+              = image_tag playlist.image_url(:preview), style: "width: 100%; margin-bottom: 10px;", alt: playlist.name
     /= link_to "https://xiaozhuanlan.com/rails365", target: "_blank" do
     /  = image_tag "xiaozhuanlan.png", class: "share_logo"
     /= link_to "https://juejin.im/user/58649ccd1b69e675fce22698", target: '_blank' do
