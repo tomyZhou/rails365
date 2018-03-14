@@ -1,24 +1,22 @@
 .row
   .col-md-8.article-left
-    - if @movie.is_paid?
+    - if @movie.has_read_priv?(current_user)
+      = render 'left_show'
+    - else
       - if !user_signed_in?
         .jumbotron.text-center
           h4 不好意思，查看该视频需要登录
           p
             a.btn.btn-primary.primary-btn href="/users/sign_in" 登录
       - else
-        - if current_user.is_paid? || current_user.super_admin?
-          = render 'left_show'
-        - else
-          .jumbotron.text-center
-            h4 
-              span 不好意思，查看 
-              span.my-badge.my-badge-danger Pro
-              span  视频需要订阅本站
-            p
-              a.btn.btn-primary.primary-btn href="/vip" 订阅本站
-    - else
-      = render 'left_show'
+        .jumbotron.text-center
+          h4 
+            span 不好意思，查看 
+            span.my-badge.my-badge-danger Pro
+            span  视频需要订阅本站
+          p
+            a.btn.btn-primary.primary-btn href="/vip" 订阅本站
+        
   .col-md-4.article-right
     - cache [@movie, @playlist_movies] do
       .panel.panel-default
