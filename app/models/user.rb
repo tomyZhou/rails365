@@ -86,6 +86,7 @@ class User < ActiveRecord::Base
 
   def self.set_paid(user_id, number)
     user = self.find(user_id)
+    Rails.cache.delete "current_user_[#{user.id}]"
     user.is_paid = true
     user.pay_expired_at = Time.now + number.months
     user.save!
@@ -96,6 +97,7 @@ class User < ActiveRecord::Base
       if Time.now > user.pay_expired_at
         user.is_paid = false
         user.save(validate: false)
+        Rails.cache.delete "current_user_[#{user.id}]"
       end
     end
   end
