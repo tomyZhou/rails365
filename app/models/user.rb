@@ -84,6 +84,22 @@ class User < ActiveRecord::Base
     self.company_name.present? ? "#{self.position} @ #{self.company_name}" : self.position
   end
 
+  def self.set_paid(user_id, number)
+    user = self.find(user_id)
+    user.is_paid = true
+    user.pay_expired_at = Time.now + number.months
+    user.save!
+  end
+
+  def self.set_expired_time
+    self.where(is_paid: true).where.not(pay_expired_at: nil).each do |user|
+      if Time.now > user.pay_expired_at
+        user.is_paid = false
+        user.save(validate: false)
+      end
+    end
+  end
+
   attr_writer :login
 
   def login

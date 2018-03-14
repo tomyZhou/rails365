@@ -10,12 +10,14 @@
       <%= I18n.l @user.created_at, :format => :long %>
     </p>
     <% if current_user && current_user == @user %>
-      <p class="text-center">
-        <span class="my-badge my-badge-danger">Pro 会员</span>
-      </p>
-      <p class="text-center">
-        <span>会员到期时间：</span>
-      </p>
+      <% if current_user.is_paid? %>
+        <p class="text-center">
+          <span class="my-badge my-badge-danger">Pro 会员</span>
+        </p>
+        <p class="text-center">
+          <span>会员到期时间：<%= datetime @user.pay_expired_at %></span>
+        </p>
+      <% end %>
       <p class="text-center">
         <%= link_to "修改密码", edit_user_registration_path %>
       </p>

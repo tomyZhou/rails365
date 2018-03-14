@@ -22,3 +22,7 @@
 every 2.hours do
   runner "UpdateReadCountWorker.perform_async"
 end
+
+every 1.day, at: '1:30 am' do
+  runner "UserPayExpiredWorker.perform_async"
+end
