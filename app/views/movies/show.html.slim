@@ -5,12 +5,15 @@
     - else
       - if !user_signed_in?
         .jumbotron.text-center
-          h4 不好意思，查看该视频需要登录
+          h4
+            span 不好意思，查看 
+            span.my-badge.my-badge-danger Pro
+            span  视频需要登录
           p
             a.btn.btn-primary.primary-btn href="/users/sign_in" 登录
       - else
         .jumbotron.text-center
-          h4 
+          h4
             span 不好意思，查看 
             span.my-badge.my-badge-danger Pro
             span  视频需要订阅本站
