@@ -100,7 +100,7 @@ class MoviesController < ApplicationController
     if current_user && current_user.super_admin?
       params.require(:movie).permit!
     else
-      params.require(:movie).permit(:title, :mp4_name, :author, :play_time, :body, :playlist_id, :user_id, :image, :mp4_url, :youtube_url, :is_finished, :download_url)
+      params.require(:movie).permit(:title, :is_paid, :mp4_name, :author, :play_time, :body, :playlist_id, :user_id, :image, :mp4_url, :youtube_url, :is_finished, :download_url)
     end
   end
 end

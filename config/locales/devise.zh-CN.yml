@@ -12,6 +12,7 @@ zh-CN:
         nickname: "昵称"
         position: "职位"
         company_name: "公司"
+        is_paid: "是否付费"
     models:
       user: "用户"
   devise:

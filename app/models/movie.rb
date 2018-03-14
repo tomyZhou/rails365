@@ -17,7 +17,7 @@ class Movie < ActiveRecord::Base
   has_many :comments, as: 'commentable'
   cache_has_many :comments, :inverse_name => :commentable
 
-  scope :except_body_with_default, -> { select(:title, :like_count, :serial_id, :is_original, :created_at, :updated_at, :is_finished, :playlist_id, :image, :slug, :id, :play_time, :user_id, :weight).includes(:playlist) }
+  scope :except_body_with_default, -> { select(:title, :is_paid, :like_count, :serial_id, :is_original, :created_at, :updated_at, :is_finished, :playlist_id, :image, :slug, :id, :play_time, :user_id, :weight).includes(:playlist) }
 
   mount_uploader :image, VideoUploader
 
@@ -56,6 +56,16 @@ class Movie < ActiveRecord::Base
     # 引发 ActiveModel::Dirty 的 change
     self.title_will_change!
     self.title.auto_correct!
+  end
+
+  def has_read_priv?(current_user)
+    # 如果不用付费可以直接观看
+    return true if !self.is_paid?
+    # 需要付费，但是没有登录，不可以观看
+    return false if current_user.nil?
+    # 超级管理员和付费的用户可以看付费的视频
+    # 其他人不能观看付费的视频
+    current_user.is_paid? || current_user.super_admin? ? true : false
   end
 
   include ReadCountConcern

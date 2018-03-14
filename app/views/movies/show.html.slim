@@ -1,51 +1,22 @@
 .row
   .col-md-8.article-left
-    .panel.panel-default
-      .panel-body
-        - cache [@movie, "playlist-title"] do
-          div.text-left.article-desc
-            span.dian = link_to "首页", root_path
-            = link_to @movie.playlist.try(:name), playlist_path(@movie.playlist)
-        div
-          h1.my-title = @movie.title
-          div.article-desc
-            span.mr5 发布于
-            span.dian = custom_timeago_tag @movie.created_at
-            span #{@movie.read_count} 次观看
-            - if can? :update, @movie
-                = link_to "编辑", edit_movie_path(@movie), class: 'before-dian'
-        .article_content
-          div.video-block.mb20
-            video id="vid" src="#{@movie.mp4_url}" controls="controls" poster="#{@movie.image_url}" onclick="this.paused ? this.play() : this.pause();"
-              你的浏览器不支持该视频播放
-          .clearfix
-            - cache [@movie, current_user, "title-like"]
-              = link_to like_movie_path(@movie), remote: true, class: "real-ray" do
-                = render partial: 'like', locals: { movie: @movie }
-
-            .pull-right = social_share_button_tag(@movie.title)
-          .clearfix style="margin-top: 15px;"
-            - if @prev_movie.present?
-              = link_to '<<上一集', movie_path(@prev_movie), class: "pull-left"
-            - if @next_movie.present?
-              = link_to '下一集>>', movie_path(@next_movie), class: "pull-right"
-          .text-center.heart-green 扫码打赏 6.66 元起加我微信拉入微信群
-
-          hr
-          / 为了兼容以前的数据内容
-          - if !@movie.body.include?('视频内容搬运于网络') && @movie.author.present?
-            div
-              p 视频内容搬运于网络，由 #{@movie.author} 发布，本站提供下载链接是为了提高用户体验，而不是以盈利为目的，如有版本问题，请联系我（邮箱：hfpp2012@gmail.com），即可删除信息。
-          div
-            - cache [@movie, "markdown"] do
-              = markdown @movie.body
-            - if @movie.baidu_download?
-              div
-                = link_to '立即下载', @movie.actual_download_url, class: "btn btn-sm mr5 btn-primary", target: "_blank"
-                | 密码： #{@movie.actual_download_password}
-    = render partial: 'comments/form', locals: { object: @movie }
-    div#comment_box
-      = render 'comments/comments'
+    - if @movie.has_read_priv?(current_user)
+      = render 'left_show'
+    - else
+      - if !user_signed_in?
+        .jumbotron.text-center
+          h4 不好意思，查看该视频需要登录
+          p
+            a.btn.btn-primary.primary-btn href="/users/sign_in" 登录
+      - else
+        .jumbotron.text-center
+          h4 
+            span 不好意思，查看 
+            span.my-badge.my-badge-danger Pro
+            span  视频需要订阅本站
+          p
+            a.btn.btn-primary.primary-btn href="/vip" 订阅本站
+        
   .col-md-4.article-right
     - cache [@movie, @playlist_movies] do
       .panel.panel-default
@@ -55,14 +26,17 @@
             i class="fa fa-angle-down"
         .panel-body.hidden
           - @playlist_movies.each_with_index do |playlist_movie, index|
-            - if playlist_movie.id == @movie.id
-              p.home-p.box-article
+            p.home-p.box-article
+              - if playlist_movie.id == @movie.id
                 i.glyphicon.glyphicon-play.mr5
                 = link_to playlist_movie.title, movie_path(playlist_movie), class: "real-ray"
-            - else
-              p.home-p.box-article
+              - else
                 span.dian = index + 1
                 = link_to playlist_movie.title, movie_path(playlist_movie), class: "real-ray"
+              - if playlist_movie.is_paid?
+                span.dian
+                small.my-badge.my-badge-danger Pro
+
     = render 'shared/wechatpay'
     = render 'shared/qqgroup'
     = render 'shared/public_account'

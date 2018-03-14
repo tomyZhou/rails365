@@ -52,4 +52,5 @@ Rails.application.routes.draw do
   get '/ws', to: 'websocket#ws'
   get 'find', to: 'home#find'
   get '/about-us', to: 'home#about_us'
+  get '/vip', to: 'home#vip'
 end

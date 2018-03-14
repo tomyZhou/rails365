@@ -34,4 +34,7 @@ class HomeController < ApplicationController
 
   def about_us
   end
+
+  def vip
+  end
 end

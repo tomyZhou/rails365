@@ -23,6 +23,7 @@ zh-CN:
         is_original: '是否原创'
         serial_id: '视频分类'
         is_english: '是否英语'
+        is_paid: '是否付费'
       serial:
         name: '名称'
         weight: '权重'
@@ -40,6 +41,7 @@ zh-CN:
         weight: '权重'
         articles_count: '视频数量'
         is_original: "是否原创"
+        is_paid: '是否付费'
       app:
         name: '名称'
         link_url: '链接'

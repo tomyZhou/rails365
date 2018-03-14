@@ -20,6 +20,8 @@
                  | 分类
               li
                 a href="/books" 小书
+              li
+                a href="/vip" 订阅本站
 
         - if user_signed_in?
           ul.nav.navbar-nav.navbar-right.pull-right style="margin-right: 25px"
@@ -75,6 +77,8 @@
             a href="/groups" 分类
           li class="#{controller_name == 'books' ? 'active' : nil}"
             a href="/books" 小书
+          li class="#{controller_name == 'home' && action_name == 'vip' ? 'active' : nil}"
+            a href="/vip" 订阅本站
 
         ul.nav.navbar-nav.navbar-right
           li

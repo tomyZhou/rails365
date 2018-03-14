@@ -7,6 +7,10 @@
       a href="#{playlist_path(playlist)}" class="real-ray"
         = playlist.name
     p.time
+      - if playlist.is_paid?
+        small.my-badge.my-badge-danger Pro
+        span.dian
       = custom_timeago_tag playlist.created_at
-      | &nbsp;*&nbsp; 视频数量：
+      span.dian
+      | 视频数量：
       = playlist.movies_count
