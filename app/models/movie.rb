@@ -58,16 +58,6 @@ class Movie < ActiveRecord::Base
     self.title.auto_correct!
   end
 
-  def has_read_priv?(current_user)
-    # 如果不用付费可以直接观看
-    return true if !self.is_paid?
-    # 需要付费，但是没有登录，不可以观看
-    return false if current_user.nil?
-    # 超级管理员和付费的用户可以看付费的视频
-    # 其他人不能观看付费的视频
-    current_user.is_paid? || current_user.super_admin? ? true : false
-  end
-
   include ReadCountConcern
 
   include BaiduDownloadConcern
