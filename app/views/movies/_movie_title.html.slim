@@ -1,0 +1,14 @@
+.panel.panel-default style="margin-bottom: 0"
+  .panel-body
+    - cache [@movie, "playlist-title"] do
+      div.text-left.article-desc
+        span.dian = link_to "首页", root_path
+        = link_to @movie.playlist.try(:name), playlist_path(@movie.playlist)
+    div
+      h1.my-title = @movie.title
+      div.article-desc
+        span.mr5 发布于
+        span.dian = custom_timeago_tag @movie.created_at
+        span #{@movie.read_count} 次观看
+        - if can? :update, @movie
+            = link_to "编辑", edit_movie_path(@movie), class: 'before-dian'

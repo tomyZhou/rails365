@@ -7,6 +7,9 @@
     div
       h1.my-title = @movie.title
       div.article-desc
+        - if @movie.is_paid?
+          small.my-badge.my-badge-danger Pro
+          span.dian
         span.mr5 发布于
         span.dian = custom_timeago_tag @movie.created_at
         span #{@movie.read_count} 次观看
