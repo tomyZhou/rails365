@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :like_softs, through: "likees", source: :likee, source_type: "Soft"
 
   has_many :articles
+  has_many :orders
 
   validate :validate_username
   validates :username, format: { with: ALLOW_LOGIN_CHARS_REGEXP, message: '只允许数字、大小写字母和下划线' },
@@ -84,12 +85,15 @@ class User < ActiveRecord::Base
     self.company_name.present? ? "#{self.position} @ #{self.company_name}" : self.position
   end
 
-  def self.set_paid(user_id, number)
+  def self.set_paid(user_id, number, money)
     user = self.find(user_id)
     Rails.cache.delete "current_user_[#{user.id}]"
     user.is_paid = true
     user.pay_expired_at = Time.now + number.months
     user.save!
+
+    order = user.orders.new(expired_at: user.pay_expired_at, money: money)
+    order.save!
   end
 
   def self.set_expired_time
