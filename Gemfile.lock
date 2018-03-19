@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/radar/by_star
+  revision: 422c06ec1ea8ce633aca014a4403fbac92630057
+  specs:
+    by_star (3.0.0)
+      activesupport (> 3)
+
+GIT
   remote: https://github.com/smartinez87/exception_notification
   revision: 40d2a87e2b9d663f661f704a3e727f46f1fb189e
   specs:
@@ -584,6 +591,7 @@ DEPENDENCIES
   babosa
   bootstrap-sass
   bootswatch-rails
+  by_star!
   cancancan
   capistrano (~> 3.5.0)
   capistrano-bundler

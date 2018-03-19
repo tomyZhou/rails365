@@ -92,7 +92,7 @@ class User < ActiveRecord::Base
     user.pay_expired_at = Time.now + number.months
     user.save!
 
-    order = user.orders.new(expired_at: user.pay_expired_at, money: money)
+    order = user.orders.new(expired_at: user.pay_expired_at, month: number, money: money)
     order.save!
   end
 
