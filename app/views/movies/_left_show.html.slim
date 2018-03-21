@@ -17,8 +17,10 @@
             = link_to "编辑", edit_movie_path(@movie), class: 'before-dian'
     .article_content
       div.video-block.mb20
-        video id="vid" src="#{@movie.mp4_url}" controls="controls" poster="#{@movie.image_url}" onclick="this.paused ? this.play() : this.pause();"
-          你的浏览器不支持该视频播放
+        #dplayer
+        /video id="vid" src="#{@movie.mp4_url}" controls="controls" poster="#{@movie.image_url}" onclick="this.paused ? this.play() : this.pause();"
+        /  你的浏览器不支持该视频播放
+        = render 'movies/dplayer'
       .clearfix
         - cache [@movie, current_user, "title-like"]
           = link_to like_movie_path(@movie), remote: true, class: "real-ray" do
