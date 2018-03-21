@@ -25,7 +25,7 @@ class ArticlesController < ApplicationController
     end
 
     @movies = Rails.cache.fetch "movies" do
-      Movie.except_body_with_default.where(is_original: true).order('id DESC').limit(8)
+      Movie.except_body_with_default.where(is_original: true).order('id DESC').limit(10)
     end
 
     # respond_to do |format|
