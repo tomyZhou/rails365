@@ -16,7 +16,7 @@ class Article < ActiveRecord::Base
   has_many :comments, as: 'commentable'
   cache_has_many :comments, :inverse_name => :commentable
 
-  scope :except_body_with_default, -> { select(:title, :like_count, :created_at, :updated_at, :group_id, :slug, :id, :user_id, :weight, :is_home).includes(:group) }
+  scope :except_body_with_default, -> { select(:title, :visit_count, :like_count, :created_at, :updated_at, :group_id, :slug, :id, :user_id, :weight, :is_home).includes(:group) }
 
   def self.async_create(user_id, article_params)
     user = User.find(user_id)

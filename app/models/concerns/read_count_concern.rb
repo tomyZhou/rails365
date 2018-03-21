@@ -35,9 +35,9 @@ module ReadCountConcern
 
     def read_count
       if self.his_class_name.to_s == 'article'
-        $redis.get("user_#{self.id}_count") || 0
+        $redis.get("user_#{self.id}_count") || self.visit_count || 0
       else
-        $redis.get("user_#{self.his_class_name}_#{self.id}_count") || 0
+        $redis.get("user_#{self.his_class_name}_#{self.id}_count") || self.visit_count || 0
       end
     end
 
