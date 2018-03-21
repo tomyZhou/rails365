@@ -1,5 +1,6 @@
 .panel.panel-default
   .panel-body
+    = render 'movies/hide_right'
     - cache [@movie, "playlist-title"] do
       div.text-left.article-desc
         span.dian = link_to "首页", root_path

@@ -1,5 +1,5 @@
 .row
-  .col-md-8.article-left
+  .col-md-8.article-left#movie-left
     - if @movie.has_read_priv?(current_user)
       = render 'left_show'
     - else
@@ -22,7 +22,7 @@
           p
             a.btn.btn-primary.primary-btn href="/vip" 订阅本站
 
-  .col-md-4.article-right
+  .col-md-4.article-right#movie-right
     - cache [@movie, @playlist_movies] do
       .panel.panel-default
         .panel-heading.playlist-angle

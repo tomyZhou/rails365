@@ -1,0 +1,22 @@
+<% unless mobile_device? %>
+  <i id="hide-right" class="fa fa-angle-right hide-right-btn pull-right"> 切换右边</i>
+
+  <script>
+  $("#hide-right").on('click', function() {
+    var movie_right = $("#movie-right");
+    var movie_left = $("#movie-left");
+
+    if (movie_left.hasClass('col-md-8')) {
+      movie_left.removeClass('col-md-8').addClass('col-md-12');
+    } else {
+      movie_left.removeClass('col-md-12').addClass('col-md-8');
+    }
+
+    if (movie_right.hasClass('hidden')) {
+      movie_right.removeClass('hidden');
+    } else {
+      movie_right.addClass('hidden');
+    }
+  });
+  </script>
+<% end %>
