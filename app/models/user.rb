@@ -89,7 +89,13 @@ class User < ActiveRecord::Base
     user = self.find(user_id)
     Rails.cache.delete "current_user_[#{user.id}]"
     user.is_paid = true
-    user.pay_expired_at = Time.now + number.months
+
+    if user.pay_expired_at && user.pay_expired_at > Time.now
+      user.pay_expired_at = user.pay_expired_at + number.months
+    else
+      user.pay_expired_at = Time.now + number.months
+    end
+
     user.save!
 
     order = user.orders.new(expired_at: user.pay_expired_at, month: number, money: money)
