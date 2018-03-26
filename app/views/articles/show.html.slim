@@ -43,7 +43,6 @@
           = link_to like_article_path(@article), remote: true, class: "real-ray" do
             = render partial: 'like', locals: { article: @article }
     = render 'shared/qqgroup'
-    = render 'shared/public_account'
     - cache [@recommend_articles, 'recommend_articles'] do
       .panel.panel-default.sticker
         .panel-heading
