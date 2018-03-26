@@ -23,7 +23,10 @@ class SoftsController < ApplicationController
 
     @comments = @soft.fetch_comments
     @comment = @soft.comments.build
-    @soft.increment_read_count
+
+    if !(current_user && current_user.super_admin?)
+      @soft.increment_read_count
+    end
   end
 
   def new

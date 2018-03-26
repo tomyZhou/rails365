@@ -40,7 +40,9 @@ class MoviesController < ApplicationController
 
     # @site_info_home_desc = Playlist.fetch_by_id(@movie.playlist_id).try(:desc)
 
-    @movie.increment_read_count
+    if !(current_user && current_user.super_admin?)
+      @movie.increment_read_count
+    end
 
     @prev_movie = @movie.playlist.movies.where("weight < ?", @movie.weight).first
     @next_movie = @movie.playlist.movies.where("weight > ?", @movie.weight).last

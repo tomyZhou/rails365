@@ -43,7 +43,9 @@ class ArticlesController < ApplicationController
 
     @books = Group.fetch_by_id(@article.group_id).fetch_books
 
-    @article.increment_read_count
+    if !(current_user && current_user.super_admin?)
+      @article.increment_read_count
+    end
   end
 
   def new
