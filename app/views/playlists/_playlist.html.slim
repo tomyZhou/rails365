@@ -3,7 +3,7 @@
     div
       a href="#{playlist_path(playlist)}"
         = image_tag playlist.image_url(:preview), alt: playlist.name
-    p.title
+    p.title style="height: 36px;"
       a href="#{playlist_path(playlist)}" class="real-ray"
         = playlist.name
     p.time
