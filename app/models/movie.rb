@@ -26,6 +26,7 @@ class Movie < ActiveRecord::Base
   validates :image, presence: true, on: :create
 
   def self.increment_random_read_count
+    Rails.cache.delete 'movies'
     self.last(10).each do |movie|
       $redis.set("user_movie_#{movie.id}_count", movie.read_count.to_i + rand(10))
     end
