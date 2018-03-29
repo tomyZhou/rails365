@@ -19,7 +19,7 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 2.hours do
+every 1.hours do
   runner "UpdateReadCountWorker.perform_async"
 end
 
