@@ -10,7 +10,9 @@
       - if playlist.is_paid?
         small.my-badge.my-badge-danger Pro
         span.dian
-      = custom_timeago_tag playlist.created_at
+        span 部分收费
+      - else
+        span 全部免费
       span.dian
       | 视频数量：
       = playlist.movies_count

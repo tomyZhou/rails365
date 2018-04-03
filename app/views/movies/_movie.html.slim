@@ -9,7 +9,9 @@ div.video-box
   p.time
     - if movie.is_paid?
       small.my-badge.my-badge-danger Pro
-      span.dian
+    - else
+      span 免费
+    span.dian
     span.dian #{movie.read_count} 次观看
     span = custom_timeago_tag(movie.created_at)
   /div.text-left
