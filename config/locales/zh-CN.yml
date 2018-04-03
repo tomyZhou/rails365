@@ -42,6 +42,7 @@ zh-CN:
         articles_count: '视频数量'
         is_original: "是否原创"
         is_paid: '是否付费'
+        is_finished: '是否完结'
       app:
         name: '名称'
         link_url: '链接'
@@ -83,3 +84,4 @@ zh-CN:
       book: '小书'
       soft: '资源下载'
       serial: '视频分类'
+      order: '订单'

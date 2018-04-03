@@ -14,5 +14,11 @@
       - else
         span 全部免费
       span.dian
-      | 视频数量：
-      = playlist.movies_count
+      span
+        = playlist.movies_count
+        |  个视频
+      span.dian
+      - if playlist.is_finished?
+        span 已完结
+      - else
+        span 更新中

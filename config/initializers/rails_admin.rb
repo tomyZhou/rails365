@@ -37,6 +37,7 @@ RailsAdmin.config do |config|
       field :weight
       field :is_paid
       field :is_original
+      field :is_finished
     end
   end
 
