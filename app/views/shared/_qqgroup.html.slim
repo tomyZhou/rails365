@@ -1,15 +1,16 @@
 .panel.panel-default
-  .panel-heading
-    div QQ 群 <b>697272886</b> <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=aaf6205b492a221fe6262e54454c55f5b2bb77ab9b7b7db8b604b3267b3449d1"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="rails365技术交流群" title="rails365技术交流群"></a>
-.panel.panel-default
-  .panel-heading
-    div 欢迎关注我的知乎：<a href="https://www.zhihu.com/people/rails365">rails365</a>
-.panel.panel-default
-  .panel-heading
-    div 我的 github：<a href="https://www.github.com/hfpp2012">hfpp2012</a>
-.panel.panel-default
-  .panel-heading
-    div youtube 频道：<a href="https://www.youtube.com/channel/UCA-Jkgr40A9kl5vsIqg-BIg">rails365 编程学院</a>
-.panel.panel-default
-  .panel-heading
-    div 本站源码：<a href="https://www.github.com/hfpp2012/rails365">rails365</a>
+  .panel-heading 友情提示
+  .list-group
+    .list-group-item QQ 群 <b>697272886</b> <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=aaf6205b492a221fe6262e54454c55f5b2bb77ab9b7b7db8b604b3267b3449d1"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="rails365技术交流群" title="rails365技术交流群"></a>
+    .list-group-item 欢迎关注我的知乎: <a href="https://www.zhihu.com/people/rails365">rails365</a>
+    .list-group-item 我的 github: <a href="https://www.github.com/hfpp2012">hfpp2012</a>
+    .list-group-item youtube 频道: <a href="https://www.youtube.com/channel/UCA-Jkgr40A9kl5vsIqg-BIg">rails365 编程学院</a>
+    .list-group-item 本站源码: <a href="https://www.github.com/hfpp2012/rails365">rails365</a>
+
+- cache do
+  .panel.panel-default
+    .panel-heading 统计信息
+    .list-group
+      .list-group-item 社区会员: #{User.count}
+      .list-group-item 视频数量: #{Movie.where(is_original: true).count}
+      .list-group-item 文章数量: #{Article.count}

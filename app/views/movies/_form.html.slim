@@ -1,7 +1,7 @@
 = bootstrap_form_for @movie, html: {class: "form-horizontal"} do |f|
   = f.error_messages
 
-  = f.text_field :title, class: "form-control", required: true
+  = f.text_field :title, value: (@movie.new_record? ? Movie.last.title : @movie.title), class: "form-control", required: true
   = f.text_field :mp4_url, class: "form-control"
   = f.image_file_field :image, required: @movie.new_record?
   .form-group

@@ -1,7 +1,7 @@
 = bootstrap_form_for @article, html: {class: "form-horizontal"}, remote: true do |f|
   = f.error_messages
 
-  = f.text_field :title, class: "form-control", required: true
+  = f.text_field :title, value: (@article.new_record? ? Article.last.title : @article.title), class: "form-control", required: true
   .form-group
     .col-sm-12
       .hide
