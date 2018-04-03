@@ -18,6 +18,12 @@ class Article < ActiveRecord::Base
 
   scope :except_body_with_default, -> { select(:title, :visit_count, :like_count, :created_at, :updated_at, :group_id, :slug, :id, :user_id, :weight, :is_home).includes(:group) }
 
+  def self.increment_random_read_count
+    self.last(10).each do |article|
+      $redis.set("user_#{article.id}_count", article.read_count.to_i + rand(10))
+    end
+  end
+
   def self.async_create(user_id, article_params)
     user = User.find(user_id)
     article = self.new(article_params)
