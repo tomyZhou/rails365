@@ -7,10 +7,9 @@
     .list-group-item youtube 频道: <a href="https://www.youtube.com/channel/UCA-Jkgr40A9kl5vsIqg-BIg">rails365 编程学院</a>
     .list-group-item 本站源码: <a href="https://www.github.com/hfpp2012/rails365">rails365</a>
 
-- cache do
-  .panel.panel-default
-    .panel-heading 统计信息
-    .list-group
-      .list-group-item 社区会员: #{User.count}
-      .list-group-item 视频数量: #{Movie.where(is_original: true).count}
-      .list-group-item 文章数量: #{Article.count}
+.panel.panel-default
+  .panel-heading 统计信息
+  .list-group
+    .list-group-item 社区会员: #{User.count}
+    .list-group-item 视频数量: #{Movie.where(is_original: true).count}
+    .list-group-item 文章数量: #{Article.count}

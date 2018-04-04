@@ -71,8 +71,6 @@
               | 视频
           li class="#{controller_name == 'playlists' ? 'active' : nil}"
             a href="/playlists" 播放列表
-          li.hidden class="#{controller_name == 'softs' ? 'active' : nil}"
-            a href="/softs" 资源下载
           li class="#{controller_name == 'groups' ? 'active' : nil}"
             a href="/groups" 分类
           li class="#{controller_name == 'books' ? 'active' : nil}"
@@ -95,15 +93,13 @@
               ul.dropdown-menu
                 - if current_user.super_admin?
                   li
-                    a href="/admin" 后台管理
+                    a href="/admin"
+                      i class="fa fa-dashboard"
+                      |  后台管理
                 li
                   = link_to user_path(current_user) do
                     i class="fa fa-user-o" aria-hidden="true"
                     |  个人中心
-                li
-                  = link_to softs_path do
-                    i class="fa fa-download" aria-hidden="true"
-                    |  资源下载
                 li.divider
                 li
                   = link_to destroy_user_session_path, :method => :delete, data: { confirm: "确定登出吗？我们需要你！" } do
@@ -111,11 +107,16 @@
                     |  注销
                 - if can? :create, Movie
                   li
-                    = link_to "添加新视频", new_movie_path
+                    = link_to new_movie_path do
+                      i class="fa fa-file-video-o"
+                      |  添加新视频
 
                 - if can? :create, Soft
                   li
-                    = link_to "添加新下载资源", new_soft_path
+                    = link_to new_soft_path do
+                      i class="fa fa-download"
+                      |  添加新下载资源
+
           - else
             li
               = link_to new_session_path(:user), class: "blue-style" do
