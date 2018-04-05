@@ -511,6 +511,8 @@ GEM
       activemodel (>= 4.1)
       elasticsearch (>= 1)
       hashie
+    select2-rails (4.0.3)
+      thor (~> 0.14)
     shellany (0.0.1)
     sidekiq (5.0.5)
       concurrent-ruby (~> 1.0)
@@ -661,6 +663,7 @@ DEPENDENCIES
   sass-rails
   sdoc
   searchkick
+  select2-rails
   sidekiq
   sinatra
   slim-rails

@@ -1,0 +1,11 @@
+= bootstrap_form_for @order, html: {class: "form-horizontal"} do |f|
+  = f.error_messages
+
+  = f.text_field :money, class: "form-control", required: true
+  = f.collection_select :user_id, User.all, :id, :order_name, { include_blank: "选择用户" }, { class: 'form-control', required: 'required' }
+  = f.select :month, options_for_select(1..12)
+  = f.submit "保存", class: "btn btn-primary", "data-disable-with" => '正在保存...'
+
+coffee:
+  $("#order_user_id").select2
+    theme: "bootstrap"

@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   resources :books, only: [:index]
 
   resources :articles, concerns: [:commentable, :like]
-  resources :orders, only: [:index]
+  resources :orders, only: [:index, :new, :create]
   resources :movies, concerns: [:commentable, :like]
   get "/movies/all/:name", to: "movies#index", as: :all_movies
   get "/movies/q/:filter", to: "movies#index", as: :q_movies

@@ -1,7 +1,7 @@
 class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
   delegate :content_tag, :pluralize, :image_tag, to: :@template
 
-  %w( text_field text_area select file_field url_field check_box email_field).each do |method_name|
+  %w( text_field text_area select file_field url_field check_box email_field collection_select).each do |method_name|
     define_method(method_name) do |method, *tag_value|
       content_tag(:div, class: 'form-group') do
         label(method, class: 'col-sm-2 control-label') +

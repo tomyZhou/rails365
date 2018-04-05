@@ -22,6 +22,10 @@ module ApplicationHelper
     datetime.to_time.strftime('%Y-%m-%d %H:%M:%S') unless datetime.nil?
   end
 
+  def money(number)
+    number_to_currency(number, precision: 2, delimiter: '')
+  end
+
   def search_params
     if ['movies', 'playlists'].include?(controller_name)
       "movies"

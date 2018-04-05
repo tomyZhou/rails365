@@ -5,21 +5,21 @@
         .panel.panel-success
           .panel-heading 所有订单
           .panel-body
-            | 金额：#{Order.pluck(:money).sum}
+            | 金额：#{money Order.pluck(:money).sum}
             br
             | 数量：#{Order.count}
       .col-md-4
         .panel.panel-success
           .panel-heading 月订单
           .panel-body
-            | 金额：#{Order.past_month.pluck(:money).sum}
+            | 金额：#{money Order.past_month.pluck(:money).sum}
             br
             | 数量：#{Order.past_month.count}
       .col-md-4
         .panel.panel-success
           .panel-heading 周订单
           .panel-body
-            | 金额：#{Order.past_week.pluck(:money).sum}
+            | 金额：#{money Order.past_week.pluck(:money).sum}
             br
             | 数量：#{Order.past_week.count}
   table.table
@@ -29,10 +29,23 @@
       th 创建时间
       th 过期时间
       th 用户 id
+      th 订阅月数
+      - if current_user.super_admin?
+        th 过期否
     - @orders.each do |order|
       tr
         td = order.id
         td = order.money
-        td = datetime(order.created_at)
-        td = datetime(order.expired_at)
-        td = link_to order.user_id, user_path(order.user_id)
+        td
+          = datetime(order.created_at)
+          | （#{custom_timeago_tag order.created_at}）
+        td
+          = datetime(order.expired_at)
+          - if order.expired_at > Time.now
+            | （还有 #{distance_of_time_in_words(Time.now, order.expired_at)}到期）
+          - else
+            | （已过期 #{distance_of_time_in_words(order.expired_at, Time.now)}）
+        td = link_to order.user.order_name, user_path(order.user_id)
+        td = order.month
+        - if current_user.super_admin?
+          td = order.user.is_paid? ? '否' : '是'

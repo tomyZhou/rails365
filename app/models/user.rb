@@ -81,6 +81,10 @@ class User < ActiveRecord::Base
     self.nickname || self.username
   end
 
+  def order_name
+    "#{self.id} - #{self.hello_name}"
+  end
+
   def signature_name
     self.company_name.present? ? "#{self.position} @ #{self.company_name}" : self.position
   end

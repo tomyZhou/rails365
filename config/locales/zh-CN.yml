@@ -71,6 +71,11 @@ zh-CN:
         user_id: '用户'
         user: '用户'
         tag: '标签分类'
+      order:
+        money: "金额"
+        user: '用户'
+        user_id: '用户'
+        month: '月'
     models:
       article: "文章"
       app: '应用'

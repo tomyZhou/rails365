@@ -9,14 +9,23 @@
     <p class="text-center">
       <%= I18n.l @user.created_at, :format => :long %>
     </p>
-    <% if current_user && current_user == @user %>
-      <% if current_user.is_paid? %>
+    <% if current_user && (current_user == @user || current_user.super_admin?) %>
+      <% if @user.pay_expired_at.present? %>
         <p class="text-center">
           <span class="my-badge my-badge-danger">Pro 会员</span>
         </p>
-        <p class="text-center">
-          <span>会员到期时间：<%= datetime @user.pay_expired_at %></span>
-        </p>
+        <% if @user.pay_expired_at > Time.now %>
+          <p class="text-center">
+            <span>会员到期时间：<%= datetime @user.pay_expired_at %></span>
+          </p>
+          <p class="text-center">
+            <span><%= "会员（还有 #{distance_of_time_in_words(Time.now, @user.pay_expired_at)}到期）" %></span>
+          </p>
+        <% else %>
+          <p>
+            <span><%= "会员（已过期 #{distance_of_time_in_words(@user.pay_expired_at, Time.now)}）" %></span>
+          </p>
+        <% end %>
       <% end %>
       <p class="text-center">
         <%= link_to "修改密码", edit_user_registration_path %>
