@@ -12,16 +12,16 @@
         .panel.panel-success
           .panel-heading 月订单
           .panel-body
-            | 金额：#{money Order.past_month.pluck(:money).sum}
+            | 金额：#{money Order.by_month.pluck(:money).sum}
             br
-            | 数量：#{Order.past_month.count}
+            | 数量：#{Order.by_month.count}
       .col-md-4
         .panel.panel-success
           .panel-heading 周订单
           .panel-body
-            | 金额：#{money Order.past_week.pluck(:money).sum}
+            | 金额：#{money Order.by_week.pluck(:money).sum}
             br
-            | 数量：#{Order.past_week.count}
+            | 数量：#{Order.by_week.count}
   table.table
     tr
       th id

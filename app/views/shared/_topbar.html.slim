@@ -33,6 +33,16 @@
                   = link_to user_path(current_user) do
                     i class="fa fa-user-o" aria-hidden="true"
                     |  个人中心
+                - if can? :read, Order
+                  li
+                    = link_to orders_path do
+                      i class="fa fa-first-order" aria-hidden="true"
+                      |  我的订单
+                - if can? :create, Order
+                  li
+                    = link_to new_order_path do
+                      i class="fa fa-sticky-note" aria-hidden="true"
+                      |  创建订单
                 li.divider
                 li
                   = link_to destroy_user_session_path, :method => :delete, data: { confirm: "确定登出吗？我们需要你！" } do
