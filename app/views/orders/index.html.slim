@@ -1,0 +1,38 @@
+.white-bg
+  - if current_user.super_admin?
+    .row
+      .col-md-4
+        .panel.panel-success
+          .panel-heading 所有订单
+          .panel-body
+            | 金额：#{Order.pluck(:money).sum}
+            br
+            | 数量：#{Order.count}
+      .col-md-4
+        .panel.panel-success
+          .panel-heading 月订单
+          .panel-body
+            | 金额：#{Order.past_month.pluck(:money).sum}
+            br
+            | 数量：#{Order.past_month.count}
+      .col-md-4
+        .panel.panel-success
+          .panel-heading 周订单
+          .panel-body
+            | 金额：#{Order.past_week.pluck(:money).sum}
+            br
+            | 数量：#{Order.past_week.count}
+  table.table
+    tr
+      th id
+      th 金额
+      th 创建时间
+      th 过期时间
+      th 用户 id
+    - @orders.each do |order|
+      tr
+        td = order.id
+        td = order.money
+        td = datetime(order.created_at)
+        td = datetime(order.expired_at)
+        td = link_to order.user_id, user_path(order.user_id)

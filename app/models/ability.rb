@@ -15,6 +15,10 @@ class Ability
         article.user_id == user.id
       end
 
+      can :read, Order do |order|
+        order.user_id = user.id
+      end
+
       can :read, Group
       can :read, Book
       can :read, Movie

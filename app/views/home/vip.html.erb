@@ -1,60 +1,62 @@
-<div class="row text-center">
-  <div class="col-md-4">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="text-muted">月订阅</h4>
-        <div class="price display-3"><span>129元</span><small> / 月</small></div>
-        <div class="mb-3 text-muted">按月付</div>
-      </div>
-    </div> 
-  </div>
-
-  <div class="col-md-4">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="text-muted">季度订阅<span class="text-primary">「节省 ¥30」</span></h4>
-        <div class="price display-3"><span>119元</span><small> / 月</small></div>
-        <div class="mb-3 text-muted">按一季度三个月付</div>
-      </div>
-    </div> 
-  </div>
-
-  <div class="col-md-4">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="text-muted">年订阅<span class="text-primary">「节省 ¥240」</span></h4>
-        <div class="price display-3"><span>109元</span><small> / 月</small></div>
-        <div class="mb-3 text-muted">按一年十二个月付</div>
-      </div>
-    </div> 
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-12">
-    <h3 class="text-center mb20">支付流程</h3>
-    <h5>1. 加我微信（微信号：<span class="heart-green">15014006126</span>）后，发微信红包或转账于我，如果是打赏，请发打赏截图。</h5>
-    <h5>2. 发送你的用户id: <span class="heart-green"><%= user_signed_in? ? current_user.id : "登录后刷新本页可查看" %></span> 给我，我好针对客户进行订单处理。</h5>
-    <h5>3. 我收到钱后会在后台处理订单，处理结果即时通知，然后就可以观看 Pro 视频。</h5>
-    <h5>4. 我会拉你进微信群，可以进行视频内容提问和交流互动。</h5>
-  </div>
-</div>
-
-
-<div class="row">
-  <div class="col-md-12">
-    <h3 class="text-center mb20">FAQ</h3>
-    <div class="mb20">
-      <h5>1. 视频更新频率？</h5>
-      <p>准备好视频内容后，一般是一天 2 到 3 个视频，曾经准备 4 套 redux 课程，花了 11 天。（一套课程花 3 天左右，也有可能更短）</p>
+<div class="white-bg">
+  <div class="row text-center">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="text-muted">月订阅</h4>
+          <div class="price display-3"><span>129元</span><small> / 月</small></div>
+          <div class="mb-3 text-muted">按月付</div>
+        </div>
+      </div> 
     </div>
-    <div class="mb20">
-      <h5>2. 优惠？</h5>
-      <p>学生党？刚出来工作？以前微信打赏过？加我微信私聊</p>
+
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="text-muted">季度订阅<span class="text-primary">「节省 ¥30」</span></h4>
+          <div class="price display-3"><span>119元</span><small> / 月</small></div>
+          <div class="mb-3 text-muted">按一季度三个月付</div>
+        </div>
+      </div> 
     </div>
-    <div class="mb20">
-      <h5>3. 发票？</h5>
-      <p>不开发票（因为是个人）</p>
+
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="text-muted">年订阅<span class="text-primary">「节省 ¥240」</span></h4>
+          <div class="price display-3"><span>109元</span><small> / 月</small></div>
+          <div class="mb-3 text-muted">按一年十二个月付</div>
+        </div>
+      </div> 
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="text-center mb20">支付流程</h3>
+      <h5>1. 加我微信（微信号：<span class="heart-green">15014006126</span>）后，发微信红包或转账于我，如果是打赏，请发打赏截图。</h5>
+      <h5>2. 发送你的用户id: <span class="heart-green"><%= user_signed_in? ? current_user.id : "登录后刷新本页可查看" %></span> 给我，我好针对客户进行订单处理。</h5>
+      <h5>3. 我收到钱后会在后台处理订单，处理结果即时通知，然后就可以观看 Pro 视频。</h5>
+      <h5>4. 我会拉你进微信群，可以进行视频内容提问和交流互动。</h5>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="text-center mb20">FAQ</h3>
+      <div class="mb20">
+        <h5>1. 视频更新频率？</h5>
+        <p>准备好视频内容后，一般是一天 2 到 3 个视频，曾经准备 4 套 redux 课程，花了 11 天。（一套课程花 3 天左右，也有可能更短）</p>
+      </div>
+      <div class="mb20">
+        <h5>2. 优惠？</h5>
+        <p>学生党？刚出来工作？以前微信打赏过？加我微信私聊</p>
+      </div>
+      <div class="mb20">
+        <h5>3. 发票？</h5>
+        <p>不开发票（因为是个人）</p>
+      </div>
     </div>
   </div>
 </div>
