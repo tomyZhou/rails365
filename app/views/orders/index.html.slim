@@ -37,10 +37,10 @@
         td = order.id
         td = order.money
         td
-          = datetime(order.created_at)
+          = I18n.l order.created_at, :format => :long
           | （#{custom_timeago_tag order.created_at}）
         td
-          = datetime(order.expired_at)
+          = I18n.l order.expired_at, :format => :long
           - if order.expired_at > Time.now
             | （还有 #{distance_of_time_in_words(Time.now, order.expired_at)}到期）
           - else

@@ -4,7 +4,13 @@
     <img src="<%= @user.letter_avatar_url(100) %>" alt="" class="img-fluid rounded-circle">
     <p class="card-title text-center mb20"><%= @user.username %></p>
     <p class="text-center">
-      <%= "用户id: #{@user.id}" %>
+      <%= "昵称: #{@user.nickname}" %>
+    </p>
+    <p class="text-center">
+      <%= "公司名: #{@user.company_name}" %>
+    </p>
+    <p class="text-center">
+      用户id: <strong><%= @user.id %></strong>
     </p>
     <p class="text-center">
       <%= I18n.l @user.created_at, :format => :long %>
@@ -27,23 +33,31 @@
           </p>
         <% end %>
       <% end %>
+      <% unless @user.email.include?("from_github") %>
+        <p class="text-center">
+          <%= link_to edit_user_registration_path do %>
+            <i class="fa fa-user-circle-o"></i>
+            修改密码
+          <% end %>
+        </p>
+      <% end %>
       <p class="text-center">
-        <%= link_to "修改密码", edit_user_registration_path %>
-      </p>
-      <p class="text-center">
-        <%= link_to "修改个人信息", change_profile_users_path %>
+        <%= link_to change_profile_users_path do %>
+          <i class="fa fa-pencil-square-o"></i>
+          修改个人信息
+        <% end %>
       </p>
     <% end %>
 
     <hr>
     <div class="row">
       <div class="col-md-6 col-xs-6 mb20 text-right">
-        <p><a href="<%= articles_user_path(@user) %>"><%= @articles.total_count %></a></p>
-        <h6 class="text-muted">文章</h6>
+        <p><a href="<%= user_path(@user) %>"><%= @favourite_movies.total_count.to_i %></a></p>
+        <p class="text-small text-muted">喜欢的视频</p>
       </div>
       <div class="col-md-6 col-xs-6 mb20 text-left">
-        <p><a href="<%= user_path(@user) %>"><%= @favourite_articles.total_count.to_i %></a></p>
-        <p class="text-small text-muted">喜欢</p>
+        <p><a href="<%= articles_user_path(@user) %>"><%= @articles.total_count %></a></p>
+        <h6 class="text-muted">发表的文章</h6>
       </div>
     </div>
 

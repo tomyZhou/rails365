@@ -8,3 +8,8 @@ div.mb10.clearfix
     span.text-muted
       | 创建于
       = custom_timeago_tag movie.created_at
+    span.dian
+    - if movie.is_paid?
+      small.my-badge.my-badge-danger Pro
+    - else
+      span 免费

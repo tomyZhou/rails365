@@ -3,17 +3,17 @@
 
     <!-- Nav tabs -->
     <ul class="nav tabs-admin" role="tablist">
-      <li role="presentation" class="nav-item"><a class="nav-link active" href="<%= user_path(@user) %>" >喜欢</a></li>
+      <li role="presentation" class="nav-item"><a class="nav-link active" href="<%= user_path(@user) %>" >喜欢的视频</a></li>
       <li role="presentation" class="nav-item"><a class="nav-link" href="<%= articles_user_path(@user) %>" >发表的文章</a></li>
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content admin-tab-content pt30">
       <div role="tabpanel" class="tab-pane active show">
-        <% @favourite_articles.each do |article| %>
-          <%= render partial: 'articles/article', locals: { article: article } %>
+        <% @favourite_movies.each do |movie| %>
+          <%= render partial: 'movies/favourite_movie', locals: { movie: movie } %>
         <% end %>
-        <%= paginate @articles %>
+        <%= paginate @favourite_movies %>
       </div>
     </div>
 
