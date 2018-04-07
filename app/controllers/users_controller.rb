@@ -1,10 +1,13 @@
 class UsersController < ApplicationController
+  before_action :common, only: [:show, :articles, :like_articles]
   def show
-    common
   end
 
   def articles
-    common
+    @articles = @user.articles.order('id DESC').page(params[:page])
+  end
+
+  def like_articles
   end
 
   def change_profile
@@ -25,10 +28,9 @@ class UsersController < ApplicationController
 
   def common
     @user = User.find(params[:id])
-    # @favourite_articles = @user.like_articles.page(params[:page])
     @favourite_movies = @user.like_movies.order('id DESC').page(params[:page])
+    @favourite_articles = @user.like_articles.order('id DESC').page(params[:page])
     # @favourite_softs = @user.like_softs
-    @articles = @user.articles.order('id DESC').page(params[:page])
   end
 
   def user_params

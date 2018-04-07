@@ -1,0 +1,6 @@
+<!-- Nav tabs -->
+<ul class="nav tabs-admin" role="tablist">
+  <li role="presentation" class="nav-item"><a class="nav-link <%= current_page?(user_path(@user)) ? 'active' : nil %>" href="<%= user_path(@user) %>">喜欢的视频</a></li>
+  <li role="presentation" class="nav-item"><a class="nav-link <%= current_page?(like_articles_user_path(@user)) ? 'active' : nil %>" href="<%= like_articles_user_path(@user) %>">喜欢的文章</a></li>
+  <li role="presentation" class="nav-item"><a class="nav-link <%= current_page?(articles_user_path(@user)) ? 'active' : nil %>" href="<%= articles_user_path(@user) %>">发表的文章</a></li>
+</ul>

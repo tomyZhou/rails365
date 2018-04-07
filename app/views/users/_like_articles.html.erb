@@ -7,12 +7,12 @@
     <div class="tab-content admin-tab-content pt30">
       <div role="tabpanel" class="tab-pane active show">
         <div>
-          <% @articles.each do |article| %>
+          <% @favourite_articles.each do |article| %>
             <%= render partial: 'articles/article', locals: { article: article } %>
           <% end %>
         </div>
         <div class="text-center">
-          <%= paginate @articles %>
+          <%= paginate @favourite_articles %>
         </div>
       </div>
     </div>

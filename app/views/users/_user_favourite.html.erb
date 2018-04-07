@@ -1,11 +1,6 @@
 <div class="card">
   <div>
-
-    <!-- Nav tabs -->
-    <ul class="nav tabs-admin" role="tablist">
-      <li role="presentation" class="nav-item"><a class="nav-link active" href="<%= user_path(@user) %>" >喜欢的视频</a></li>
-      <li role="presentation" class="nav-item"><a class="nav-link" href="<%= articles_user_path(@user) %>" >发表的文章</a></li>
-    </ul>
+    <%= render 'nav_bars' %>
 
     <!-- Tab panes -->
     <div class="tab-content admin-tab-content pt30">
@@ -13,7 +8,9 @@
         <% @favourite_movies.each do |movie| %>
           <%= render partial: 'movies/favourite_movie', locals: { movie: movie } %>
         <% end %>
-        <%= paginate @favourite_movies %>
+        <div class="text-center">
+          <%= paginate @favourite_movies %>
+        </div>
       </div>
     </div>
 
