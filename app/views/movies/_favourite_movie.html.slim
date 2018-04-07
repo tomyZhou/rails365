@@ -3,7 +3,7 @@ div.mb10.clearfix
     a href="#{movie_path(movie)}"
       = image_tag movie.image_url(:preview), class: "favourite_movie"
   p.article-title
-    = link_to movie.title, movie_path(movie)
+    = link_to truncate(movie.title, length: 62), movie_path(movie)
   p.text-left.hidden-xs.article-desc
     span.text-muted
       | 创建于
