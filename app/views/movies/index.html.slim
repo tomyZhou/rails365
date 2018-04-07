@@ -3,6 +3,8 @@
 
   hr
 
+  p.text-center.text-muted 共找到 #{@movies.total_count} 个视频
+
   - cache @movies do
     div.pt15.home-video
       .infinite-table

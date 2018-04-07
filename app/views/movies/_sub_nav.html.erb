@@ -1,5 +1,7 @@
 <div class="sub-nav">
   <a class="<%= current_page?("/movies") ? 'current active' : nil %>" href="/movies">全部</a>
+  <%= link_to '免费', q_movies_path("free"), class: "#{params[:filter] == "free" ? 'current active' : nil}" %>
+  <%= link_to 'Pro 视频', q_movies_path("pro"), class: "#{params[:filter] == "pro" ? 'current active' : nil}" %>
   <% @serials.each do |serial| %>
     <%= link_to serial.name, all_movies_path(serial.slug), class: "#{params[:name] == serial.slug ? 'current active' : nil}" %>
   <% end %>

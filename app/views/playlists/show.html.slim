@@ -3,6 +3,8 @@
     .page-header
       h4.text-primary.title-header.text-center
         = @playlist.name
+  - if @playlist.is_paid?
+    = render 'sub_nav'
 
   - cache [@movies, current_user] do
     div.home-video

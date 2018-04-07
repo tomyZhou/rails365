@@ -1,0 +1,6 @@
+<div class="sub-nav">
+  <span>过滤：</span>
+  <a class="<%= current_page?(playlist_path(@playlist)) && params[:q].nil? ? 'current active' : nil %> playlist-nav" href="<%= playlist_path(@playlist) %>">默认</a>
+  <a class="<%= params[:q].presence == 'free' ? 'current active' : nil %> playlist-nav" href="<%= playlist_path(@playlist, q: "free") %>">免费</a>
+  <a class="<%= params[:q].presence == 'pro' ? 'current active' : nil %> playlist-nav" href="<%= playlist_path(@playlist, q: 'pro') %>">Pro</a>
+</div>

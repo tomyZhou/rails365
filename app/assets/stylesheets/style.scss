@@ -859,6 +859,10 @@ ul.tabs-admin li {
     border-color: $blue;
     color: $blue;
   }
+  a.playlist-nav {
+    padding: 0;
+    margin-bottom: 25px;
+  }
 }
 
 .article-user-card {

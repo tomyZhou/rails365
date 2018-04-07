@@ -17,6 +17,14 @@ class PlaylistsController < ApplicationController
 
   def set_playlist
     @playlist = Playlist.fetch_by_slug!(params[:id])
-    @movies = @playlist.fetch_movies
+    if params[:q].present?
+      if params[:q] == 'free'
+        @movies = @playlist.movies.where(is_paid: false).reorder(weight: :asc)
+      elsif params[:q] == 'pro'
+        @movies = @playlist.movies.where(is_paid: true).reorder(weight: :asc)
+      end
+    else
+      @movies = @playlist.fetch_movies
+    end
   end
 end

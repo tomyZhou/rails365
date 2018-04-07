@@ -14,6 +14,10 @@ class MoviesController < ApplicationController
       @movies = Movie.except_body_with_default.order('id DESC').page(params[:page]).per(20)
     elsif params[:filter].present? && params[:filter] == 'other'
       @movies = Movie.except_body_with_default.where(is_original: true).where("serial_id is null").order('id DESC').page(params[:page]).per(20)
+    elsif params[:filter].present? && params[:filter] == 'free'
+      @movies = Movie.except_body_with_default.where(is_original: true, is_paid: false).order('id DESC').page(params[:page]).per(20)
+    elsif params[:filter].present? && params[:filter] == 'pro'
+      @movies = Movie.except_body_with_default.where(is_original: true, is_paid: true).order('id DESC').page(params[:page]).per(20)
     else
       @movies = Movie.except_body_with_default.where(is_original: true).order('id DESC').page(params[:page]).per(20)
     end
