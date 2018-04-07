@@ -11,5 +11,5 @@
   .panel-heading 统计信息
   .list-group
     .list-group-item 社区会员: #{User.count}
-    .list-group-item 视频数量: #{Movie.where(is_original: true).count}
+    .list-group-item 视频数量: #{Movie.where(is_original: true).count}（免费视频：#{Movie.where(is_original: true, is_paid: false).count}，Pro 视频：#{Movie.where(is_original: true, is_paid: true).count}）
     .list-group-item 文章数量: #{Article.count}
