@@ -139,4 +139,12 @@ class User < ActiveRecord::Base
   def super_admin?
     Settings.admin_emails.include?(email)
   end
+
+  after_commit :send_ws_message, on: :create
+
+  private
+
+  def send_ws_message
+    Redis.new.publish 'ws', { only_website: true, title: '欢迎', content: "恭喜新学员 #{self.hello_name} 开始进入网站学习" }.to_json
+  end
 end

@@ -51,9 +51,10 @@ class MoviesController < ApplicationController
     @prev_movie = @movie.playlist.movies.where("weight < ?", @movie.weight).first
     @next_movie = @movie.playlist.movies.where("weight > ?", @movie.weight).last
 
-    if user_signed_in?
+    if user_signed_in? && !current_user.super_admin?
       $redis.lpush "movies_#{current_user.id}_history", @movie.id
       $redis.ltrim "movies_#{current_user.id}_history", 0, 99
+      Redis.new.publish 'ws', { only_website: true, title: '学习', content: "学员 #{current_user.hello_name} 正在学习 #{@movie.title}" }.to_json
     end
   end
 

@@ -57,12 +57,18 @@ $ ->
     #   toastr.success("#{event.data}", '有消息啦！')
     json_data = JSON.parse(event.data)
     if event.data.length
-      notification = new Notification json_data["title"],
-        # body: "#{event.data}"
-        body: json_data["content"]
-        icon: "https://www.rails365.net/favicon.ico"
-      notification.onclick = () ->
-        window.location.href = json_data["url"]
+      if json_data["only_website"]
+        new PNotify
+          title: json_data["title"]
+          text: json_data["content"]
+          icon: 'fa fa-bullhorn'
+      else
+        notification = new Notification json_data["title"],
+          # body: "#{event.data}"
+          body: json_data["content"]
+          icon: "https://www.rails365.net/favicon.ico"
+        notification.onclick = () ->
+          window.location.href = json_data["url"]
 
 Notification.requestPermission()
 
