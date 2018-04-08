@@ -1,0 +1,15 @@
+.panel.panel-default
+  .panel-heading
+    div.custom-panel-heading
+      span 最新学员
+  .panel-body.text-left
+    .m-widget4
+      - @new_users.each do |user|
+        .m-widget4__item
+          .m-widget4__img.m-widget4__img--pic
+            = link_to articles_user_path(user) do
+              = image_tag user.letter_avatar_url(100), alt: user.hello_name
+          .m-widget4__info
+            = link_to user.hello_name, articles_user_path(user), class: 'm-widget4__title'
+            br/
+            span.m-widget4__sub = truncate user.signature_name, length: 18

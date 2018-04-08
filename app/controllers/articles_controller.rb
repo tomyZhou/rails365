@@ -18,6 +18,7 @@ class ArticlesController < ApplicationController
       Group.order(weight: :desc).to_a
     end
 
+    @new_users = User.last(5)
     @users = User.where(id: Article.pluck(:user_id).uniq)
 
     @playlists = Rails.cache.fetch 'article_playlists' do
