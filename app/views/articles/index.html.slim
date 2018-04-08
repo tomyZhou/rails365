@@ -1,8 +1,11 @@
+= render 'shared/site_info_home_desc'
+
 - unless params[:search].present?
   .white-bg.home-container
     - cache @movies do
       div.pt15.home-video
         = render partial: 'movies/index', object: @movies
+
 .row
   .col-md-8.article-left
     .panel.panel-default

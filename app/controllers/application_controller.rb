@@ -23,9 +23,6 @@ class ApplicationController < ActionController::Base
     @site_info_meta_description = Admin::SiteInfo.fetch_by_key('meta_description').try(:value)
     @site_info_meta_keyword = Admin::SiteInfo.fetch_by_key('meta_keyword').try(:value)
 
-    # banner说明文
-    # @site_info_home_desc = Admin::SiteInfo.fetch_by_key('home_desc').try(:value)
-
     # if current_user && current_user.super_admin?
     Rack::MiniProfiler.authorize_request
     # end

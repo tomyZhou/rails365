@@ -29,6 +29,9 @@ class ArticlesController < ApplicationController
       Movie.except_body_with_default.where(is_original: true).order('id DESC').limit(10)
     end
 
+    # banner说明文
+    @site_info_home_desc = Admin::SiteInfo.fetch_by_key('home_desc').try(:value)
+
     # respond_to do |format|
     #   format.all { render :index, formats: [:html, :js] }
     # end

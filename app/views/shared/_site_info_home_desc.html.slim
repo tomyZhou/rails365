@@ -1,9 +1,29 @@
-- if @site_info_home_desc.present?
-  .row
+- if @site_info_home_desc.present? && @site_info_home_desc != "空"
+  .row style="margin-right: -5px;"
     - cache  @site_info_home_desc do
       .col-md-12
         .panel.panel-default
           .panel-body
-            .text-center
+            .text-center.no-p-margin
               = markdown @site_info_home_desc
+- else
+  script src="https://cdn.bootcss.com/jQuery.Marquee/1.5.0/jquery.marquee.js"
+  .row style="margin-right: -5px;"
+    .col-md-12
+      .panel.panel-default
+        .panel-body.marqueen-info
+          .text-center.no-p-margin.marquee
+            - @new_users.each do |user|
+              p
+                i class="fa fa-info-circle" aria-hidden="true"
+                |  欢迎新用户 
+                = link_to user.hello_name, user_path(user)
 
+  coffee:
+    $('.marquee').marquee
+      duration: 5000,
+      gap: 50
+      delayBeforeStart: 0
+      direction: 'up'
+      duplicated: true
+      startVisible: true
