@@ -27,6 +27,6 @@ every 1.day, at: '1:30 am' do
   runner "UserPayExpiredWorker.perform_async"
 end
 
-every 1.day, at: '2:30 am' do
+every 2.hours do
   runner "BgSaveUserMovieHistoryWorker.perform_async"
 end
