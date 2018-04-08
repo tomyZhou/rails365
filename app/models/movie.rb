@@ -93,7 +93,7 @@ class Movie < ActiveRecord::Base
 
   def publish_create
     unless Rails.env.test?
-      Redis.new.publish 'ws', {title: 'rails365 上传了视频', content: self.title, url: "https://www.rails365.net/movies/#{self.slug}"}.to_json
+      Redis.new.publish 'ws', { title: 'rails365 上传了视频', content: self.title, url: "https://www.rails365.net/movies/#{self.slug}" }.to_json
     end
   end
 

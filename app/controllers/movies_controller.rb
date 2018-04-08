@@ -54,7 +54,10 @@ class MoviesController < ApplicationController
     if user_signed_in? && !current_user.super_admin?
       $redis.lpush "movies_#{current_user.id}_history", @movie.id
       $redis.ltrim "movies_#{current_user.id}_history", 0, 99
-      Redis.new.publish 'ws', { only_website: true, title: '学习', content: "学员 #{current_user.hello_name} 正在学习 #{@movie.title}" }.to_json
+
+      Redis.new.publish 'ws', { only_website: true, title: '努力学习', content: "学员 <strong class='heart-green'>#{current_user.hello_name}</strong> 正在学习 #{@movie.title}" }.to_json
+
+      send_system_history("正在学习")
     end
   end
 
@@ -78,7 +81,7 @@ class MoviesController < ApplicationController
 
   def update
     if @movie.update(movie_params)
-      Redis.new.publish 'ws', {title: 'rails365 更新了视频', content: @movie.title, url: "https://www.rails365.net/movies/#{@movie.slug}"}.to_json
+      Redis.new.publish 'ws', { title: 'rails365 更新了视频', content: @movie.title, url: "https://www.rails365.net/movies/#{@movie.slug}" }.to_json
       flash[:success] = "更新成功"
       redirect_to movie_path(@movie)
     else
@@ -94,9 +97,22 @@ class MoviesController < ApplicationController
   def like
     current_user.toggle_like(@movie)
     @movie.update_like_count
+    if @movie.liked_by?(current_user)
+      Redis.new.publish 'ws', { only_website: true, title: '获得喜欢', content: "学员 <strong class='heart-green'>#{current_user.hello_name}</strong> 喜欢了 #{@movie.title}" }.to_json
+      send_system_history("喜欢")
+    end
   end
 
   private
+
+  def send_system_history(notify_type)
+    system_history = $redis.lrange "system_history", 0, -1
+    message = "学员 <a href=#{movie_history_user_path(current_user)}>#{current_user.hello_name}</a> #{notify_type} <a href=#{movie_path(@movie)}>#{@movie.title}</a>"
+    if system_history.present? && !system_history.include?(message)
+      $redis.lpush "system_history", message
+      $redis.ltrim "system_history", 0, 9
+    end
+  end
 
   def set_movie
     @movie = Movie.fetch_by_slug!(params[:id])

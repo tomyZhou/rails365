@@ -1574,11 +1574,11 @@ code {
 
 .no-p-margin {
   p {
-    margin: 0
+    margin: 5px 0;
   }
 }
 
 .marquee {
-  height: 25px; /* the plugin works for responsive layouts so width is not necessary */
+  height: 35px; /* the plugin works for responsive layouts so width is not necessary */
   overflow: hidden;
 }

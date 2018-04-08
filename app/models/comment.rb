@@ -16,11 +16,18 @@ class Comment < ActiveRecord::Base
   def publish_create
     unless Rails.env.test?
       if self.commentable_type == "Article"
-        Redis.new.publish 'ws', "文章 #{self.commentable.title} 创建了一条新的评论"
+        Redis.new.publish 'ws', { only_website: true, title: '获得评论', content: "学员 <strong class='heart-green'>#{self.user.hello_name}</strong> 评论了文章 #{self.commentable.title}" }.to_json
       end
 
       if self.commentable_type == "Movie"
-        Redis.new.publish 'ws', "视频 #{self.commentable.title} 创建了一条新的评论"
+        Redis.new.publish 'ws', { only_website: true, title: '获得评论', content: "学员 <strong class='heart-green'>#{self.user.hello_name}</strong> 评论了视频 #{self.commentable.title}" }.to_json
+
+        system_history = $redis.lrange "system_history", 0, -1
+        message = "学员 #{self.user.hello_name} 评论了 #{self.commentable.title}"
+        if system_history.present? && !system_history.include?(message)
+          $redis.lpush "system_history", message
+          $redis.ltrim "system_history", 0, 9
+        end
       end
     end
   end

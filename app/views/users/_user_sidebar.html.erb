@@ -52,11 +52,11 @@
     <hr>
     <div class="row">
       <div class="col-md-6 col-xs-6 mb20 text-right">
-        <p><a href="<%= user_path(@user) %>"><%= @favourite_movies.total_count.to_i %></a></p>
+        <p><a href="<%= user_path(@user) %>"><%= @favourite_movies_count %></a></p>
         <p class="text-small text-muted">喜欢的视频</p>
       </div>
       <div class="col-md-6 col-xs-6 mb20 text-left">
-        <p><a href="<%= like_articles_user_path(@user) %>"><%= @favourite_articles.total_count %></a></p>
+        <p><a href="<%= like_articles_user_path(@user) %>"><%= @favourite_articles_count %></a></p>
         <h6 class="text-muted">喜欢的文章</h6>
       </div>
     </div>

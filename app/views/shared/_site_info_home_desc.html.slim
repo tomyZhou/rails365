@@ -13,16 +13,23 @@
       .panel.panel-default
         .panel-body.marqueen-info
           .text-center.no-p-margin.marquee
+            - if @system_history.present?
+              - @system_history.each do |sh|
+                p
+                  i class="fa fa-bullhorn" aria-hidden="true"
+                  = raw sh
             - @new_users.each do |user|
               p
-                i class="fa fa-info-circle" aria-hidden="true"
+                i class="fa fa-user-plus" aria-hidden="true"
                 |  欢迎新学员 
                 = link_to user.hello_name, movie_history_user_path(user)
+
 
   coffee:
     $('.marquee').marquee
       duration: 5000
       delayBeforeStart: 0
+      pauseOnHover: true
       direction: 'up'
       duplicated: true
       startVisible: true

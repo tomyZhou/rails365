@@ -145,6 +145,6 @@ class User < ActiveRecord::Base
   private
 
   def send_ws_message
-    Redis.new.publish 'ws', { only_website: true, title: '欢迎', content: "恭喜新学员 #{self.hello_name} 开始进入网站学习" }.to_json
+    Redis.new.publish 'ws', { only_website: true, title: '欢迎', content: "恭喜新学员 <strong class='heart-green'>#{self.hello_name}</strong> 开始进入网站学习" }.to_json
   end
 end

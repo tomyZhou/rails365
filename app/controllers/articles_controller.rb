@@ -32,6 +32,8 @@ class ArticlesController < ApplicationController
     # banner说明文
     @site_info_home_desc = Admin::SiteInfo.fetch_by_key('home_desc').try(:value)
 
+    @system_history = $redis.lrange "system_history", 0, -1
+
     # respond_to do |format|
     #   format.all { render :index, formats: [:html, :js] }
     # end

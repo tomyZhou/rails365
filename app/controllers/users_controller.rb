@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :common, only: [:show, :articles, :like_articles, :movie_history]
   def show
+    @favourite_movies = @user.like_movies.order('id DESC').page(params[:page])
   end
 
   def articles
@@ -8,6 +9,7 @@ class UsersController < ApplicationController
   end
 
   def like_articles
+    @favourite_articles = @user.like_articles.order('id DESC').page(params[:page])
   end
 
   def movie_history
@@ -40,8 +42,8 @@ class UsersController < ApplicationController
 
   def common
     @user = User.find(params[:id])
-    @favourite_movies = @user.like_movies.order('id DESC').page(params[:page])
-    @favourite_articles = @user.like_articles.order('id DESC').page(params[:page])
+    @favourite_movies_count = @user.like_movies.count
+    @favourite_articles_count = @user.like_articles.count
     # @favourite_softs = @user.like_softs
   end
 

@@ -58,10 +58,16 @@ $ ->
     json_data = JSON.parse(event.data)
     if event.data.length
       if json_data["only_website"]
-        new PNotify
+        notice = new PNotify
           title: json_data["title"]
           text: json_data["content"]
           icon: 'fa fa-bullhorn'
+          hide: false
+          buttons:
+            closer: false,
+            sticker: false
+        notice.get().click ->
+          notice.remove()
       else
         notification = new Notification json_data["title"],
           # body: "#{event.data}"
