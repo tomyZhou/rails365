@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     member do
       get :articles
       get :like_articles
+      get :movie_history
     end
     collection do
       get :change_profile

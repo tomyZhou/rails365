@@ -50,6 +50,11 @@ class MoviesController < ApplicationController
 
     @prev_movie = @movie.playlist.movies.where("weight < ?", @movie.weight).first
     @next_movie = @movie.playlist.movies.where("weight > ?", @movie.weight).last
+
+    if user_signed_in?
+      $redis.lpush "movies_#{current_user.id}_history", @movie.id
+      $redis.ltrim "movies_#{current_user.id}_history", 0, 99
+    end
   end
 
   def new

@@ -55,6 +55,20 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.bg_save_movie_history
+    self.find_each do |user|
+      ids = $redis.lrange("movies_#{user.id}_history", 0, -1).uniq
+      if ids.present?
+        puts "user #{user.id}"
+        user.movie_history = ids
+        user.save
+      elsif user.movie_history.present?
+        $redis.lpush "movies_#{user.id}_history", user.movie_history
+        $redis.ltrim "movies_#{user.id}_history", 0, 99
+      end
+    end
+  end
+
   def self.random_like
     self.find_each do |user|
       articles = Article.limit(rand(Article.count))

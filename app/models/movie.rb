@@ -32,6 +32,16 @@ class Movie < ActiveRecord::Base
     end
   end
 
+  # https://stackoverflow.com/questions/1309624/simulating-mysqls-order-by-field-in-postgresql
+  def self.order_by_ids(ids)
+    order_by = ["CASE"]
+    ids.each_with_index do |id, index|
+      order_by << "WHEN id='#{id}' THEN #{index}"
+    end
+    order_by << "END"
+    order(order_by.join(" "))
+  end
+
   # def recommend_movies
   #   playlist = Playlist.fetch(self.playlist_id)
   #   Rails.cache.fetch "recommend_movies_#{playlist.slug}" do

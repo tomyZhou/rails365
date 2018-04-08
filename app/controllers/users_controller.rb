@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :common, only: [:show, :articles, :like_articles]
+  before_action :common, only: [:show, :articles, :like_articles, :movie_history]
   def show
   end
 
@@ -8,6 +8,18 @@ class UsersController < ApplicationController
   end
 
   def like_articles
+  end
+
+  def movie_history
+    ids = $redis.lrange("movies_#{@user.id}_history", 0, -1).uniq
+    if ids.present?
+      @favourite_movies = Movie.where(id: ids).order_by_ids(ids).page(params[:page])
+    elsif @user.movie_history.present?
+      @favourite_movies = Movie.where(id: @user.movie_history).order_by_ids(@user.movie_history).page(params[:page])
+    else
+      @favourite_movies = Movie.none.page(params[:page])
+    end
+    render :show
   end
 
   def change_profile

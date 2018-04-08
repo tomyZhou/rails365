@@ -33,6 +33,10 @@
                   = link_to user_path(current_user) do
                     i class="fa fa-user-o" aria-hidden="true"
                     |  个人中心
+                li
+                  = link_to movie_history_user_path(current_user) do
+                    i class="fa fa-history" aria-hidden="true"
+                    |  视频浏览记录
                 - if can? :read, Order
                   li
                     = link_to orders_path do
@@ -114,6 +118,10 @@
                   = link_to user_path(current_user) do
                     i class="fa fa-user-o" aria-hidden="true"
                     |  个人中心
+                li
+                  = link_to movie_history_user_path(current_user) do
+                    i class="fa fa-history" aria-hidden="true"
+                    |  视频浏览记录
                 li
                   = link_to change_profile_users_path do
                     i class="fa fa-pencil-square-o" aria-hidden="true"
