@@ -27,3 +27,15 @@ Admin::SiteInfo.find_or_create_by(key: 'home_desc') do |cp|
   cp.value = '本站致力于分享nginx, ruby on rails, 运维, 服务器, 架构, postgresql, redis, 日志, 多线程, 消息队列, vim, git, 前端javascript等优秀文章, 且保持高更新频率'
   cp.desc = '首页banner宣传文字'
 end
+
+puts "Top 10 视频播放量自动增长开关"
+Admin::SiteInfo.find_or_create_by(key: 'top_10_video_auto_increment') do |cp|
+  cp.value = '开启'
+  cp.desc = "如果为 空 这个字符串就是关闭，否则任意字符串开启"
+end
+
+puts "Top 10 文章点击量自动增长开关"
+Admin::SiteInfo.find_or_create_by(key: 'top_10_article_auto_increment') do |cp|
+  cp.value = '开启'
+  cp.desc = "如果为 空 这个字符串就是关闭，否则任意字符串开启"
+end
