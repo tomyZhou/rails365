@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   end
 
   resources :books, only: [:index]
+  namespace :ahoy do
+    resources :visits
+  end
 
   resources :articles, concerns: [:commentable, :like]
   resources :orders, only: [:index, :new, :create]

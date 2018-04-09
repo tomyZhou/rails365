@@ -53,6 +53,11 @@
                   = link_to change_profile_users_path do
                     i class="fa fa-pencil-square-o" aria-hidden="true"
                     |  修改个人信息
+                - if can? :manage, Ahoy::Visit
+                  li
+                    = link_to ahoy_visits_path do
+                      i class="fa fa-line-chart" aria-hidden="true"
+                      |  学员访问统计
                 li.divider
                 li
                   = link_to destroy_user_session_path, :method => :delete, data: { confirm: "确定登出吗？我们需要你！" } do
@@ -140,6 +145,11 @@
                     = link_to new_order_path do
                       i class="fa fa-sticky-note" aria-hidden="true"
                       |  创建订单
+                - if can? :manage, Ahoy::Visit
+                  li
+                    = link_to ahoy_visits_path do
+                      i class="fa fa-line-chart" aria-hidden="true"
+                      |  学员访问统计
                 li.divider
                 li
                   = link_to destroy_user_session_path, :method => :delete, data: { confirm: "确定登出吗？我们需要你！" } do

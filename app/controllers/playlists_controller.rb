@@ -1,5 +1,6 @@
 class PlaylistsController < ApplicationController
   before_action :set_playlist, only: [:show]
+  after_action :set_ahoy_track, only: [:show, :index]
   authorize_resource
 
   def index
@@ -14,6 +15,10 @@ class PlaylistsController < ApplicationController
   end
 
   private
+
+  def set_ahoy_track
+    ahoy.track @title, {language: "Ruby"}
+  end
 
   def set_playlist
     @playlist = Playlist.fetch_by_slug!(params[:id])

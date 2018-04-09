@@ -143,3 +143,6 @@ gem "font-awesome-rails"
 gem 'whenever', :require => false
 gem 'by_star', git: "git://github.com/radar/by_star"
 gem "select2-rails"
+gem 'ahoy_matey'
+gem 'groupdate'
+gem 'chartkick'

@@ -27,6 +27,8 @@ class MoviesController < ApplicationController
     end
 
     @title = 'web 编程视频'
+    
+    ahoy.track @title, {language: "Ruby"}
 
     # respond_to do |format|
     #   format.all { render :index, formats: [:html] }
@@ -34,6 +36,7 @@ class MoviesController < ApplicationController
   end
 
   def show
+    ahoy.track @movie.title, {language: "Ruby"}
     @title = @movie.title
 
     # @recommend_movies = @movie.recommend_movies
@@ -64,6 +67,8 @@ class MoviesController < ApplicationController
 
       SendSystemHistory.send_system_history("学员 <a href=#{movie_history_user_path(current_user)}>#{current_user.hello_name}</a>", "正在学习", "<a href=#{movie_path(@movie)}>#{@movie.title}</a>")
     else
+      return if user_signed_in? && current_user.super_admin?
+
       Redis.new.publish 'ws', { only_website: true, title: '努力学习', content: "游客 正在学习 #{@movie.title}" }.to_json
 
       SendSystemHistory.send_system_history("游客", "正在学习", "<a href=#{movie_path(@movie)}>#{@movie.title}</a>")

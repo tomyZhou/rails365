@@ -5,6 +5,8 @@ class ArticlesController < ApplicationController
   authorize_resource
 
   def index
+    ahoy.track "首页", {language: "Ruby"}
+
     @articles =
       if params[:search].present?
         Article.search params[:search], fields: [:title, :body], highlight: true, misspellings: false, includes: [:group, :user], page: params[:page], per_page: 20
