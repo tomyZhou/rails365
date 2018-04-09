@@ -139,6 +139,9 @@ class User < ActiveRecord::Base
       if Time.now > user.pay_expired_at
         user.is_paid = false
         user.save(validate: false)
+
+        user.orders.update_all(is_expired: true)
+
         Rails.cache.delete "current_user_[#{user.id}]"
       end
     end
