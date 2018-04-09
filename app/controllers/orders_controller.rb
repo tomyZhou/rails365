@@ -4,7 +4,9 @@ class OrdersController < ApplicationController
 
   def index
     if current_user.super_admin?
-      @orders = Order.order(created_at: :desc).page(params[:page])
+      @q = Order.ransack(params[:q])
+      @orders = @q.result(distinct: true).order(id: :desc).page(params[:page]).per(25)
+      @users = User.where(is_paid: true).order(pay_expired_at: :asc).page(params[:page]).per(25)
     else
       @orders = current_user.orders
     end

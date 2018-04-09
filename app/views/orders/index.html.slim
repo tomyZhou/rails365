@@ -24,13 +24,20 @@
             | 数量：#{Order.by_week.count}
   .row
     .col-md-12
+      - if current_user.super_admin?
+        = search_form_for @q, html: { class: 'form-inline pull-right margin-top-bottom-20' } do |f|
+          .form-group
+            = label_tag "is_expired", "是否过期"
+            = f.select :is_expired_true, options_for_select({ "是" => true, "否" => false }, "#{params[:q][:is_expired_true].presence if params[:q].present?}"), { include_blank: "请选择"}, class: "form-control"
+            = f.submit class: 'btn btn-default', value: '搜索', style: 'margin-top: 4px;'
       table.table
         tr
           th id
           th 金额
+          th 用户 id
+          th 头像
           th 创建时间
           th 过期时间
-          th 用户 id
           th 订阅月数
           - if current_user.super_admin?
             th 过期否
@@ -38,6 +45,8 @@
           tr
             td = order.id
             td = order.money
+            td = link_to order.user.order_name, user_path(order.user_id)
+            td = image_tag order.user.letter_avatar_url(100), alt: order.user.hello_name, size: "40x40", style: "border-radius: 50%"
             td
               = I18n.l order.created_at, :format => :long
               | （#{custom_timeago_tag order.created_at}）
@@ -47,9 +56,33 @@
                 | （还有 #{distance_of_time_in_words(Time.now, order.expired_at)}到期）
               - else
                 | （已过期 #{distance_of_time_in_words(order.expired_at, Time.now)}）
-            td = link_to order.user.order_name, user_path(order.user_id)
             td = order.month
             - if current_user.super_admin?
               td = order.is_expired? ? '是' : '否'
       .text-center
         = paginate @orders
+
+      - if current_user.super_admin?
+        h4.text-center 付费用户
+        table.table
+          tr
+            th id
+            th 用户名
+            th 头像
+            th email
+            th 创建时间
+            th 过期时间
+            th 还有多少天过期
+          - @users.each do |user|
+            tr
+              td = user.id
+              td = link_to user.hello_name, user_path(user)
+              td = image_tag user.letter_avatar_url(100), alt: user.hello_name, size: "40x40", style: "border-radius: 50%"
+              td = user.email
+              td
+                = I18n.l user.created_at, :format => :long
+                | （#{custom_timeago_tag user.created_at}）
+              td = I18n.l user.pay_expired_at, :format => :long
+              td = distance_of_time_in_words(Time.now, user.pay_expired_at)
+        .text-center
+          = paginate @users

@@ -7,6 +7,11 @@ class PlaylistsController < ApplicationController
     @playlists = Rails.cache.fetch 'playlist_all' do
       Playlist.where(is_original: true).order(weight: :desc).to_a
     end
+
+    if params[:q].presence == 'all'
+      @playlists = Playlist.order(weight: :desc)
+    end
+
     @title = "播放列表"
   end
 
