@@ -1,2 +1,28 @@
-.white-bg
-  = line_chart Ahoy::Visit.group_by_day(:started_at).count
+.row
+  .col-md-12
+    .panel.panel-default
+      .panel-heading 日访问量
+      .panel-body
+        = line_chart Ahoy::Visit.group_by_day(:started_at).count
+.row
+  .col-md-6
+    .panel.panel-default
+      .panel-heading 操作系统
+      .panel-body
+        = pie_chart Ahoy::Visit.group(:os).count
+  .col-md-6
+    .panel.panel-default
+      .panel-heading 设备类型
+      .panel-body
+        = pie_chart Ahoy::Visit.group(:device_type).count
+.row
+  .col-md-6
+    .panel.panel-default
+      .panel-heading 浏览器
+      .panel-body
+        = pie_chart Ahoy::Visit.group(:browser).count
+  .col-md-6
+    .panel.panel-default
+      .panel-heading 国家
+      .panel-body
+        = pie_chart Ahoy::Visit.group(:country).count

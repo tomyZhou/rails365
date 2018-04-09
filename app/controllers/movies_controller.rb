@@ -27,7 +27,7 @@ class MoviesController < ApplicationController
     end
 
     @title = 'web 编程视频'
-    
+
     ahoy.track @title, {language: "Ruby"}
 
     # respond_to do |format|
