@@ -53,7 +53,18 @@
             .pagination-text.article-box
 
   .col-md-4.hidden-xs.article-right
-    = render 'shared/new_users'
+    - cache @new_users do
+      .panel.panel-default
+        .panel-heading
+          div.custom-panel-heading
+            span 最新学员
+        = render partial: 'shared/new_users', locals: { users: @new_users }
+    - cache @active_weight_users do
+      .panel.panel-default
+        .panel-heading
+          div.custom-panel-heading
+            span Top 5 活跃学员
+        = render partial: 'shared/new_users', locals: { users: @active_weight_users }
     = render 'shared/follow'
     /.panel.panel-default
     /  .panel-heading

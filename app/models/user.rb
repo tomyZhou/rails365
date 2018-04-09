@@ -59,6 +59,11 @@ class User < ActiveRecord::Base
   end
 
   def self.bg_save_movie_history
+    # 首页 Top 5 活跃学员
+    Rails.cache.delete "active_weight_users"
+    # Top 100 活跃学员
+    Rails.cache.delete 'active_users'
+
     self.find_each do |user|
       ids = $redis.lrange("movies_#{user.id}_history", 0, -1).uniq
       if ids.present?
@@ -72,6 +77,8 @@ class User < ActiveRecord::Base
       user.active_weight = user.movie_history.size.to_i rescue 0 + user.like_original_movies.count.to_i + user.comments.count.to_i
       user.save
     end
+
+    Redis.new.publish 'ws', { only_website: true, title: '祝贺', content: "目前 Top 5 活跃会员分别是 #{User.order(active_weight: :desc, id: :desc).limit(5).map(&:hello_name).map{ |name| "<strong>#{name}</strong>" }.join(', ')}" }.to_json
   end
 
   def self.random_like

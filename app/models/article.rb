@@ -107,6 +107,8 @@ class Article < ActiveRecord::Base
     IdentityCache.cache.delete(group.primary_cache_index_key)
     # 分类show页面下的文章列表
     Rails.cache.delete [group.slug, 'articles']
+
+    Rails.cache.delete "article_users"
   end
 
   def clear_before_updated_cache

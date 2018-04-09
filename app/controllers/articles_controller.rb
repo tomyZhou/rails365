@@ -18,8 +18,17 @@ class ArticlesController < ApplicationController
       Group.order(weight: :desc).to_a
     end
 
-    @new_users = User.order(id: :desc).first(5)
-    @users = User.where(id: Article.pluck(:user_id).uniq)
+    @new_users = Rails.cache.fetch "new_users" do
+      User.order(id: :desc).limit(5)
+    end
+
+    @active_weight_users = Rails.cache.fetch "active_weight_users" do
+      User.order(active_weight: :desc, id: :desc).limit(5)
+    end
+
+    @users = Rails.cache.fetch "article_users" do
+      User.where(id: Article.pluck(:user_id).uniq)
+    end
 
     @playlists = Rails.cache.fetch 'article_playlists' do
       Playlist.where(is_original: true).order(weight: :desc).limit(4).to_a

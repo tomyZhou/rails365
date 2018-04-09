@@ -57,11 +57,11 @@ class MoviesController < ApplicationController
 
       Redis.new.publish 'ws', { only_website: true, title: '努力学习', content: "学员 <strong class='heart-green'>#{current_user.hello_name}</strong> 正在学习 #{@movie.title}" }.to_json
 
-      SendSystemHistory.send_system_history("学员 #{current_user.hello_name}", "正在学习", @movie.title)
+      SendSystemHistory.send_system_history("学员 <a href=#{movie_history_user_path(current_user)}>#{current_user.hello_name}</a>", "正在学习", "<a href=#{movie_path(@movie)}>#{@movie.title}</a>")
     else
       Redis.new.publish 'ws', { only_website: true, title: '努力学习', content: "游客 正在学习 #{@movie.title}" }.to_json
 
-      SendSystemHistory.send_system_history("游客", "正在学习", @movie.title)
+      SendSystemHistory.send_system_history("游客", "正在学习", "<a href=#{movie_path(@movie)}>#{@movie.title}</a>")
     end
   end
 
@@ -103,7 +103,7 @@ class MoviesController < ApplicationController
     @movie.update_like_count
     if @movie.liked_by?(current_user)
       Redis.new.publish 'ws', { only_website: true, title: '获得喜欢', content: "学员 <strong class='heart-green'>#{current_user.hello_name}</strong> 喜欢了 #{@movie.title}" }.to_json
-      SendSystemHistory.send_system_history("学员 #{current_user.hello_name}", "喜欢", @movie.title)
+      SendSystemHistory.send_system_history("学员 <a href=#{movie_history_user_path(current_user)}>#{current_user.hello_name}</a>", "喜欢", "<a href=#{movie_path(@movie)}>#{@movie.title}</a>")
     end
   end
 

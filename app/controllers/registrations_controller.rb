@@ -4,6 +4,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def create
+    Rails.cache.delete "new_users"
     build_resource(sign_up_params)
 
     verify_rucaptcha?(resource) && resource.save

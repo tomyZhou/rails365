@@ -2,11 +2,13 @@ class UsersController < ApplicationController
   before_action :common, only: [:show, :articles, :like_articles, :movie_history]
 
   def index
-    @users = User.order(active_weight: :desc).limit(100)
+    @users = Rails.cache.fetch 'active_users' do
+      @users = User.order(active_weight: :desc, id: :desc).limit(100)
+    end
   end
 
   def show
-    @favourite_movies = @user.like_movies.order('id DESC').page(params[:page])
+    @favourite_movies = @user.like_original_movies.order('id DESC').page(params[:page])
   end
 
   def articles
@@ -47,7 +49,7 @@ class UsersController < ApplicationController
 
   def common
     @user = User.find(params[:id])
-    @favourite_movies_count = @user.like_movies.count
+    @favourite_movies_count = @user.like_original_movies.count
     @favourite_articles_count = @user.like_articles.count
     # @favourite_softs = @user.like_softs
   end
