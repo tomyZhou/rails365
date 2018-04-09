@@ -11,8 +11,9 @@ class Movie < ActiveRecord::Base
   act_as_likee
   include LikeConcern
 
-  include PublicActivity::Model
-  tracked owner: ->(controller, model) { controller && controller.current_user }
+  # include PublicActivity::Model
+  # tracked owner: ->(controller, model) { controller && controller.current_user }
+  include PublicActivity::Common
 
   belongs_to :playlist, counter_cache: true, touch: true
   belongs_to :serial, counter_cache: true
