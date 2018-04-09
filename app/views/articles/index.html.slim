@@ -1,3 +1,4 @@
+
 - unless params[:search].present?
   = render 'shared/site_info_home_desc'
   .white-bg.home-container
@@ -53,17 +54,31 @@
             .pagination-text.article-box
 
   .col-md-4.hidden-xs.article-right
+    .panel.panel-default
+      .panel-heading
+        .custom-panel-heading
+          strong 大家在关注
+      .panel-body
+        .m-widget4
+          - @activities.each do |activity|
+            .m-widget4__item.custom-activity
+              .m-widget4__img.m-widget4__img--pic
+                - if activity.owner
+                  = link_to user_path(activity.owner) do
+                    = image_tag activity.owner.letter_avatar_url(100), alt: activity.owner.hello_name
+              .m-widget4__info.custom-activity
+                = render_activity activity
     - cache @new_users do
       .panel.panel-default
         .panel-heading
           div.custom-panel-heading
-            span 最新学员
+            strong 最新学员
         = render partial: 'shared/new_users', locals: { users: @new_users }
     - cache @active_weight_users do
       .panel.panel-default
         .panel-heading
           div.custom-panel-heading
-            span Top 5 活跃学员
+            strong Top 5 活跃学员
         = render partial: 'shared/new_users', locals: { users: @active_weight_users }
     = render 'shared/follow'
     /.panel.panel-default
@@ -87,7 +102,7 @@
       .panel.panel-default
         .panel-heading
           div.custom-panel-heading
-            span 热门分类
+            strong 热门分类
         .panel-body.pb0.pt25
           = render partial: 'groups/article_group', locals: { groups: @groups }
     = render 'shared/activity_users'

@@ -146,3 +146,5 @@ gem "select2-rails"
 gem 'ahoy_matey'
 gem 'groupdate'
 gem 'chartkick'
+
+gem 'public_activity'

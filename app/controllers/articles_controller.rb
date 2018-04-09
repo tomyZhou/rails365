@@ -44,6 +44,8 @@ class ArticlesController < ApplicationController
       Movie.except_body_with_default.where(is_original: true).order('id DESC').limit(10)
     end
 
+    @activities = PublicActivity::Activity.all
+
     # banner说明文
     @site_info_home_desc = Admin::SiteInfo.fetch_by_key('home_desc').try(:value)
 

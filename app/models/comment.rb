@@ -7,6 +7,10 @@ class Comment < ActiveRecord::Base
   belongs_to :commentable, polymorphic: true
   cache_belongs_to :commentable
 
+  # include PublicActivity::Model
+  # tracked owner: ->(controller, model) { controller && controller.current_user }
+  include PublicActivity::Common
+
   validates :body, :user, presence: true
 
   after_create :publish_create

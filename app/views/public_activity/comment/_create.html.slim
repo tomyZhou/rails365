@@ -1,0 +1,8 @@
+span.dian.m-widget4__sub = custom_timeago_tag activity.created_at
+.m-widget4__title.custom-activity 添加了评论
+.m-widget4__img.m-widget4__img--pic
+  - if activity.recipient
+    = link_to movie_path(activity.recipient) do
+      = image_tag activity.recipient.image_url(:preview), alt: activity.recipient.title, class: "custom-activity"
+  - else
+    | 视频已被删除
