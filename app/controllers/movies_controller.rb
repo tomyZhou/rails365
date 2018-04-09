@@ -57,7 +57,11 @@ class MoviesController < ApplicationController
 
       Redis.new.publish 'ws', { only_website: true, title: '努力学习', content: "学员 <strong class='heart-green'>#{current_user.hello_name}</strong> 正在学习 #{@movie.title}" }.to_json
 
-      send_system_history("正在学习")
+      SendSystemHistory.send_system_history("学员 #{current_user.hello_name}", "正在学习", @movie.title)
+    else
+      Redis.new.publish 'ws', { only_website: true, title: '努力学习', content: "游客 正在学习 #{@movie.title}" }.to_json
+
+      SendSystemHistory.send_system_history("游客", "正在学习", @movie.title)
     end
   end
 
@@ -99,20 +103,11 @@ class MoviesController < ApplicationController
     @movie.update_like_count
     if @movie.liked_by?(current_user)
       Redis.new.publish 'ws', { only_website: true, title: '获得喜欢', content: "学员 <strong class='heart-green'>#{current_user.hello_name}</strong> 喜欢了 #{@movie.title}" }.to_json
-      send_system_history("喜欢")
+      SendSystemHistory.send_system_history("学员 #{current_user.hello_name}", "喜欢", @movie.title)
     end
   end
 
   private
-
-  def send_system_history(notify_type)
-    system_history = $redis.lrange "system_history", 0, -1
-    message = "学员 <a href=#{movie_history_user_path(current_user)}>#{current_user.hello_name}</a> #{notify_type} <a href=#{movie_path(@movie)}>#{@movie.title}</a>"
-    if system_history.present? && !system_history.include?(message)
-      $redis.lpush "system_history", message
-      $redis.ltrim "system_history", 0, 9
-    end
-  end
 
   def set_movie
     @movie = Movie.fetch_by_slug!(params[:id])
