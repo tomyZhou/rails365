@@ -8,11 +8,14 @@ class User < ActiveRecord::Base
 
   act_as_liker
   has_many :like_movies, through: "likees", source: :likee, source_type: "Movie"
+  has_many :like_original_movies, -> { Movie.original }, through: "likees", source: :likee, source_type: "Movie"
   has_many :like_articles, through: "likees", source: :likee, source_type: "Article"
   has_many :like_softs, through: "likees", source: :likee, source_type: "Soft"
 
   has_many :articles
   has_many :orders
+
+  has_many :comments, as: 'commentable'
 
   validate :validate_username
   validates :username, format: { with: ALLOW_LOGIN_CHARS_REGEXP, message: '只允许数字、大小写字母和下划线' },
@@ -66,6 +69,8 @@ class User < ActiveRecord::Base
         $redis.lpush "movies_#{user.id}_history", user.movie_history
         $redis.ltrim "movies_#{user.id}_history", 0, 99
       end
+      user.active_weight = user.movie_history.size.to_i rescue 0 + user.like_original_movies.count.to_i + user.comments.count.to_i
+      user.save
     end
   end
 

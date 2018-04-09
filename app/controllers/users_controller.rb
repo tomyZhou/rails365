@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
   before_action :common, only: [:show, :articles, :like_articles, :movie_history]
+
+  def index
+    @users = User.order(active_weight: :desc).limit(100)
+  end
+
   def show
     @favourite_movies = @user.like_movies.order('id DESC').page(params[:page])
   end

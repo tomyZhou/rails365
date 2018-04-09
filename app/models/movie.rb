@@ -19,6 +19,8 @@ class Movie < ActiveRecord::Base
 
   scope :except_body_with_default, -> { select(:title, :is_paid, :visit_count, :like_count, :serial_id, :is_original, :created_at, :updated_at, :is_finished, :playlist_id, :image, :slug, :id, :play_time, :user_id, :weight).includes(:playlist) }
 
+  scope :original, -> { where(is_original: true) }
+
   mount_uploader :image, VideoUploader
 
   validates :title, :body, :playlist_id, :user_id, presence: true

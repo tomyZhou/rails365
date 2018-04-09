@@ -1,0 +1,18 @@
+.row
+  .col-md-12
+    .panel.panel-default
+      .panel-heading
+        strong Top 100 活跃学员
+        div.pull-right 目前已有 #{User.count} 位学员加入学习
+      .panel-body
+        .row
+          - @users.each do |user|
+            .col-xs-12.col-sm-6.col-md-4.m-widget4
+              .m-widget4__item
+                .m-widget4__img.m-widget4__img--pic
+                  = link_to movie_history_user_path(user) do
+                    = image_tag user.letter_avatar_url(100), alt: user.hello_name
+                .m-widget4__info
+                  = link_to user.hello_name, movie_history_user_path(user), class: 'm-widget4__title'
+                  br/
+                  span.m-widget4__sub = truncate user.signature_name, length: 18

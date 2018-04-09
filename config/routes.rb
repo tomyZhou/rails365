@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   resources :groups, only: [:index, :show]
   resources :playlists, only: [:index, :show]
   # resources :apps, only: [:index]
-  resources :users, only: [:show] do
+  resources :users, only: [:show, :index] do
     member do
       get :articles
       get :like_articles
