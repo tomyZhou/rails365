@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :async, authentication_keys: [:login]
   devise :omniauthable, omniauth_providers: [:github]
 
+  include IdentityCache
+
   act_as_liker
   has_many :like_movies, through: "likees", source: :likee, source_type: "Movie"
   has_many :like_original_movies, -> { Movie.original }, through: "likees", source: :likee, source_type: "Movie"

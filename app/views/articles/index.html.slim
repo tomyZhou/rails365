@@ -1,4 +1,3 @@
-
 - unless params[:search].present?
   = render 'shared/site_info_home_desc'
   .white-bg.home-container
@@ -60,14 +59,15 @@
           strong 大家在关注
       .panel-body
         .m-widget4
-          - @activities.each do |activity|
-            .m-widget4__item.custom-activity
-              .m-widget4__img.m-widget4__img--pic
-                - if activity.owner
-                  = link_to movie_history_user_path(activity.owner) do
-                    = image_tag activity.owner.letter_avatar_url(100), alt: activity.owner.hello_name
-              .m-widget4__info.custom-activity
-                = render_activity activity
+          - cache @activities do
+            - @activities.each do |activity|
+              .m-widget4__item.custom-activity
+                .m-widget4__img.m-widget4__img--pic
+                  - if activity.owner
+                    = link_to movie_history_user_path(activity.owner) do
+                      = image_tag activity.owner.letter_avatar_url(100), alt: activity.owner.hello_name
+                .m-widget4__info.custom-activity
+                  = render_activity activity
     - cache @new_users do
       .panel.panel-default
         .panel-heading

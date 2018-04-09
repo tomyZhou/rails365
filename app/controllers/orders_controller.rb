@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
 
   def index
     if current_user.super_admin?
-      @orders = Order.order(created_at: :desc)
+      @orders = Order.order(created_at: :desc).page(params[:page])
     else
       @orders = current_user.orders
     end

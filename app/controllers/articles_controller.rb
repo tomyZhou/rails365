@@ -22,7 +22,7 @@ class ArticlesController < ApplicationController
 
     # 新用户
     @new_users = Rails.cache.fetch "new_users" do
-      User.order(id: :desc).limit(5)
+      User.order(id: :desc).limit(5).to_a
     end
 
     # 活跃用户
@@ -31,9 +31,7 @@ class ArticlesController < ApplicationController
     end
 
     # 文章原创用户
-    @users = Rails.cache.fetch "article_users" do
-      User.where(id: Article.pluck(:user_id).uniq)
-    end
+    @users = User.fetch_multi(id: Article.pluck(:user_id).uniq)
 
     # 热门播放列表
     @playlists = Rails.cache.fetch 'article_playlists' do
