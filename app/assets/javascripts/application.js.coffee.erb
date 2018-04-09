@@ -7,6 +7,7 @@
 #= require bootstrap/collapse
 #= require bootstrap/alert
 #= require bootstrap/tab
+#= require bootstrap/carousel
 #= require jquery.checkall
 #= require qrcode
 #= require jquery.ba-throttle-debounce
@@ -44,6 +45,8 @@ jQuery ->
 
   $(".playlist-angle").on 'click', ->
     $(this).next().toggleClass('hidden');
+
+  $('.carousel').carousel()
 
 
 
