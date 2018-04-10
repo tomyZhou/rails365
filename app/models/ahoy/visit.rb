@@ -3,4 +3,6 @@ class Ahoy::Visit < ActiveRecord::Base
 
   has_many :events, class_name: "Ahoy::Event"
   belongs_to :user
+
+  by_star_field :started_at
 end
