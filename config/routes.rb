@@ -15,7 +15,11 @@ Rails.application.routes.draw do
 
   resources :books, only: [:index]
   namespace :ahoy do
-    resources :visits
+    resources :visits, only: [:index]
+  end
+
+  resources :activities, only: [:index, :destroy] do
+    delete :destroy_multiple, on: :collection
   end
 
   resources :articles, concerns: [:commentable, :like]

@@ -1,0 +1,43 @@
+.white-bg
+  .row
+    .col-md-12
+      = form_tag destroy_multiple_activities_path, method: :delete
+        table.table
+          p.text-right
+            button#destroy_multiple type="submit" class="btn btn-danger btn-sm" disabled="disabled"
+              |删除
+          tr
+            th
+              input type="checkbox" id="checkAll" value="checkAll" class="check"
+              label for="checkAll"
+            th id
+            th key
+            th trackable_id
+            th trackable_type
+            th owner_id
+            th owner_type
+            th recipient_id
+            th recipient_type
+            th 创建时间
+            th 操作
+          - @activities.each do |activity|
+            tr
+              td = check_box_tag 'activity_ids[]', activity.id, nil, :id => "activity_#{activity.id}", class: "check"
+              td = activity.id
+              td = activity.key
+              td = activity.trackable_id
+              td = activity.trackable_type
+              td = activity.owner_id
+              td = activity.owner_type
+              td = activity.recipient_id
+              td = activity.recipient_type
+              td = I18n.l activity.created_at, :format => :long
+              td
+                = link_to '删除', activity_path(activity), data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger btn-xs'
+        .text-center
+          = paginate @activities
+
+coffee:
+  jQuery ->
+    $('#checkAll').checkAll('.check')
+    $(".check").checkDisable("#destroy_multiple")

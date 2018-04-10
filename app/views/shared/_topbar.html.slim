@@ -150,6 +150,11 @@
                     = link_to ahoy_visits_path do
                       i class="fa fa-line-chart" aria-hidden="true"
                       |  学员访问统计
+                - if can? :manage, PublicActivity::Activity
+                  li
+                    = link_to activities_path do
+                      i class="fa fa-flask" aria-hidden="true"
+                      |  动态管理
                 li.divider
                 li
                   = link_to destroy_user_session_path, :method => :delete, data: { confirm: "确定登出吗？我们需要你！" } do
