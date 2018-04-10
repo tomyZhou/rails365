@@ -106,7 +106,7 @@ class User < ActiveRecord::Base
   end
 
   def hello_name
-    self.nickname || self.username
+    self.nickname.presence || self.username
   end
 
   def order_name
