@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
       @orders = @q.result(distinct: true).order(id: :desc).page(params[:page]).per(25)
       @users = User.where(is_paid: true).order(pay_expired_at: :asc).page(params[:page]).per(25)
     else
-      @orders = current_user.orders
+      @orders = current_user.orders.page(params[:page]).per(25)
     end
     @title = "我的订单"
   end
