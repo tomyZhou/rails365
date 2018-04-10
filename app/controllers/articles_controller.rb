@@ -42,7 +42,7 @@ class ArticlesController < ApplicationController
       Movie.except_body_with_default.where(is_original: true).order('id DESC').limit(10)
     end
 
-    @activities = PublicActivity::Activity.order(id: :desc).limit(5)
+    @activities = PublicActivity::Activity.where("trackable_type != 'Article' AND (trackable_type = 'Movie' OR (trackable_type = 'Comment' AND recipient_type != 'Article')) ").order(created_at: :desc).limit(5)
 
     # banner说明文
     @site_info_home_desc = Admin::SiteInfo.fetch_by_key('home_desc').try(:value)
@@ -56,6 +56,8 @@ class ArticlesController < ApplicationController
 
   def show
     @title = @article.title
+
+    ahoy.track @title, {language: "Ruby"}
 
     @recommend_articles = @article.recommend_articles
 
@@ -97,6 +99,11 @@ class ArticlesController < ApplicationController
   def like
     current_user.toggle_like(@article)
     @article.update_like_count
+    if @article.liked_by?(current_user)
+      unless current_user.super_admin?
+        @article.create_activity key: 'article.like', owner: current_user
+      end
+    end
   end
 
   private

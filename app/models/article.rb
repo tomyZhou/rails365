@@ -8,6 +8,8 @@ class Article < ActiveRecord::Base
   act_as_likee
   include LikeConcern
 
+  include PublicActivity::Common
+
   include IdentityCache
   cache_index :slug, unique: true
 
@@ -29,6 +31,9 @@ class Article < ActiveRecord::Base
     article = self.new(article_params)
     article.user_id = user.id
     article.save!
+
+    # 创建动态
+    article.create_activity :create, owner: user
   end
 
   def self.async_update(article_id, article_params)

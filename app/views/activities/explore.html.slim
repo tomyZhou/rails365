@@ -1,0 +1,24 @@
+.row
+  .col-md-8.article-left
+    .panel.panel-default
+      .panel-body
+        .infinite-table
+          = render partial: 'explore', object: @activities
+        .my-pagination.hidden
+          = link_to_next_page(@activities, 'Next Page', :remote => true)
+        .pagination-text.article-box
+
+  .col-md-4.hidden-xs.article-right
+    = render 'shared/follow'
+    - cache @new_users do
+      .panel.panel-default
+        .panel-heading
+          div.custom-panel-heading
+            strong 最新学员
+        = render partial: 'shared/new_users', locals: { users: @new_users }
+    - cache @active_weight_users do
+      .panel.panel-default
+        .panel-heading
+          div.custom-panel-heading
+            strong Top 5 活跃学员
+        = render partial: 'shared/new_users', locals: { users: @active_weight_users }

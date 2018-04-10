@@ -16,6 +16,9 @@
                 a href="/movies"
                  | 视频
               li
+                a href="/activities/explore"
+                | 动态
+              li
                 a href="/groups"
                  | 分类
               li
@@ -96,6 +99,8 @@
               | 视频
           li class="#{controller_name == 'playlists' ? 'active' : nil}"
             a href="/playlists" 播放列表
+          li class="#{controller_name == 'activities' ? 'active' : nil}"
+            a href="/activities/explore" 动态
           li class="#{controller_name == 'groups' ? 'active' : nil}"
             a href="/groups" 分类
           li class="#{controller_name == 'books' ? 'active' : nil}"

@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   resources :activities, only: [:index, :destroy] do
     delete :destroy_multiple, on: :collection
+    get :explore, on: :collection
   end
 
   resources :articles, concerns: [:commentable, :like]

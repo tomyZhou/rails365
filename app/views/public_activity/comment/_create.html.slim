@@ -1,8 +1,12 @@
-span.dian.m-widget4__sub = custom_timeago_tag activity.created_at
-.m-widget4__title.custom-activity.dian 评论了视频
-.m-widget4__img.m-widget4__img--pic
-  - if activity.recipient
-    = link_to movie_path(activity.recipient) do
-      = image_tag activity.recipient.image_url(:preview), alt: activity.recipient.title, class: "custom-activity"
-  - else
-    | 视频已被删除
+- if activity.recipient
+  .m-widget4__title.custom-activity.dian 评论了#{activity.recipient.class.model_name.human}
+  .m-widget4__img.m-widget4__img--pic
+    - if controller_name == 'activities'
+      p.article-title style="margin: 0"
+        = link_to truncate(activity.recipient.title, length: 40), activity.recipient
+    - else
+      = link_to movie_path(activity.recipient) do
+        = image_tag activity.recipient.image_url(:preview), alt: activity.recipient.title, class: "custom-activity"
+- else
+  p.article-title style="margin: 0"
+    | 评论已被删除

@@ -1,0 +1,12 @@
+.m-widget4
+  - cache @activities do
+    - @activities.each do |activity|
+      .m-widget4__item.custom-activity
+        .m-widget4__img.m-widget4__img--pic
+          - if activity.owner
+            = link_to movie_history_user_path(activity.owner) do
+              = image_tag activity.owner.letter_avatar_url(100), alt: activity.owner.hello_name
+        .m-widget4__info.custom-activity
+          .m-widget4__title.custom-activity.dian style="margin-right: 0" = activity.owner.hello_name
+          span.dian.m-widget4__sub.pull-right = custom_timeago_tag activity.created_at
+          = render_activity activity

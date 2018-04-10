@@ -1,0 +1,12 @@
+.m-widget4__img.m-widget4__img--pic
+
+  - if activity.trackable
+    - if controller_name == 'activities'
+      p.article-title style="margin: 0"
+        = link_to truncate(activity.trackable.title, length: 40), movie_path(activity.trackable)
+    - else
+      = link_to movie_path(activity.trackable) do
+        = image_tag activity.trackable.image_url(:preview), alt: activity.trackable.title, class: "custom-activity"
+  - else
+    p.article-title style="margin: 0"
+      | 该视频已被删除

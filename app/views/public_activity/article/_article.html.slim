@@ -1,0 +1,6 @@
+.m-widget4__img.m-widget4__img--pic
+  p.article-title style="margin: 0"
+    - if activity.trackable
+      = link_to truncate(activity.trackable.title, length: 40), article_path(activity.trackable)
+    - else
+      | 该文章已被删除

@@ -96,7 +96,6 @@ class MoviesController < ApplicationController
 
   def update
     if @movie.update(movie_params)
-      @movie.create_activity :update, owner: current_user
       Redis.new.publish 'ws', { title: 'rails365 更新了视频', content: @movie.title, url: "https://www.rails365.net/movies/#{@movie.slug}" }.to_json
       flash[:success] = "更新成功"
       redirect_to movie_path(@movie)
