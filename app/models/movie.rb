@@ -31,9 +31,9 @@ class Movie < ActiveRecord::Base
   validates :title, uniqueness: true
   validates :image, presence: true, on: :create
 
-  def self.increment_random_read_count
+  def self.increment_random_read_count(n)
     Rails.cache.delete 'movies'
-    self.last(10).each do |movie|
+    self.last(n.to_i).each do |movie|
       $redis.set("user_movie_#{movie.id}_count", movie.read_count.to_i + rand(10))
     end
   end

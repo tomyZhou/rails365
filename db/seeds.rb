@@ -39,3 +39,15 @@ Admin::SiteInfo.find_or_create_by(key: 'top_10_article_auto_increment') do |cp|
   cp.value = '开启'
   cp.desc = "如果为 空 这个字符串就是关闭，否则任意字符串开启"
 end
+
+puts "Top n 视频播放量"
+Admin::SiteInfo.find_or_create_by(key: 'top_n_video_auto_increment') do |cp|
+  cp.value = '10'
+  cp.desc = "数字，取最后 n 后"
+end
+
+puts "Top n 文章点击量"
+Admin::SiteInfo.find_or_create_by(key: 'top_n_article_auto_increment') do |cp|
+  cp.value = '10'
+  cp.desc = "数字，取最后 n 后"
+end
