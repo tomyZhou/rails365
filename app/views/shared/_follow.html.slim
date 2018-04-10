@@ -15,7 +15,8 @@
           .carousel-inner role="listbox" 
             - @playlists.each_with_index do |playlist, index|
               .item class="#{index == 0 ? 'active' : nil}"
-                img alt="#{playlist.name}" src="#{playlist.image_url(:preview)}"
+                = link_to playlist_path(playlist) do
+                  img alt="#{playlist.name}" src="#{playlist.image_url(:preview)}"
                 .carousel-caption
                   = playlist.name
           /! Controls
