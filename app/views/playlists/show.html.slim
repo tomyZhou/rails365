@@ -3,6 +3,7 @@
     .page-header
       h4.text-primary.title-header.text-center
         = @playlist.name
+      p.text-center.text-muted = @playlist.desc if @playlist.desc
   - if @playlist.is_paid?
     = render 'sub_nav'
 

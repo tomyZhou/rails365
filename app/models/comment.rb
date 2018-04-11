@@ -20,11 +20,11 @@ class Comment < ActiveRecord::Base
   def publish_create
     unless Rails.env.test?
       if self.commentable_type == "Article"
-        Redis.new.publish 'ws', { only_website: true, title: '获得评论', content: "学员 <strong class='heart-green'>#{self.user.hello_name}</strong> 评论了文章 #{self.commentable.title}" }.to_json
+        Redis.new.publish 'ws', { only_website: true, title: '获得评论', content: "学员 <strong>#{self.user.hello_name}</strong> 评论了文章 #{self.commentable.title}" }.to_json
       end
 
       if self.commentable_type == "Movie"
-        Redis.new.publish 'ws', { only_website: true, title: '获得评论', content: "学员 <strong class='heart-green'>#{self.user.hello_name}</strong> 评论了视频 #{self.commentable.title}" }.to_json
+        Redis.new.publish 'ws', { only_website: true, title: '获得评论', content: "学员 <strong>#{self.user.hello_name}</strong> 评论了视频 #{self.commentable.title}" }.to_json
 
         SendSystemHistory.send_system_history("学员 #{self.user.hello_name}", "评论了", self.commentable.title)
       end

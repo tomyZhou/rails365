@@ -63,7 +63,7 @@ class MoviesController < ApplicationController
       $redis.lpush "movies_#{current_user.id}_history", @movie.id
       $redis.ltrim "movies_#{current_user.id}_history", 0, 99
 
-      Redis.new.publish 'ws', { only_website: true, title: '努力学习', content: "学员 <strong class='heart-green'>#{current_user.hello_name}</strong> 正在学习 #{@movie.title}" }.to_json
+      Redis.new.publish 'ws', { only_website: true, title: '努力学习', content: "学员 <strong>#{current_user.hello_name}</strong> 正在学习 #{@movie.title}" }.to_json
 
       SendSystemHistory.send_system_history("学员 <a href=#{movie_history_user_path(current_user)}>#{current_user.hello_name}</a>", "正在学习", "<a href=#{movie_path(@movie)}>#{@movie.title}</a>")
     else
@@ -116,7 +116,7 @@ class MoviesController < ApplicationController
     if @movie.liked_by?(current_user)
       unless current_user.super_admin?
         @movie.create_activity key: 'movie.like', owner: current_user
-        Redis.new.publish 'ws', { only_website: true, title: '获得喜欢', content: "学员 <strong class='heart-green'>#{current_user.hello_name}</strong> 喜欢了 #{@movie.title}" }.to_json
+        Redis.new.publish 'ws', { only_website: true, title: '获得喜欢', content: "学员 <strong>#{current_user.hello_name}</strong> 喜欢了 #{@movie.title}" }.to_json
         SendSystemHistory.send_system_history("学员 <a href=#{movie_history_user_path(current_user)}>#{current_user.hello_name}</a>", "喜欢", "<a href=#{movie_path(@movie)}>#{@movie.title}</a>")
       end
     end
