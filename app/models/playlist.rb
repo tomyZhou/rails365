@@ -8,6 +8,16 @@ class Playlist < ActiveRecord::Base
 
   has_many :movies, -> { order 'weight DESC' }, dependent: :nullify
 
+  def self.movies_list(name)
+    playlist = self.find_by(name: name)
+    if playlist
+      playlist.movies.each do |movie|
+        puts "[#{movie.title}](https://www.rails365.net#{Rails.application.routes.url_helpers.movie_path(movie)})"
+        puts
+      end
+    end
+  end
+
   mount_uploader :image, VideoUploader
 
   validates :name, presence: true, uniqueness: true
