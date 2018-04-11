@@ -7,6 +7,19 @@ namespace :logs do
   end
 end
 
+namespace :task do
+  desc 'Execute the specific rake task'
+  task :invoke, :command do |task, args|
+    on roles(:app) do
+      within "#{current_path}" do
+        with rails_env: :production do
+          execute :rake, args[:command]
+        end
+      end
+    end
+  end
+end
+
 namespace :setup do
   desc "Create the database."
   task :create_db do
@@ -18,15 +31,44 @@ namespace :setup do
       end
     end
   end
-end
 
-namespace :setup do
   desc "baidu article"
   task :baidu_article do
     on roles(:app) do
       within "#{current_path}" do
         with rails_env: :production do
           execute :rake, "baidu_article:puts"
+        end
+      end
+    end
+  end
+
+  desc 'Execute the specific rake task'
+  task :invoke, :command do |task, args|
+    on roles(:app) do
+      execute :rake, args[:command]
+    end
+  end
+
+  # 调用 bundle exec cap setup:all_movies_list| awk '{$1="";print}'
+  desc "print all movies based on its playlist"
+  task :all_movies_list do
+    on roles(:app) do
+      within "#{current_path}" do
+        with rails_env: :production do
+          execute :rake, "print:all_movies_list"
+        end
+      end
+    end
+  end
+
+  # 调用 bundle exec cap "setup:playlist_movies_list[诱人的 react 视频教程-基础篇]" | awk '{$1="";print}'
+  desc "print playlist's movies"
+  task :playlist_movies_list, :command do |task, args|
+    on roles(:app) do
+      within "#{current_path}" do
+        with rails_env: :production do
+          execute :rake, "'print:playlist_movies_list[#{args[:command]}]'"
         end
       end
     end

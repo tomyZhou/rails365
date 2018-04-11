@@ -8,13 +8,25 @@ class Playlist < ActiveRecord::Base
 
   has_many :movies, -> { order 'weight DESC' }, dependent: :nullify
 
-  def self.movies_list(name)
+  def self.playlist_movies_list(name)
+    puts "## #{name}"
+    puts
+
     playlist = self.find_by(name: name)
     if playlist
-      playlist.movies.each do |movie|
-        puts "[#{movie.title}](https://www.rails365.net#{Rails.application.routes.url_helpers.movie_path(movie)})"
+      playlist.movies.reorder(weight: :asc, id: :asc).each do |movie|
+        puts "[#{movie.title}](https://www.rails365.net#{Rails.application.routes.url_helpers.movie_path(movie)})#{movie.is_paid ? '「Pro」' : nil}"
         puts
       end
+    else
+      puts "没有找到 #{name}"
+      puts
+    end
+  end
+
+  def self.all_movies_list
+    self.where(is_original: true).order(weight: :asc).each do |playlist|
+      self.playlist_movies_list(playlist.name)
     end
   end
 
