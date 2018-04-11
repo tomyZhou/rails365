@@ -31,7 +31,7 @@ class ArticlesController < ApplicationController
     end
 
     # 文章原创用户
-    @users = User.fetch_multi(id: Article.pluck(:user_id).uniq)
+    @users = User.where(id: Article.pluck(:user_id).uniq)
 
     # 热门播放列表
     @playlists = Rails.cache.fetch 'article_playlists' do
