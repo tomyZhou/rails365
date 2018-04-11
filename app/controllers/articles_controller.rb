@@ -21,13 +21,13 @@ class ArticlesController < ApplicationController
     end
 
     # 新用户
-    @new_users = Rails.cache.fetch "new_users" do
+    @new_users = Rails.cache.fetch 'new_users' do
       User.order(id: :desc).limit(5).to_a
     end
 
     # 活跃用户
-    @active_weight_users = Rails.cache.fetch "active_weight_users" do
-      User.order(active_weight: :desc, id: :desc).limit(5)
+    @active_weight_users = Rails.cache.fetch 'active_weight_users' do
+      User.order(active_weight: :desc, id: :desc).limit(5).to_a
     end
 
     # 文章原创用户
@@ -38,7 +38,7 @@ class ArticlesController < ApplicationController
       Playlist.where(is_original: true).order(weight: :desc).limit(4).to_a
     end
 
-    @movies = Rails.cache.fetch "movies" do
+    @movies = Rails.cache.fetch 'movies' do
       Movie.except_body_with_default.where(is_original: true).order('id DESC').limit(10)
     end
 

@@ -16,7 +16,7 @@ class Movie < ActiveRecord::Base
   include PublicActivity::Common
 
   belongs_to :playlist, counter_cache: true, touch: true
-  belongs_to :serial, counter_cache: true
+  belongs_to :serial, counter_cache: true, touch: true
   belongs_to :user
   has_many :comments, as: 'commentable'
   cache_has_many :comments, :inverse_name => :commentable

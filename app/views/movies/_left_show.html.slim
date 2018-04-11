@@ -4,6 +4,7 @@
     - cache [@movie, "playlist-title"] do
       div.text-left.article-desc
         span.dian = link_to "首页", root_path
+        span.dian = link_to @movie.serial.name, all_movies_path(@movie.serial.slug) if @movie.serial
         = link_to @movie.playlist.try(:name), playlist_path(@movie.playlist)
     div
       h1.my-title = @movie.title
