@@ -73,24 +73,6 @@ class Article < ActiveRecord::Base
     self.title.auto_correct!
   end
 
-  # 订阅量
-  def self.update_visit_count
-    self.find_each do |article|
-      if article.visit_count != article.read_count.to_i
-        article.visit_count = article.read_count.to_i
-        article.save validate: false
-      end
-    end
-  end
-
-  def self.init_random_read_count
-    self.find_each do |article|
-      article.visit_count = rand(1000)
-      article.save validate: false
-      $redis.set("user_#{article.id}_count", article.visit_count)
-    end
-  end
-
   include ReadCountConcern
 
   private

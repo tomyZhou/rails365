@@ -42,7 +42,9 @@ class ArticlesController < ApplicationController
       Movie.except_body_with_default.where(is_original: true).order('id DESC').limit(10)
     end
 
-    @activities = PublicActivity::Activity.where("trackable_type != 'Article' AND (trackable_type = 'Movie' OR (trackable_type = 'Comment' AND recipient_type != 'Article')) ").order(created_at: :desc).limit(5)
+    # @activities = PublicActivity::Activity.where("trackable_type != 'Article' AND (trackable_type = 'Movie' OR (trackable_type = 'Comment' AND recipient_type != 'Article')) ").order(created_at: :desc).limit(5)
+    # 高好的写法如下:
+    @activities = PublicActivity::Activity.where.not("trackable_type = 'Article' OR (trackable_type = 'Comment' AND recipient_type = 'Article') ").order(created_at: :desc).limit(5)
 
     # banner说明文
     @site_info_home_desc = Admin::SiteInfo.fetch_by_key('home_desc').try(:value)
@@ -68,6 +70,9 @@ class ArticlesController < ApplicationController
 
     if !(current_user && current_user.super_admin?)
       @article.increment_read_count
+
+      # 记录哪些文章被浏览过
+      @article.remember_visit_id
     end
   end
 
@@ -99,13 +104,11 @@ class ArticlesController < ApplicationController
   def like
     current_user.toggle_like(@article)
     @article.update_like_count
-    if @article.liked_by?(current_user)
-      unless current_user.super_admin?
-        @article.create_activity key: 'article.like', owner: current_user
+    if @article.liked_by?(current_user) && !current_user.super_admin?
+      @article.create_activity key: 'article.like', owner: current_user
 
-        Redis.new.publish 'ws', { only_website: true, title: '获得喜欢', content: "学员 <strong>#{current_user.hello_name}</strong> 喜欢了 #{@article.title}" }.to_json
-        SendSystemHistory.send_system_history("学员 <a href=#{movie_history_user_path(current_user)}>#{current_user.hello_name}</a>", "喜欢", "<a href=#{article_path(@article)}>#{@article.title}</a>")
-      end
+      Redis.new.publish 'ws', { only_website: true, title: '获得喜欢', content: "学员 <strong>#{current_user.hello_name}</strong> 喜欢了 #{@article.title}" }.to_json
+      SendSystemHistory.send_system_history("学员 <a href=#{movie_history_user_path(current_user)}>#{current_user.hello_name}</a>", "喜欢", "<a href=#{article_path(@article)}>#{@article.title}</a>")
     end
   end
 

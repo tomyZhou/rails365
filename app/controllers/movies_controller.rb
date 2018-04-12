@@ -49,6 +49,9 @@ class MoviesController < ApplicationController
 
     if !(current_user && current_user.super_admin?)
       @movie.increment_read_count
+
+      # 记录哪些视频被浏览过
+      @movie.remember_visit_id
     end
 
     # 热门播放列表
@@ -60,6 +63,13 @@ class MoviesController < ApplicationController
     @next_movie = @movie.playlist.movies.where("weight > ?", @movie.weight).last
 
     if user_signed_in? && !current_user.super_admin?
+      # 记录所有浏览过视频的用户的 id
+      user_view_ids = $redis.lrange "user_view_ids", 0, -1
+      if !user_view_ids.present? || (user_view_ids.present? && !user_view_ids.include?(current_user.id.to_s))
+        $redis.lpush "user_view_ids", current_user.id
+      end
+
+      # 浏览记录
       $redis.lpush "movies_#{current_user.id}_history", @movie.id
       $redis.ltrim "movies_#{current_user.id}_history", 0, 99
 
@@ -113,12 +123,10 @@ class MoviesController < ApplicationController
   def like
     current_user.toggle_like(@movie)
     @movie.update_like_count
-    if @movie.liked_by?(current_user)
-      unless current_user.super_admin?
-        @movie.create_activity key: 'movie.like', owner: current_user
-        Redis.new.publish 'ws', { only_website: true, title: '获得喜欢', content: "学员 <strong>#{current_user.hello_name}</strong> 喜欢了 #{@movie.title}" }.to_json
-        SendSystemHistory.send_system_history("学员 <a href=#{movie_history_user_path(current_user)}>#{current_user.hello_name}</a>", "喜欢", "<a href=#{movie_path(@movie)}>#{@movie.title}</a>")
-      end
+    if @movie.liked_by?(current_user) && !current_user.super_admin?
+      @movie.create_activity key: 'movie.like', owner: current_user
+      Redis.new.publish 'ws', { only_website: true, title: '获得喜欢', content: "学员 <strong>#{current_user.hello_name}</strong> 喜欢了 #{@movie.title}" }.to_json
+      SendSystemHistory.send_system_history("学员 <a href=#{movie_history_user_path(current_user)}>#{current_user.hello_name}</a>", "喜欢", "<a href=#{movie_path(@movie)}>#{@movie.title}</a>")
     end
   end
 

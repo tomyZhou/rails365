@@ -60,13 +60,17 @@ class User < ActiveRecord::Base
     end
   end
 
+  # 修改用户的视频访问记录
   def self.bg_save_movie_history
     # 首页 Top 5 活跃学员
     Rails.cache.delete "active_weight_users"
     # Top 100 活跃学员
     Rails.cache.delete 'active_users'
 
-    self.find_each do |user|
+    # 仅选择有访问视频的用户
+    user_view_ids = $redis.lrange "user_view_ids", 0, -1
+
+    self.where(id: user_view_ids).find_each do |user|
       ids = $redis.lrange("movies_#{user.id}_history", 0, -1).uniq
       if ids.present?
         puts "user #{user.id}"
@@ -79,6 +83,8 @@ class User < ActiveRecord::Base
       user.active_weight = user.movie_history.size.to_i rescue 0 + user.like_original_movies.count.to_i + user.comments.count.to_i
       user.save
     end
+
+    $redis.del "user_view_ids"
 
     Redis.new.publish 'ws', { only_website: true, title: '祝贺', content: "目前 Top 5 活跃会员分别是 #{User.order(active_weight: :desc, id: :desc).limit(5).map(&:hello_name).map{ |name| "<strong>#{name}</strong>" }.join(', ')}" }.to_json
   end

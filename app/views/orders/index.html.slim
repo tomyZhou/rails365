@@ -45,7 +45,7 @@
           tr
             td = order.id
             td = order.money
-            td = link_to order.user.order_name, user_path(order.user_id)
+            td = link_to order.user.order_name, movie_history_user_path(order.user_id)
             td = image_tag order.user.letter_avatar_url(100), alt: order.user.hello_name, size: "40x40", style: "border-radius: 50%"
             td
               = I18n.l order.created_at, :format => :long
@@ -76,7 +76,7 @@
           - @users.each do |user|
             tr
               td = user.id
-              td = link_to user.hello_name, user_path(user)
+              td = link_to user.hello_name, movie_history_user_path(user)
               td = image_tag user.letter_avatar_url(100), alt: user.hello_name, size: "40x40", style: "border-radius: 50%"
               td = user.email
               td
