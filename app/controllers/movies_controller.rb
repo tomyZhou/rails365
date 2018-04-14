@@ -79,7 +79,11 @@ class MoviesController < ApplicationController
     else
       return if user_signed_in? && current_user.super_admin?
 
-      # Redis.new.publish 'ws', { only_website: true, title: '努力学习', content: "游客 正在学习 #{@movie.title}" }.to_json
+      # guest_access_movie = Admin::SiteInfo.fetch_by_key('guest_access_movie').try(:value)
+      #
+      # if guest_access_movie.presence != '空'
+      #   Redis.new.publish 'ws', { only_website: true, title: '努力学习', content: "游客 正在学习 #{@movie.title}" }.to_json
+      # end
 
       SendSystemHistory.send_system_history("游客", "正在学习", "<a href=#{movie_path(@movie)}>#{@movie.title}</a>")
     end

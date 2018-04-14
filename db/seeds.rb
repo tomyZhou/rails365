@@ -31,13 +31,13 @@ end
 puts "Top 10 视频播放量自动增长开关"
 Admin::SiteInfo.find_or_create_by(key: 'top_10_video_auto_increment') do |cp|
   cp.value = '开启'
-  cp.desc = "如果为 空 这个字符串就是关闭，否则任意字符串开启"
+  cp.desc = "如果为 空 就是关闭，否则任意字符串开启"
 end
 
 puts "Top 10 文章点击量自动增长开关"
 Admin::SiteInfo.find_or_create_by(key: 'top_10_article_auto_increment') do |cp|
   cp.value = '开启'
-  cp.desc = "如果为 空 这个字符串就是关闭，否则任意字符串开启"
+  cp.desc = "如果为 空 就是关闭，否则任意字符串开启"
 end
 
 puts "Top n 视频播放量"
@@ -50,4 +50,10 @@ puts "Top n 文章点击量"
 Admin::SiteInfo.find_or_create_by(key: 'top_n_article_auto_increment') do |cp|
   cp.value = '10'
   cp.desc = "数字，取最后 n 后"
+end
+
+puts "访问视频 ws 通知控制"
+Admin::SiteInfo.find_or_create_by(key: 'guest_access_movie') do |cp|
+  cp.value = '空'
+  cp.desc = "如果为 空 就是关闭，否则任意字符串开"
 end
