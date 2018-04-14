@@ -23,18 +23,16 @@ class ActivitiesController < ApplicationController
     @activities = PublicActivity::Activity.order(created_at: :desc).page(params[:page])
 
     # 新用户
-    @new_users = Rails.cache.fetch "new_users" do
-      User.order(id: :desc).limit(5).to_a
-    end
+    @new_users = Cache.new_users
 
     # 活跃用户
-    @active_weight_users = Rails.cache.fetch "active_weight_users" do
-      User.order(active_weight: :desc, id: :desc).limit(5)
-    end
+    @active_weight_users = Cache.active_weight_users
 
     # 热门播放列表
-    @playlists = Rails.cache.fetch 'article_playlists' do
-      Playlist.where(is_original: true).order(weight: :desc).limit(4).to_a
-    end
+    @playlists = Cache.article_playlists
+
+    @movies = Cache.movies(3)
+
+    @articles = Cache.new_articles
   end
 end

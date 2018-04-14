@@ -20,17 +20,3 @@
 
 /div class="zhihu-card" data-userhash="rails365"
 /script async=true defer=true src="https://laike9m.github.io/zhihu-card/dist/widget.js"
-
-.panel.panel-default style="margin-top: 15px;"
-  .panel-heading
-    strong 统计信息
-  .list-group
-    .list-group-item
-      i class="fa fa-user" aria-hidden="true"
-      | &nbsp;&nbsp;&nbsp; 社区会员: #{User.count}
-    .list-group-item
-      i class="fa fa-file-video-o" aria-hidden="true"
-      | &nbsp;&nbsp;&nbsp; 视频数量: #{Movie.where(is_original: true).count}
-    .list-group-item
-      i class="fa fa-file-text-o" aria-hidden="true"
-      | &nbsp;&nbsp;&nbsp; 文章数量: #{Article.count}

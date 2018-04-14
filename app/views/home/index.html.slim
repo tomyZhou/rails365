@@ -1,59 +1,112 @@
+- unless params[:search].present?
+  = render 'shared/site_info_home_desc'
+  .white-bg.home-container
+    - cache @movies do
+      div.pt15.home-video
+        = render partial: 'movies/index', object: @movies
+
 .row
-  - cache [@articles, current_user] do
-    .col-md-6.article-left
+  .col-md-8.article-left
+    .panel.panel-default
+      .panel-heading
+          - if params[:search].present?
+            div.custom-panel-heading.real-ray
+              p 共找到 <span class="blue">#{@articles.total_count}</span> 条关于 <span class="blue">#{params[:search]}</span> 的搜索结果
+          - else
+            div.custom-panel-heading.real-ray.hot-title
+              = link_to '最新', articles_path, class: "link-color dian #{params[:find].present? ? nil : 'link-active-color'}"
+              = link_to '最热', articles_path(find: 'hot'), class: "link-color #{params[:find].present? ? 'link-active-color' : nil}"
+              = link_to 'webpack', articles_path(search: 'webpack', tp: 'articles'), class: "link-color pull-right"
+              = link_to 'ruby', articles_path(search: 'ruby', tp: 'articles'), class: "link-color dian pull-right"
+              = link_to 'docker', articles_path(search: 'docker', tp: 'articles'), class: "link-color dian pull-right hidden-xs"
+              = link_to 'nginx', articles_path(search: 'nginx', tp: 'articles'), class: "link-color dian pull-right"
+              = link_to 'parcel', articles_path(search: 'parcel', tp: 'articles'), class: "link-color dian pull-right"
+      .panel-body
+        - cache @articles do
+          - if params[:search].present?
+            div.search-hight-light
+              - @articles.with_details.each do |article, details|
+                div.mb20
+                  - if details[:highlight][:title].present?
+                    p.article-title = link_to details[:highlight][:title].html_safe, article
+                  - else
+                    p.article-title = link_to article.title, article
+                  p.mb10
+                    = link_to article_url(article), article, class: "blue"
+                  - if details[:highlight][:body].present?
+                    p
+                      = details[:highlight][:body].html_safe
+                  p.text-left.hidden-xs.article-desc
+                    span.dian #{link_to article.user.try(:login), user_path(article.user)}
+                    - if article.group
+                      = link_to group_path(article.group) do
+                        span.dian = article.group.name
+                    = custom_timeago_tag article.created_at
+            div.text-center
+              = paginate @articles
+
+          - else
+            .infinite-table
+              = render partial: 'articles/index', object: @articles
+            .my-pagination.hidden
+              = link_to_next_page(@articles, 'Next Page', :remote => true)
+            .pagination-text.article-box
+
+  .col-md-4.hidden-xs.article-right
+    .panel.panel-default
+      .panel-heading
+        .custom-panel-heading
+          strong 大家在关注
+      .panel-body
+        .m-widget4
+          - cache @activities do
+            - @activities.each do |activity|
+              .m-widget4__item.custom-activity
+                .m-widget4__img.m-widget4__img--pic
+                  - if activity.owner
+                    = link_to movie_history_user_path(activity.owner) do
+                      = image_tag activity.owner.letter_avatar_url(100), alt: activity.owner.hello_name
+                .m-widget4__info.custom-activity
+                  span.dian.m-widget4__sub = custom_timeago_tag activity.created_at
+                  = render_activity activity
+    - cache @new_users do
       .panel.panel-default
         .panel-heading
-          div
-            span 最近的文章
-            = link_to '更多>>', articles_path, class: "pull-right"
-        .panel-body.pb0.article-panel-box
-          - @articles.each do |article|
-            = render partial: 'articles/article', locals: { article: article }
-
-  - cache [@hot_articles, current_user] do
-    .col-md-6.article-right
+          div.custom-panel-heading
+            strong 最新学员
+        = render partial: 'shared/new_users', locals: { users: @new_users }
+    - cache @active_weight_users do
       .panel.panel-default
         .panel-heading
-          div
-            span 最热门的文章
-            = link_to '更多>>', articles_path, class: "pull-right"
-        .panel-body.pb0.article-panel-box
-          - @hot_articles.each do |article|
-            = render partial: 'articles/article', locals: { article: article }
+          div.custom-panel-heading
+            strong Top 5 活跃学员
+        = render partial: 'shared/new_users', locals: { users: @active_weight_users }
+    /.panel.panel-default
+    /  .panel-heading
+    /    div.custom-panel-heading
+    /      span
+    /        | 最新视频
+    /        = render 'shared/heartbeat'
+    /  .panel-body.text-left
+    /    .m-widget4
+    /      - @movies.each do |movie|
+    /        .m-widget4__item
+    /          .m-widget4__info
+    /            p
+    /              = link_to movie.title, movie_path(movie), class: 'm-widget4__title'
+    /            p
+    /              span.m-widget4__sub.dian #{movie.read_count} 次观看
+    /              span.m-widget4__sub = custom_timeago_tag(movie.created_at)
 
-- cache [@movies, current_user] do
-  .row
-    .col-md-12
+    - cache @groups do
       .panel.panel-default
         .panel-heading
-          div
-            span
-              | 免费视频(在线观看+网盘下载)
-            = link_to '更多>>', movies_path, class: "pull-right"
-        .panel-body.pb0.pt15.home-video
-          - @movies.each do |movie|
-            = render partial: 'movies/movie', locals: { movie: movie }
-
-= render 'shared/books'
-
-- cache @groups do
-  .row
-    .col-md-12
-      .panel.panel-default
-        .panel-heading
-          div
-            span 分类
-            = link_to '更多>>', groups_path, class: "pull-right"
-        .panel-body.pb0
-          = render partial: 'groups/group', locals: { groups: @groups }
-
-- cache @playlists do
-  .row
-    .col-md-12
-      .panel.panel-default
-        .panel-heading
-          div
-            span 播放列表
-            = link_to '更多>>', playlists_path, class: "pull-right"
-        .panel-body.pb0.pt15.home-video
-          = render partial: 'playlists/playlist', locals: { playlists: @playlists }
+          div.custom-panel-heading
+            strong 文章分类
+        .panel-body.pb0.pt25
+          = render partial: 'groups/article_group', locals: { groups: @groups }
+    = render 'shared/activity_users'
+    = render 'shared/follow'
+    .sticker
+      = render 'shared/qqgroup'
+      = render 'shared/stat'

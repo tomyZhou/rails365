@@ -10,14 +10,11 @@
               span.caret
             ul.dropdown-menu.mobile-menu role="menu"
               li
-                a href="/playlists"
-                 | 播放列表
-              li
                 a href="/movies"
                  | 视频
               li
-                a href="/activities/explore"
-                  | 动态
+                a href="/playlists"
+                 | 播放列表
               li
                 a href="/groups"
                  | 分类
@@ -90,7 +87,7 @@
         a.navbar-brand href="/" = image_tag "logo.png"
       #bs-example-navbar-collapse-1.collapse.navbar-collapse
         ul.nav.navbar-nav
-          li class="#{controller_name == 'articles' ? 'active' : nil}"
+          li class="#{controller_name == 'home' && action_name == 'index' ? 'active' : nil}"
             a href="/"
               | 首页
               span.sr-only (current)
@@ -99,12 +96,12 @@
               | 视频
           li class="#{controller_name == 'playlists' ? 'active' : nil}"
             a href="/playlists" 播放列表
-          li class="#{controller_name == 'activities' ? 'active' : nil}"
-            a href="/activities/explore" 动态
-          li class="#{controller_name == 'groups' ? 'active' : nil}"
-            a href="/groups" 分类
+          li class="#{controller_name == 'articles' ? 'active' : nil}"
+            a href="/articles" 文章
           li class="#{controller_name == 'books' ? 'active' : nil}"
             a href="/books" 小书
+          li class="#{controller_name == 'activities' ? 'active' : nil}"
+            a href="/activities/explore" 动态
           li class="#{controller_name == 'users' ? 'active' : nil}"
             a href="/users" 活跃学员
           li class="#{controller_name == 'home' && action_name == 'vip' ? 'active' : nil}"

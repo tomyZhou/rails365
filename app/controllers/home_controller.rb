@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
   def index
+    ahoy.track "首页", {language: "Ruby"}
+
     @articles =
       if params[:search].present?
         Article.search params[:search], fields: [:title, :body], highlight: true, misspellings: false, includes: [:group, :user], page: params[:page], per_page: 20
@@ -9,18 +11,37 @@ class HomeController < ApplicationController
         Article.except_body_with_default.order('id DESC').page(params[:page])
       end
 
-    @groups = Rails.cache.fetch 'group_all' do
-      Group.order(weight: :desc).to_a
-    end
+    @groups = Cache.group_all
 
+    # 新用户
+    @new_users = Cache.new_users
+
+    # 活跃用户
+    @active_weight_users = Cache.active_weight_users
+
+    # 文章原创用户
     @users = User.where(id: Article.pluck(:user_id).uniq)
 
-    @movies = Rails.cache.fetch "movies" do
-      Movie.except_body_with_default.where(is_original: true).order('id DESC').limit(4)
+    # 热门播放列表
+    @playlists = Cache.article_playlists
+
+    @movies = Cache.movies
+
+    # @activities = PublicActivity::Activity.where("trackable_type != 'Article' AND (trackable_type = 'Movie' OR (trackable_type = 'Comment' AND recipient_type != 'Article')) ").order(created_at: :desc).limit(5)
+    # 高好的写法如下:
+    @activities = PublicActivity::Activity.where.not("trackable_type = 'Article' OR (trackable_type = 'Comment' AND recipient_type = 'Article') ").order(created_at: :desc).limit(5)
+
+    # banner说明文
+    @site_info_home_desc = Admin::SiteInfo.fetch_by_key('home_desc').try(:value)
+
+    @system_history = $redis.lrange "system_history", 0, -1
+
+    if request.xhr?
+      render 'articles/index.js.erb'
     end
 
     # respond_to do |format|
-    #   format.all { render :index, formats: [:html] }
+    #   format.all { render :index, formats: [:html, :js] }
     # end
   end
 

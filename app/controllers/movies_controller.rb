@@ -54,10 +54,7 @@ class MoviesController < ApplicationController
       @movie.remember_visit_id
     end
 
-    # 热门播放列表
-    @playlists = Rails.cache.fetch 'article_playlists' do
-      Playlist.where(is_original: true).order(weight: :desc).limit(4).to_a
-    end
+    @playlists = Cache.article_playlists
 
     @prev_movie = @movie.playlist.movies.where("weight < ?", @movie.weight).first
     @next_movie = @movie.playlist.movies.where("weight > ?", @movie.weight).last

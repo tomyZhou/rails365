@@ -3,9 +3,7 @@ class GroupsController < ApplicationController
   authorize_resource
 
   def index
-    @groups = Rails.cache.fetch 'group_all' do
-      Group.order(weight: :desc).to_a
-    end
+    @groups = Cache.group_all
     @title = "分类列表"
   end
 
@@ -16,9 +14,7 @@ class GroupsController < ApplicationController
 
     @books = @group.fetch_books
 
-    @groups = Rails.cache.fetch 'group_all' do
-      Group.order(weight: :desc).to_a
-    end
+    @groups = Cache.group_all
   end
 
   private

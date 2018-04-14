@@ -9,7 +9,23 @@
         .pagination-text.article-box
 
   .col-md-4.hidden-xs.article-right
-    = render 'shared/follow'
+    .panel.panel-default
+      .panel-heading
+        div.custom-panel-heading
+          span 最新视频
+      .panel-body.text-left
+        .m-widget4
+          - cache @movies do
+            = render partial: 'shared/new_collection', locals: { records: @movies }
+    .panel.panel-default
+      .panel-heading
+        div.custom-panel-heading
+          span 最新文章
+      .panel-body.text-left
+        .m-widget4
+          - cache @articles do
+            = render partial: 'shared/new_collection', locals: { records: @articles }
+
     - cache @new_users do
       .panel.panel-default
         .panel-heading
@@ -22,3 +38,6 @@
           div.custom-panel-heading
             strong Top 5 活跃学员
         = render partial: 'shared/new_users', locals: { users: @active_weight_users }
+    .sticker
+      = render 'shared/qqgroup'
+      = render 'shared/follow'
