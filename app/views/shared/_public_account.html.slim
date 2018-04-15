@@ -1,5 +1,13 @@
 .panel.panel-default
-  .panel-heading
-    div 我的微信二维码
-  .panel-body
+  .panel-heading.playlist-angle
+    strong 我的微信二维码 
+    i class="fa fa-angle-down"
+  .panel-body.hidden
     = image_tag "weixin_qr.jpg", style: "width: 100%;"
+
+.panel.panel-default
+  .panel-heading.playlist-angle
+    strong 微信公众账号 
+    i class="fa fa-angle-down"
+  .panel-body.hidden
+    = image_tag "qrcode.jpg", style: "width: 100%;"

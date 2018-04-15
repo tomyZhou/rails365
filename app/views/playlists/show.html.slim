@@ -3,7 +3,14 @@
     .page-header
       h4.text-primary.title-header.text-center
         = @playlist.name
+        span.text-muted （#{@playlist.movies_count} 个视频）
+
       p.text-center.text-muted = @playlist.desc if @playlist.desc
+      p.text-center
+        - if @playlist.is_finished?
+          span class="label label-success" 已更新完结
+        - else
+          span class="label label-primary" 正在更新中
   - if @playlist.is_paid?
     = render 'sub_nav'
 

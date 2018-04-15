@@ -19,6 +19,6 @@
         |  个视频
       span.dian
       - if playlist.is_finished?
-        span 已完结
+        span class="label label-success" 已完结
       - else
-        span 更新中
+        span class="label label-primary" 更新中
