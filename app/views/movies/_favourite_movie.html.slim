@@ -9,6 +9,7 @@ div.mb10.clearfix
       | 创建于
       = custom_timeago_tag movie.created_at
     span.dian
+    span.dian #{movie.read_count} 次观看
     - if movie.is_paid?
       small.my-badge.my-badge-danger Pro
     - else
