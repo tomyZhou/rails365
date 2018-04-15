@@ -105,7 +105,8 @@ class Movie < ActiveRecord::Base
 
   def clear_cache
     # 首页
-    Rails.cache.delete 'movies'
+    Rails.cache.delete 'movies_10'
+    Rails.cache.delete 'movies_3'
     Rails.cache.delete 'playlists'
     # 所有分类页面
     Rails.cache.delete 'playlist_all'
