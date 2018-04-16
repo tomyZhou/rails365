@@ -27,7 +27,9 @@ module ApplicationHelper
   end
 
   def md5_color(str)
-    Digest::MD5.hexdigest(str)[0..5] unless str.nil?
+    char = Pinyin.t(str)[0].upcase
+    "rgb(#{LetterAvatar::Colors.with_google(char).join(',')})" unless str.nil?
+    # Digest::MD5.hexdigest(str)[0..5] unless str.nil?
   end
 
   def search_params
