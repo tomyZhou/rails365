@@ -4,6 +4,7 @@ html
     title = @title ? "#{@title} | #{@site_info_title}" : @site_info_title
     meta name="description" content="#{@site_info_meta_description}"
     meta name="keywords" content="#{@site_info_meta_keyword}"
+    link href="https://cdn.bootcss.com/select2/4.0.3/css/select2.min.css" rel="stylesheet"
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
     link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
@@ -11,6 +12,8 @@ html
     link href="https://cdn.bootcss.com/pnotify/3.2.1/pnotify.brighttheme.css" rel="stylesheet"
     script src="https://cdn.bootcss.com/pnotify/3.2.1/pnotify.js"
     script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    link href="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet"
+    script src="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"
     meta http-equiv="X-UA-Compatible" content="IE=edge"
     meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"
     = render 'shared/baidu'
