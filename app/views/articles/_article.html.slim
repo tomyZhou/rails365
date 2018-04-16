@@ -6,16 +6,15 @@ div.article-box
       = link_to article.user.try(:login), user_path(article.user)
     span.dian
       = custom_timeago_tag article.created_at
-    span.dian
-      - if article.group
-        = link_to group_path(article.group) do
-          span.mr5 = article.group.name
     span #{article.read_count} 次点击
   p.article-title
+    = link_to group_path(article.group)
+      span class="label label-primary" style="background-color: ##{md5_color(article.group.name)}" = article.group.name
+    span.dian
     = link_to article.title, article
     - if article.is_top
       span.dian
-      span class="label label-success" 已完结
+      span class="label label-success" 置顶
   /div.article-desc
   /  .btn-group
   /    = link_to like_article_path(article), remote: true do

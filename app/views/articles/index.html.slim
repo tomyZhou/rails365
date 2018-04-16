@@ -15,7 +15,7 @@
               = link_to 'nginx', articles_path(search: 'nginx', tp: 'articles'), class: "link-color dian pull-right"
               = link_to 'parcel', articles_path(search: 'parcel', tp: 'articles'), class: "link-color dian pull-right"
       .panel-body
-        - cache @articles do
+        - cache [@articles, @top_articles] do
           - if params[:search].present?
             div.search-hight-light
               - @articles.with_details.each do |article, details|
@@ -39,6 +39,8 @@
               = paginate @articles
 
           - else
+            - @top_articles.each do |article|
+              = render partial: 'articles/article', locals: { article: article }
             .infinite-table
               = render partial: 'index', object: @articles
             .my-pagination.hidden

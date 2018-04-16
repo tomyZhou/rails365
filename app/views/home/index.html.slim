@@ -22,35 +22,15 @@
               = link_to 'nginx', articles_path(search: 'nginx', tp: 'articles'), class: "link-color dian pull-right"
               = link_to 'parcel', articles_path(search: 'parcel', tp: 'articles'), class: "link-color dian pull-right"
       .panel-body
+        - cache @top_articles do
+          - @top_articles.each do |article|
+            = render partial: 'articles/article', locals: { article: article }
         - cache @articles do
-          - if params[:search].present?
-            div.search-hight-light
-              - @articles.with_details.each do |article, details|
-                div.mb20
-                  - if details[:highlight][:title].present?
-                    p.article-title = link_to details[:highlight][:title].html_safe, article
-                  - else
-                    p.article-title = link_to article.title, article
-                  p.mb10
-                    = link_to article_url(article), article, class: "blue"
-                  - if details[:highlight][:body].present?
-                    p
-                      = details[:highlight][:body].html_safe
-                  p.text-left.hidden-xs.article-desc
-                    span.dian #{link_to article.user.try(:login), user_path(article.user)}
-                    - if article.group
-                      = link_to group_path(article.group) do
-                        span.dian = article.group.name
-                    = custom_timeago_tag article.created_at
-            div.text-center
-              = paginate @articles
-
-          - else
-            .infinite-table
-              = render partial: 'articles/index', object: @articles
-            .my-pagination.hidden
-              = link_to_next_page(@articles, 'Next Page', :remote => true)
-            .pagination-text.article-box
+          .infinite-table
+            = render partial: 'articles/index', object: @articles
+          .my-pagination.hidden
+            = link_to_next_page(@articles, 'Next Page', :remote => true)
+          .pagination-text.article-box
 
   .col-md-4.hidden-xs.article-right
     .panel.panel-default

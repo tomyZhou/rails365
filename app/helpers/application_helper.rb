@@ -26,6 +26,10 @@ module ApplicationHelper
     number_to_currency(number, precision: 2, delimiter: '')
   end
 
+  def md5_color(str)
+    Digest::MD5.hexdigest(str)[0..5] unless str.nil?
+  end
+
   def search_params
     if ['movies', 'playlists'].include?(controller_name)
       "movies"

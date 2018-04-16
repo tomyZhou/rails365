@@ -15,7 +15,7 @@ class Cache
   # 置顶的文章
   def self.top_articles
     Rails.cache.fetch "top_articles" do
-      Article.except_body_with_default.where(is_top: true).order('id DESC')
+      Article.except_body_with_default.where(is_top: true).order(weight: :asc)
     end
   end
 

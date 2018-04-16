@@ -94,9 +94,9 @@ class ArticlesController < ApplicationController
 
   def article_params
     if current_user && current_user.super_admin?
-      params.require(:article).permit(:title, :body, :group_id, :user_id, :weight, :is_home)
+      params.require(:article).permit(:title, :is_top, :body, :group_id, :user_id, :weight, :is_home)
     else
-      params.require(:article).permit(:title, :body, :group_id, :user_id, :is_home)
+      params.require(:article).permit(:title, :is_top, :body, :group_id, :user_id, :is_home)
     end
   end
 end
