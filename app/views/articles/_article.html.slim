@@ -14,7 +14,7 @@ div.article-box
     = link_to article.title, article
     - if article.is_top
       span.dian
-      span class="label label-success" 置顶
+      span class="label label-success label-my" 置顶
   /div.article-desc
   /  .btn-group
   /    = link_to like_article_path(article), remote: true do
