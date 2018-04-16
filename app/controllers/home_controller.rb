@@ -13,6 +13,9 @@ class HomeController < ApplicationController
 
     @groups = Cache.group_all
 
+    # 置顶的文章
+    @top_articles = Cache.top_articles
+
     # 新用户
     @new_users = Cache.new_users
 

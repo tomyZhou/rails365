@@ -12,6 +12,13 @@ class Cache
     end
   end
 
+  # 置顶的文章
+  def self.top_articles
+    Rails.cache.fetch "top_articles" do
+      Article.except_body_with_default.where(is_top: true).order('id DESC')
+    end
+  end
+
   # 热门播放列表
   def self.article_playlists(count = 4)
     Rails.cache.fetch "article_playlists_#{count}" do

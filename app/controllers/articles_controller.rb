@@ -16,6 +16,8 @@ class ArticlesController < ApplicationController
         Article.except_body_with_default.order('id DESC').page(params[:page])
       end
 
+    @top_articles = Cache.top_articles
+
     @groups = Cache.group_all
 
     # 文章原创用户

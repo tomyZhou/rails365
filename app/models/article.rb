@@ -18,7 +18,7 @@ class Article < ActiveRecord::Base
   has_many :comments, as: 'commentable'
   cache_has_many :comments, :inverse_name => :commentable
 
-  scope :except_body_with_default, -> { select(:title, :visit_count, :like_count, :created_at, :updated_at, :group_id, :slug, :id, :user_id, :weight, :is_home) }
+  scope :except_body_with_default, -> { select(:title, :is_top, :visit_count, :like_count, :created_at, :updated_at, :group_id, :slug, :id, :user_id, :weight, :is_home) }
 
   def self.increment_random_read_count(n)
     self.last(n.to_i).each do |article|
@@ -86,6 +86,7 @@ class Article < ActiveRecord::Base
   def clear_cache
     # 首页
     Rails.cache.delete 'articles'
+    Rails.cache.delete "top_articles"
     Rails.cache.delete 'groups'
     # 所有分类页面
     Rails.cache.delete 'group_all'

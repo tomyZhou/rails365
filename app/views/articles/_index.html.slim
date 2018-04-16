@@ -1,2 +1,5 @@
+- @top_articles.each do |article|
+  = render partial: 'articles/article', locals: { article: article }
+
 - @articles.each do |article|
   = render partial: 'articles/article', locals: { article: article }
