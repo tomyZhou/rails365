@@ -35,13 +35,38 @@ class User < ActiveRecord::Base
     end
   end
 
-  def letter_avatar_url(size)
-    avatar_url || LetterAvatar.generate(Pinyin.t(self.username), size).sub('public/', '/')
+  def aliyun_avatar_url(size)
+    if small_aliyun_avatar || big_aliyun_avatar
+      size.to_i == 40 ? "#{Settings.aliyun_host}/#{small_aliyun_avatar}" : "#{Settings.aliyun_host}/#{big_aliyun_avatar}"
+    end
   end
 
+  def letter_avatar_url(size)
+    avatar_url || aliyun_avatar_url(size) || LetterAvatar.generate(Pinyin.t(self.username), size).sub('public/', '/')
+  end
+
+  # 有自己头像的
   def send_avatar_to_aliyun
-    client = Aliyun::Oss::Client.new(CarrierWave::Uploader::Base.aliyun_access_id, CarrierWave::Uploader::Base.aliyun_access_key, host: "oss-cn-shenzhen.aliyuncs.com", bucket: CarrierWave::Uploader::Base.aliyun_bucket) 
-    client.bucket_create_object("1.png", File.new("public/#{self.letter_avatar_url(40)}"), { 'Content-Type' => 'image/png' })
+    unless self.avatar_url
+      client = Aliyun::Oss::Client.new(CarrierWave::Uploader::Base.aliyun_access_id, CarrierWave::Uploader::Base.aliyun_access_key, host: "oss-cn-shenzhen.aliyuncs.com", bucket: CarrierWave::Uploader::Base.aliyun_bucket)
+
+      small_aliyun_avatar = "letter_avatars/#{self.username[0].upcase}/40.png"
+      big_aliyun_avatar = "letter_avatars/#{self.username[0].upcase}/100.png"
+
+      client.bucket_create_object(small_aliyun_avatar, File.new("public/#{self.letter_avatar_url(40)}"), { 'Content-Type' => 'image/png' })
+      client.bucket_create_object(big_aliyun_avatar, File.new("public/#{self.letter_avatar_url(100)}"), { 'Content-Type' => 'image/png' })
+
+      self.small_aliyun_avatar = small_aliyun_avatar
+      self.big_aliyun_avatar = big_aliyun_avatar
+
+      self.save validate: false
+    end
+  end
+
+  def self.bg_send_aliyun_avatar
+    self.where("small_aliyun_avatar IS NULL OR big_aliyun_avatar IS NULL").find_each do |user|
+      user.send_avatar_to_aliyun
+    end
   end
 
   def validate_username
