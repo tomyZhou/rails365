@@ -117,7 +117,10 @@ gem 'tubesock'
 
 # elasticsearch
 gem 'searchkick', '~> 3'
+# 提高性能
+gem 'oj'
 gem 'typhoeus'
+gem "searchjoy"
 
 gem 'puma'
 

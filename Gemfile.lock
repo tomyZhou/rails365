@@ -363,6 +363,7 @@ GEM
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
+    oj (3.5.1)
     omniauth (1.7.1)
       hashie (>= 3.4.6, < 3.6.0)
       rack (>= 1.6.2, < 3)
@@ -540,6 +541,10 @@ GEM
     sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    searchjoy (0.3.2)
+      activerecord (>= 4)
+      chartkick (>= 2)
+      groupdate (>= 3)
     searchkick (3.0.2)
       activemodel (>= 4.2)
       elasticsearch (>= 5)
@@ -675,6 +680,7 @@ DEPENDENCIES
   like_system
   migration_data
   mini_magick
+  oj
   omniauth-github
   pg
   pghero
@@ -700,6 +706,7 @@ DEPENDENCIES
   rucaptcha (~> 2.1.0)
   sass-rails
   sdoc
+  searchjoy
   searchkick (~> 3)
   select2-rails
   sidekiq

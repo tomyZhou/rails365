@@ -6,7 +6,7 @@ class MoviesController < ApplicationController
 
   def index
     if params[:search].present?
-      @movies = Movie.search params[:search], where: { is_original: true }, boost_by: [:visit_count], fields: [:title, :body], includes: [:playlist], page: params[:page], per_page: 20
+      @movies = Movie.search params[:search], where: { is_original: true }, boost_by: [:visit_count], fields: [:title, :body], includes: [:playlist], track: { user_id: current_user.try(:id) }, page: params[:page], per_page: 20
     elsif params[:name].present?
       @serial = Serial.find(params[:name])
       @movies = @serial.movies.except_body_with_default.where(is_original: true).order('id DESC').page(params[:page]).per(20)

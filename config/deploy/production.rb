@@ -8,7 +8,7 @@
 # server 'db.example.com', user: 'deploy', roles: %w{db}
 
 server '39.108.193.69', user: 'deploy', roles: %w( app db web )
-# server '120.77.233.243', user: 'deploy', roles: %w( app db web )
+server '120.77.233.243', user: 'deploy', roles: %w( app db web )
 set :rails_env, 'production'
 set :stage, :production
 

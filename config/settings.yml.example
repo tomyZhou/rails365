@@ -6,6 +6,8 @@ aliyun_access_key: 'your access key'
 aliyun_bucket: 'your bucket name'
 aliyun_area: "cn-shenzhen"
 aliyun_host: "https://rails365.oss-cn-shenzhen.aliyuncs.com"
+elasticsearch_url: "http://127.0.0.1:9200"
+redis_host: '127.0.0.1'
 
 # sidekiq
 sidekiq_namespace: "sidekiq"

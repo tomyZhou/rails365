@@ -1,6 +1,6 @@
 require 'babosa'
 class Movie < ActiveRecord::Base
-  searchkick highlight: [:title, :body]
+  searchkick
 
   extend FriendlyId
   friendly_id :title, use: [:slugged, :finders, :history]
