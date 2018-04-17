@@ -39,6 +39,11 @@ class User < ActiveRecord::Base
     avatar_url || LetterAvatar.generate(Pinyin.t(self.username), size).sub('public/', '/')
   end
 
+  def send_avatar_to_aliyun
+    client = Aliyun::Oss::Client.new(CarrierWave::Uploader::Base.aliyun_access_id, CarrierWave::Uploader::Base.aliyun_access_key, host: "oss-cn-shenzhen.aliyuncs.com", bucket: CarrierWave::Uploader::Base.aliyun_bucket) 
+    client.bucket_create_object("1.png", File.new("public/#{self.letter_avatar_url(40)}"), { 'Content-Type' => 'image/png' })
+  end
+
   def validate_username
     if User.where(email: username).exists?
       errors.add(:username, :invalid)

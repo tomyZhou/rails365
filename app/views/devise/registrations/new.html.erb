@@ -25,12 +25,11 @@
         <div class="prompt-box text-center">
           <%= link_to "已有账号登录", new_session_path(resource_name), class: "clickable" %>
         </div>
-        <div class="oauth-box text-left">
-          第三方账号登录：
-          <%= link_to omniauth_authorize_path(:user, :github), class: "btn btn-link" do %>
-            <i class="fa fa-github" aria-hidden="true"></i>
-          <% end %>
-        </div>
+        <hr>
+        <%= link_to omniauth_authorize_path(:user, :github), class: "btn btn-block btn-primary btn-float m-t-25 mb20 btn-dark" do %>
+          <i class="fa fa-github" aria-hidden="true"></i>
+          Github 账号免注册一键登录
+        <% end %>
       </div>
     </div>
   <% end %>
