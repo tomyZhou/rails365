@@ -39,7 +39,7 @@ module Rails365
         helper_specs: false,
         routing_specs: false,
         request_specs: false
-      g.fixture_replacement :factory_girl, dir: 'spec/factories'
+      g.fixture_replacement :factory_bot, dir: 'spec/factories'
     end
     config.exceptions_app = self.routes
     config.cache_store = :redis_store, { host: Settings.redis_host, port: 6379, namespace: 'rails365', driver: :hiredis }

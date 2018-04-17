@@ -54,7 +54,7 @@ group :development, :test do
   gem 'spring'
   gem 'rspec-rails', '~> 3.4'
   gem 'database_cleaner'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'spring-commands-rspec'
   gem 'capybara'
   gem 'cucumber-rails', :require => false
