@@ -5,7 +5,8 @@ else
   # source 'https://mirrors.tuna.tsinghua.edu.cn/rubygems/'
 end
 
-gem 'rails', '5.1.6'
+gem 'rails', '5.2.0'
+gem 'bootsnap'
 gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'

@@ -1,10 +1,10 @@
 require 'exception_notification/rails'
 require 'exception_notification/sidekiq'
-require 'exception_notifier/database_notifier'
+# require 'exception_notifier/database_notifier'
 
 ExceptionNotification.configure do |config|
   # config.ignored_exceptions += %w{ActionView::TemplateError}
-  config.add_notifier :database, {}
+  # config.add_notifier :database, {}
   # Ignore additional exception types.
   # ActiveRecord::RecordNotFound, AbstractController::ActionNotFound and ActionController::RoutingError are already added.
   # config.ignored_exceptions += %w{ActionView::TemplateError CustomError}
