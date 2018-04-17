@@ -44,40 +44,6 @@ jQuery ->
 
   $('.carousel').carousel()
 
-
-
-$ ->
-  socket = new WebSocket "<%= Settings.ws_protocol %>://#{window.location.host}/ws/"
-
-  socket.onmessage = (event) ->
-    # toastr.options.closeDuration = 40000
-    # toastr.remove()
-    # if event.data.length
-    #   toastr.success("#{event.data}", '有消息啦！')
-    json_data = JSON.parse(event.data)
-    if event.data.length
-      if json_data["only_website"]
-        notice = new PNotify
-          title: json_data["title"]
-          text: json_data["content"]
-          icon: 'fa fa-bullhorn'
-          buttons:
-            closer: false,
-            sticker: false
-          desktop:
-            desktop: false
-        notice.get().click ->
-          notice.remove()
-      else
-        notification = new Notification json_data["title"],
-          # body: "#{event.data}"
-          body: json_data["content"]
-          icon: "https://www.rails365.net/favicon.ico"
-        notification.onclick = () ->
-          window.location.href = json_data["url"]
-
-Notification.requestPermission()
-
 jQuery ->
   flash = [
     "info"

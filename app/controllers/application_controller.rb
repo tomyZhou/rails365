@@ -12,9 +12,9 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :email, :password, :password_confirmation, :remember_me) }
-    devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:login, :username, :email, :password, :remember_me) }
-    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :avatar, :email, :password, :password_confirmation, :current_password) }
+    devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:username, :email, :password, :password_confirmation, :remember_me) }
+    devise_parameter_sanitizer.permit(:sign_in) { |u| u.permit(:login, :username, :email, :password, :remember_me) }
+    devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:username, :avatar, :email, :password, :password_confirmation, :current_password) }
   end
 
   before_action do
@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
     @site_info_meta_keyword = Admin::SiteInfo.fetch_by_key('meta_keyword').try(:value)
 
     # if current_user && current_user.super_admin?
-    Rack::MiniProfiler.authorize_request
+    # Rack::MiniProfiler.authorize_request
     # end
   end
 

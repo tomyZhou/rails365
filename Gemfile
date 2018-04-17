@@ -5,7 +5,7 @@ else
   # source 'https://mirrors.tuna.tsinghua.edu.cn/rubygems/'
 end
 
-gem 'rails', '4.2.7.1'
+gem 'rails', '5.1.6'
 gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'
@@ -35,7 +35,7 @@ gem 'kaminari-i18n'
 gem 'awesome_print'
 
 # monitor
-gem 'rack-mini-profiler', require: false
+# gem 'rack-mini-profiler', require: false
 
 # background
 gem 'sidekiq'
@@ -69,7 +69,6 @@ group :development do
   gem 'guard-rspec', require: false
   gem 'guard-bundler', require: false
   gem 'guard-cucumber'
-  gem 'quiet_assets'
   gem 'pry'
   gem 'web-console'
   gem 'capistrano', '~> 3.5.0'
