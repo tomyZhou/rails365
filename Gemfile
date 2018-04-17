@@ -116,7 +116,7 @@ gem 'cityhash'
 gem 'tubesock'
 
 # elasticsearch
-gem 'searchkick'
+gem 'searchkick', '~> 3'
 gem 'typhoeus'
 
 gem 'puma'

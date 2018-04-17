@@ -9,7 +9,7 @@ class ArticlesController < ApplicationController
 
     @articles =
       if params[:search].present?
-        Article.search params[:search], fields: [:title, :body], order: { visit_count: :desc }, highlight: true, misspellings: false, includes: [:group, :user], page: params[:page], per_page: 20
+        Article.search params[:search], fields: [:title, :body], boost_by: [:visit_count], highlight: true, misspellings: false, includes: [:group, :user], page: params[:page], per_page: 20
       elsif params[:find].present? && params[:find] == 'hot'
         Article.except_body_with_default.order('visit_count DESC').page(params[:page])
       else

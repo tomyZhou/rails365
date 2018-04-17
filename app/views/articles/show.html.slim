@@ -46,11 +46,14 @@
     - cache [@recommend_articles, 'recommend_articles'] do
       .panel.panel-default.sticker
         .panel-heading
-          strong 相关推荐
+          strong 相似的文章
         .panel-body
           - @recommend_articles.each do |recommend_article|
-            - unless recommend_article.id == @article.id
-              p.home-p.box-article = link_to recommend_article.title, article_path(recommend_article), class: "real-ray"
+            p.home-p.box-article
+              = link_to group_path(recommend_article.group)
+                span class="label label-primary" style="background-color: #{md5_color(recommend_article.group.name)}" = recommend_article.group.name
+              span.dian
+              = link_to recommend_article.title, article_path(recommend_article), class: "real-ray"
 
 javascript:
   $(document).ready(function() {

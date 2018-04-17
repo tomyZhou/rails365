@@ -20,9 +20,9 @@ class Cache
   end
 
   # 热门播放列表
-  def self.article_playlists(count = 4)
-    Rails.cache.fetch "article_playlists_#{count}" do
-      Playlist.where(is_original: true).order(weight: :desc).limit(count).to_a
+  def self.article_playlists
+    Rails.cache.fetch "article_playlists" do
+      Playlist.where(is_original: true).order(weight: :desc).limit(4).to_a
     end
   end
 

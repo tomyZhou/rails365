@@ -4,7 +4,7 @@
       .panel-heading
           - if params[:search].present?
             div.custom-panel-heading.real-ray
-              p 共找到 <span class="blue">#{@articles.total_count}</span> 条关于 <span class="blue">#{params[:search]}</span> 的搜索结果
+              p 共找到 <span class="blue">#{@articles.total_count}</span> 条关于 <span class="blue">#{params[:search]}</span> 的搜索结果, 耗时 <span class="blue">#{@articles.took}</span> ms
           - else
             div.custom-panel-heading.real-ray.hot-title
               = link_to '最新', articles_path, class: "link-color dian #{params[:find].present? ? nil : 'link-active-color'}"
@@ -18,22 +18,19 @@
         - cache [@articles, @top_articles] do
           - if params[:search].present?
             div.search-hight-light
-              - @articles.with_details.each do |article, details|
+              - @articles.with_highlights.each do |article, highlights|
                 div.mb20
                   p.article-title
                     - if article.group
                       = link_to group_path(article.group)
                         span class="label label-primary" style="background-color: #{md5_color(article.group.name)}" = article.group.name
                       span.dian
-                    - if details[:highlight][:title].present?
-                      = link_to details[:highlight][:title].html_safe, article
+                    - if highlights[:title].present?
+                      = link_to highlights[:title].html_safe, article
                     - else
                       = link_to article.title, article
                   p.mb10
                     = link_to article_url(article), article, class: "blue"
-                  - if details[:highlight][:body].present?
-                    p
-                      = details[:highlight][:body].html_safe
                   p.text-left.hidden-xs.article-desc
                     span.dian #{link_to article.user.try(:login), user_path(article.user)}
                     span.dian

@@ -48,9 +48,8 @@ class Article < ActiveRecord::Base
   validates :title, uniqueness: true
 
   def recommend_articles
-    group = Group.fetch(self.group_id)
-    Rails.cache.fetch "recommend_articles_#{group.slug}" do
-      self.class.except_body_with_default.search(group.name, fields: [:title, :body], limit: 11)
+    Rails.cache.fetch "recommend_articles_#{self.id}" do
+      self.similar(fields: [:title], limit: 10)
     end
   end
 
@@ -109,6 +108,6 @@ class Article < ActiveRecord::Base
 
   def clear_after_updated_cache
     # 文章show页面右侧推荐文章列表
-    Rails.cache.delete "recommend_articles_#{self.group.slug}"
+    Rails.cache.delete "recommend_articles_#{self.id}"
   end
 end
