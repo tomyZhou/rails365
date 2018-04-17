@@ -20,10 +20,15 @@
             div.search-hight-light
               - @articles.with_details.each do |article, details|
                 div.mb20
-                  - if details[:highlight][:title].present?
-                    p.article-title = link_to details[:highlight][:title].html_safe, article
-                  - else
-                    p.article-title = link_to article.title, article
+                  p.article-title
+                    - if article.group
+                      = link_to group_path(article.group)
+                        span class="label label-primary" style="background-color: #{md5_color(article.group.name)}" = article.group.name
+                      span.dian
+                    - if details[:highlight][:title].present?
+                      = link_to details[:highlight][:title].html_safe, article
+                    - else
+                      = link_to article.title, article
                   p.mb10
                     = link_to article_url(article), article, class: "blue"
                   - if details[:highlight][:body].present?
@@ -31,10 +36,9 @@
                       = details[:highlight][:body].html_safe
                   p.text-left.hidden-xs.article-desc
                     span.dian #{link_to article.user.try(:login), user_path(article.user)}
-                    - if article.group
-                      = link_to group_path(article.group) do
-                        span.dian = article.group.name
-                    = custom_timeago_tag article.created_at
+                    span.dian
+                      = custom_timeago_tag article.created_at
+                    span #{article.read_count} 次点击
             div.text-center
               = paginate @articles
 
