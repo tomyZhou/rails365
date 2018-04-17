@@ -8,7 +8,7 @@ This is the source code of rails365.net website.
 
 ### 依赖:
 
-* rails 4
+* rails 5
 
 * postgresql
 
@@ -17,8 +17,6 @@ This is the source code of rails365.net website.
 * elasticsearch
 
 * imagemagick
-
-* memcached
 
 ### 安装:
 
@@ -61,7 +59,7 @@ bundle exec spring rspec
 
 ## License
 
-Copyright (c) 2015-2016 rails365
+Copyright (c) 2015-2018 rails365
 
 Released under the MIT license:
 
