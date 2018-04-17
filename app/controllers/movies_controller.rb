@@ -26,7 +26,7 @@ class MoviesController < ApplicationController
       Serial.order(weight: :desc).to_a
     end
 
-    @title = 'web 编程视频'
+    @title = '视频列表'
 
     ahoy.track @title, {language: "Ruby"}
 
@@ -42,8 +42,15 @@ class MoviesController < ApplicationController
     # @recommend_movies = @movie.recommend_movies
     @playlist_movies = @movie.playlist_movies
 
-    @comments = @movie.fetch_comments
-    @comment = @movie.comments.build
+    if @movie.has_read_priv?(current_user)
+      @comments = @movie.fetch_comments
+      @comment = @movie.comments.build
+
+      @prev_movie = @movie.prev_movie
+      @next_movie = @movie.next_movie
+    end
+
+    @recommend_movies = @movie.recommend_movies
 
     # @site_info_home_desc = Playlist.fetch_by_id(@movie.playlist_id).try(:desc)
 
@@ -56,34 +63,7 @@ class MoviesController < ApplicationController
 
     @playlists = Cache.article_playlists
 
-    @prev_movie = @movie.playlist.movies.where("weight < ?", @movie.weight).first
-    @next_movie = @movie.playlist.movies.where("weight > ?", @movie.weight).last
-
-    if user_signed_in? && !current_user.super_admin?
-      # 记录所有浏览过视频的用户的 id
-      user_view_ids = $redis.lrange "user_view_ids", 0, -1
-      if !user_view_ids.present? || (user_view_ids.present? && !user_view_ids.include?(current_user.id.to_s))
-        $redis.lpush "user_view_ids", current_user.id
-      end
-
-      # 浏览记录
-      $redis.lpush "movies_#{current_user.id}_history", @movie.id
-      $redis.ltrim "movies_#{current_user.id}_history", 0, 99
-
-      Redis.new.publish 'ws', { only_website: true, title: '努力学习', content: "学员 <strong>#{current_user.hello_name}</strong> 正在学习 #{@movie.title}" }.to_json
-
-      SendSystemHistory.send_system_history("学员 <a href=#{movie_history_user_path(current_user)}>#{current_user.hello_name}</a>", "正在学习", "<a href=#{movie_path(@movie)}>#{@movie.title}</a>")
-    else
-      return if user_signed_in? && current_user.super_admin?
-
-      # guest_access_movie = Admin::SiteInfo.fetch_by_key('guest_access_movie').try(:value)
-      #
-      # if guest_access_movie.presence != '空'
-      #   Redis.new.publish 'ws', { only_website: true, title: '努力学习', content: "游客 正在学习 #{@movie.title}" }.to_json
-      # end
-
-      SendSystemHistory.send_system_history("游客", "正在学习", "<a href=#{movie_path(@movie)}>#{@movie.title}</a>")
-    end
+    @movie.login_visit_history(current_user)
   end
 
   def new

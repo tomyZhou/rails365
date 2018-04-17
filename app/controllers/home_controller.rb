@@ -57,8 +57,10 @@ class HomeController < ApplicationController
   end
 
   def about_us
+    @title = '关于'
   end
 
   def vip
+    @title = '订阅本站'
   end
 end

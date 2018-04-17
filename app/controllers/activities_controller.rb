@@ -34,5 +34,7 @@ class ActivitiesController < ApplicationController
     @movies = Cache.movies(3)
 
     @articles = Cache.new_articles
+
+    @title = '动态'
   end
 end

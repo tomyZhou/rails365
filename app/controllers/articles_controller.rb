@@ -20,6 +20,8 @@ class ArticlesController < ApplicationController
 
     @groups = Cache.group_all
 
+    @title = '文章列表'
+
     # 文章原创用户
     @users = User.where(id: Article.pluck(:user_id).uniq)
   end

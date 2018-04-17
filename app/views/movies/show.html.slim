@@ -48,6 +48,15 @@ script src="https://cdn.bootcss.com/dplayer/1.22.2/DPlayer.min.js"
     = render 'shared/wechatpay'
     = render 'shared/alipay'
     = render 'shared/public_account'
+    .panel.panel-default
+      .panel-heading.playlist-angle
+        strong 相似的视频
+        i class="fa fa-angle-down"
+      .panel-body.hidden
+        - cache @recommend_movies do
+          .home-video
+            - @recommend_movies.each do |movie|
+              = render partial: 'movies/movie', locals: { movie: movie }
     .sticker
       = render 'shared/qqgroup'
       = render 'shared/follow'

@@ -5,6 +5,8 @@ class UsersController < ApplicationController
     @users = Rails.cache.fetch 'active_users' do
       @users = User.order(active_weight: :desc, id: :desc).limit(100)
     end
+
+    @title = '活跃学员'
   end
 
   def show

@@ -48,12 +48,11 @@ class Movie < ActiveRecord::Base
     order(order_by.join(" "))
   end
 
-  # def recommend_movies
-  #   playlist = Playlist.fetch(self.playlist_id)
-  #   Rails.cache.fetch "recommend_movies_#{playlist.slug}" do
-  #     self.class.except_body_with_default.search(playlist.name, fields: [:title, :body], limit: 11)
-  #   end
-  # end
+  def recommend_movies
+    Rails.cache.fetch "recommend_movies_1#{self.id}" do
+      self.similar(fields: [:title], limit: 3, where: { is_original: true })
+    end
+  end
 
   def has_read_priv?(current_user)
     # 如果不用付费可以直接观看
@@ -69,6 +68,42 @@ class Movie < ActiveRecord::Base
     playlist = Playlist.fetch(self.playlist_id)
     Rails.cache.fetch "playlist_movies_#{playlist.slug}" do
       self.class.except_body_with_default.where(playlist: playlist).order(weight: :asc, id: :asc)
+    end
+  end
+
+  def prev_movie
+    playlist.movies.where("weight < ?", weight).first
+  end
+
+  def next_movie
+    playlist.movies.where("weight > ?", weight).last
+  end
+
+  def login_visit_history(current_user)
+    if !current_user.nil? && !current_user.super_admin?
+      # 记录所有浏览过视频的用户的 id
+      user_view_ids = $redis.lrange "user_view_ids", 0, -1
+      if !user_view_ids.present? || (user_view_ids.present? && !user_view_ids.include?(current_user.id.to_s))
+        $redis.lpush "user_view_ids", current_user.id
+      end
+
+      # 浏览记录
+      $redis.lpush "movies_#{current_user.id}_history", self.id
+      $redis.ltrim "movies_#{current_user.id}_history", 0, 99
+
+      Redis.new.publish 'ws', { only_website: true, title: '努力学习', content: "学员 <strong>#{current_user.hello_name}</strong> 正在学习 #{self.title}" }.to_json
+
+      SendSystemHistory.send_system_history("学员 <a href='/users/#{current_user.id}/movie_history'>#{current_user.hello_name}</a>", "正在学习", "<a href='/movies/#{self.slug}'>#{self.title}</a>")
+    else
+      return if !current_user.nil? && current_user.super_admin?
+
+      # guest_access_movie = Admin::SiteInfo.fetch_by_key('guest_access_movie').try(:value)
+      #
+      # if guest_access_movie.presence != '空'
+      #   Redis.new.publish 'ws', { only_website: true, title: '努力学习', content: "游客 正在学习 #{@movie.title}" }.to_json
+      # end
+
+      SendSystemHistory.send_system_history("游客", "正在学习", "<a href='/movies/#{self.slug}'>#{self.title}</a>")
     end
   end
 
@@ -126,7 +161,7 @@ class Movie < ActiveRecord::Base
 
   def clear_after_updated_cache
     # 文章show页面右侧推荐视频列表
-    # Rails.cache.delete "recommend_movies_#{playlist.slug}"
+    Rails.cache.delete "recommend_movies_#{self.id}"
 
     Rails.cache.delete "playlist_movies_#{playlist.slug}"
   end
