@@ -6,7 +6,7 @@ class Playlist < ApplicationRecord
   include IdentityCache
   cache_index :slug, unique: true
 
-  has_many :movies, -> { order 'weight DESC' }, dependent: :nullify
+  has_many :movies, dependent: :nullify
 
   def self.playlist_movies_list(name)
     puts "## #{name}"
@@ -36,7 +36,7 @@ class Playlist < ApplicationRecord
   validates :image, presence: true, on: :create
 
   def fetch_movies
-    Rails.cache.fetch([self.slug, 'movies']) { movies.reorder(weight: :asc, slug: :asc).to_a }
+    Rails.cache.fetch([self.slug, 'movies']) { movies.to_a }
   end
 
   def normalize_friendly_id(input)

@@ -1,0 +1,12 @@
+script src="https://cdn.bootcss.com/autosize.js/4.0.1/autosize.min.js"
+.form-group
+  .col-sm-10.col-sm-offset-2.text-left
+    .hide
+      = file_field_tag "image", class: "form-control", rows: 20
+    button.btn.btn-default.mr5#image-upload style="color: #495057;"
+      span.fa.fa-image
+
+coffee:
+  jQuery ->
+    autosize($('textarea'));
+    $("#image-upload").image_uploader()

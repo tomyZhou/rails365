@@ -1,3 +1,5 @@
+= render 'shared/select2_js_css'
+
 = bootstrap_form_for @movie, html: {class: "form-horizontal"} do |f|
   = f.error_messages
 
@@ -11,7 +13,8 @@
       .text-right
         span.glyphicon.glyphicon-picture#image-upload
   = f.text_area :body, class: "form-control", rows: 20, required: true
-  = f.select :playlist_id, Playlist.where(is_original: true).collect { |p| [ p.name, p.id ] }, selected: (@movie.new_record? ? Movie.last.try(:playlist_id) : @movie.playlist_id), include_blank: false
+  = f.select :playlist_id, Playlist.where(is_original: true).collect { |p| [ p.name, p.id ] }, { selected: (@movie.new_record? ? Movie.last.try(:playlist_id) : @movie.playlist_id), include_blank: false }, { class: "form-control" }
+  = f.select :serial_id, Serial.all.collect { |p| [ p.name, p.id ] }, { selected: (@movie.new_record? ? Movie.last.try(:serial_id) : @movie.serial_id), include_blank: false }, { class: "form-control" }
   - if current_user.super_admin?
     = f.text_field :weight, value: (@movie.new_record? ? (Movie.last.try(:weight) && Movie.last.weight.to_i + 1) : @movie.weight), class: "form-control"
   - if @movie.new_record?
@@ -20,25 +23,14 @@
     = f.hidden_field :user_id, value: @movie.user_id
   = f.check_box :is_original, checked: "checked"
   = f.check_box :is_paid
-  = f.select :serial_id, Serial.all.collect { |p| [ p.name, p.id ] }, selected: (@movie.new_record? ? Movie.last.try(:serial_id) : @movie.serial_id), include_blank: false
   = f.submit "保存", class: "btn btn-primary", "data-disable-with" => '正在保存...'
 
 coffee:
   jQuery ->
-    $("#movie_body").markdown
-      autofocus: false
-      savable: false
-      language: "zh"
     FormStorage.init()
     FormStorage.restore()
-    $("#image-upload").on 'click', ->
-      $("#image").click()
-    $("#image").bind('fileuploadadd', (e, data) ->
-      $("#image-upload").removeClass('glyphicon-picture').addClass('glyphicon-hourglass')
-    ).bind('fileuploaddone', (e, data) ->
-      $("#image-upload").removeClass('glyphicon-hourglass').addClass('glyphicon-picture')
-      $("#movie_body").insertAtCaret("![]" + "(" + data.result + ")");
-    ).fileupload
-      url: "/photos"
-      type: "PATCH"
-      formData: {}
+    $("#image-upload").image_uploader
+    $("#movie_serial_id").select2
+      theme: "bootstrap"
+    $("#movie_playlist_id").select2
+      theme: "bootstrap"

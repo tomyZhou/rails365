@@ -143,8 +143,6 @@ gem 'dalli'
 gem 'letter_avatar'
 gem 'chinese_pinyin'
 
-gem 'rails-bootstrap-markdown'
-
 gem 'social-share-button'
 gem 'sweetalert-rails'
 
