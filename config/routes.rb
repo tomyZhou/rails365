@@ -68,7 +68,6 @@ Rails.application.routes.draw do
     mount ExceptionTrack::Engine => "/exception-track"
   end
 
-  get '/ws', to: 'websocket#ws'
   get 'find', to: 'home#find'
   get '/about-us', to: 'home#about_us'
   get '/vip', to: 'home#vip'

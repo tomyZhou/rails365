@@ -124,7 +124,7 @@ gem 'identity_cache'
 gem 'cityhash'
 
 # websocket
-gem 'tubesock'
+# gem 'tubesock'
 
 # elasticsearch
 gem 'searchkick', '~> 3'
