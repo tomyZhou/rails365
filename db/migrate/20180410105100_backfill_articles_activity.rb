@@ -1,4 +1,4 @@
-class BackfillArticlesActivity < ActiveRecord::Migration
+class BackfillArticlesActivity < ActiveRecord::Migration[5.2]
   def up
     Article.find_each do |article|
       puts "处理 article #{article.title}"

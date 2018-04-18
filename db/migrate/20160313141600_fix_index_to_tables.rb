@@ -1,4 +1,4 @@
-class FixIndexToTables < ActiveRecord::Migration
+class FixIndexToTables < ActiveRecord::Migration[5.2]
   def change
     change_column :articles, :title, :string, null: false, default: ""
     add_index :articles, :title, unique: true

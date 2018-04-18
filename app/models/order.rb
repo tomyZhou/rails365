@@ -1,4 +1,4 @@
-class Order < ActiveRecord::Base
+class Order < ApplicationRecord
   belongs_to :user
   by_star_field :created_at
 

@@ -3,7 +3,7 @@ class Admin::Site < ActiveRecord::Base
   validates :name, uniqueness: true
 
   def self.cached_all
-    Rails.cache.fetch(:sites) { self.all.to_a }
+    Rails.cache.fetch("sites") { self.all.to_a }
   end
 
   after_commit :clear_cache

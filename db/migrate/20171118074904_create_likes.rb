@@ -3,7 +3,7 @@
 #
 # This class defines the create likes migration in like system
 ###
-class CreateLikes < ActiveRecord::Migration
+class CreateLikes < ActiveRecord::Migration[5.2]
   ###
   # Changes the database
   ###

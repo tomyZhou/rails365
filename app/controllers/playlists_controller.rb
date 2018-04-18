@@ -3,7 +3,7 @@ class PlaylistsController < ApplicationController
   authorize_resource
 
   def index
-    @playlists = Rails.cache.fetch :playlist_all do
+    @playlists = Rails.cache.fetch "playlist_all" do
       Playlist.where(is_original: true).order(weight: :desc).to_a
     end
 

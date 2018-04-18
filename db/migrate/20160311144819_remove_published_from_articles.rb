@@ -1,4 +1,4 @@
-class RemovePublishedFromArticles < ActiveRecord::Migration
+class RemovePublishedFromArticles < ActiveRecord::Migration[5.2]
   def up
     remove_column :articles, :published
   end

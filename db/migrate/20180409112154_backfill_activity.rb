@@ -1,4 +1,4 @@
-class BackfillActivity < ActiveRecord::Migration
+class BackfillActivity < ActiveRecord::Migration[5.2]
   def up
     Movie.where(is_original: true).find_each do |movie|
       puts "处理 movie #{movie.title}"

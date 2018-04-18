@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :common, only: [:show, :articles, :like_articles, :movie_history]
 
   def index
-    @users = Rails.cache.fetch :active_users do
+    @users = Rails.cache.fetch "active_users" do
       @users = User.order(active_weight: :desc, id: :desc).limit(100)
     end
 

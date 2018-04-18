@@ -1,5 +1,5 @@
 require 'babosa'
-class Serial < ActiveRecord::Base
+class Serial < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: [:slugged, :finders, :history]
 

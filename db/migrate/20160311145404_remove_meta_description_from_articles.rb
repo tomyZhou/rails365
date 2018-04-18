@@ -1,4 +1,4 @@
-class RemoveMetaDescriptionFromArticles < ActiveRecord::Migration
+class RemoveMetaDescriptionFromArticles < ActiveRecord::Migration[5.2]
   def up
     remove_column :articles, :meta_description
   end

@@ -1,5 +1,5 @@
 require 'babosa'
-class App < ActiveRecord::Base
+class App < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: [:slugged, :finders, :history]
   mount_uploader :image, PhotoUploader

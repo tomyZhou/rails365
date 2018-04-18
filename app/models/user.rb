@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   ALLOW_LOGIN_CHARS_REGEXP = /\A[A-Za-z0-9\-\_\.]+\z/
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -76,8 +76,7 @@ class User < ActiveRecord::Base
   end
 
   def self.serialize_from_session(key, salt)
-    key = "current_user_#{key}".to_sym
-    Rails.cache.fetch key do
+    Rails.cache.fetch "current_user_#{key}" do
       super
     end
   end
@@ -192,13 +191,5 @@ class User < ActiveRecord::Base
 
   def super_admin?
     Settings.admin_emails.include?(email)
-  end
-
-  after_commit :send_ws_message, on: :create
-
-  private
-
-  def send_ws_message
-    Redis.new.publish 'ws', { only_website: true, title: '欢迎', content: "恭喜新学员 <strong>#{self.hello_name}</strong> 开始进入网站学习" }.to_json
   end
 end

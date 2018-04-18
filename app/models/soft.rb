@@ -1,5 +1,5 @@
 require 'babosa'
-class Soft < ActiveRecord::Base
+class Soft < ApplicationRecord
   searchkick highlight: [:title, :body]
 
   extend FriendlyId

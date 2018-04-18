@@ -1,4 +1,4 @@
-class AddAuthorToMovies < ActiveRecord::Migration
+class AddAuthorToMovies < ActiveRecord::Migration[5.2]
   def change
     add_column :movies, :author, :string
   end

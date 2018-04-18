@@ -1,5 +1,5 @@
 require 'babosa'
-class Movie < ActiveRecord::Base
+class Movie < ApplicationRecord
   searchkick
 
   extend FriendlyId
@@ -21,7 +21,7 @@ class Movie < ActiveRecord::Base
   has_many :comments, as: 'commentable'
   cache_has_many :comments, :inverse_name => :commentable
 
-  scope :except_body_with_default, -> { select(:title, :is_paid, :visit_count, :like_count, :serial_id, :is_original, :created_at, :updated_at, :is_finished, :playlist_id, :image, :slug, :id, :play_time, :user_id, :weight).includes(:playlist) }
+  scope :except_body_with_default, -> { select(:title, :is_paid, :visit_count, :like_count, :serial_id, :is_original, :created_at, :is_finished, :playlist_id, :image, :slug, :id, :play_time, :user_id, :weight).includes(:playlist) }
 
   scope :original, -> { where(is_original: true) }
 

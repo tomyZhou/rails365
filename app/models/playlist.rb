@@ -1,5 +1,5 @@
 require 'babosa'
-class Playlist < ActiveRecord::Base
+class Playlist < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: [:slugged, :finders, :history]
 

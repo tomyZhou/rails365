@@ -22,7 +22,7 @@ class MoviesController < ApplicationController
       @movies = Movie.except_body_with_default.where(is_original: true).order('id DESC').page(params[:page]).per(20)
     end
 
-    @serials = Rails.cache.fetch(:serials) do
+    @serials = Rails.cache.fetch("serials") do
       Serial.order(weight: :desc).to_a
     end
 

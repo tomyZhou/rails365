@@ -1,5 +1,5 @@
 require 'babosa'
-class Article < ActiveRecord::Base
+class Article < ApplicationRecord
   searchkick highlight: [:title, :body]
 
   extend FriendlyId
@@ -18,7 +18,7 @@ class Article < ActiveRecord::Base
   has_many :comments, as: 'commentable'
   cache_has_many :comments, :inverse_name => :commentable
 
-  scope :except_body_with_default, -> { select(:title, :is_top, :visit_count, :like_count, :created_at, :updated_at, :group_id, :slug, :id, :user_id, :weight, :is_home) }
+  scope :except_body_with_default, -> { select(:title, :is_top, :visit_count, :like_count, :created_at, :group_id, :slug, :id, :user_id, :weight, :is_home) }
 
   def self.increment_random_read_count(n)
     self.last(n.to_i).each do |article|
@@ -48,8 +48,7 @@ class Article < ActiveRecord::Base
   validates :title, uniqueness: true
 
   def recommend_articles
-    key = "recommend_articles_#{self.id}".to_sym
-    Rails.cache.fetch key do
+    Rails.cache.fetch "recommend_articles_#{self.id}" do
       self.similar(fields: [:title], limit: 10)
     end
   end

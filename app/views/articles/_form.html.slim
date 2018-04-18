@@ -1,7 +1,7 @@
 = bootstrap_form_for @article, html: {class: "form-horizontal"}, remote: true do |f|
   = f.error_messages
 
-  = f.text_field :title, value: (@article.new_record? ? Article.last.title : @article.title), class: "form-control", required: true
+  = f.text_field :title, value: (@article.new_record? ? Article.last.try(:title) : @article.title), class: "form-control", required: true
   .form-group
     .col-sm-12
       .hide
@@ -9,7 +9,7 @@
       .text-right
         span.glyphicon.glyphicon-picture#image-upload
   = f.text_area :body, class: "form-control", rows: 20, required: true
-  = f.select :group_id, Group.all.collect { |p| [ p.name, p.id ] }, selected: (@article.new_record? ? Article.last.group_id : @article.group_id), include_blank: false
+  = f.select :group_id, Group.all.collect { |p| [ p.name, p.id ] }, selected: (@article.new_record? ? Article.last.try(:group_id) : @article.group_id), include_blank: false
   - if current_user.super_admin?
     = f.text_field :weight, class: "form-control"
     = f.check_box :is_home
