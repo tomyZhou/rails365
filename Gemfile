@@ -5,6 +5,10 @@ else
   # source 'https://mirrors.tuna.tsinghua.edu.cn/rubygems/'
 end
 
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+
+ruby '2.5.1'
+
 gem 'rails', '5.2.0'
 gem 'bootsnap'
 gem 'sass-rails'
@@ -42,7 +46,7 @@ gem 'awesome_print'
 gem 'sidekiq'
 
 # notification
-gem 'exception_notification', git: 'https://github.com/smartinez87/exception_notification'
+gem 'exception-track'
 
 # friendly url
 gem 'friendly_id'
@@ -145,7 +149,6 @@ gem 'google-analytics-rails', '1.1.1'
 gem 'whenever', :require => false
 gem 'by_star', git: "git://github.com/radar/by_star"
 gem "select2-rails"
-gem 'ahoy_matey'
 gem 'groupdate'
 gem 'chartkick'
 

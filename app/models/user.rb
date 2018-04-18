@@ -76,7 +76,8 @@ class User < ActiveRecord::Base
   end
 
   def self.serialize_from_session(key, salt)
-    Rails.cache.fetch "current_user_#{key}" do
+    key = "current_user_#{key}".to_sym
+    Rails.cache.fetch key do
       super
     end
   end

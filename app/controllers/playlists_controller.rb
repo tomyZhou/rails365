@@ -1,10 +1,9 @@
 class PlaylistsController < ApplicationController
   before_action :set_playlist, only: [:show]
-  after_action :set_ahoy_track, only: [:show, :index]
   authorize_resource
 
   def index
-    @playlists = Rails.cache.fetch 'playlist_all' do
+    @playlists = Rails.cache.fetch :playlist_all do
       Playlist.where(is_original: true).order(weight: :desc).to_a
     end
 
@@ -20,10 +19,6 @@ class PlaylistsController < ApplicationController
   end
 
   private
-
-  def set_ahoy_track
-    ahoy.track @title, {language: "Ruby"}
-  end
 
   def set_playlist
     @playlist = Playlist.fetch_by_slug!(params[:id])

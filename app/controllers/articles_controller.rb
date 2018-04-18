@@ -5,8 +5,6 @@ class ArticlesController < ApplicationController
   authorize_resource
 
   def index
-    ahoy.track "文章列表", {language: "Ruby"}
-
     @articles =
       if params[:search].present?
         Article.search params[:search], fields: [:title, :body], boost_by: [:visit_count], highlight: true, includes: [:group, :user], track: { user_id: current_user.try(:id) }, page: params[:page], per_page: 20
@@ -28,8 +26,6 @@ class ArticlesController < ApplicationController
 
   def show
     @title = @article.title
-
-    ahoy.track @title, {language: "Ruby"}
 
     @recommend_articles = @article.recommend_articles
 

@@ -48,7 +48,8 @@ class Article < ActiveRecord::Base
   validates :title, uniqueness: true
 
   def recommend_articles
-    Rails.cache.fetch "recommend_articles_#{self.id}" do
+    key = "recommend_articles_#{self.id}".to_sym
+    Rails.cache.fetch key do
       self.similar(fields: [:title], limit: 10)
     end
   end

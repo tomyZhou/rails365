@@ -64,6 +64,10 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
+  authenticate :user, ->(u) { u.super_admin? } do
+    mount ExceptionTrack::Engine => "/exception-track"
+  end
+
   get '/ws', to: 'websocket#ws'
   get 'find', to: 'home#find'
   get '/about-us', to: 'home#about_us'

@@ -6,14 +6,6 @@ GIT
       activesupport (> 3)
 
 GIT
-  remote: https://github.com/smartinez87/exception_notification
-  revision: dec18c97698035dd720e5f1078e265ef55db7ee2
-  specs:
-    exception_notification (4.2.2)
-      actionmailer (>= 4.0, < 6)
-      activesupport (>= 4.0, < 6)
-
-GIT
   remote: https://github.com/stanhu/rouge
   revision: fafe6c111b7273b733908cc73e1ede43a94d5ce2
   specs:
@@ -65,15 +57,6 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
-    ahoy_matey (2.0.2)
-      addressable
-      browser (~> 2.0)
-      geocoder (>= 1.4.5)
-      railties (>= 4.2)
-      referer-parser (>= 0.3)
-      request_store
-      safely_block (>= 0.2.1)
-      user_agent_parser
     airbrussh (1.3.0)
       sshkit (>= 1.6.1, != 1.7.0)
     aliyun-oss-sdk (0.1.8)
@@ -99,7 +82,6 @@ GEM
       sass (>= 3.3.4)
     bootswatch-rails (3.3.5)
       railties (>= 3.1)
-    browser (2.5.3)
     builder (3.2.3)
     cancancan (2.2.0)
     capistrano (3.5.0)
@@ -234,10 +216,16 @@ GEM
     elasticsearch-transport (6.0.2)
       faraday
       multi_json
-    errbase (0.1.0)
     erubi (1.7.1)
     ethon (0.11.0)
       ffi (>= 1.3.0)
+    exception-track (0.3.0)
+      exception_notification (~> 4)
+      kaminari (>= 0.15)
+      rails (>= 4.0, < 6)
+    exception_notification (4.2.2)
+      actionmailer (>= 4.0, < 6)
+      activesupport (>= 4.0, < 6)
     execjs (2.7.0)
     factory_bot (4.8.2)
       activesupport (>= 3.0.0)
@@ -252,7 +240,6 @@ GEM
     formatador (0.2.5)
     friendly_id (5.2.3)
       activerecord (>= 4.0.0)
-    geocoder (1.4.7)
     gherkin (4.1.3)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
@@ -494,10 +481,7 @@ GEM
       redis-store (>= 1.2, < 2)
     redis-store (1.5.0)
       redis (>= 2.2, < 5)
-    referer-parser (0.3.0)
     remotipart (1.4.0)
-    request_store (1.4.1)
-      rack (>= 1.4)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
@@ -536,8 +520,6 @@ GEM
     ruby_dep (1.5.0)
     rucaptcha (2.1.3)
       railties (>= 3.2)
-    safely_block (0.2.1)
-      errbase
     sass (3.5.6)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -621,7 +603,6 @@ GEM
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.3.0)
     url (0.3.2)
-    user_agent_parser (2.4.1)
     warden (1.2.7)
       rack (>= 1.0)
     web-console (3.6.0)
@@ -642,7 +623,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ahoy_matey
   auto-correct
   awesome_print
   babosa
@@ -674,7 +654,7 @@ DEPENDENCIES
   database_cleaner
   devise
   devise-async
-  exception_notification!
+  exception-track
   factory_bot_rails
   faraday
   friendly_id
@@ -736,6 +716,9 @@ DEPENDENCIES
   uglifier
   web-console
   whenever
+
+RUBY VERSION
+   ruby 2.5.1p57
 
 BUNDLED WITH
    1.16.1

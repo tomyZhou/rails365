@@ -18,7 +18,8 @@ RailsAdmin.config do |config|
   config.navigation_static_links = {
     'sidekiq web' => '/sidekiq',
     'pghero' => '/pghero',
-    'searchjoy' => '/searchjoy'
+    'searchjoy' => '/searchjoy',
+    'exception-track' => '/exception-track'
   }
 
   config.model Group do

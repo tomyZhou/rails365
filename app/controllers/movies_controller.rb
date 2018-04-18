@@ -22,13 +22,11 @@ class MoviesController < ApplicationController
       @movies = Movie.except_body_with_default.where(is_original: true).order('id DESC').page(params[:page]).per(20)
     end
 
-    @serials = Rails.cache.fetch('serials') do
+    @serials = Rails.cache.fetch(:serials) do
       Serial.order(weight: :desc).to_a
     end
 
     @title = '视频列表'
-
-    ahoy.track @title, {language: "Ruby"}
 
     # respond_to do |format|
     #   format.all { render :index, formats: [:html] }
@@ -36,7 +34,6 @@ class MoviesController < ApplicationController
   end
 
   def show
-    ahoy.track @movie.title, {language: "Ruby"}
     @title = @movie.title
 
     # @recommend_movies = @movie.recommend_movies
