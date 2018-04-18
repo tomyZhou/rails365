@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     @comment.save
 
     @comment.create_activity :create, owner: current_user, recipient: @commentable
-    
+
     @comments = @commentable.fetch_comments
   end
 end

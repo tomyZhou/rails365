@@ -61,8 +61,8 @@ class Article < ApplicationRecord
 
   after_commit :clear_cache
   before_update :clear_before_updated_cache
-  after_update :clear_after_updated_cache
-  after_create :publish_create
+  after_update_commit :clear_after_updated_cache
+  after_create_commit :publish_create
 
   before_save do
     # 引发 ActiveModel::Dirty 的 change
@@ -76,7 +76,11 @@ class Article < ApplicationRecord
 
   def publish_create
     unless Rails.env.test?
-      Redis.new.publish 'ws', { title: 'rails365 上传了文章', content: self.title, url: "https://www.rails365.net/articles/#{self.slug}" }.to_json
+      ActionCable.server.broadcast \
+        "notification_channel", { title: 'rails365 上传了文章',
+                                  content: self.title,
+                                  url: "https://www.rails365.net/articles/#{self.slug}"
+      }.to_json
     end
   end
 

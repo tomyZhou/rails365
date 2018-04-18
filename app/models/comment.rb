@@ -1,8 +1,8 @@
 class Comment < ApplicationRecord
   include IdentityCache
 
-  belongs_to :article
-  belongs_to :movie
+  belongs_to :article, optional: true
+  belongs_to :movie, optional: true
   belongs_to :user
   belongs_to :commentable, polymorphic: true
   cache_belongs_to :commentable

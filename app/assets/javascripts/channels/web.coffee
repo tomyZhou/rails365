@@ -1,4 +1,4 @@
-App.room = App.cable.subscriptions.create "WebChannel",
+App.web = App.cable.subscriptions.create "WebChannel",
   connected: ->
     # Called when the subscription is ready for use on the server
 
