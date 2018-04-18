@@ -1,6 +1,6 @@
 div.video-box
   div
-    a href="#{movie_path(movie)}"
+    a href="#{movie_path(movie)}" class="hint--bottom" aria-label="#{movie.title}"
       = image_tag movie.image_url(:preview), alt: movie.title
   p.title
     a href="#{movie_path(movie)}" class="real-ray"

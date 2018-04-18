@@ -1,7 +1,7 @@
 - playlists.each do |playlist|
   div.video-box
     div
-      a href="#{playlist_path(playlist)}"
+      a href="#{playlist_path(playlist)}" class="hint--bottom" aria-label="#{playlist.desc}"
         = image_tag playlist.image_url(:preview), alt: playlist.name
     p.title style="height: 36px;"
       a href="#{playlist_path(playlist)}" class="real-ray"

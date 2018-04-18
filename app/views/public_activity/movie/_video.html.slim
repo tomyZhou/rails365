@@ -5,7 +5,7 @@
       p.article-title style="margin: 0"
         = link_to truncate(activity.trackable.title, length: 40), movie_path(activity.trackable)
     - else
-      = link_to movie_path(activity.trackable) do
+      = link_to movie_path(activity.trackable), class: "hint--bottom", "aria-label": "#{activity.trackable.title}" do
         = image_tag activity.trackable.image_url(:preview), alt: activity.trackable.title, class: "custom-activity"
   - else
     p.article-title style="margin: 0"
