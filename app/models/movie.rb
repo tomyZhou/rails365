@@ -89,9 +89,13 @@ class Movie < ApplicationRecord
       $redis.lpush "movies_#{current_user.id}_history", self.id
       $redis.ltrim "movies_#{current_user.id}_history", 0, 99
 
-      Redis.new.publish 'ws', { only_website: true, title: '努力学习', content: "学员 <strong>#{current_user.hello_name}</strong> 正在学习 #{self.title}" }.to_json
+      ActionCable.server.broadcast \
+        'web_channel', { title: '努力学习',
+                         content: "学员 <strong>#{current_user.hello_name}</strong> 正在学习 #{self.title}"
+      }.to_json
 
-      SendSystemHistory.send_system_history("学员 <a href='/users/#{current_user.id}/movie_history'>#{current_user.hello_name}</a>", "正在学习", "<a href='/movies/#{self.slug}'>#{self.title}</a>")
+      SendSystemHistory.send_system_history \
+        "学员 <a href='/users/#{current_user.id}/movie_history'>#{current_user.hello_name}</a>", "正在学习", "<a href='/movies/#{self.slug}'>#{self.title}</a>"
     else
       return if !current_user.nil? && current_user.super_admin?
 
@@ -101,7 +105,8 @@ class Movie < ApplicationRecord
       #   Redis.new.publish 'ws', { only_website: true, title: '努力学习', content: "游客 正在学习 #{@movie.title}" }.to_json
       # end
 
-      SendSystemHistory.send_system_history("游客", "正在学习", "<a href='/movies/#{self.slug}'>#{self.title}</a>")
+      SendSystemHistory.send_system_history \
+        "游客", "正在学习", "<a href='/movies/#{self.slug}'>#{self.title}</a>"
     end
   end
 

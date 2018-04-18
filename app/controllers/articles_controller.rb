@@ -51,7 +51,6 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    logger.info article_params
 
     if @article.valid?
       CreateArticleWorker.perform_async(current_user.id, article_params)
@@ -74,8 +73,13 @@ class ArticlesController < ApplicationController
     if @article.liked_by?(current_user) && !current_user.super_admin?
       @article.create_activity key: 'article.like', owner: current_user
 
-      Redis.new.publish 'ws', { only_website: true, title: '获得喜欢', content: "学员 <strong>#{current_user.hello_name}</strong> 喜欢了 #{@article.title}" }.to_json
-      SendSystemHistory.send_system_history("学员 <a href=#{movie_history_user_path(current_user)}>#{current_user.hello_name}</a>", "喜欢", "<a href=#{article_path(@article)}>#{@article.title}</a>")
+      ActionCable.server.broadcast \
+        'web_channel', { title: '获得喜欢',
+                         content: "学员 <strong>#{current_user.hello_name}</strong> 喜欢了 #{@article.title}"
+      }.to_json
+
+      SendSystemHistory.send_system_history \
+        "学员 <a href=#{movie_history_user_path(current_user)}>#{current_user.hello_name}</a>", "喜欢", "<a href=#{article_path(@article)}>#{@article.title}</a>"
     end
   end
 
