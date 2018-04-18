@@ -51,6 +51,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
+    logger.info article_params
 
     if @article.valid?
       CreateArticleWorker.perform_async(current_user.id, article_params)

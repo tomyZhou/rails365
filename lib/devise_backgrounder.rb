@@ -15,7 +15,7 @@ class DeviseBackgrounder
     @method, @record, @token, @opts = method, record, token, opts
   end
 
-  def deliver
+  def deliver_later
     # You need to hardcode the class of the Devise mailer that you
     # actually want to use. The default is Devise::Mailer.
     Devise::Mailer.send(@method, @record, @token, @opts).deliver_later

@@ -627,6 +627,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activestorage
   auto-correct
   awesome_print
   babosa

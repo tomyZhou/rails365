@@ -28,7 +28,7 @@ class Article < ApplicationRecord
 
   def self.async_create(user_id, article_params)
     user = User.find(user_id)
-    article = self.new(article_params)
+    article = self.new(JSON.parse article_params.gsub('=>', ':'))
     article.user_id = user.id
     article.save!
 
@@ -39,7 +39,7 @@ class Article < ApplicationRecord
   def self.async_update(article_id, article_params)
     article = self.find(article_id)
     user_id = article.user_id
-    article.update!(article_params)
+    article.update!(JSON.parse article_params.gsub('=>', ':'))
     article.user_id = user_id
     article.save(validate: false)
   end
