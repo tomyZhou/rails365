@@ -60,4 +60,17 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.action_mailer.default_url_options = { :host => 'localhost:4000' }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default charset: 'utf-8'
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:   'smtpdm.aliyun.com',
+    port:  25,
+    # domain: "domain.of.sender.net",
+    authentication: 'plain',
+    user_name: Settings.aliyun_email_username,
+    password: Settings.aliyun_email_password,
+    enable_starttls_auto: true
+  }
 end

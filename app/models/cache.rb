@@ -2,20 +2,20 @@ class Cache
   # 最新视频
   def self.movies(count = 10)
     Rails.cache.fetch "movies_#{count}" do
-      Movie.except_body_with_default.where(is_original: true).order('id DESC').limit(count).to_a
+      Movie.where(is_original: true).order('id DESC').limit(count).to_a
     end
   end
 
   def self.new_articles
     Rails.cache.fetch "new_articles" do
-      Article.except_body_with_default.order('id DESC').limit(3).to_a
+      Article.order('id DESC').limit(3).to_a
     end
   end
 
   # 置顶的文章
   def self.top_articles
     Rails.cache.fetch "top_articles" do
-      Article.except_body_with_default.where(is_top: true).order(weight: :asc)
+      Article.where(is_top: true).order(weight: :asc)
     end
   end
 

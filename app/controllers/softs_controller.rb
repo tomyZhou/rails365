@@ -8,7 +8,7 @@ class SoftsController < ApplicationController
     if params[:search].present?
       @softs = Soft.search params[:search], fields: [:title, :body, :name, :tag], page: params[:page], per_page: 20
     else
-      @softs = Soft.except_body_with_default.order('id DESC').page(params[:page]).per(20)
+      @softs = Soft.order('id DESC').page(params[:page]).per(20)
     end
 
     @title = '下载列表'

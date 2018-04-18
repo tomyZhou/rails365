@@ -9,9 +9,9 @@ class ArticlesController < ApplicationController
       if params[:search].present?
         Article.search params[:search], fields: [:title, :body], boost_by: [:visit_count], highlight: true, includes: [:group, :user], track: { user_id: current_user.try(:id) }, page: params[:page], per_page: 20
       elsif params[:find].present? && params[:find] == 'hot'
-        Article.except_body_with_default.order('visit_count DESC').page(params[:page])
+        Article.order('visit_count DESC').page(params[:page])
       else
-        Article.except_body_with_default.order('id DESC').page(params[:page])
+        Article.order('id DESC').page(params[:page])
       end
 
     @top_articles = Cache.top_articles

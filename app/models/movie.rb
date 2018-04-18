@@ -21,8 +21,6 @@ class Movie < ApplicationRecord
   has_many :comments, as: 'commentable'
   cache_has_many :comments, :inverse_name => :commentable
 
-  scope :except_body_with_default, -> { select(:title, :is_paid, :visit_count, :like_count, :serial_id, :is_original, :created_at, :is_finished, :playlist_id, :image, :slug, :id, :play_time, :user_id, :weight).includes(:playlist) }
-
   scope :original, -> { where(is_original: true) }
 
   mount_uploader :image, VideoUploader
@@ -67,7 +65,7 @@ class Movie < ApplicationRecord
   def playlist_movies
     playlist = Playlist.fetch(self.playlist_id)
     Rails.cache.fetch "playlist_movies_#{playlist.slug}" do
-      self.class.except_body_with_default.where(playlist: playlist).order(weight: :asc, id: :asc)
+      self.class.includes(:playlist).where(playlist: playlist).order(weight: :asc, id: :asc)
     end
   end
 

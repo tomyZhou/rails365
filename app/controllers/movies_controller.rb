@@ -9,17 +9,17 @@ class MoviesController < ApplicationController
       @movies = Movie.search params[:search], where: { is_original: true }, boost_by: [:visit_count], fields: [:title, :body], includes: [:playlist], track: { user_id: current_user.try(:id) }, page: params[:page], per_page: 20
     elsif params[:name].present?
       @serial = Serial.find(params[:name])
-      @movies = @serial.movies.except_body_with_default.where(is_original: true).order('id DESC').page(params[:page]).per(20)
+      @movies = @serial.movies.where(is_original: true).order('id DESC').page(params[:page]).per(20)
     elsif params[:filter].present? && params[:filter] == 'original'
-      @movies = Movie.except_body_with_default.order('id DESC').page(params[:page]).per(20)
+      @movies = Movie.order('id DESC').page(params[:page]).per(20)
     elsif params[:filter].present? && params[:filter] == 'other'
-      @movies = Movie.except_body_with_default.where(is_original: true).where("serial_id is null").order('id DESC').page(params[:page]).per(20)
+      @movies = Movie.where(is_original: true).where("serial_id is null").order('id DESC').page(params[:page]).per(20)
     elsif params[:filter].present? && params[:filter] == 'free'
-      @movies = Movie.except_body_with_default.where(is_original: true, is_paid: false).order('id DESC').page(params[:page]).per(20)
+      @movies = Movie.where(is_original: true, is_paid: false).order('id DESC').page(params[:page]).per(20)
     elsif params[:filter].present? && params[:filter] == 'pro'
-      @movies = Movie.except_body_with_default.where(is_original: true, is_paid: true).order('id DESC').page(params[:page]).per(20)
+      @movies = Movie.where(is_original: true, is_paid: true).order('id DESC').page(params[:page]).per(20)
     else
-      @movies = Movie.except_body_with_default.where(is_original: true).order('id DESC').page(params[:page]).per(20)
+      @movies = Movie.where(is_original: true).order('id DESC').page(params[:page]).per(20)
     end
 
     @serials = Rails.cache.fetch("serials") do

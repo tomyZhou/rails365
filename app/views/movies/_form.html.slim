@@ -13,7 +13,7 @@
   = f.text_area :body, class: "form-control", rows: 20, required: true
   = f.select :playlist_id, Playlist.where(is_original: true).collect { |p| [ p.name, p.id ] }, selected: (@movie.new_record? ? Movie.last.try(:playlist_id) : @movie.playlist_id), include_blank: false
   - if current_user.super_admin?
-    = f.text_field :weight, value: (@movie.new_record? ? Movie.last.weight.to_i + 1 : @movie.weight), class: "form-control"
+    = f.text_field :weight, value: (@movie.new_record? ? (Movie.last.try(:weight) && Movie.last.weight.to_i + 1) : @movie.weight), class: "form-control"
   - if @movie.new_record?
     = f.hidden_field :user_id, value: current_user.id
   - else

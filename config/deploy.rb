@@ -20,6 +20,8 @@ set :rbenv_roles, :all # default value
 
 set :bundle_flags, ''
 
+set :sidekiq_queue, 'config/sidekiq.yml'
+
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 

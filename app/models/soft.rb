@@ -15,8 +15,6 @@ class Soft < ApplicationRecord
   has_many :comments, as: 'commentable'
   cache_has_many :comments, :inverse_name => :commentable
 
-  scope :except_body_with_default, -> { select(:title, :like_count, :name, :image, :tag, :id, :updated_at, :slug, :created_at) }
-
   mount_uploader :image, SoftUploader
 
   validates :title, :body, :user_id, :name, :tag, presence: true
