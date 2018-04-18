@@ -18,8 +18,8 @@ module Rails365
     config.time_zone = 'Beijing'
     config.i18n.default_locale = :'zh-CN'
 
-    config.autoload_paths << Rails.root.join('lib')
-    config.autoload_paths << Rails.root.join('app', 'form_builders')
+    config.eager_load_paths << Rails.root.join('lib')
+    config.eager_load_paths << Rails.root.join('app', 'form_builders')
     config.generators.assets = false
     config.generators.helper = false
 

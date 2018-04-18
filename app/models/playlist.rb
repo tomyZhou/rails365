@@ -36,7 +36,7 @@ class Playlist < ApplicationRecord
   validates :image, presence: true, on: :create
 
   def fetch_movies
-    Rails.cache.fetch([self.slug, 'movies']) { movies.to_a }
+    Rails.cache.fetch([self.slug, 'movies']) { movies.reorder(weight: :asc, id: :asc).to_a }
   end
 
   def normalize_friendly_id(input)

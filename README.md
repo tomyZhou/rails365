@@ -8,7 +8,9 @@ This is the source code of rails365.net website.
 
 ### 依赖:
 
-* rails 5
+* ruby 2.5.1
+
+* rails 5.2.0
 
 * postgresql
 

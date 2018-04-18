@@ -55,7 +55,7 @@
                     |  修改个人信息
                 - if current_user.super_admin?
                   li
-                    = link_to ahoy_visits_path do
+                    = link_to '/visit' do
                       i class="fa fa-line-chart" aria-hidden="true"
                       |  学员访问统计
                 li.divider
@@ -149,7 +149,7 @@
                       |  创建订单
                 - if current_user.super_admin?
                   li
-                    = link_to ahoy_visits_path do
+                    = link_to '/visit' do
                       i class="fa fa-line-chart" aria-hidden="true"
                       |  学员访问统计
                 - if can? :manage, PublicActivity::Activity

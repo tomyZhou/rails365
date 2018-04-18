@@ -20,8 +20,6 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'pids', 'tmp/s
 
 set :bundle_flags, ''
 
-set :sidekiq_queue, 'config/sidekiq.yml'
-
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 

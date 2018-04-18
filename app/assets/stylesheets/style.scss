@@ -1239,6 +1239,10 @@ Only Needed in Multi-Coloured Variation
   }
 }
 
+.btn-comment[disabled]:hover {
+  background: $blue;
+}
+
 a {
   color: $blue;
   &:hover {

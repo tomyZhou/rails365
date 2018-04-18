@@ -18,9 +18,6 @@ Rails.application.routes.draw do
   end
 
   resources :books, only: [:index]
-  namespace :ahoy do
-    resources :visits, only: [:index]
-  end
 
   resources :activities, only: [:index, :destroy] do
     delete :destroy_multiple, on: :collection
@@ -55,20 +52,15 @@ Rails.application.routes.draw do
   patch '/photos', to: 'photos#create'
 
   authenticate :user, lambda { |u| u.super_admin? } do
-    mount Sidekiq::Web => '/sidekiq'
-  end
-
-  authenticate :user, lambda { |u| u.super_admin? } do
     mount PgHero::Engine, at: 'pghero'
+    mount Sidekiq::Web => '/sidekiq'
+    mount ExceptionTrack::Engine => "/exception-track"
   end
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
-  authenticate :user, ->(u) { u.super_admin? } do
-    mount ExceptionTrack::Engine => "/exception-track"
-  end
-
   get 'find', to: 'home#find'
   get '/about-us', to: 'home#about_us'
   get '/vip', to: 'home#vip'
+  get '/visit', to: 'visit#index'
 end
