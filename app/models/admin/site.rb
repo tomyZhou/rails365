@@ -1,4 +1,4 @@
-class Admin::Site < ActiveRecord::Base
+class Admin::Site < ApplicationRecord
   validates :name, :url, presence: true
   validates :name, uniqueness: true
 

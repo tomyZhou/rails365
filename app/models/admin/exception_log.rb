@@ -1,2 +1,2 @@
-class Admin::ExceptionLog < ActiveRecord::Base
+class Admin::ExceptionLog < ApplicationRecord
 end

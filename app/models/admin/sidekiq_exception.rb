@@ -1,2 +1,2 @@
-class Admin::SidekiqException < ActiveRecord::Base
+class Admin::SidekiqException < ApplicationRecord
 end
